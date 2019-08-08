@@ -5,6 +5,7 @@ import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { CurrencyInfo, DepositCrypto, DepositFiat, TabPanel, WalletItemProps, WalletList } from '../../components';
+import FiatWithdraw from '../../containers/FiatWithdraw/FiatWithdraw';
 import { ModalWithdrawConfirmation } from '../../containers/ModalWithdrawConfirmation';
 import { ModalWithdrawSubmit } from '../../containers/ModalWithdrawSubmit';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
@@ -268,7 +269,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     };
 
     private renderDeposit(wallet: WalletItemProps) {
-        const { addressDepositError, wallets, selectedWalletAddress } = this.props;
+        const { addressDepositError, wallets, selectedWalletAddress , user} = this.props;
         const { selectedWalletIndex } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
         const text = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
@@ -298,7 +299,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             return (
                 <React.Fragment>
                     <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
-                    <DepositFiat title={this.title} description={this.description} />
+                    <DepositFiat title={this.title} description={this.description} currency={currency}  email={user.email} userid={user.uid} />
                     {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
                 </React.Fragment>
             );
@@ -308,12 +309,17 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     private renderWithdraw(withdrawProps: WithdrawProps, type: string) {
         const { walletsError, user, wallets } = this.props;
         const { selectedWalletIndex } = this.state;
+        const balance = (wallets[selectedWalletIndex] || { balance: 0 }).balance;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
+        // <p className="pg-wallet__enable-2fa-message">
+        //     {this.translate('page.body.wallets.tabs.deposit.fiat.admin')}
+        // </p>
+
         if (type === 'fiat') {
             return (
-                <p className="pg-wallet__enable-2fa-message">
-                    {this.translate('page.body.wallets.tabs.deposit.fiat.admin')}
-                </p>
+                <div>
+                {user.otp ? <FiatWithdraw userid={user.uid} currency={currency} balance={balance}  email={user.email}/> : this.isOtpDisabled()}
+                </div>
             );
         }
         return (

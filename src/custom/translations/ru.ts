@@ -139,6 +139,7 @@ export const ru: LangType = {
     'page.body.history.deposit.content.status.canceled': 'Отменен',
     'page.body.history.deposit.content.status.rejected': 'Отвергнут',
     'page.body.history.deposit.content.status.skipped': 'Пропущен',
+    'page.body.history.deposit.content.status.undefined': 'Undefined',
 
     'page.body.history.withdraw': 'История выводов',
     'page.body.history.withdraw.header.id': 'ID',
@@ -280,6 +281,8 @@ export const ru: LangType = {
     'page.body.kyc.phone.code': 'СМС',
     'page.body.kyc.phone.send': 'ОТПРАВИТЬ КОД',
     'page.body.kyc.phone.resend': 'ПЕРЕСЛАТЬ КОД',
+    'page.body.kyc.phone.resend.error': 'You must wait ',
+    'page.body.kyc.phone.resend.error.secounds': 'seconds. ',
     'page.body.kyc.identity.firstName': 'Имя',
     'page.body.kyc.identity.lastName': 'Фамилия',
     'page.body.kyc.identity.dateOfBirth': 'Дата рождения ДД/ММ/ГГГГ',

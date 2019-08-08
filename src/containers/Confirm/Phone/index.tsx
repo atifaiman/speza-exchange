@@ -16,6 +16,7 @@ import {
     verifyPhone,
 } from '../../../modules/user/kyc/phone';
 import { changeUserLevel } from '../../../modules/user/profile';
+import Timer from './timer';
 
 interface ReduxProps {
     verifyPhoneSuccess?: string;
@@ -28,6 +29,7 @@ interface OnChangeEvent {
 }
 
 interface PhoneState {
+    wait: boolean;
     phoneNumber: string;
     phoneNumberFocused: boolean;
     confirmationCode: string;
@@ -49,6 +51,7 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
         super(props);
 
         this.state = {
+            wait: false,
             phoneNumber: '',
             phoneNumberFocused: false,
             confirmationCode: '',
@@ -73,6 +76,7 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
             phoneNumberFocused,
             confirmationCode,
             confirmationCodeFocused,
+            wait,
         } = this.state;
         const {
             verifyPhoneSuccess,
@@ -110,17 +114,19 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                         <button
                             className={phoneNumber ? 'pg-confirm__content-phone-col-content-send' : 'pg-confirm__content-phone-col-content-send--disabled'}
                             type="button"
+                            disabled={(wait)}
                             onClick={this.handleSendCode}
                         >
                             {this.state.resendCode ? this.translate('page.body.kyc.phone.resend') : this.translate('page.body.kyc.phone.send')}
                         </button>
+                        <label style={{marginTop: '10px' , color: 'red'}}> {wait ? this.translate('page.body.kyc.phone.resend.error') : null} {wait ? <Timer /> : null} {wait ? this.translate('page.body.kyc.phone.resend.error.secounds') : null} </label>
                     </fieldset>
                 </div>
                 <div className="pg-confirm__content-phone-col">
                     <div className="pg-confirm__content-phone-col-text">
                         2. {this.translate('page.body.kyc.phone.enterCode')}
                     </div>
-                    <fieldset className={confirmationCodeFocusedClass}>
+                    <fieldset className={confirmationCodeFocusedClass} disabled={wait}>
                         {confirmationCode && <legend>{this.translate('page.body.kyc.phone.code')}</legend>}
                         <input
                             className="pg-confirm__content-phone-col-content-number"
@@ -235,6 +241,11 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                 resendCode: true,
             });
         } else {
+            this.setState({wait: true});
+            setTimeout(
+              () => {
+                   this.setState({wait: false});
+            },60000);
             this.props.resendCode(requestProps);
         }
     };

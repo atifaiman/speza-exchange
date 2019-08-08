@@ -7,7 +7,7 @@ describe('DepositFiat', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<DepositFiat title={'text123'} description={'123123'}/>);
+        wrapper = shallow(<DepositFiat title={'text123'} description={'123123'} currency={'usd'} email={'asad@aksd.com'} userid={'U1232412'}/>);
     });
 
     it('should contains title', () => {

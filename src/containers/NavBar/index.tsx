@@ -155,6 +155,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('ru')}>
                     RU
                 </div>
+                <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('zh')}>
+                    ZH
+                </div>
                 {/* tslin:enable jsx-no-lambda */}
             </div>
         );

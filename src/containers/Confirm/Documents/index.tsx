@@ -5,11 +5,12 @@ import {
 } from '@openware/components';
 import cr from 'classnames';
 import * as React from 'react';
+import DatePicker from 'react-date-picker';
 import {
     InjectedIntlProps,
     injectIntl,
 } from 'react-intl';
-import MaskInput from 'react-maskinput';
+// import MaskInput from 'react-maskinput';
 import {
   connect,
   MapDispatchToPropsFunction,
@@ -17,8 +18,8 @@ import {
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import close = require('../../../assets/images/close.svg');
-import { formatDate } from '../../../helpers';
-import { isDateInFuture } from '../../../helpers/checkDate';
+// import { formatDate } from '../../../helpers';
+// import { isDateInFuture } from '../../../helpers/checkDate';
 import { alertPush, RootState } from '../../../modules';
 import {
     selectSendDocumentsLoading,
@@ -49,6 +50,7 @@ interface DocumentsState {
     idNumber: string;
     idNumberFocused: boolean;
     scans: File[];
+    date: Date;
 }
 
 type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps;
@@ -73,8 +75,11 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         idNumber: '',
         idNumberFocused: false,
         scans: [],
+        date: new Date(),
     };
-
+    public onChange = date => {
+        this.setState({ date });
+    }
     public componentWillReceiveProps(next: Props) {
         if (next.success){
             this.props.history.push('/profile');
@@ -84,7 +89,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     public render() {
         const {
             documentsType,
-            expiration,
+            //expiration,
             expirationFocused,
             idNumber,
             idNumberFocused,
@@ -135,16 +140,12 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                                     />
                                 </fieldset>
                                 <fieldset className={expirationFocusedClass}>
-                                    {expiration && <legend>{this.translate('page.body.kyc.documents.expiryDate')}</legend>}
-                                    <MaskInput
-                                      maskString="00/00/0000"
-                                      mask="00/00/0000"
-                                      onChange={this.handleChangeExpiration}
-                                      onFocus={this.handleFieldFocus('expiration')}
-                                      onBlur={this.handleFieldFocus('expiration')}
-                                      value={expiration}
-                                      className="group-input"
-                                      placeholder={this.translate('page.body.kyc.documents.expiryDate')}
+                                    {this.state.date && <legend>{this.translate('page.body.kyc.documents.expiryDate')}</legend>}
+                                    <DatePicker
+                                        locale={(`${this.translate('page.body.kyc.documents.expiryDate')}` === 'Expiration Date') ? 'en-US' : 'zh-Hans'}
+                                        className="group-input"
+                                        value={this.state.date}
+                                        onChange={this.onChange}
                                     />
                                 </fieldset>
                             </div>
@@ -258,11 +259,11 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         };
     }
 
-    private handleChangeExpiration = (e: OnChangeEvent) => {
-        this.setState({
-          expiration: formatDate(e.target.value),
-        });
-    }
+    // private handleChangeExpiration = (e: OnChangeEvent) => {
+    //     this.setState({
+    //       expiration: formatDate(e.target.value),
+    //     });
+    // }
 
     private handleUploadScan = uploadEvent => {
         const allFiles: File[] = uploadEvent.target.files;
@@ -292,23 +293,27 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 
     private handleCheckButtonDisabled = () => {
         const {
-            expiration,
+            // expiration,
             idNumber,
             scans,
         } = this.state;
-        return !scans.length || !idNumber || !expiration;
+        // return !scans.length || !idNumber || !expiration;
+        return !scans.length || !idNumber;
     }
 
     private sendDocuments = () => {
         const {
             scans,
             idNumber,
-            expiration,
+            // expiration,
             documentsType,
+            date,
         }: DocumentsState = this.state;
 
+        const today = new Date();
         const typeOfDocuments = this.getDocumentsType(documentsType);
-        const docExpire = isDateInFuture(expiration) ? expiration : '';
+        // const docExpire = isDateInFuture(expiration) ? expiration : '';
+        const dateOfExp = (date && (date > today)) ? date.toLocaleDateString() : '' ;
 
         if (!scans.length) {
             return;
@@ -319,7 +324,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         for (const scan of scans) {
             request.append('upload[]', scan);
         }
-        request.append('doc_expire', docExpire);
+        request.append('doc_expire', dateOfExp);
         request.append('doc_type', typeOfDocuments);
         request.append('doc_number', idNumber);
 
