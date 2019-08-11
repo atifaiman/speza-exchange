@@ -24,6 +24,7 @@ import {
     EmailVerificationScreen,
     ForgotPasswordScreen,
     HistoryScreen,
+    LandingScreen,
     OrdersTabScreen,
     ProfileScreen,
     ProfileTwoFactorAuthScreen,
@@ -142,6 +143,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
         return (
             <div className="container-fluid pg-layout">
                 <Switch>
+                    <PublicRoute loading={userLoading} path="/landing" component={LandingScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={SignInScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/confirmation" component={VerificationScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signup" component={SignUpScreen} />
@@ -155,7 +157,8 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile" component={ProfileScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/wallets" component={WalletsScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/security/2fa" component={ProfileTwoFactorAuthScreen} />
-                    <Route path="**"><Redirect to="/trading/" /></Route>
+                    {/* <Route path="**"><Redirect to="/trading/" /></Route> */}
+                    <Route path="**"><Redirect to="/landing/" /></Route>
                 </Switch>
                 {isLoggedIn && <WalletsFetch/>}
             </div>

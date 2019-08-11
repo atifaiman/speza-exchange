@@ -37,12 +37,12 @@ class MarketDepthContainer extends React.Component<Props> {
     public render() {
         const { asksItems, bidsItems } = this.props;
         const colors = {
-            fillAreaAsk: '#fa5252',
-            fillAreaBid: '#12b886',
+            fillAreaAsk: '#BF357F',
+            fillAreaBid: '#12C096',
             gridBackgroundStart: '#1a243b',
             gridBackgroundEnd: '#1a243b',
-            strokeAreaAsk: '#fa5252',
-            strokeAreaBid: '#12b886',
+            strokeAreaAsk: '#BF357F',
+            strokeAreaBid: '#12C096',
             strokeGrid: ' #B8E9F5',
             strokeAxis: '#cccccc',
         };

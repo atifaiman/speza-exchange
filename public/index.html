@@ -23,7 +23,225 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Cryptobase</title>
+    <title>Speza</title>
+    <script>
+                                            
+      var request = new XMLHttpRequest()
+      
+      var proxyURL = 'https://cors-anywhere.herokuapp.com';
+      
+      request.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/tickers/', true)
+      
+      request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+      
+      request.setRequestHeader('Access-Control-Allow-Origin', '*');
+      
+      request.setRequestHeader('Access-Control-Allow-Method', 'GET');
+      
+      request.setRequestHeader('Content-Type', 'application/json');
+      
+      request.onload = function() {
+      
+        if (request.status >= 200 && request.status < 400) {
+          // array splits the resonse into each market 
+          
+         // var data = JSON.stringify(this.response);
+          var data = this.response;
+          data = data.split(/[}}]/);
+          var cleandata ="|";
+
+          for ( h=0 ; h < data.length ; h++) {
+              if ( h%2 === 0 ){
+                  cleandata += data[h] + "|";
+              }
+          }
+          cleandata = cleandata.split("|");
+          cleandata.pop();
+          cleandata.pop();
+          cleandata.shift();
+        
+          //cleandata is the array each index contains one market  with empty elements if first element and last two elements
+     
+          var result = [];
+          var endResult = [];
+          //result.length = 10;
+          //var marketData = "";
+          //var rawdata = "";
+          //var KIR = "";
+            for ( o=0 ; o < cleandata.length ; o++) {
+              cleandata[o] =   cleandata[o] ; 
+              var Market = cleandata[o].split(",");
+              if( o > 0 ){
+                  // the first market contains empty value in first index instead of itemvalues
+                  Market.shift();
+              }
+              for ( j=0 ; j < Market.length ; j++){
+          
+                  if ( j >= 2){
+                          // all other values
+                      var newitem = Market[j].replace(/\"/g, '');
+                      newitem = newitem.replace(/{/g, '');
+                  
+                      var MarketName = newitem.split(":");
+                      for ( k=0 ; k < MarketName.length ; k++){
+                     
+                          if (k%2 === 1){
+                              result.push( MarketName[k]);
+                          }
+                      }
+                  
+                  } else {
+                          if (j === 0 ){
+                              //market Name
+                              var newitem = Market[j].replace(/\"/g, '');
+                              newitem = newitem.replace(/{/g, '');
+                            
+                              var MarketName = newitem.split(":");
+                            
+                              result.push(MarketName[0]);
+                      } else if ( j=== 1 ) {
+                              // Buy Value
+                              var newitem = Market[j].replace(/\"/g, '');
+                              newitem = newitem.replace(/{/g, '');
+                            
+                              var MarketName = newitem.split(":");
+                              result.push(MarketName[2]);
+                      }
+                }
+                endResult.push(result);
+                result = new Array();
+              }
+ 
+          }
+          
+
+         for( l=0 ; l < endResult.length ; l++){
+             if( l%10 === 2){
+              //endResult.splice(l,1);
+             }
+            
+         }
+          
+          var show = "";
+          var tableData = "";
+          tableData +="<div style=\" padding: 100px 0px; margin-left:-2px; \"><table  id=\"myTable\" class=\"fixed_header table-hover\"><thead><tr><th><input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for Market..\"></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:45px;\">Market</th><th>Buy</th><th>Sell</th><th>Low</th><th>High</th><th>Open</th><th>Last</th><th>Volume</th><th>Price Change</th></tr></thead><tbody>";
+          for (t=0 ; t < endResult.length; t++){
+              
+              if (t === 0 ){
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:45px;\">MGT market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+              }
+              if (t === 143 ){
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px;\">BCH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+              }
+              if (t === 252 ){
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px; \">BTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+              }
+              if (t === 340 ){
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px; \">ETH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+              }
+              if (t === 439 ){
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:45px; \">LTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+              }
+              if (t === 549 ){
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px; \">TUSD market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+              }
+              if (t === 572 ){
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px; \">XRP market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+              }
+
+
+              if (t%11 === 0 ){
+               
+                  tableData += "<tr onclick=\"window.open(\'https://blockchain.mundoexchange.io/trading/" +endResult[t] + " \');\">";
+                  tableData += "<td style=\" color: #AAB4C1;  text-transform: uppercase; padding-left:45px; \" >";
+                  tableData += endResult[t] + "</td>"
+              } 
+              else if (t%11 === 1 ){
+               
+               tableData += "<td  style=\" color: #4DD77C;\">";
+               tableData += Number(endResult[t]) + "</td>"
+              } 
+              else if (t%11 === 2 ){
+               
+               tableData += "<td style=\" color: #FF1479;\">";
+               tableData += Number(endResult[t]) + "</td>"
+              }  
+              else if (t%11 === 3 ){
+               
+               tableData += "<td>";
+               tableData += Number(endResult[t]) + "</td>"
+              } 
+              else if (t%11 === 4 ){
+               
+               tableData += "<td>";
+                tableData += Number(endResult[t]) + "</td>"
+              }  
+              else if (t%11 === 5 ){
+               
+               tableData += "<td>";
+                tableData += Number(endResult[t]) + "</td>"
+              }  
+              else if (t%11 === 6 ){
+               
+               tableData += "<td>";
+               tableData += Number(endResult[t]) + "</td>"
+              }
+              else if (t%11 === 7 ){
+               
+               tableData += "<td>";
+                tableData += Number(endResult[t]) + "</td>"
+              }  
+              if (t%11 === 8 ){
+               
+              // tableData += "<td>";
+              // tableData += Number(endResult[t]) + "</td>"
+               
+              } 
+              else if (t%11 === 9 ){
+               var data = endResult[t];
+               var sign =  data[0];
+
+               if( sign[0] === "+" ){
+                  tableData += "<td style=\" color:#4DD77C;\">";
+               } else{
+                  tableData += "<td style=\" color: #FF1479;\">";
+               }
+               
+               tableData += endResult[t] +"</td>"
+               tableData += "</tr>";
+               
+              } 
+              else if (t%11 === 10 ){
+               
+              // tableData += "<td  style=\" display: none;\">";
+              // tableData += endResult[t] + "</td>"
+              // tableData += "</tr>";
+              } 
+          }
+
+          tableData += " <tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
+
+          document.getElementById("demo").innerHTML = tableData ;
+          
+
+          console.log(JSON.stringify(TickerMarket));
+      
+        } else {
+      
+          const errorMessage = document.getElementById("demo")
+      
+          errorMessage.innerHTML = `Gah, it's not working!`
+      
+          app.appendChild(errorMessage)
+      
+        }
+      
+      }
+      
+      request.send()
+      
+      
+      </script>
   </head>
   <body>
     <script src="%PUBLIC_URL%/config/env.js"></script>

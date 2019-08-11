@@ -14,8 +14,6 @@ class FooterComponent extends React.Component {
         return (
             <React.Fragment>
                 <footer className="pg-footer">
-                    <span>Powered by</span>
-                    <a href="https://openware.com">openware.com</a>
                     {startDate && <span>EXPIRE IN <b>{Math.ceil((startDate - today) / (3600 * 1000 * 24))} days</b></span>}
                 </footer>
             </React.Fragment>

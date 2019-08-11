@@ -11,19 +11,19 @@
 
   /* STYLE GUIDE */
 
-  --main-bg: #1E2841;
-  --back-bg: #171C29;
+  --main-bg: #212328;
+  --back-bg: #212328;
   --second-bg: #222B41;
-  --text: #657395;
-  --placeholder-text: #737F92;
-  --header: #27324F;
-  --header-text: #919EBA;
-  --button-normal: #2E4C80;
+  --text: #fff;
+  --placeholder-text: #fff;
+  --header: #2C2E33;
+  --header-text: #fff;
+  --button-normal: linear-gradient(90.06deg, #BE55AD 0%, #543D8F 100.04%)0;
   --white: #FFFFFF;
-  --accent: #3C78E0;
-  --green: #54B489;
-  --red: #E85E59;
-  --selected-item: #3A4663;
+  --accent: #BF357F;
+  --green: #12C096;
+  --red: #BF357F;
+  --selected-item: #BF357F;
   --gamboge: #E0A300;
 
   /* DARK.PCSS */
@@ -243,7 +243,7 @@
   --email-confirmation-screen-text-color: var(--placeholder-text);
 
   /* Email verification screen */
-  --email-verification-screen-background: #1E2841;
+  --email-verification-screen-background: #212328;
 
   /* ToolBar */
   --trading-header-background: var(--back-bg);
@@ -274,6 +274,12 @@ input[type=text], input[type=button] {
   font-size: 1em !important;
   width: 100%;
   border-bottom: 1px solid var(--trading-header);
+}
+
+.cr-table__head {
+  background: var(--transparent);
+  color: #fff;
+  font-weight: 500;
 }
 
 .cr-table {

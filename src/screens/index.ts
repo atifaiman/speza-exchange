@@ -12,3 +12,4 @@ export * from './ProfileTwoFactorAuthScreen';
 export * from './ForgotPassword';
 export * from './ChangeForgottenPasswordScreen';
 export * from './ConfirmScreen';
+export * from './LandingScreen';

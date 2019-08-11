@@ -50,6 +50,7 @@
             font-size: calc(var(--gap) * 2);
 
             &:hover {
+                font-weight: bold;
                 background: var(--background-dropdown-hover);
                 opacity: 0,5;
                 a {
@@ -146,7 +147,8 @@
 
                       &:hover {
                           color: var(--color-white);
-                          background-color: var(--navbar-language-selector-background-hover);
+                           font-weight: bold;
+                          background-color: var(--transparent);
                       }
                   }
 
@@ -176,8 +178,9 @@
                           a {
                               color: var(--color-white);
                               text-decoration: none;
+                              font-weight: bold;
                           }
-                          background-color: var(--navbar-language-selector-background-hover);
+                          background-color: var(--transparent);
                       }
                   }
               }
@@ -198,7 +201,7 @@
               }
 
               .dropdown-menu-user {
-                  background-color: var(--navbar-language-selector-background);
+                   background-color: #823179;
                   display: flex;
                   flex-direction: column;
                   border-radius: 4px;
@@ -210,7 +213,7 @@
               }
 
               .dropdown-menu-language {
-                  background-color: var(--navbar-language-selector-background);
+                  background-color: #823179;
                   display: flex;
                   flex-direction: column;
                   border-radius: 4px;

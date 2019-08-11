@@ -2,6 +2,27 @@ import { en as customTranslations } from '../custom/translations/en';
 import { nationalitiesNames } from './nationalities';
 
 export const en = {
+    'page.landing.slider.title': 'Fully Regulated Digital Asset Exchange',
+    'page.landing.slider.description': 'The offshore licensed digital asset exchange with liquidity in mind.',
+    'page.landing.smallbanner1.title': 'ZERO TRADING FEES',
+    'page.landing.smallbanner1.description': 'World first zero trading fees regulated digital asset exchange.',
+    'page.landing.smallbanner1.button': 'Get Started',
+    'page.landing.smallbanner2.title': 'MARGIN TRADE',
+    'page.landing.smallbanner2.description': 'Maximize your trading power.',
+    'page.landing.smallbanner2.button': 'Coming Soon',
+    'page.landing.smallbanner3.title': 'STO/ICO SERVICES',
+    'page.landing.smallbanner3.description': 'End-to-end regulated STO/ICO service provider.',
+    'page.landing.smallbanner3.button': 'Join',
+
+    'page.landing.paneldark.col1.title': 'Stay Connected',
+    'page.landing.paneldark.col1.description': ' Receive our newsletter for latest product information, legislation and regulation in the digital asset and cryptocurrency space.',
+    'page.landing.paneldark.col2.name': '*Name :',
+    'page.landing.paneldark.col2.email': '*Email :',
+    'page.header.panelbottom.col1.link1': '<a href="mailto: sales@speza.exchange " id="terms" >sales@speza.exchange </a>',
+    'page.header.panelbottom.col1.link2': '<a href="mailto: press@speza.exchange  " id="terms" >press@speza.exchange </a>',
+    'page.header.panelbottom.col1.link3': '<a href="mailto: jobs@speza.exchange " id="terms" >jobs@speza.exchange </a>',
+
+    'page.header.navbar.Landing': 'Home',
     'page.header.navbar.signIn': 'Sign In',
     'page.header.navbar.trade': 'Trade',
     'page.header.navbar.wallets': 'Wallets',

@@ -1,11 +1,12 @@
 import { Loader } from '@openware/components';
+import { History } from 'history';
 import * as React from 'react';
 import {
     FormattedMessage,
     InjectedIntlProps,
     injectIntl,
 } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect , MapStateToProps } from 'react-redux';
 import { Order, OrderProps, WalletItemProps } from '../../components';
 import {
     RootState,
@@ -34,6 +35,7 @@ interface ReduxProps {
     asks: string[][];
     wallets: WalletItemProps[];
     currentPrice: number | undefined;
+    isLoggedIn: boolean;
 }
 
 interface StoreProps {
@@ -47,8 +49,10 @@ interface DispatchProps {
     setCurrentPrice: typeof setCurrentPrice;
     orderExecute: typeof orderExecuteFetch;
 }
-
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
+interface OwnProps {
+    history: History;
+}
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & OwnProps;
 
 class OrderInsert extends React.PureComponent<Props, StoreProps> {
     constructor(props: Props) {
@@ -89,9 +93,18 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
             });
         }
     }
-
+    public handleLogin() {
+        const applogic = window.env.api.applogicUrl;
+        const loginLink = `${applogic.substring(0, applogic.length - 15)}signup`;
+        window.location.assign(loginLink);
+    }
+    public handleSignUp() {
+        const applogic = window.env.api.applogicUrl;
+        const signUpLink = `${applogic.substring(0, applogic.length - 15)}signup`;
+        window.location.assign(signUpLink);
+    }
     public render() {
-        const { executeLoading, marketTickers, currentMarket, wallets, asks, bids } = this.props;
+        const { executeLoading, marketTickers, currentMarket, wallets, asks, bids, isLoggedIn } = this.props;
         if (!currentMarket) {
             return null;
         }
@@ -110,45 +123,57 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
                 <div className="cr-title-component"><FormattedMessage id="page.body.trade.header.newOrder" /></div>
             </div>
         );
-        return (
+        if (isLoggedIn) {
+            return (
 
-            <div className={'pg-order'} ref={this.orderRef}>
-                {this.state.width > 448 ? headerContent : undefined}
-                <Order
-                    asks={asks}
-                    bids={bids}
-                    disabled={executeLoading}
-                    feeBuy={Number(currentMarket.ask_fee)}
-                    feeSell={Number(currentMarket.ask_fee)}
-                    from={from}
-                    availableBase={this.getAvailableValue(walletBase)}
-                    availableQuote={this.getAvailableValue(walletQuote)}
-                    onSubmit={this.handleSubmit}
-                    priceMarketBuy={Number((currentTicker || defaultCurrentTicker).last)}
-                    priceMarketSell={Number((currentTicker || defaultCurrentTicker).last)}
-                    priceLimit={priceLimit}
-                    to={to}
-                    handleSendType={this.getOrderType}
-                    orderTypes={this.getOrderTypes}
-                    currentMarketAskPrecision={currentMarket.ask_precision}
-                    currentMarketBidPrecision={currentMarket.bid_precision}
-                    amountText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.amount' })}
-                    availableText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.available' })}
-                    orderTypeText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.orderType' })}
-                    priceText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.price' })}
-                    totalText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.total' })}
-                    labelFirst={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.buy' })}
-                    labelSecond={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.sell' })}
-                    estimatedFeeText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.estimatedFee' })}
-                    submitBuyButtonText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.buy' })}
-                    submitSellButtonText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.sell' })}
-                    width={this.state.width}
-                    listenInputPrice={this.listenInputPrice}
-                />
-                {executeLoading && <Loader />}
-            </div>
-        );
-    }
+                <div className={'pg-order'} ref={this.orderRef}>
+                    {this.state.width > 448 ? headerContent : undefined}
+                    <Order
+                        asks={asks}
+                        bids={bids}
+                        disabled={executeLoading}
+                        feeBuy={Number(currentMarket.ask_fee)}
+                        feeSell={Number(currentMarket.ask_fee)}
+                        from={from}
+                        availableBase={this.getAvailableValue(walletBase)}
+                        availableQuote={this.getAvailableValue(walletQuote)}
+                        onSubmit={this.handleSubmit}
+                        priceMarketBuy={Number((currentTicker || defaultCurrentTicker).last)}
+                        priceMarketSell={Number((currentTicker || defaultCurrentTicker).last)}
+                        priceLimit={priceLimit}
+                        to={to}
+                        handleSendType={this.getOrderType}
+                        orderTypes={this.getOrderTypes}
+                        currentMarketAskPrecision={currentMarket.ask_precision}
+                        currentMarketBidPrecision={currentMarket.bid_precision}
+                        amountText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.amount' })}
+                        availableText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.available' })}
+                        orderTypeText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.orderType' })}
+                        priceText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.price' })}
+                        totalText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.total' })}
+                        labelFirst={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.buy' })}
+                        labelSecond={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.sell' })}
+                        estimatedFeeText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.estimatedFee' })}
+                        submitBuyButtonText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.buy' })}
+                        submitSellButtonText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.sell' })}
+                        width={this.state.width}
+                        listenInputPrice={this.listenInputPrice}
+                    />
+                    {executeLoading && <Loader />}
+                </div>
+            );
+        }  else {
+            return (
+                <div className="buy-sell-backgroundimage">
+                    <div style={{ textAlign: 'center' , padding: '110px 0px' , color: '#fff'}}>
+                        <button className="login-button" onClick={this.handleLogin}>Login</button>
+                        <p style={{ fontSize: '26px' ,padding: '5px 10px' , color: '#fff'}}>   or  </p>
+                        <button className="login-button"  onClick={this.handleSignUp}>Sign up</button>
+                    </div>
+                </div>
+            );
+            }
+        }
 
     private handleSubmit = (value: OrderProps) => {
         if (!this.props.currentMarket) {
@@ -189,7 +214,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     }
 }
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     bids: selectDepthBids(state),
     asks: selectDepthAsks(state),
     currentMarket: selectCurrentMarket(state),
@@ -198,6 +223,7 @@ const mapStateToProps = (state: RootState) => ({
     wallets: selectWallets(state),
     currentPrice: selectCurrentPrice(state),
     userLoggedIn: selectUserLoggedIn(state),
+    isLoggedIn: selectUserLoggedIn(state),
 });
 
 const mapDispatchToProps = dispatch => ({

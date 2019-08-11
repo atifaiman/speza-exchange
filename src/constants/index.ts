@@ -1,7 +1,8 @@
-export const PG_TITLE_PREFIX = 'Cryptobase';
+export const PG_TITLE_PREFIX = 'Speza';
 
 export const pgRoutes = (isLoggedIn: boolean): string[][] => {
     const routes = [
+        ['page.header.navbar.Landing', '/landing/'],
         ['page.header.navbar.trade', '/trading/'],
         ['page.header.navbar.wallets', '/wallets'],
         ['page.header.navbar.openOrders', '/orders'],

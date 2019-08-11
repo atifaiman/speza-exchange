@@ -6,6 +6,7 @@ import {
 
 describe('Constants', () => {
     const expectedRoutesForLoggedInUser = [
+      ['page.header.navbar.Landing', '/landing/'],
       ['page.header.navbar.trade', '/trading/'],
       ['page.header.navbar.wallets', '/wallets'],
       ['page.header.navbar.openOrders', '/orders'],
