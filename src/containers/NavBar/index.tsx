@@ -80,7 +80,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         };
         const path = url.includes('/trading') && currentMarket ? `/trading/${currentMarket.id}` : url;
         return (
-            <li onClick={handleLinkChange} key={index}>
+            <li onClick={handleLinkChange} key={index} >
                 <Link className={cx} to={path}>
                     <FormattedMessage id={name} />
                 </Link>

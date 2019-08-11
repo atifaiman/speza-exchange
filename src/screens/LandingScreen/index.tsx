@@ -11,7 +11,7 @@ import { setDocumentTitle } from '../../helpers';
 class LandingComponent extends React.Component<RouterProps> {
 
     public componentDidMount() {
-        setDocumentTitle(' ');
+        setDocumentTitle('Home');
     }
 
     public goBack = () => {
