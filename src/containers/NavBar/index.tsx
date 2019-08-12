@@ -92,7 +92,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const { location, user, lang } = this.props;
         const { isOpenLanguage } = this.state;
         const address = location ? location.pathname : '';
-        const languageName = lang.toUpperCase();
+        const languageName = (lang === 'zh') ? '中文' : (lang === 'en') ?  'English' : lang.toUpperCase();
         const languageClassName = classnames('dropdown-menu-language-field', {
             'dropdown-menu-language-field-active': isOpenLanguage,
         });
@@ -150,13 +150,13 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             <div className="dropdown-menu dropdown-menu-language" role="menu">
                 {/* tslint:disable jsx-no-lambda */}
                 <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('en')}>
-                    EN
+                    English
                 </div>
                 <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('ru')}>
                     RU
                 </div>
                 <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('zh')}>
-                    ZH
+                    中文
                 </div>
                 {/* tslin:enable jsx-no-lambda */}
             </div>
