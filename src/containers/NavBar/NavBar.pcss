@@ -315,11 +315,41 @@
       }
     }
     &__header {
-       &-settings{
+       &-settings  {
           position: fixed;
-          top: 10px;
+          left: 49%;
+          right: 42%;
+          bottom: 50px;
           display: inherit;
           align-items: center;
+          .dropdown-menu-language-field {
+          }
+          .dropdown-menu-language-field-active {
+            background-color: transparent;
+          }
+          .navbar-user-menu-active {
+            background-color: transparent;
+          }
+
+          &__account {
+            &-dropdown {
+              .dropdown-menu {
+                .dropdown-menu-item-user {
+                  height: 35px;
+                  a {
+                    padding-top: 10px;
+                    padding-bottom: 0;
+                  }
+                }
+              }
+              .dropdown-menu-language {
+                flex-direction: row;
+              }
+              .dropdown-menu-user{
+                flex-direction: row;
+              }
+            }
+          }
        }
        &-language{
        }  
