@@ -27,7 +27,7 @@ class Head extends React.Component<any, HeaderState> {
         super(props);
 
         this.state = {
-            isActive: false,
+            isActive: true,
         };
     }
 
@@ -37,7 +37,7 @@ class Head extends React.Component<any, HeaderState> {
         return (
           <React.Fragment>
           {!['/confirm'].some(r => location.pathname.includes(r)) &&
-            <header className={`pg-header ${isActive ? 'pg-header--active' : ''}`}>
+            <header className={'pg-header pg-header--active'}>
                 <div className="pg-container pg-header__content">
                     <Link to={'/wallets'} className="pg-header__logo">
                         <div className="pg-logo">

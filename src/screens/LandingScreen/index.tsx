@@ -27,13 +27,13 @@ class LandingComponent extends React.Component<RouterProps> {
                 </div>
             </div>
             <div className="row">
-                <div className="col-4" style={{padding:'0'}}>
+                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12" style={{padding:'0'}}>
                     <SmallBanner1/>
                 </div>
-                <div className="col-4" style={{padding:'0'}}>
+                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12" style={{padding:'0'}}>
                     <SmallBanner2/>
                 </div>
-                <div className="col-4" style={{padding:'0'}}>
+                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12" style={{padding:'0'}}>
                     <SmallBanner3/>
                 </div>
             </div>
@@ -43,30 +43,40 @@ class LandingComponent extends React.Component<RouterProps> {
                 </div>
             </div>
             <div className="row">
-                <div className="col-12" style={{height:'300px' , background:'#141622'}}>
-                <div className="row" style={{height:'300px' , color: '#fff'}}>
-                    <div className="col-4"  style={{padding:'30px 55px'}}>
+                <div className="col-12" style={{ background:'#141622'}}>
+                <div className="row" style={{ color: '#fff'}}>
+                    <div className="col-xl-4 col-md-12 col-l-4 col-sm-12"  style={{height:'300px',margin: 'auto' }}>
+                    <div className="row">
+                        <div  style={{ margin: 'auto', padding:'40px', display:'flex' , flexFlow:'column'}}>
                         <h3 style={{fontSize:'48px'}}><FormattedMessage id="page.landing.paneldark.col1.title"/></h3>
                         <p style={{fontSize:'14px', maxWidth:'400px'}}><FormattedMessage id="page.landing.paneldark.col1.description"/></p>
+                        </div>
                     </div>
-                    <div className="col-5"  style={{margin:'auto'}}>
-                        <form style={{display:'flex' , flexDirection:'row'}}>
-                            <label style={{fontSize:'14px', padding:'10px'}}>
+                    </div>
+                    <div className="col-xl-5 col-md-12 col-l-5 col-sm-12"  style={{margin:'auto'}}>
+                    <div className="row">
+                        <form style={{display:'flex', margin:'auto'}} className="stayconnected">
+                            <label style={{fontSize:'14px', padding:'10px'}} >
                                 <FormattedMessage id="page.landing.paneldark.col2.name"/><br/>
-                                <input type="text" name="name" style={{padding:'15px' , width:'180px', height:'40px' , marginTop:'5px'}} />
+                                <input type="text" name="name" style={{padding:'15px', height:'40px' , marginTop:'5px'}} className="stayconnectedInput"/>
                             </label>
                             <label style={{fontSize:'14px', padding:'10px'}}>
                                 <FormattedMessage id="page.landing.paneldark.col2.email"/><br/>
-                                <input type="email" name="email" style={{padding:'15px', width:'180px', height:'40px' , marginTop:'5px'}}/>
+                                <input type="email" name="email" style={{padding:'15px', height:'40px' , marginTop:'5px'}} className="stayconnectedInput"/>
                             </label>
-        <input type="submit" value="submit" style={{background: 'linear-gradient(270deg, #513A92 0%, #892D78 100%)' , width:'180px', height:'44px' , fontSize:'14px' , color:'#fff', padding:'10px' , marginTop:'30px' , marginLeft:'10px' , border: 'none'}} />
+        <input type="submit" value="submit" style={{background: 'linear-gradient(270deg, #513A92 0%, #892D78 100%)' , height:'44px' , fontSize:'14px' , color:'#fff', padding:'10px' , marginTop:'30px' , marginLeft:'10px' , border: 'none'}} className="stayconnectedInput" />
                         </form>
                     </div>
-                    <div className="col-3" style={{ margin:'auto'}}>
+                    </div>
+                    <div className="col-xl-3 col-md-12 col-l-3 col-sm-12" style={{margin:'auto'}}>
+                    <div className="row" style={{  height:'100px' }} >
+                        <div style={{  margin:'auto' }}>
                              <img src={require('./fb.svg')} style={{ height:'37px' , padding:'0 15px'}}/>
                              <img src={require('./linkedin.svg')} style={{ height:'37px', padding:'0 15px'}} />
                              <img src={require('./tele.svg')} style={{ height:'37px', padding:'0 15px'}}/>
+                        </div>
                     </div>
+                  </div>
                   </div>
                 </div>
             </div>

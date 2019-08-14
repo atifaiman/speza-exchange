@@ -82,7 +82,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         return (
             <li onClick={handleLinkChange} key={index} >
                 <Link className={cx} to={path}>
-                    <FormattedMessage id={name} />
+                    <FormattedMessage id={name}/>
                 </Link>
             </li>
         );

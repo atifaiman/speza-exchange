@@ -82,15 +82,16 @@ header {
 
     &__navbar {
       margin-left: 0;
-      height: 100vh;
+      height: 200px;
       bottom: 0;
       z-index: 666;
-      max-width: calc(var(--gap) * 33);
+      width: 100px;
       position: absolute;
       width: 100%;
       display: none;
       transition: all 1s ease;
       &::after {
+        display: none;
         background: rgba(0, 0, 0, 0.8);
         width: 100vw;
         content: '';
@@ -105,10 +106,10 @@ header {
       cursor: pointer;
       width: 30px;
       height: 30px;
-      display: block;
+      display: none;
       &-item {
         background: var(--navbar-text-color);
-        display: block;
+        display: none;
         width: 30px;
         height: 3px;
         border-radius: 5px;
