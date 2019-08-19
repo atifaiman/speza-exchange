@@ -57,7 +57,7 @@ class SliderComponent extends Component {
                                 className="slider-content"
                                 style={{ background: `url('${item.image}') no-repeat center center` }}
                             >
-                                <div className="inner">
+                                <div className="inner" style={{marginTop:'70px'}}>
 									{(item.image === "http://i.imgur.com/HUhlwqm.jpg" ) ? (<img style={{ height: '114px' , margin: 'auto' , }} src={spezalogo} alt="clock-Logo"/>) : null}
                                     <h3>{item.title}</h3>
                                     <p>{item.description}</p>

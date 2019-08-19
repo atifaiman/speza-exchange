@@ -183,10 +183,10 @@ class LandingComponent extends React.Component<RouterProps> {
                         </div>
                     </div>
                     <div className="row" style={{background:'#fff'}}>
-                        <div style={{height:'30px', display:'flex',flexFlow:'row', fontSize: '16px', margin: 'auto',padding: '0px 20px'}}>
-                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4 col-xs-12"><FormattedHTMLMessage id="page.header.panelbottom.col1.link1"/></div>
-                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4 col-xs-12"><FormattedHTMLMessage id="page.header.panelbottom.col1.link2"/></div>
-                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4 col-xs-12"><FormattedHTMLMessage id="page.header.panelbottom.col1.link3"/></div>
+                        <div style={{height:'100px', display:'flex', fontSize: '16px', margin: 'auto',padding: '10px 20px'}} className="buttombanner_emails">
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4"><FormattedHTMLMessage id="page.header.panelbottom.col1.link1"/></div>
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4"><FormattedHTMLMessage id="page.header.panelbottom.col1.link2"/></div>
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4"><FormattedHTMLMessage id="page.header.panelbottom.col1.link3"/></div>
                         </div>
                     </div>
                     <div className="row" style={{background:'#fff'}}>
@@ -194,7 +194,7 @@ class LandingComponent extends React.Component<RouterProps> {
                         <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de1mo"  style={{ margin: '5px' , background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>COMPANY&#x2192;</h3></button>
                          <div id="de1mo"  className="collapse">
                 <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
-                    <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '30px'}}>
+                    <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '35px'}}>
                     <li style={{fontSize:'18px' , color:'#1E252F'}}>About Us</li>
                     <li style={{fontSize:'18px' , color:'#1E252F'}}>Terms</li>
                     <li style={{fontSize:'18px' , color:'#1E252F'}}>Fees</li>
@@ -205,7 +205,7 @@ class LandingComponent extends React.Component<RouterProps> {
             <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de2mo"style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>PRODUCTS&#x2192;</h3></button>
             <div id="de2mo"  className="collapse">
                 <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
-                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '30px'}}>
+                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '35px'}}>
                         <li style={{fontSize:'18px' , color:'#1E252F'}}>Regulated Exchange Platform</li>
                         <li style={{fontSize:'18px' , color:'#1E252F'}}>Regulated Asset Backed Tokenization</li>
                         <li style={{fontSize:'18px' , color:'#1E252F'}}>Offshore Virtual Currency</li>
@@ -216,7 +216,7 @@ class LandingComponent extends React.Component<RouterProps> {
             <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de3mo" style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>RESOURCES&#x2192;</h3></button>
             <div id="de3mo" className="collapse">
                      <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
-                        <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '30px'}}>
+                        <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '35px'}}>
                         <li style={{fontSize:'18px' , color:'#1E252F'}}>Blog</li>
                         <li style={{fontSize:'18px' , color:'#1E252F'}}>Announcements</li>
                         <li style={{fontSize:'18px' , color:'#1E252F'}}>API Docs</li>
@@ -229,7 +229,7 @@ class LandingComponent extends React.Component<RouterProps> {
             <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de4mo" style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>CAREERS&#x2192;</h3></button>
             <div id="de4mo" className="collapse">
                     <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
-                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '30px'}}>
+                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '35px'}}>
                     <li style={{fontSize:'18px' , color:'#1E252F'}}>Careers</li>
                     <li style={{fontSize:'18px' , color:'#1E252F'}}>Apply to SPEZA</li>
                     </ul>
