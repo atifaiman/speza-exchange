@@ -165,8 +165,8 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
     private getUserEmailMenu = () => {
         const { isOpen } = this.state;
-        const userClassName = classnames('navbar-user-menu', {
-            'navbar-user-menu-active': isOpen,
+        const userClassName = classnames('navbar-usser-menu', {
+            'navbar-usser-menu-active': isOpen,
         });
 
         return (

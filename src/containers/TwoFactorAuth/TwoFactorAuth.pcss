@@ -580,11 +580,26 @@
   text-decoration: none;
 }
 #myTable {
+  max-width: 1900px;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
-  border: solid 1px #000;
+  border-radius: 20px;
 }
-
+#myInput {
+    background-image: url('./loupe.svg');
+    background-position: 95%;
+    background-repeat: no-repeat;
+    background-size: 35px;
+    color: #000;
+    padding: 0 20px;
+    border-radius: 5px;
+    height: 60px;
+    width: 50%;
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
+}
 .fixed_header tbody{
   border: 1px solid #E7E6E7;
   display:block;
@@ -602,12 +617,11 @@
 }
 
 .fixed_header thead th {
-  padding: 5px;
+  width: 12%;
+  padding: 2px;
   padding-left: 10px;
   text-align: left;
-  max-width: 121px;
-  min-width: 121px;
- font-size: 12px;
+  font-size: 12px;
 }
 
 .fixed_header thead {
@@ -617,9 +631,9 @@
 }
 
 .fixed_header th, .fixed_header td {
-  padding: 5px;
+  width: 13%;
+  padding: 2px;
   text-align: left;
-  min-width: 121px;
 }
 
 .stayconnected {
@@ -633,5 +647,18 @@
    width: 180px;
    @media (max-width: 640px) {
     width: 350px;
+  }
+}
+
+.spezaButtomBanner {
+  display: block;
+  @media (max-width: 1100px) {
+    display: none;
+  }
+}
+.spezaButtomBannerMobile {
+    display: none;
+  @media (max-width: 1100px) {
+    display: block;
   }
 }

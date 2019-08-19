@@ -42,6 +42,13 @@ header {
     z-index: 11;
     left: 25px;
   }
+  &__togglerer {
+    display: block;
+    position: absolute;
+    top: 15px;
+    z-index: 11;
+    left: 25px;
+  }
 
   .pg-container {
     justify-content: flex-start;
@@ -81,8 +88,9 @@ header {
     }
 
     &__navbar {
+      padding: 0 20px;
       margin-left: 0;
-      height: 155px;
+      height: 85px;
       bottom: 0;
       z-index: 666;
       width: 100%;
@@ -110,6 +118,21 @@ header {
       &-item {
         background: var(--navbar-text-color);
         display: none;
+        width: 30px;
+        height: 3px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        transition: all 0.2s linear;
+      }
+    }
+    &__togglerer {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: block;
+      &-item {
+        background: var(--navbar-text-color);
+        display: block;
         width: 30px;
         height: 3px;
         border-radius: 5px;

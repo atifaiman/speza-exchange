@@ -37,9 +37,12 @@ class History extends React.Component<Props, State> {
         currentTabIndex: 0,
     };
 
-    public tabMapping = ['deposits', 'withdraws', 'trades'];
+    // public tabMapping = ['deposits', 'withdraws', 'trades'];
+    public tabMapping = ['trades'];
+
 
     public componentDidMount() {
+        this.setState({ tab: this.tabMapping[0] });
         setDocumentTitle('History');
         this.props.fetchMarkets();
         this.props.fetchWallets();
@@ -77,14 +80,14 @@ class History extends React.Component<Props, State> {
     private renderTabs = () => {
         const { tab } = this.state;
         return [
-            {
-                content: tab === 'deposits' ? <HistoryElement type="deposits" /> : null,
-                label: this.props.intl.formatMessage({id: 'page.body.history.deposit'}),
-            },
-            {
-                content: tab === 'withdraws' ? <HistoryElement type="withdraws" /> : null,
-                label: this.props.intl.formatMessage({id: 'page.body.history.withdraw'}),
-            },
+            // {
+            //     content: tab === 'deposits' ? <HistoryElement type="deposits" /> : null,
+            //     label: this.props.intl.formatMessage({id: 'page.body.history.deposit'}),
+            // },
+            // {
+            //     content: tab === 'withdraws' ? <HistoryElement type="withdraws" /> : null,
+            //     label: this.props.intl.formatMessage({id: 'page.body.history.withdraw'}),
+            // },
             {
                 content: tab === 'trades' ? <HistoryElement type="trades" /> : null,
                 label: this.props.intl.formatMessage({id: 'page.body.history.trade'}),

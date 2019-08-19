@@ -14,6 +14,9 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <link rel="stylesheet" href="../node_modules/@openware/cryptofont/font/crypto-font.css">
     <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -25,6 +28,27 @@
     -->
     <title>Speza</title>
     <script>
+       function myFunction() {
+          // Declare variables 
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+        
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            } 
+          }
+        }
                                             
       var request = new XMLHttpRequest()
       
@@ -113,47 +137,40 @@
               }
  
           }
-          
-
          for( l=0 ; l < endResult.length ; l++){
              if( l%10 === 2){
               //endResult.splice(l,1);
-             }
-            
+             }  
          }
-          
           var show = "";
           var tableData = "";
-          tableData +="<div style=\" padding: 100px 0px; margin-left:-2px; \"><table  id=\"myTable\" class=\"fixed_header table-hover\"><thead><tr><th><input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for Market..\"></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:45px;\">Market</th><th>Buy</th><th>Sell</th><th>Low</th><th>High</th><th>Open</th><th>Last</th><th>Volume</th><th>Price Change</th></tr></thead><tbody>";
+          tableData +="<div style=\" padding: 20px 0px; margin-left:-2px; \"><input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for Market..\"><table  id=\"myTable\" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:15px;\">Market</th><th>Buy</th><th>Sell</th><th>Low</th><th>High</th><th>Open</th><th>Last</th><th>Volume</th><th>Price Change</th></tr></thead><tbody>";
           for (t=0 ; t < endResult.length; t++){
               
               if (t === 0 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:45px;\">MGT market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px;\">MGT market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
               }
               if (t === 143 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px;\">BCH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px;\">BCH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
               }
               if (t === 252 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px; \">BTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">BTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
               }
               if (t === 340 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px; \">ETH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">ETH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
               }
               if (t === 439 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:45px; \">LTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px; \">LTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
               }
               if (t === 549 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px; \">TUSD market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">TUSD market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
               }
               if (t === 572 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:45px; \">XRP market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">XRP market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
               }
-
-
               if (t%11 === 0 ){
-               
                   tableData += "<tr onclick=\"window.open(\'https://blockchain.mundoexchange.io/trading/" +endResult[t] + " \');\">";
-                  tableData += "<td style=\" color: #AAB4C1;  text-transform: uppercase; padding-left:45px; \" >";
+                  tableData += "<td style=\" color: #AAB4C1;  text-transform: uppercase; padding-left:15px; \" >";
                   tableData += endResult[t] + "</td>"
               } 
               else if (t%11 === 1 ){
@@ -222,10 +239,7 @@
           tableData += " <tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
 
           document.getElementById("demo").innerHTML = tableData ;
-          
 
-          console.log(JSON.stringify(TickerMarket));
-      
         } else {
       
           const errorMessage = document.getElementById("demo")

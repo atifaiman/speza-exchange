@@ -37,6 +37,42 @@ class LandingComponent extends React.Component<RouterProps> {
                     <SmallBanner3/>
                 </div>
             </div>
+            <div className="row" style={{display:'none'}}>
+                <ul className="nav nav-tabs" id="myTab" role="tablist">
+                <li className="nav-item">
+                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                </li>
+                <li className="nav-item">
+                    <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                </li>
+                </ul>
+                <div className="tab-content" id="myTabContent">
+                <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">Raw denim you
+                    probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master
+                    cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+                    keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
+                    placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
+                    qui.</div>
+                <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">Food truck fixie
+                    locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
+                    blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
+                    Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
+                    PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
+                    salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
+                    sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+                    stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</div>
+                <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Etsy mixtape
+                    wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack
+                    lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard
+                    locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify
+                    squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie
+                    etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog
+                    stumptown. Pitchfork sustainable tofu synth chambray yr.</div>
+                </div>
+            </div>
             <div className="row">
                 <div className="col-12" style={{height:'100%' , background:'#fff', marginLeft: 'auto' , marginRight: 'auto' , width: '100%'}}>
                     <div id="demo"/>
@@ -80,55 +116,129 @@ class LandingComponent extends React.Component<RouterProps> {
                   </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-4" style={{height:'500px' , background:'#fff', display:'flex'}}>
-                    <div style={{margin:'auto', marginTop:'110px', display:'flex' , flexDirection:'column' , marginLeft: '40px' , textAlign:'left' , lineHeight:'12px'}}>
-                        <img src={require('./spezalogo.svg')} style={{ height:'37px', padding:'0 15px'}}/>
-                        <h3 style={{fontSize:'24px' , color:'#0053A3' , marginTop:'30px'}}>HAVE QUESTIONS?</h3>
-                        <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link1"/></p>
-                        <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link2"/></p>
-                        <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link3"/></p>
-                        <p style={{fontSize:'14px' ,color:'#1E252F'}}>+603 7490 7707</p>
-                   </div>
-                </div>
-                <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
-                    <div style={{marginTop:'100px', display:'flex' , flexDirection:'column' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px'}}>
-                        <h3 style={{fontSize:'24px' , color:'#141622'}}>COMPANY</h3>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>About Us</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Terms</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Fees</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Referral</p>
-                   </div>
-                </div>
-                <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
-                    <div style={{marginTop:'100px', display:'flex' , flexDirection:'column' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px'}}>
-                        <h3 style={{fontSize:'24px' , color:'#141622'}}>PRODUCTS</h3>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Regulated Exchange Platform</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Regulated Asset Backed Tokenization</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Offshore Virtual Currency</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Exchange License</p>
-                   </div>
-                </div>
-                <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
-                    <div style={{marginTop:'100px', display:'flex' , flexDirection:'column' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px'}}>
-                        <h3 style={{fontSize:'24px' , color:'#141622'}}>RESOURCES</h3>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Blog</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Announcements</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>API Docs</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>FAQ</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Support Center</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Contact Us</p>
-                   </div>
-                </div>
-                <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
-                    <div style={{marginTop:'100px', display:'flex' , flexDirection:'column' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px'}}>
-                        <h3 style={{fontSize:'24px' , color:'#141622'}}>CAREERS</h3>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Careers</p>
-                        <p style={{fontSize:'12px' , color:'#1E252F'}}>Apply to SPEZA</p>
-                   </div>
+            <div className="spezaButtomBanner">
+                <div className="row">
+                        <div className="col-4" style={{height:'500px' , background:'#fff', display:'flex'}}>
+                            <div style={{margin:'auto', marginTop:'110px', display:'flex' , flexDirection:'column' , marginLeft: '40px' , textAlign:'left' , lineHeight:'12px'}} >
+                                <img src={require('./spezalogo.svg')} style={{ height:'37px', padding:'0 15px'}}/>
+                                <h3 style={{fontSize:'24px' , color:'#0053A3' , marginTop:'30px'}}>HAVE QUESTIONS?</h3>
+                                <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link1"/></p>
+                                <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link2"/></p>
+                                <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link3"/></p>
+                                <p style={{fontSize:'14px' ,color:'#1E252F'}}>+603 7490 7707</p>
+                        </div>
+                        </div>
+                        <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
+                            <div style={{marginTop:'100px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}} >
+                                <h3 style={{fontSize:'24px' , color:'#141622'}}>COMPANY</h3>
+                                <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '20px'}}>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>About Us</li>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Terms</li>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Fees</li>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Referral</li>
+                                </ul>
+                        </div>
+                        </div>
+                        <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
+                            <div style={{marginTop:'100px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px', flexDirection:'column'}}>
+                                <h3 style={{fontSize:'24px' , color:'#141622'}}>PRODUCTS</h3>
+                                <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '20px'}}>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Regulated Exchange Platform</li>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Regulated Asset Backed Tokenization</li>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Offshore Virtual Currency</li>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Exchange License</li>
+                                </ul>
+                        </div>
+                        </div>
+                        <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
+                            <div style={{marginTop:'100px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px', flexDirection:'column'}}>
+                                <h3 style={{fontSize:'24px' , color:'#141622'}}>RESOURCES</h3>
+                                <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '20px'}}>
+                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>Blog</li>
+                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>Announcements</li>
+                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>API Docs</li>
+                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>FAQ</li>
+                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>Support Center</li>
+                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>Contact Us</li>
+                                </ul>
+                        </div>
+                        </div>
+                        <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
+                            <div style={{marginTop:'100px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px',flexDirection:'column'}}>
+                                <h3 style={{fontSize:'24px' , color:'#141622'}}>CAREERS</h3>
+                                <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '20px'}}>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Careers</li>
+                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Apply to SPEZA</li>
+                                </ul>
+                        </div>
+                        </div>
+                    </div>
+            </div>
+            <div className="spezaButtomBannerMobile">
+                    <div className="row" style={{background:'#fff'}}>
+                        <div style={{height:'200px' , paddingTop:'50px',margin:'auto', textAlign:'center' }}>
+                            <img src={require('./spezalogo.svg')} style={{ height:'37px', padding:'0 15px'}}/>
+                            <h3 style={{fontSize:'24px' , color:'#0053A3' , marginTop:'30px'}}>HAVE QUESTIONS?</h3>
+                            <p style={{fontSize:'14px' ,color:'#1E252F'}}>+603 7490 7707</p>
+                        </div>
+                    </div>
+                    <div className="row" style={{background:'#fff'}}>
+                        <div style={{height:'30px', display:'flex',flexFlow:'row', fontSize: '16px', margin: 'auto',padding: '0px 20px'}}>
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4 col-xs-12"><FormattedHTMLMessage id="page.header.panelbottom.col1.link1"/></div>
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4 col-xs-12"><FormattedHTMLMessage id="page.header.panelbottom.col1.link2"/></div>
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4 col-xs-12"><FormattedHTMLMessage id="page.header.panelbottom.col1.link3"/></div>
+                        </div>
+                    </div>
+                    <div className="row" style={{background:'#fff'}}>
+                        <div style={{paddingBottom: '80px', paddingTop:'20px', margin:'auto' , display: 'flex' , flexFlow: 'column'}}>
+                        <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de1mo"  style={{ margin: '5px' , background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>COMPANY&#x2192;</h3></button>
+                         <div id="de1mo"  className="collapse">
+                <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
+                    <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '30px'}}>
+                    <li style={{fontSize:'18px' , color:'#1E252F'}}>About Us</li>
+                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Terms</li>
+                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Fees</li>
+                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Referral</li>
+                    </ul>
                 </div>
             </div>
-         </div>
+            <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de2mo"style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>PRODUCTS&#x2192;</h3></button>
+            <div id="de2mo"  className="collapse">
+                <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
+                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '30px'}}>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Regulated Exchange Platform</li>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Regulated Asset Backed Tokenization</li>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Offshore Virtual Currency</li>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Exchange License</li>
+                    </ul>
+                </div>
+            </div>
+            <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de3mo" style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>RESOURCES&#x2192;</h3></button>
+            <div id="de3mo" className="collapse">
+                     <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
+                        <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '30px'}}>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Blog</li>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Announcements</li>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>API Docs</li>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>FAQ</li>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Support Center</li>
+                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Contact Us</li>
+                        </ul>
+                    </div>
+            </div>
+            <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de4mo" style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>CAREERS&#x2192;</h3></button>
+            <div id="de4mo" className="collapse">
+                    <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
+                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '30px'}}>
+                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Careers</li>
+                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Apply to SPEZA</li>
+                    </ul>
+                    </div>
+            </div>
+            </div>
+            </div>
+            </div>
+        </div>
         );
     }
 }
