@@ -66,6 +66,10 @@
         }
 
         legend {
+          width: 110px;
+          border-bottom: none;
+          color: #fff;
+          font-size: 15px;
           background-color: var(--base-bright);
           position:absolute;
           top: -8px;
@@ -209,7 +213,6 @@
           }
 
           &__list {
-            background-color: var(--background-dropdown);
             border: 0px;
             border-radius: 4px;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.24), 0px 2px 8px rgba(0, 0, 0, 0.12);
@@ -232,7 +235,7 @@
                 font-size: calc(var(--gap) * 2);
               }
               &:hover {
-                background-color: var(--background-dropdown-hover);
+                background-color: transparent;
                 color: var(--background-dropdown-hover-text);
               }
             }
@@ -245,8 +248,14 @@
   .react-date-picker {
   width: 100%;
 
+  &__calendar {
+    .react-calendar {
+       color: #000;
+    }
+  }
+
   &__wrapper {
-    margin-top: -5px;
+    margin-top: -2px;
     width: 100%;
     border: none;
     font-size: large;

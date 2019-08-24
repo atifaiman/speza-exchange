@@ -117,6 +117,13 @@
       width: 100%;
     }
     .cr-sign-in-form {
+      height: 70vh;
+      min-width: 70%;
+
+      .cr-button {
+        border-radius: calc(var(--gap) * 1);
+        height: 65px;
+      }
       &__button {
         margin-top: calc(var(--gap) * 4);
         font-size: calc(var(--gap) * 2);
@@ -124,6 +131,37 @@
       &__title {
         background: var(--transparent);
         margin-top: calc(var(--gap) * 2);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .pg-sign-in-screen {
+    .pg-sign-in-screen__container {
+      margin: calc(var(--gap) * 3.33) calc(var(--gap) * 1.66) 0;
+      width: 100%;
+    }
+    .cr-sign-in-form__button-wrapper {
+        font-size: 12px;
+    }
+  
+    .cr-sign-in-form {
+      height: 76vh;
+      min-width: 70%;
+
+      .cr-button {
+        border-radius: calc(var(--gap) * 0.5);
+        height: 35px;
+      }
+      &__button {
+        margin-top: calc(var(--gap) * 2);
+        font-size: 12px;
+      }
+      
+      &__title {
+        background: var(--transparent);
+        margin-top: calc(var(--gap) * 1);
       }
     }
   }

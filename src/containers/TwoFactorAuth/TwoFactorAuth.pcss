@@ -333,6 +333,7 @@
 
 
 .wrapper {
+  pointer-events: none;
   width: 100%;
   box-sizing: border-box;
   margin: auto;
@@ -637,16 +638,20 @@
 }
 
 .stayconnected {
-    flex-direction: row;
+    margin-top: -15px;
+    flex-direction: row; 
     @media (max-width: 640px) {
     flex-direction: column;
+  }
+   @media (max-width: 420px) {
+    font-size:14px;
   }
 }
 
 .stayconnectedInput {
    width: 180px;
    @media (max-width: 640px) {
-    width: 350px;
+    width: 300px;
   }
 }
 
@@ -668,4 +673,70 @@
       }
     }
   }
+}
+.bannerimg {
+  height: 114px;
+}
+
+@media (max-width: 768px) {
+  .smallbanner-inner h3 {
+    font-size: 14px;
+}
+
+.smallbanner-inner p {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 428px) {
+  .smallbanner-inner h3 {
+    font-size: 3px;
+  }
+
+  .smallbanner-inner p {
+    font-size: 9px;
+  }
+}
+.react-date-picker__calendar{
+  .react-calendar { 
+    color: #000;
+  }
+} 
+.mobileNavWallet {
+ display: none;
+ @media (max-width: 768px) {
+   display: block;
+ }
+} 
+
+.mobileNavOrder {
+ display: none;
+ @media (max-width: 768px) {
+   display: block;
+ }
+}
+
+.mobileNavHistory {
+  display: none;
+  @media (max-width: 768px) {
+   display: block;
+  }
+}
+.mobileNavAccount {
+ display: none;
+  @media (max-width: 768px) {
+   display: block;
+ }
+}
+
+.mobileNavSign {
+  display: block;
+  @media (max-width: 768px) {
+   display: none;
+ }
+}
+
+
+.dropdown-menu {
+  min-width: fit-content;
 }

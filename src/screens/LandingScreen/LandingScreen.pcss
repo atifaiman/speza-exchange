@@ -1,3 +1,127 @@
 .LandingScreen{
     font-size: 15px;
 }
+
+
+@media screen and (max-width: 768px) {
+    .pg_landing {
+        padding: 0 10px;
+
+        .bigSlider {
+            max-height: 300px;
+
+            .slider-content {
+                .inner {
+                        top: 13vh;
+                        h3 {
+                            font-size: 18px;
+                        }
+                        p {
+                            font-size: 10px;
+                        }
+                        img {
+                            height: 55px;
+                        }
+                }
+            }
+            
+            .wrapper {
+                .slider-wrapper {
+                        height: 300px;
+                }
+            }
+        }
+
+        .smallbannerMobile {
+            max-height: 170px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 170px;
+                    }
+                    &-inner {
+                        top: 90px;
+                        h3 {
+                            max-height: 100%;
+                            font-size: 12px;
+                            line-height: 20px;
+                        }
+                        p {
+                            font-size: 9px;
+                            max-height: 100%;
+                            line-height: 15px;
+                        }
+                        button {
+                            font-size: 10px;
+                            width: 90px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .pg_landing {
+        padding: 0 10px;
+
+        .bigSlider {
+            max-height: 200px;
+
+            .slider-content {
+                .inner {
+                        top: 15vh;
+                        h3 {
+                            font-size: 14px;
+                        }
+                        p {
+                            font-size: 10px;
+                        }
+                        img {
+                            height: 55px;
+                        }
+                }
+            }
+            
+            .wrapper {
+                .slider-wrapper {
+                        height: 200px;
+                }
+            }
+        }
+
+        .smallbannerMobile {
+            max-height: 90px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 90px;
+                    }
+                    &-inner {
+                        margin: auto;
+                        top: 30px;
+                        h3 {
+                            max-height: 100%;
+                            font-size: 12px;
+                            line-height: 10px;
+                        }
+                        p {
+                            display:none;
+                        }
+                        button {
+                            font-size: 8px;
+                            width: 80px;
+                            height: 15px;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}

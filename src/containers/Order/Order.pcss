@@ -464,7 +464,23 @@
   }
 }
 
+.buy-sell-backgroundimage {
+ p {
+    font-size: 23px;
+  }
+  @media screen and (max-width: 780px) {
+   p {
+      font-size: 18px;
+    }
+  }
+ @media screen and (max-width: 420px) {
+   p {
+      font-size: 14px;
+    }
+ }
+}
 .login-button {
+  border-radius: 10px;
   background-color: transparent;
   color: #fff;
   width: 30%;
@@ -472,8 +488,8 @@
   border: solid 1px #fff;
   border-radius: calc(var(--gap) * 0.01) ;
   opacity: 0.7;
-  font-size: calc(var(--gap) * 4);
-
+  font-size: calc(var(--gap) * 3.3);
+ 
   &:hover {
     background:  linear-gradient(90.03deg, #BE55AD 0%, #543D8F 100.04%);
     opacity: 1;
@@ -483,10 +499,24 @@
     background:  linear-gradient(90.03deg, BE55AD 0%, ##543D8F  100.04%);
     opacity: 1;
   }
+  @media screen and (max-width:780px) {
+    border-radius: 4px;
+    font-size: calc(var(--gap) * 2.5);
+    width: 20%;
+    height: 35px;
+  }
+  @media screen and (max-width: 420px) {
+    border-radius: 3x;
+    font-size: calc(var(--gap) * 2);
+    width: 45%;
+    height: 30px;
+  }
+
 }
 
 .buy-sell-backgroundimage {
+   cursor: not-allowed;
    background-image: url("BuySell.jpg");
    background-repeat: no-repeat;
-   background-size: 100% 95%;
+   background-size: 100% 100%;
 }

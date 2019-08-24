@@ -1,6 +1,12 @@
 @import "../../containers/Wallets/EstimatedValue/EstimatedValue.pcss";
 
 .pg-wallet {
+
+    legend {
+        border-bottom: none;
+        max-width: 100px;
+    }
+
     align-items: flex-start !important;
     display: flex;
     margin-top: calc(var(--gap) * 2) !important;
@@ -28,7 +34,7 @@
 
     .cr-crypto-icon {
       color: var(--white-color);
-      opacity: 0.5;
+      opacity: 0.9;
     }
 
     .cr-wallet-list {
@@ -72,14 +78,14 @@
                 span {
                     color: var(--color-white);
                     &:nth-child(1) {
-                        opacity: 0.5
+                        opacity: 1;
                     }
                     &:nth-child(2) {
                         font-weight: var(--font-light);
                         margin-top: calc(var(--gap) * .6);
                         color: var(--wallets-locked-amount);
                         font-size: calc(var(--gap) * 1.9);
-                        opacity: 0.3
+                        opacity: 1;
                     }
                 }
             }
@@ -88,7 +94,7 @@
                 color: var(--wallets-locked-amount);
                 padding-top: calc(var(--gap) * .6);
                 font-size: calc(var(--gap) * 1.9);
-                opacity: 0.60;
+                opacity: 1;
 
                 path {
                     fill: var(--color-white);
@@ -103,7 +109,7 @@
 
             &__balance {
                 font-weight: var(--font-light);
-                opacity: 0.5;
+                opacity: 1;
             }
 
             &--active {

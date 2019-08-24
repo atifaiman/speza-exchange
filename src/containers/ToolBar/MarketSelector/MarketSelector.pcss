@@ -76,7 +76,7 @@
     animation-duration: var(--market-selector-animation-duration);
     margin-left: calc(var(--big-gap) * 1.5);
     background: var(--trading-header-btn-open);
-    left: 220px;
+    left: 300px;
     width: 30px;
     position: absolute;
   }
@@ -109,7 +109,7 @@
   &-list-container-open {
     left: calc(var(--big-gap) * -0.23);
     top: calc(var(--big-gap) * -0.082);
-    width: calc(var(--big-gap) * 5.6);
+    width: calc(var(--big-gap) * 7);
     height: 100vh;
     padding-left: calc(var(--gap));
     background: var(--trading-header-background);
@@ -118,7 +118,7 @@
     z-index: 10;
 
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: scroll;
     animation-name: pg-trading-header-selector-list-container-open;
     animation-duration: var(--market-selector-animation-duration);
   }
@@ -194,7 +194,7 @@
     top: 0;
   }
   to {
-    width: calc(var(--big-gap) * 5.6);
+    width: calc(var(--big-gap) * 7);
     height: calc(100vh - var(--big-gap) * 1.1);
     top: calc(var(--big-gap) * -0.082);
   }
@@ -202,7 +202,7 @@
 
 @keyframes pg-trading-header-selector-list-container-close {
   from {
-    width: calc(var(--big-gap) * 5.6);
+    width: calc(var(--big-gap) * 7);
     height: calc(100vh - var(--big-gap) * 1.1);
     top: calc(var(--big-gap) * -0.082);
   }

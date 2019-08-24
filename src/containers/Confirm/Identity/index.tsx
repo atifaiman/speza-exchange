@@ -44,6 +44,7 @@ interface IdentityState {
     dateOfBirth: string;
     firstName: string;
     lastName: string;
+    national: string;
     metadata: {
         nationality: string,
     };
@@ -68,6 +69,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
         dateOfBirth: '',
         firstName: '',
         lastName: '',
+        national: '',
         metadata: {
             nationality: '',
         },
@@ -118,8 +120,9 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
             postcodeFocused,
             residentialAddressFocused,
             countryOfBirth,
-            metadata,
+            // metadata,
             selectedOption,
+            national,
         } = this.state;
         const { success, lang } = this.props;
 
@@ -470,15 +473,15 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                     <div className="pg-confirm__content-identity-col-row">
                         <div className="pg-confirm__content-identity-col-row-content">
                         <div className="pg-confirm__content-identity-col-row-content-label">
-                            {metadata && this.translate('page.body.kyc.identity.nationality')}
+                            {national && this.translate('page.body.kyc.identity.nationality')}
                         </div>
                             <fieldset>
                                 <input
                                     type="text"
                                     className="pg-confirm__content-documents-col-row-content-number"
                                     placeholder={this.translate('page.body.kyc.identity.nationality')}
-                                    value={metadata.nationality}
-                                    onChange={this.handleChange('metadata')}
+                                    value={national}
+                                    onChange={this.handleChange('national')}
                                     onFocus={this.handleFieldFocus('nationality')}
                                     onBlur={this.handleFieldFocus('nationality')}
                                 />
@@ -649,15 +652,15 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
     private handleCheckButtonDisabled = () => {
         const {
             city,
-            dateOfBirth,
+            date,
             firstName,
             lastName,
             postcode,
             residentialAddress,
             countryOfBirth,
-            metadata,
+            national,
         } = this.state;
-        return !firstName || !lastName  || !dateOfBirth || !metadata.nationality || !residentialAddress || !countryOfBirth || !city || !postcode;
+        return !firstName || !lastName  || !date || !national || !residentialAddress || !countryOfBirth || !city || !postcode;
     }
 
     private sendData = () => {
@@ -673,7 +676,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
             city: this.state.city,
             country: this.state.countryOfBirth,
             metadata: {
-                nationality: this.state.metadata.nationality,
+                nationality: this.state.national,
             },
         };
         this.props.sendIdentity(profileInfo);

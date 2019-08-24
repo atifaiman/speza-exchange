@@ -10,25 +10,25 @@ import {
 const content = [
 	{
 		title: <FormattedMessage id="page.landing.slider.title" />,
-		description: <FormattedMessage id='page.landing.slider.description' />,
+		description: '',
 		button: <FormattedMessage id="page.header.navbar.signIn" />,
 		image: 'http://i.imgur.com/HUhlwqm.jpg',
 	},
 	{
 		title:  <FormattedMessage id="page.landing.slider.title" />,
-		description: <FormattedMessage id='page.landing.slider.description' />,
+		description: '',
 		button: <FormattedMessage id='page.header.navbar.signIn' />,
 		image: 'http://i.imgur.com/HUhlwqm.jpg',
 	},
 	{
 		title: <FormattedMessage id="page.landing.slider.title" />,
-		description:<FormattedMessage id="page.landing.slider.description" />,
+		description:'',
 		button:<FormattedMessage id="page.header.navbar.signIn" />,
 		image: 'http://i.imgur.com/HUhlwqm.jpg',
 	},
 	{
 		title:  <FormattedMessage id="page.landing.slider.title" />,
-		description:<FormattedMessage id='page.landing.slider.description' />,
+		description:'',
 		button: <FormattedMessage id='page.header.navbar.signIn' />,
 		image: 'http://i.imgur.com/HUhlwqm.jpg',
 	},
@@ -57,8 +57,8 @@ class SliderComponent extends Component {
                                 className="slider-content"
                                 style={{ background: `url('${item.image}') no-repeat center center` }}
                             >
-                                <div className="inner" style={{marginTop:'70px'}}>
-									{(item.image === "http://i.imgur.com/HUhlwqm.jpg" ) ? (<img style={{ height: '114px' , margin: 'auto' , }} src={spezalogo} alt="clock-Logo"/>) : null}
+                                <div className="inner">
+									{(item.image === "http://i.imgur.com/HUhlwqm.jpg" ) ? (<img style={{ margin: 'auto' , }} className="bannerimg" src={spezalogo} alt="clock-Logo"/>) : null}
                                     <h3>{item.title}</h3>
                                     <p>{item.description}</p>
                                     {/* {(item.image === "http://i.imgur.com/HUhlwqm.jpg" ) ? (<button onClick={handleClick}><img style={{float: 'left', height: '13px' , margin: 'auto' , paddingLeft: '15px',paddingTop: '2px' }} src={arrow} alt="clock-Logo"/><span style={{fontSize: '17px' , marginLeft: '-15px'}}>{item.button}</span></button>) : null} */}

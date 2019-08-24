@@ -57,7 +57,9 @@ header {
 }
 
 @media screen and (max-width: 768px) {
+
   .pg-header {
+
     position: relative;
     justify-content: none;
     height: calc(var(--gap) * 6);
@@ -88,9 +90,118 @@ header {
     }
 
     &__navbar {
-      padding: 0 20px;
+      padding-top: 1px;
       margin-left: 0;
-      height: 85px;
+      height: 75px;
+      bottom: 0;
+      z-index: 666;
+      width: 100%;
+      position: absolute;
+      width: 100%;
+      display: none;
+      transition: all 1s ease;
+      &::after {
+        display: none;
+        background: rgba(0, 0, 0, 0.8);
+        width: 100vw;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 264px;
+      }
+    }
+
+    &__toggler {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: none;
+      &-item {
+        background: var(--navbar-text-color);
+        display: none;
+        width: 30px;
+        height: 3px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        transition: all 0.2s linear;
+      }
+    }
+    &__togglerer {
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: block;
+      &-item {
+        background: var(--navbar-text-color);
+        display: block;
+        width: 30px;
+        height: 3px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        transition: all 0.2s linear;
+      }
+    }
+  }
+
+  .pg-container {
+    justify-content: center !important;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .pg-header {
+     &__navbar {
+      height: 70px;
+      }
+    }
+}
+
+@media screen and (max-width: 540px) {
+  .pg-header {
+     &__navbar {
+      height: 65px;
+      }
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+  .pg-header {
+
+    position: relative;
+    justify-content: none;
+    height: calc(var(--gap) * 6);
+
+    &__logo {
+      display: none;
+    }
+
+    &__location {
+      display: block;
+      font-size: 18px;
+      text-align: center;
+      text-transform: uppercase;
+      color: var(--color-white);
+      text-decoration: none;
+    }
+
+    &--active {
+      position: static;
+      .pg-header__navbar {
+        display: block;
+        position: fixed;
+        left: 0;
+        background: var(--background-dark);
+        -webkit-animation: slide-right .3s ease-out;
+        -moz-animation: slide-right .3s ease-out;
+      }
+    }
+
+    &__navbar {
+      padding-top: 1px;
+      margin-left: 0;
+      height: 65px;
       bottom: 0;
       z-index: 666;
       width: 100%;

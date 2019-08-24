@@ -166,7 +166,14 @@
     }
 
     .cr-sign-up-form {
+      height: 70vh;
+      min-width: 70%;
       margin: 0 auto;
+
+    .cr-button {
+        border-radius: calc(var(--gap) * 1);
+         height: 65px;
+      }
 
       &__button {
         margin-top: calc(var(--gap) * 4);
@@ -176,6 +183,59 @@
       &__title {
         background: var(--transparent);
         margin-top: calc(var(--gap) * 2);
+      }
+    }
+  }
+
+  .cr-modal {
+    .cr-modal__container {
+      font-size: calc(var(--gap) * 1.5);
+      width: 100%;
+      .cr-modal__container-header {
+        font-size: calc(var(--gap) * 1.5);
+      }
+      .cr-modal__container-content {
+        padding: 0 calc(var(--gap) * 3.33);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .pg-sign-up-screen {
+    .pg-sign-up-screen__container {
+      margin: calc(var(--gap) * 3.33) calc(var(--gap) * 1.66) 0;
+      width: 100%;
+    }
+    .cr-sign-up-form__group {
+      margin-bottom: 15px;
+    }
+    .cr-sign-up-form {
+      min-height: calc(var(--big-gap) * 8.5);
+      height: 62vh;
+      min-width: 70%;
+      margin: 0 auto;
+
+      .cr-button {
+        border-radius: calc(var(--gap) * 0.5);
+        height: 35px;
+      }
+      .cr-checkbox__label {
+        font-size: calc(var(--gap) * 1.63);
+      }
+
+    .cr-sign-up-form__button-wrapper {
+      font-size: 12px;
+    }
+
+      &__button {
+        margin-top: calc(var(--gap) * 2);
+        
+      }
+
+      &__title {
+        background: var(--transparent);
+        margin-top: calc(var(--gap) * 1);
       }
     }
   }

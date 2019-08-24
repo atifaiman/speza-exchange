@@ -81,9 +81,14 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const path = url.includes('/trading') && currentMarket ? `/trading/${currentMarket.id}` : url;
         return (
             <li onClick={handleLinkChange} key={index} >
-                <Link className={cx} to={path}>
-                    <FormattedMessage id={name}/>
-                </Link>
+                <div className="buttonNavMobile">
+                    <div className={`${ !isLoggedIn && (name === 'page.header.navbar.wallets') ? 'mobileNavWallet' : !isLoggedIn && (name === 'page.header.navbar.openOrders') ? 'mobileNavOrder' : !isLoggedIn && (name === 'page.header.navbar.history') ? 'mobileNavHistory' :  !isLoggedIn && (name === 'page.header.navbar.profile') ? 'mobileNavAccount' : !isLoggedIn && (name === 'page.header.navbar.signIn') ? 'mobileNavSign' : 'mobileNav'}`}>
+                        <Link className={cx} to={path}>
+                        <img className="navbarIcon" src={require(`./${(name === 'page.header.navbar.trade') ? 'icon_trading.png' : (name === 'page.header.navbar.wallets') ? 'icon_wallet.png' : (name === 'page.header.navbar.Landing') ? 'icon_home.png' : (name === 'page.header.navbar.openOrders') ? 'icon_history.png' : (name === 'page.header.navbar.history') ? 'icon_history.png' : (name === 'page.header.navbar.signIn') ? 'Sign-in.png' : (name === 'page.header.navbar.profile') ? 'icon_account.png' :''}`)}/>
+                            <FormattedMessage id={name}/>
+                        </Link>
+                    </div>
+                </div>
             </li>
         );
     };

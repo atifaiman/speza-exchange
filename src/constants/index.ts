@@ -5,16 +5,18 @@ export const pgRoutes = (isLoggedIn: boolean): string[][] => {
         ['page.header.navbar.Landing', '/landing/'],
         ['page.header.navbar.trade', '/trading/'],
         ['page.header.navbar.wallets', '/wallets'],
-        ['page.header.navbar.openOrders', '/orders'],
+        // ['page.header.navbar.openOrders', '/orders'],
         ['page.header.navbar.history', '/history'],
+        ['page.header.navbar.profile', '/profile'],
     ];
     const routesUnloggedIn = [
         ['page.header.navbar.signIn', '/signin'],
         ['page.header.navbar.Landing', '/landing/'],
         ['page.header.navbar.trade', '/trading/'],
-        // ['page.header.navbar.wallets', '/wallets'],
+        ['page.header.navbar.wallets', '/wallets'],
         // ['page.header.navbar.openOrders', '/orders'],
-        // ['page.header.navbar.history', '/history'],
+        ['page.header.navbar.history', '/history'],
+        ['page.header.navbar.profile', '/profile'],
     ];
     return isLoggedIn ? routes : routesUnloggedIn;
 };

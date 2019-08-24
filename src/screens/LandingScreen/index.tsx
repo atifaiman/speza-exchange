@@ -20,21 +20,29 @@ class LandingComponent extends React.Component<RouterProps> {
 
     public render() {
         return (
-            <div>
+            <div className="pg_landing">
             <div className="row">
                 <div className="col-12">
+                    <div className="bigSlider">
                     <SliderComponent/>
+                    </div>
                 </div>
             </div>
             <div className="row">
-                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12" style={{padding:'0'}}>
+                <div className="col-xl-4 col-l-4 col-md-4 col-sm-4 col-xs-4" style={{padding:'0'}}>
+                    <div className="smallbannerMobile">
                     <SmallBanner1/>
+                    </div>
                 </div>
-                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12" style={{padding:'0'}}>
+                <div className="col-xl-4 col-l-4 col-md-4 col-sm-4 col-xs-4" style={{padding:'0'}}>
+                    <div className="smallbannerMobile">
                     <SmallBanner2/>
+                    </div>
                 </div>
-                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12" style={{padding:'0'}}>
+                <div className="col-xl-4 col-l-4 col-md-4 col-sm-4 col-xs-4" style={{padding:'0'}}>
+                     <div className="smallbannerMobile">
                     <SmallBanner3/>
+                    </div>
                 </div>
             </div>
             <div className="row" style={{display:'none'}}>
@@ -80,12 +88,13 @@ class LandingComponent extends React.Component<RouterProps> {
             </div>
             <div className="row">
                 <div className="col-12" style={{ background:'#141622'}}>
+                <div style={{margin: 'auto'}}>
                 <div className="row" style={{ color: '#fff'}}>
                     <div className="col-xl-4 col-md-12 col-l-4 col-sm-12"  style={{height:'300px',margin: 'auto' }}>
                     <div className="row">
-                        <div  style={{ margin: 'auto', padding:'40px', display:'flex' , flexFlow:'column'}}>
-                        <h3 style={{fontSize:'48px'}}><FormattedMessage id="page.landing.paneldark.col1.title"/></h3>
-                        <p style={{fontSize:'14px', maxWidth:'400px'}}><FormattedMessage id="page.landing.paneldark.col1.description"/></p>
+                        <div  style={{ margin: 'auto', padding:'40px', display:'flex' , flexFlow:'column' , paddingTop:'40px', paddingBottom:'40px'}}>
+                        <h3 style={{fontSize:'48px',textAlign: 'center'}}><FormattedMessage id="page.landing.paneldark.col1.title"/></h3>
+                        <p style={{fontSize:'14px', maxWidth:'400px',textAlign: 'center'}}><FormattedMessage id="page.landing.paneldark.col1.description"/></p>
                         </div>
                     </div>
                     </div>
@@ -114,6 +123,7 @@ class LandingComponent extends React.Component<RouterProps> {
                     </div>
                   </div>
                   </div>
+                </div>
                 </div>
             </div>
             <div className="spezaButtomBanner">

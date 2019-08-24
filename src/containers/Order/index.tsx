@@ -165,9 +165,9 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         }  else {
             return (
                 <div className="buy-sell-backgroundimage">
-                    <div style={{ textAlign: 'center' , padding: '110px 0px' , color: '#fff'}}>
+                    <div style={{ textAlign: 'center' , padding: '140px 0px' , color: '#fff'}}>
                         <button className="login-button" onClick={this.handleLogin}>Login</button>
-                        <p style={{ fontSize: '26px' ,padding: '5px 10px' , color: '#fff'}}>   or  </p>
+                        <p style={{ padding: '5px 10px' , color: '#fff'}}>   or  </p>
                         <button className="login-button"  onClick={this.handleSignUp}>Sign up</button>
                     </div>
                 </div>

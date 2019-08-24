@@ -63,8 +63,10 @@ class MarketComponent extends React.Component<Props> {
     };
 
     private getTrades(trades: PublicTrade[]) {
-        const priceFixed = this.props.currentMarket ? this.props.currentMarket.bid_precision : 0;
-        const amountFixed = this.props.currentMarket ? this.props.currentMarket.ask_precision : 0;
+        // const priceFixed = this.props.currentMarket ? this.props.currentMarket.bid_precision : 0;
+        // const amountFixed = this.props.currentMarket ? this.props.currentMarket.ask_precision : 0;
+        const priceFixed = 5;
+        const amountFixed = 5;
 
         const renderRow = item => {
             const { id, created_at, taker_type, price, volume } = item;

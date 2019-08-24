@@ -5,7 +5,7 @@ export const en = {
     'page.landing.slider.title': 'Fully Regulated Digital Asset Exchange',
     'page.landing.slider.description': 'The offshore licensed digital asset exchange with liquidity in mind.',
     'page.landing.smallbanner1.title': 'ZERO TRADING FEES',
-    'page.landing.smallbanner1.description': 'World first zero trading fees regulated digital asset exchange.',
+    'page.landing.smallbanner1.description': 'Zero trading fee Regulated digital asset exchange',
     'page.landing.smallbanner1.button': 'Get Started',
     'page.landing.smallbanner2.title': 'MARGIN TRADE',
     'page.landing.smallbanner2.description': 'Maximize your trading power.',
