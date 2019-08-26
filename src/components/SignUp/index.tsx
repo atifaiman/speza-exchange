@@ -143,7 +143,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                                 handleFocusInput={this.props.handleFocusEmail}
                                 classNameLabel="cr-sign-up-form__label"
                                 classNameInput="cr-sign-up-form__input"
-                                autoFocus={true}
+                                autoFocus={false}
                             />
                             {emailError && <div className="cr-sign-up-form__error">{emailError}</div>}
                         </div>

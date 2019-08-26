@@ -84,7 +84,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 <div className="buttonNavMobile">
                     <div className={`${ !isLoggedIn && (name === 'page.header.navbar.wallets') ? 'mobileNavWallet' : !isLoggedIn && (name === 'page.header.navbar.openOrders') ? 'mobileNavOrder' : !isLoggedIn && (name === 'page.header.navbar.history') ? 'mobileNavHistory' :  !isLoggedIn && (name === 'page.header.navbar.profile') ? 'mobileNavAccount' : !isLoggedIn && (name === 'page.header.navbar.signIn') ? 'mobileNavSign' : 'mobileNav'}`}>
                         <Link className={cx} to={path}>
-                        <img className="navbarIcon" src={require(`./${(name === 'page.header.navbar.trade') ? 'icon_trading.png' : (name === 'page.header.navbar.wallets') ? 'icon_wallet.png' : (name === 'page.header.navbar.Landing') ? 'icon_home.png' : (name === 'page.header.navbar.openOrders') ? 'icon_history.png' : (name === 'page.header.navbar.history') ? 'icon_history.png' : (name === 'page.header.navbar.signIn') ? 'Sign-in.png' : (name === 'page.header.navbar.profile') ? 'icon_account.png' :''}`)}/>
+                            <div className="navbarIcon" >
+                                <div className={`${(name === 'page.header.navbar.trade') ? 'iconNavTrade' : (name === 'page.header.navbar.wallets') ? 'iconNavWallet' : (name === 'page.header.navbar.Landing') ? 'iconNavHome' : (name === 'page.header.navbar.openOrders') ? 'iconNavOrder' : (name === 'page.header.navbar.history') ? 'iconNavHistory' : (name === 'page.header.navbar.signIn') ? 'iconNavSign' : (name === 'page.header.navbar.profile') ? 'iconNavAccount' :'z'}`}/>
+                            </div>
                             <FormattedMessage id={name}/>
                         </Link>
                     </div>
@@ -94,10 +96,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
 
     public render() {
-        const { location, user, lang } = this.props;
+        const { location, user } = this.props;
+        //const { location, user, lang } = this.props;
         const { isOpenLanguage } = this.state;
         const address = location ? location.pathname : '';
-        const languageName = (lang === 'zh') ? '中文' : (lang === 'en') ?  'English' : lang.toUpperCase();
+        // const languageName = (lang === 'zh') ? '中文' : (lang === 'en') ?  'English' : lang.toUpperCase();
         const languageClassName = classnames('dropdown-menu-language-field', {
             'dropdown-menu-language-field-active': isOpenLanguage,
         });
@@ -112,16 +115,29 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     {user.email ? this.getUserEmailMenu() : null}
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-toggle dropdown-menu-language-container">
                         <div onClick={this.toggleLanguageMenu} className={languageClassName}>
-                            {languageName}
+                             <img className="languageIcon" src={require('./top_navbar_language.png')} />
                             <img className="icon" src={require(`./${isOpenLanguage ? 'open' : 'close'}-icon.svg`)} />
                         </div>
                         {isOpenLanguage ? this.getLanguageMenu() : null}
+                    </div>
+                    <div className="topNavbarMobile">
+                            <div className="topNavbarMobileContact">
+                                <div><img className="topNavimg" src={require('./top_navbar_contact.png')}/></div>
+                                <div><p style={{fontSize:'10px'}}><FormattedMessage id={'page.header.navbar.Contact'} /></p></div>
+                            </div>
+                            <div className="topNavbarMobileNewsLetter">
+                                <div><img className="topNavimg" src={require('./top_navbar_newsletter.png')}/></div>
+                                <div><p style={{fontSize:'10px'}}><FormattedMessage id={'page.header.navbar.newsletter'} /></p></div>
+                            </div>
+                            <div className="topNavbarMobileReferralRewads">
+                                <div><img className="topNavimg" src={require('./top_navbar_referral rewards.png')}/></div>
+                                <div><p style={{fontSize:'10px'}}><FormattedMessage id={'page.header.navbar.ReferralRewads'} /></p></div>
+                            </div>
                     </div>
                 </div>
                 <div className="pg-navbar__header-language" onClick={this.toggleLanguageMenu}>
                     <span>LANGUAGE</span>
                     <span>
-                        {languageName}
                         <img className="icon" src={require(`./${isOpenLanguage ? 'open' : 'close'}-icon.svg`)} />
                     </span>
                     {isOpenLanguage ? this.getLanguageMenu() : null}
@@ -155,12 +171,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             <div className="dropdown-menu dropdown-menu-language" role="menu">
                 {/* tslint:disable jsx-no-lambda */}
                 <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('en')}>
+                <div><img  className="pg-navbar__header-profile-logout" src={require(`./english.png`)} style={{width:'30px', padding:'6px'}} /></div>
                     English
                 </div>
-                <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('ru')}>
-                    RU
-                </div>
                 <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('zh')}>
+                <div><img  className="pg-navbar__header-profile-logout" src={require(`./chinese.png`)} style={{width:'30px', padding:'6px'}}/></div>
                     中文
                 </div>
                 {/* tslin:enable jsx-no-lambda */}
@@ -177,7 +192,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         return (
             <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-toggle">
                 <div onClick={this.openMenu} className={userClassName}>
-                    <img src={require(`./${isOpen ? 'open' : 'close'}-avatar.svg`)} />
+                    <img src={require(`./${isOpen ? 'open' : 'open'}-avatar.svg`)} />
                     <img className="icon" src={require(`./${isOpen ? 'open' : 'close'}-icon.svg`)} />
                 </div>
                 {isOpen ? this.getUserMenu() : null}
@@ -287,3 +302,17 @@ const NavBar = withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBarCom
 export {
     NavBar,
 };
+/*
+    <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('ru')}>
+            RU
+    </div>
+
+    <div className="buttonNavMobile">
+    <div className={`${ !isLoggedIn && (name === 'page.header.navbar.wallets') ? 'mobileNavWallet' : !isLoggedIn && (name === 'page.header.navbar.openOrders') ? 'mobileNavOrder' : !isLoggedIn && (name === 'page.header.navbar.history') ? 'mobileNavHistory' :  !isLoggedIn && (name === 'page.header.navbar.profile') ? 'mobileNavAccount' : !isLoggedIn && (name === 'page.header.navbar.signIn') ? 'mobileNavSign' : 'mobileNav'}`}>
+        <Link className={cx} to={path}>
+            <img className="navbarIcon" src={require(`./${(name === 'page.header.navbar.trade') ? 'icon_trading.png' : (name === 'page.header.navbar.wallets') ? 'icon_wallet.png' : (name === 'page.header.navbar.Landing') ? 'icon_home.png' : (name === 'page.header.navbar.openOrders') ? 'icon_history.png' : (name === 'page.header.navbar.history') ? 'icon_history.png' : (name === 'page.header.navbar.signIn') ? 'Sign-in.png' : (name === 'page.header.navbar.profile') ? 'icon_account.png' :''}`)}/>
+            <FormattedMessage id={name}/>
+        </Link>
+    </div>
+    </div>
+*/

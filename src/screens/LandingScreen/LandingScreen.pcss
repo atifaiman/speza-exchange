@@ -1,7 +1,273 @@
 .LandingScreen{
     font-size: 15px;
 }
+.pg_landing {
+  overflow: hidden;
+}
+.bannerThreeSlider {
+    padding: 3px 0;
+}
+.smallbannerMobile {
+    width: 120%;
+      @media screen and (max-width: 1600px) {
+       width: 120%;
+    }
+    @media screen and (max-width: 1024px) {
+          width: 120%;
+    }
+    @media screen and (max-width: 768px) {
+           width: 115%;
+    }
+    @media screen and (max-width: 540px) {
+          width: 115%;
+    }
+    @media screen and (max-width: 420px) {
+          padding: 0;
+          width: 110%;
+    }
+}
+.bannerThreeSlider {
+     margin: 1% 0%;
+     margin-left: -6%;
+     margin-right: -10px;
+    @media screen and (max-width: 1600px) {
+        margin: 1% 0%;
+        margin-left: -5%;
+    }
+    @media screen and (max-width: 1024px) {
+         margin: 1% 0%;
+         margin-left: -4.5%;
+    }
+     @media screen and (max-width: 768px) {
+         margin: 1% 0%;
+         margin-left: -3.8%;
+    }
+    @media screen and (max-width: 540px) {
+         margin: 1% 0;
+         margin-left: -4%;
+    }
+         @media screen and (max-width: 420px) {
+         margin: 2% 0%;
+         margin-left: -2.5%;
+    }
+}
 
+
+@media screen and (max-width: 1280px) {
+    .pg_landing {
+        padding: 0 10px;
+
+        .bigSlider {
+            max-height: 520px;
+
+            .slider-content {
+                .inner {
+                        top: 21vh;
+                        h3 {
+                            font-size: 35px;
+                        }
+                        p {
+                            font-size: 16px;
+                        }
+                        img {
+                            height: 90px;
+                        }
+                }
+            }
+            
+            .wrapper {
+                .slider-wrapper {
+                        height: 520px;
+                }
+            }
+        }
+
+        .smallbannerMobile {
+            max-height: 160px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 160px;
+                    }
+                    &-inner {
+                        width: 120%;
+                        top: 80px;
+                        h3 {
+                            max-height: 100%;
+                            font-size: 15px;
+                            line-height: 20px;
+                        }
+                        p {
+                            font-size: 13px;
+                            max-height: 100%;
+                            
+                        }
+                        button {
+                            font-size: 10px;
+                            width: 90px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .pg_landing {
+        padding: 0 10px;
+
+        .bigSlider {
+            max-height: 400px;
+
+            .slider-content {
+                .inner {
+                        top: 19vh;
+                        h3 {
+                            font-size: 30px;
+                        }
+                        p {
+                            font-size: 14px;
+                        }
+                        img {
+                            height: 80px;
+                        }
+                }
+            }
+            
+            .wrapper {
+                .slider-wrapper {
+                        height: 400px;
+                }
+            }
+        }
+
+        .smallbannerMobile {
+            max-height: 150px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 150px;
+                    }
+                    &-inner {
+                        width: 120%;
+                        top: 70px;
+                        h3 {
+                            max-height: 100%;
+                            font-size: 10px;
+                        }
+                        p {
+                            font-size: 10px;
+                            max-height: 100%;
+                        }
+                        button {
+                            font-size: 10px;
+                            width: 90px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 1009px) {
+    .smallbannerMobile {
+            max-height: 150px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 150px;
+                    }
+                    &-inner {
+                        width: 120%;
+                        top: 70px;
+                        h3 {
+                            max-height: 100%;
+                            font-size: 10px;
+                        }
+                        p {
+                            font-size: 9px;
+                            max-height: 100%;
+                        }
+                        button {
+                            font-size: 10px;
+                            width: 90px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+}
+
+@media screen and (max-width: 800px) {
+    .pg_landing {
+        padding: 0 10px;
+
+        .bigSlider {
+            max-height: 350px;
+
+            .slider-content {
+                .inner {
+                        top: 19vh;
+                        h3 {
+                            font-size: 18px;
+                        }
+                        p {
+                            font-size: 10px;
+                        }
+                        img {
+                            height: 55px;
+                        }
+                }
+            }
+            
+            .wrapper {
+                .slider-wrapper {
+                        height: 350px;
+                }
+            }
+        }
+
+        .smallbannerMobile {
+            max-height: 130px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 130px;
+                    }
+                    &-inner {
+                        width: 130%;
+                        top: 60px;
+                        h3 {
+                            max-height: 100%;
+                            font-size: 9px;
+                        }
+                        p {
+                            font-size: 9px;
+                            max-height: 100%;
+                            
+                        }
+                        button {
+                            font-size: 10px;
+                            width: 90px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}
 
 @media screen and (max-width: 768px) {
     .pg_landing {
@@ -12,7 +278,7 @@
 
             .slider-content {
                 .inner {
-                        top: 13vh;
+                        top: 18vh;
                         h3 {
                             font-size: 18px;
                         }
@@ -33,23 +299,24 @@
         }
 
         .smallbannerMobile {
-            max-height: 170px;
+            max-height: 110px;
             .wrapper {
                 .smallbanner {
                     &-slider-wrapper {
-                            height: 170px;
+                            height: 110px;
                     }
                     &-inner {
-                        top: 90px;
+                        width: 140%;
+                        top: 60px;
                         h3 {
                             max-height: 100%;
                             font-size: 12px;
-                            line-height: 20px;
+                           
                         }
                         p {
-                            font-size: 9px;
+                            font-size: 11px;
                             max-height: 100%;
-                            line-height: 15px;
+                            
                         }
                         button {
                             font-size: 10px;
@@ -65,12 +332,137 @@
     }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 670px) {
     .pg_landing {
         padding: 0 10px;
 
         .bigSlider {
-            max-height: 200px;
+            max-height: 300px;
+
+            .slider-content {
+                .inner {
+                        top: 18vh;
+                        h3 {
+                            font-size: 18px;
+                        }
+                        p {
+                            font-size: 10px;
+                        }
+                        img {
+                            height: 55px;
+                        }
+                }
+            }
+            
+            .wrapper {
+                .slider-wrapper {
+                        height: 300px;
+                }
+            }
+        }
+
+        .smallbannerMobile {
+            max-height: 110px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 110px;
+                    }
+                    &-inner {
+                        width: 150%;
+                        top: 60px;
+                        h3 {
+                            max-height: 100%;
+                             font-size: 9px;
+                           
+                        }
+                        p {
+                           font-size: 9px;
+                            max-height: 100%;
+                            
+                        }
+                        button {
+                            font-size: 9px;
+                            width: 90px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .pg_landing {
+        padding: 0 10px;
+
+        .bigSlider {
+            max-height: 220px;
+
+            .slider-content {
+                .inner {
+                        top: 13vh;
+                        h3 {
+                            font-size: 18px;
+                        }
+                        p {
+                            font-size: 10px;
+                        }
+                        img {
+                            height: 55px;
+                        }
+                }
+            }
+            
+            .wrapper {
+                .slider-wrapper {
+                        height: 220px;
+                }
+            }
+        }
+
+        .smallbannerMobile {
+            max-height: 90px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 90px;
+                    }
+                    &-inner {
+                        width: 160%;
+                        top: 45px;
+                        h3 {
+                            max-height: 100%;
+                            font-size: 7px;
+                            
+                        }
+                        p {
+                            font-size: 7px;
+                            max-height: 100%;
+                        }
+                        button {
+                            margin-top: -5px;
+                            font-size: 9px;
+                            width: 80px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 445px) {
+    .pg_landing {
+        padding: 0 10px;
+        .bigSlider {
+            max-height: 190px;
 
             .slider-content {
                 .inner {
@@ -89,31 +481,95 @@
             
             .wrapper {
                 .slider-wrapper {
-                        height: 200px;
+                        height: 190px;
                 }
             }
         }
 
         .smallbannerMobile {
-            max-height: 90px;
+            max-height: 75px;
             .wrapper {
                 .smallbanner {
                     &-slider-wrapper {
-                            height: 90px;
+                            height: 75px;
                     }
                     &-inner {
-                        margin: auto;
-                        top: 30px;
+                        width: 194%;
+                        top: 35px;
                         h3 {
                             max-height: 100%;
-                            font-size: 12px;
+                             font-size: 7px;
                             line-height: 10px;
                         }
                         p {
-                            display:none;
+                            font-size: 6px;
+                            display: block;
                         }
                         button {
-                            font-size: 8px;
+                            margin-top:-3px;
+                            font-size: 6px;
+                            width: 80px;
+                            height: 15px;
+                        }
+                    }
+                }
+            }
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .pg_landing {
+        padding: 0 10px;
+        .bigSlider {
+            max-height: 190px;
+
+            .slider-content {
+                .inner {
+                        top: 15vh;
+                        h3 {
+                            font-size: 14px;
+                        }
+                        p {
+                            font-size: 10px;
+                        }
+                        img {
+                            height: 55px;
+                        }
+                }
+            }
+            
+            .wrapper {
+                .slider-wrapper {
+                        height: 190px;
+                }
+            }
+        }
+
+        .smallbannerMobile {
+            max-height: 75px;
+            .wrapper {
+                .smallbanner {
+                    &-slider-wrapper {
+                            height: 75px;
+                    }
+                    &-inner {
+                        width: 220%;
+                        top: 35px;
+                        h3 {
+                            max-height: 100%;
+                             font-size: 6px;
+                            line-height: 10px;
+                        }
+                        p {
+                            font-size: 5px;
+                            display: block;
+                        }
+                        button {
+                            margin-top:-3px;
+                            font-size: 6px;
                             width: 80px;
                             height: 15px;
                         }

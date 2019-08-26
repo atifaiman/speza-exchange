@@ -102,7 +102,7 @@ class SignInComponent extends React.Component<SignInProps> {
                                 handleFocusInput={() => this.handleFieldFocus('email')}
                                 classNameLabel="cr-sign-in-form__label"
                                 classNameInput="cr-sign-in-form__input"
-                                autoFocus={true}
+                                autoFocus={false}
                             />
                             {emailError && <div className={'cr-sign-in-form__error'}>{emailError}</div>}
                         </div>

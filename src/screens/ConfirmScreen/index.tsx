@@ -98,8 +98,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                       </div>
                   </div>
                   <div className="pg-confirm__content">
-                      {this.renderContent(currentProfileLevel)}
-                      {/* {this.renderContent(4)} */}
+                      {/* {this.renderContent(currentProfileLevel)} */}
+                      {this.renderContent(4)}
                   </div>
               </div>
             </div>
@@ -114,7 +114,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             case 1: return <Phone />;
             case 2: return isIdentity ? <Documents /> : <Identity />;
             case 3: return <Documents />;
-            // case 4: return  <Identity />;
+            case 4: return  <Identity />;
             default: return 'Something went wrong';
         }
     };

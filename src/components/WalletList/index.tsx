@@ -60,9 +60,14 @@ export class WalletList
 
     public render() {
         return (
-            <ul className="cr-wallet-list">
-                {this.props.walletItems.map(this.makeWalletItem)}
-            </ul>
+            <div className="cr-tab-panel">
+                <div className="cr-table-header__content">currency</div>
+                    <div className="cr-tab-content cr-tab-content__active">
+                        <ul className="cr-wallet-list">
+                            {this.props.walletItems.map(this.makeWalletItem)}
+                        </ul>
+                    </div>
+            </div>
         );
     }
 }

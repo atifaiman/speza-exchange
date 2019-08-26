@@ -12,7 +12,7 @@ const content = [
 		title:  <FormattedMessage id="page.landing.smallbanner1.title" />,
 		description:<FormattedMessage id='page.landing.smallbanner1.description' />,
 		button: <FormattedMessage id='page.landing.smallbanner1.button' />,
-        image: 'https://i.ibb.co/MVWH24w/banner-01.png',
+        image: 'https://i.imgur.com/IyTp6mX.jpg',
 	},
 ];
 

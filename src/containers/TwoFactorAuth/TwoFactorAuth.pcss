@@ -428,14 +428,12 @@
   max-width: 840px;
   color: #fff;
   font-size: 48px;
-  line-height: 28px;
 }
 
 .slider-content .inner p {
   color: #fff;
   font-weight: 400;
   font-size: 18px;
-  line-height: 21px;
   margin: 20px auto 30px;
   max-width: 640px;
 }
@@ -546,6 +544,7 @@
 }
 
 .smallbanner-inner button {
+    border: none;
     margin-top: 15px;
     float: left;
     cursor: pointer;
@@ -560,18 +559,16 @@
 .smallbanner-inner h3 {
   font-weight: bold;
   margin: 0 auto;
-  max-width: 840px;
   color: #fff;
   font-size: 24px;
   line-height: 28px;
 }
 
 .smallbanner-inner p {
-  max-width: 210px;
   color: #fff;
   font-weight: 400;
   font-size: 14px;
-  line-height: 21px;
+
 }
 .smallbanner-slider-content {
     text-align: left;
@@ -600,6 +597,26 @@
     margin: auto;
     display: block;
     margin-bottom: 20px;
+    @media screen and (max-width: 1024px){
+      width: 55%;
+      height: 55px;
+      background-size: 35px;
+    }
+    @media screen and (max-width: 768px){
+      width: 60%;
+      height: 45px;
+      background-size: 30px;
+    }
+    @media screen and (max-width: 620px){
+      width: 65%;
+      height: 40px;
+      background-size: 27px;
+    }
+    @media screen and (max-width: 420px){
+      width: 70%;
+      height: 30px;
+       background-size: 25px;
+    }
 }
 .fixed_header tbody{
   border: 1px solid #E7E6E7;
@@ -739,4 +756,11 @@
 
 .dropdown-menu {
   min-width: fit-content;
+}
+legend {
+    width: auto;
+    border-bottom: none;
+}
+.languageIcon {
+  height: 35px;
 }

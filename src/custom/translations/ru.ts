@@ -21,7 +21,9 @@ export const ru: LangType = {
     'page.header.panelbottom.col1.link1': '<a href="mailto: sales@speza.exchange " id="terms" >sales@speza.exchange </a>',
     'page.header.panelbottom.col1.link2': '<a href="mailto: press@speza.exchange  " id="terms" >press@speza.exchange </a>',
     'page.header.panelbottom.col1.link3': '<a href="mailto: jobs@speza.exchange " id="terms" >jobs@speza.exchange </a>',
-
+    'page.header.navbar.newsletter': 'Home',
+    'page.header.navbar.Contact': 'Home',
+    'page.header.navbar.ReferralRewads': 'Home',
     'page.header.navbar.Landing': 'Home',
     'page.header.navbar.signIn': 'Войти',
     'page.header.navbar.trade': 'Биржа',

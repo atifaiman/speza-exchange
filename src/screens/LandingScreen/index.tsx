@@ -28,20 +28,22 @@ class LandingComponent extends React.Component<RouterProps> {
                     </div>
                 </div>
             </div>
-            <div className="row">
-                <div className="col-xl-4 col-l-4 col-md-4 col-sm-4 col-xs-4" style={{padding:'0'}}>
-                    <div className="smallbannerMobile">
-                    <SmallBanner1/>
+            <div className="bannerThreeSlider">
+                <div className="row" style={{justifyContent: 'space-between'}}>
+                    <div className="col-3" style={{padding:'0'}}>
+                        <div className="smallbannerMobile">
+                        <SmallBanner1/>
+                        </div>
                     </div>
-                </div>
-                <div className="col-xl-4 col-l-4 col-md-4 col-sm-4 col-xs-4" style={{padding:'0'}}>
-                    <div className="smallbannerMobile">
-                    <SmallBanner2/>
+                    <div className="col-3" style={{padding:'0'}}>
+                        <div className="smallbannerMobile">
+                        <SmallBanner2/>
+                        </div>
                     </div>
-                </div>
-                <div className="col-xl-4 col-l-4 col-md-4 col-sm-4 col-xs-4" style={{padding:'0'}}>
-                     <div className="smallbannerMobile">
-                    <SmallBanner3/>
+                    <div className="col-3" style={{padding:'0'}}>
+                        <div className="smallbannerMobile">
+                        <SmallBanner3/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,6 +86,9 @@ class LandingComponent extends React.Component<RouterProps> {
             <div className="row">
                 <div className="col-12" style={{height:'100%' , background:'#fff', marginLeft: 'auto' , marginRight: 'auto' , width: '100%'}}>
                     <div id="demo"/>
+                </div>
+                <div className="col-12" style={{height:'100%' , background:'#fff', marginLeft: 'auto' , marginRight: 'auto' , width: '100%'}}>
+                    <div id="de1mo" style={{color: '#000'}}/>
                 </div>
             </div>
             <div className="row">
@@ -186,7 +191,7 @@ class LandingComponent extends React.Component<RouterProps> {
             </div>
             <div className="spezaButtomBannerMobile">
                     <div className="row" style={{background:'#fff'}}>
-                        <div style={{height:'200px' , paddingTop:'50px',margin:'auto', textAlign:'center' }}>
+                        <div style={{height:'200px' , paddingTop:'50px',margin:'auto', textAlign:'center'  }}>
                             <img src={require('./spezalogo.svg')} style={{ height:'37px', padding:'0 15px'}}/>
                             <h3 style={{fontSize:'24px' , color:'#0053A3' , marginTop:'30px'}}>HAVE QUESTIONS?</h3>
                             <p style={{fontSize:'14px' ,color:'#1E252F'}}>+603 7490 7707</p>
@@ -200,7 +205,7 @@ class LandingComponent extends React.Component<RouterProps> {
                         </div>
                     </div>
                     <div className="row" style={{background:'#fff'}}>
-                        <div style={{paddingBottom: '80px', paddingTop:'20px', margin:'auto' , display: 'flex' , flexFlow: 'column'}}>
+                        <div style={{paddingBottom: '80px', paddingTop:'20px', margin:'auto' , display: 'flex' , flexFlow: 'column' , width: '100%'}}>
                         <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de1mo"  style={{ margin: '5px' , background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>COMPANY&#x2192;</h3></button>
                          <div id="de1mo"  className="collapse">
                 <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>

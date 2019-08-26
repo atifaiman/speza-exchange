@@ -22,6 +22,9 @@ export const en = {
     'page.header.panelbottom.col1.link2': '<a href="mailto: press@speza.exchange  " id="terms" >press@speza.exchange </a>',
     'page.header.panelbottom.col1.link3': '<a href="mailto: jobs@speza.exchange " id="terms" >jobs@speza.exchange </a>',
 
+    'page.header.navbar.newsletter': 'News letter',
+    'page.header.navbar.Contact': 'Contact Us',
+    'page.header.navbar.ReferralRewads': 'Referral',
     'page.header.navbar.Landing': 'Home',
     'page.header.navbar.signIn': 'Sign In',
     'page.header.navbar.trade': 'Trade',

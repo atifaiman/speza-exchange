@@ -15,8 +15,6 @@
     <link rel="stylesheet" href="../node_modules/@openware/cryptofont/font/crypto-font.css">
     <link rel="stylesheet" href="./css/theme.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -27,235 +25,6 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Speza</title>
-    <script>
-       function myFunction() {
-          // Declare variables 
-          var input, filter, table, tr, td, i, txtValue;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          table = document.getElementById("myTable");
-          tr = table.getElementsByTagName("tr");
-        
-          // Loop through all table rows, and hide those who don't match the search query
-          for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-              txtValue = td.textContent || td.innerText;
-              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-              } else {
-                tr[i].style.display = "none";
-              }
-            } 
-          }
-        }
-                                            
-      var request = new XMLHttpRequest()
-      
-      var proxyURL = 'https://cors-anywhere.herokuapp.com';
-      
-      request.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/tickers/', true)
-      
-      request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-      
-      request.setRequestHeader('Access-Control-Allow-Origin', '*');
-      
-      request.setRequestHeader('Access-Control-Allow-Method', 'GET');
-      
-      request.setRequestHeader('Content-Type', 'application/json');
-      
-      request.onload = function() {
-      
-        if (request.status >= 200 && request.status < 400) {
-          // array splits the resonse into each market 
-          
-         // var data = JSON.stringify(this.response);
-          var data = this.response;
-          data = data.split(/[}}]/);
-          var cleandata ="|";
-
-          for ( h=0 ; h < data.length ; h++) {
-              if ( h%2 === 0 ){
-                  cleandata += data[h] + "|";
-              }
-          }
-          cleandata = cleandata.split("|");
-          cleandata.pop();
-          cleandata.pop();
-          cleandata.shift();
-        
-          //cleandata is the array each index contains one market  with empty elements if first element and last two elements
-     
-          var result = [];
-          var endResult = [];
-          //result.length = 10;
-          //var marketData = "";
-          //var rawdata = "";
-          //var KIR = "";
-            for ( o=0 ; o < cleandata.length ; o++) {
-              cleandata[o] =   cleandata[o] ; 
-              var Market = cleandata[o].split(",");
-              if( o > 0 ){
-                  // the first market contains empty value in first index instead of itemvalues
-                  Market.shift();
-              }
-              for ( j=0 ; j < Market.length ; j++){
-          
-                  if ( j >= 2){
-                          // all other values
-                      var newitem = Market[j].replace(/\"/g, '');
-                      newitem = newitem.replace(/{/g, '');
-                  
-                      var MarketName = newitem.split(":");
-                      for ( k=0 ; k < MarketName.length ; k++){
-                     
-                          if (k%2 === 1){
-                              result.push( MarketName[k]);
-                          }
-                      }
-                  
-                  } else {
-                          if (j === 0 ){
-                              //market Name
-                              var newitem = Market[j].replace(/\"/g, '');
-                              newitem = newitem.replace(/{/g, '');
-                            
-                              var MarketName = newitem.split(":");
-                            
-                              result.push(MarketName[0]);
-                      } else if ( j=== 1 ) {
-                              // Buy Value
-                              var newitem = Market[j].replace(/\"/g, '');
-                              newitem = newitem.replace(/{/g, '');
-                            
-                              var MarketName = newitem.split(":");
-                              result.push(MarketName[2]);
-                      }
-                }
-                endResult.push(result);
-                result = new Array();
-              }
- 
-          }
-         for( l=0 ; l < endResult.length ; l++){
-             if( l%10 === 2){
-              //endResult.splice(l,1);
-             }  
-         }
-          var show = "";
-          var tableData = "";
-          tableData +="<div style=\" padding: 20px 0px; margin-left:-2px; \"><input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for Market..\"><table  id=\"myTable\" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:15px;\">Market</th><th>Buy</th><th>Sell</th><th>Low</th><th>High</th><th>Open</th><th>Last</th><th>Volume</th><th>Price Change</th></tr></thead><tbody>";
-          for (t=0 ; t < endResult.length; t++){
-              
-              if (t === 0 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px;\">MGT market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-              }
-              if (t === 143 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px;\">BCH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-              }
-              if (t === 252 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">BTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-              }
-              if (t === 340 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">ETH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-              }
-              if (t === 439 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px; \">LTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-              }
-              if (t === 549 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">TUSD market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-              }
-              if (t === 572 ){
-                  tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">XRP market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-              }
-              if (t%11 === 0 ){
-                  tableData += "<tr onclick=\"window.open(\'https://www.speza.exchange/trading/" +endResult[t] + " \');\">";
-                  tableData += "<td style=\" color: #AAB4C1;  text-transform: uppercase; padding-left:15px; \" >";
-                  tableData += endResult[t] + "</td>"
-              } 
-              else if (t%11 === 1 ){
-               
-               tableData += "<td  style=\" color: #4DD77C;\">";
-               tableData += Number(endResult[t]) + "</td>"
-              } 
-              else if (t%11 === 2 ){
-               
-               tableData += "<td style=\" color: #FF1479;\">";
-               tableData += Number(endResult[t]) + "</td>"
-              }  
-              else if (t%11 === 3 ){
-               
-               tableData += "<td>";
-               tableData += Number(endResult[t]) + "</td>"
-              } 
-              else if (t%11 === 4 ){
-               
-               tableData += "<td>";
-                tableData += Number(endResult[t]) + "</td>"
-              }  
-              else if (t%11 === 5 ){
-               
-               tableData += "<td>";
-                tableData += Number(endResult[t]) + "</td>"
-              }  
-              else if (t%11 === 6 ){
-               
-               tableData += "<td>";
-               tableData += Number(endResult[t]) + "</td>"
-              }
-              else if (t%11 === 7 ){
-               
-               tableData += "<td>";
-                tableData += Number(endResult[t]) + "</td>"
-              }  
-              if (t%11 === 8 ){
-               
-              // tableData += "<td>";
-              // tableData += Number(endResult[t]) + "</td>"
-               
-              } 
-              else if (t%11 === 9 ){
-               var data = endResult[t];
-               var sign =  data[0];
-
-               if( sign[0] === "+" ){
-                  tableData += "<td style=\" color:#4DD77C;\">";
-               } else{
-                  tableData += "<td style=\" color: #FF1479;\">";
-               }
-               
-               tableData += endResult[t] +"</td>"
-               tableData += "</tr>";
-               
-              } 
-              else if (t%11 === 10 ){
-               
-              // tableData += "<td  style=\" display: none;\">";
-              // tableData += endResult[t] + "</td>"
-              // tableData += "</tr>";
-              } 
-          }
-
-          tableData += " <tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
-
-          document.getElementById("demo").innerHTML = tableData ;
-
-        } else {
-      
-          const errorMessage = document.getElementById("demo")
-      
-          errorMessage.innerHTML = `Gah, it's not working!`
-      
-          app.appendChild(errorMessage)
-      
-        }
-      
-      }
-      
-      request.send()
-      
-      
-      </script>
   </head>
   <body>
     <script src="%PUBLIC_URL%/config/env.js"></script>
@@ -274,5 +43,343 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <script>
+     var milliseconds = (new Date).getTime();
+     var earlier = milliseconds - 10 * 24 * 60 * 60 * 1000;
+     var messa22ge = 'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/xrpbtc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds;
+     var request2 = new XMLHttpRequest()
+     
+     var proxyURL = 'https://cors-anywhere.herokuapp.com';
+     
+     request2.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/xrpbtc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
+     
+     request2.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+     
+     request2.setRequestHeader('Access-Control-Allow-Origin', '*');
+     
+     request2.setRequestHeader('Access-Control-Allow-Method', 'GET');
+     
+     request2.setRequestHeader('Content-Type', 'application/json');
+     
+     request2.onload = function() {
+     
+       if (request2.status >= 200 && request.status < 400) {
+         // array splits the resonse into each market 
+         
+         //var data = JSON.stringify(this.response);
+         var data = JSON.parse(this.response);
+        document.getElementById("de1mo").innerHTML = data[1][2] + '</br>' + data[2][2] + '</br>' + data[3][2] + '</br>' + data[4][2] + '</br>' + data[5][2] + '</br>' + data[6][2] + '</br>'+  + data[7][2] + '</br>' + data[8][2] + '</br>' + data[9][2] + '</br>' + + data[10][2] + '</br>' + messa22ge;
+        //document.getElementById("de1mo").innerHTML = milliseconds ;
+
+       } else {
+     
+         const errorMessage = document.getElementById("de1mo")
+     
+         errorMessage.innerHTML = `Gah, it's not working!`
+     
+         app.appendChild(errorMessage)
+     
+       }
+      }      
+      request2.send()
+    </script>
+    <script>
+      function myFunction() {
+         // Declare variables 
+         var input, filter, table, tr, td, i, txtValue;
+         input = document.getElementById("myInput");
+         filter = input.value.toUpperCase();
+         table = document.getElementById("myTable");
+         tr = table.getElementsByTagName("tr");
+       
+         // Loop through all table rows, and hide those who don't match the search query
+         for (i = 0; i < tr.length; i++) {
+           td = tr[i].getElementsByTagName("td")[0];
+           if (td) {
+             txtValue = td.textContent || td.innerText;
+             if (txtValue.toUpperCase().indexOf(filter) > -1) {
+               tr[i].style.display = "";
+             } else {
+               tr[i].style.display = "none";
+             }
+           } 
+         }
+       }
+                                           
+     var request = new XMLHttpRequest()
+     
+     var proxyURL = 'https://cors-anywhere.herokuapp.com';
+     
+     request.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/tickers/', true)
+     
+     request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+     
+     request.setRequestHeader('Access-Control-Allow-Origin', '*');
+     
+     request.setRequestHeader('Access-Control-Allow-Method', 'GET');
+     
+     request.setRequestHeader('Content-Type', 'application/json');
+     
+     request.onload = function() {
+     
+       if (request.status >= 200 && request.status < 400) {
+         // array splits the resonse into each market 
+         
+        // var data = JSON.stringify(this.response);
+         var data = this.response;
+         data = data.split(/[}}]/);
+         var cleandata ="|";
+
+         for ( h=0 ; h < data.length ; h++) {
+             if ( h%2 === 0 ){
+                 cleandata += data[h] + "|";
+             }
+         }
+         cleandata = cleandata.split("|");
+         cleandata.pop();
+         cleandata.pop();
+         cleandata.shift();
+       
+         //cleandata is the array each index contains one market  with empty elements if first element and last two elements
+    
+         var result = [];
+         var endResult = [];
+         //result.length = 10;
+         //var marketData = "";
+         //var rawdata = "";
+         //var KIR = "";
+           for ( o=0 ; o < cleandata.length ; o++) {
+             cleandata[o] =   cleandata[o] ; 
+             var Market = cleandata[o].split(",");
+             if( o > 0 ){
+                 // the first market contains empty value in first index instead of itemvalues
+                 Market.shift();
+             }
+             for ( j=0 ; j < Market.length ; j++){
+         
+                 if ( j >= 2){
+                         // all other values
+                     var newitem = Market[j].replace(/\"/g, '');
+                     newitem = newitem.replace(/{/g, '');
+                 
+                     var MarketName = newitem.split(":");
+                     for ( k=0 ; k < MarketName.length ; k++){
+                    
+                         if (k%2 === 1){
+                             result.push( MarketName[k]);
+                         }
+                     }
+                 
+                 } else {
+                         if (j === 0 ){
+                             //market Name
+                             var newitem = Market[j].replace(/\"/g, '');
+                             newitem = newitem.replace(/{/g, '');
+                           
+                             var MarketName = newitem.split(":");
+                           
+                             result.push(MarketName[0]);
+                     } else if ( j=== 1 ) {
+                             // Buy Value
+                             var newitem = Market[j].replace(/\"/g, '');
+                             newitem = newitem.replace(/{/g, '');
+                           
+                             var MarketName = newitem.split(":");
+                             result.push(MarketName[2]);
+                     }
+               }
+               endResult.push(result);
+               result = new Array();
+             }
+
+         }
+        for( l=0 ; l < endResult.length ; l++){
+            if( l%10 === 2){
+             //endResult.splice(l,1);
+            }  
+        }
+         var pair = "";
+         var show = "";
+         var tableData = "";
+         tableData +="<div style=\" padding: 20px 0px; margin-left:-2px; \"><input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for Market..\"><table  id=\"myTable\" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:15px;\">Market</th><th>Buy</th><th>Sell</th><th>Low</th><th>High</th><th>Open</th><th>Last</th><th>Volume</th><th>Price Change</th><th>overview</th></tr></thead><tbody>";
+         for (t=0 ; t < endResult.length; t++){
+             
+             if (t === 0 ){
+                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px;\">MGT market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+             }
+             if (t === 143 ){
+                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px;\">BCH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+             }
+             if (t === 252 ){
+                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">BTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+             }
+             if (t === 340 ){
+                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">ETH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+             }
+             if (t === 439 ){
+                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px; \">LTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+             }
+             if (t === 549 ){
+                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">TUSD market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+             }
+             if (t === 572 ){
+                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">XRP market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+             }
+             if (t%11 === 0 ){
+                 tableData += "<tr onclick=\"window.open(\'https://www.speza.exchange/trading/" +endResult[t] + " \');\">";
+                 tableData += "<td style=\" color: #AAB4C1;  text-transform: uppercase; padding-left:15px; \" >";
+                 tableData += endResult[t] + "</td>"
+                 pair = endResult[t];
+             } 
+             else if (t%11 === 1 ){
+              tableData += "<td  style=\" color: #4DD77C;\">";
+              tableData += Number(endResult[t]) + "</td>"
+             } 
+             else if (t%11 === 2 ){
+              
+              tableData += "<td style=\" color: #FF1479;\">";
+              tableData += Number(endResult[t]) + "</td>"
+             }  
+             else if (t%11 === 3 ){
+              
+              tableData += "<td>";
+              tableData += Number(endResult[t]) + "</td>"
+             } 
+             else if (t%11 === 4 ){
+              
+              tableData += "<td>";
+               tableData += Number(endResult[t]) + "</td>"
+             }  
+             else if (t%11 === 5 ){
+              
+              tableData += "<td>";
+               tableData += Number(endResult[t]) + "</td>"
+             }  
+             else if (t%11 === 6 ){
+              
+              tableData += "<td>";
+              tableData += Number(endResult[t]) + "</td>"
+             }
+             else if (t%11 === 7 ){
+              
+              tableData += "<td>";
+               tableData += Number(endResult[t]) + "</td>"
+             }  
+             if (t%11 === 8 ){
+              
+             // tableData += "<td>";
+             // tableData += Number(endResult[t]) + "</td>"
+              
+             } 
+             else if (t%11 === 9 ){
+              var data = endResult[t];
+              var sign =  data[0];
+
+              if( sign[0] === "+" ){
+                 tableData += "<td style=\" color:#4DD77C;\">";
+              } else{
+                 tableData += "<td style=\" color: #FF1479;\">";
+              }
+              
+              tableData += endResult[t] +"</td><td><canvas id="+ "\"" + pair + "\"" + "width=\"150\" height=\"80\"></canvas></td>"
+              
+              tableData += "</tr>";
+              
+             } 
+             
+             else if (t%11 === 10 ){
+              
+             // tableData += "<td  style=\" display: none;\">";
+             // tableData += endResult[t] + "</td>"
+             // tableData += "</tr>";
+             } 
+         }
+
+         tableData += " <tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
+
+         document.getElementById("demo").innerHTML = tableData ;
+
+       } else {
+     
+         const errorMessage = document.getElementById("demo")
+     
+         errorMessage.innerHTML = `Gah, it's not working!`
+     
+         app.appendChild(errorMessage)
+     
+       }
+       new Chart(document.getElementById("xrpbtc"), {
+        type: 'line',
+        data: {
+          labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+          datasets: [{ 
+              data: [112,121,110,109,108,113,120,118,109,104,110,108],
+              label: "Africa",
+              borderColor: "#3e95cd",
+              fill: true
+            },
+          ]
+        },
+        options: {
+          title: {
+            display: false,
+          },
+          legend: {
+            display: false
+         },
+         tooltips: {
+            enabled: false
+         },
+         scales: {
+            xAxes: [{
+              display: false
+            }],
+            yAxes: [{
+              display: false
+            }]
+        }   
+        }
+      });
+
+        new Chart(document.getElementById("mgtthb"), {
+        type: 'line',
+        data: {
+          labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+          datasets: [{ 
+              data: [112,121,110,109,108,113,120,118,109,104,110,108],
+              label: "Africa",
+              borderColor: "#3e95cd",
+              fill: true
+            },
+          ]
+        },
+        options: {
+          title: {
+            display: false,
+          },
+          legend: {
+            display: false
+         },
+         tooltips: {
+            enabled: false
+         },
+         scales: {
+            xAxes: [{
+              display: false
+            }],
+            yAxes: [{
+              display: false
+            }]
+        }   
+        }
+      });
+    }
+     request.send()
+     </script>
+
   </body>
 </html>

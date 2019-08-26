@@ -28,6 +28,9 @@ export const zh: LangType = {
     'page.header.navbar.wallets': '钱包',
     'page.header.navbar.openOrders': '订单',
     'page.header.navbar.history': '交易历史',
+    'page.header.navbar.newsletter': '时事通讯',
+    'page.header.navbar.Contact': '联系我们',
+    'page.header.navbar.ReferralRewads': '奖励',
 
     'page.header.navbar.profile': '用户资料',
     'page.header.navbar.logout': '退出',
