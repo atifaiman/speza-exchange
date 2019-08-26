@@ -59,13 +59,19 @@ header {
 @media screen and (max-width: 768px) {
 
   .pg-header {
-
+    .pg-logo__img {
+      height: calc(var(--gap) * 5.666);
+    }
     position: relative;
     justify-content: none;
     height: calc(var(--gap) * 6);
 
     &__logo {
-      display: none;
+        display: none;
+        z-index: 9999;
+        position: fixed;
+        top: 5px;
+        left: 20px;
     }
 
     &__location {
@@ -92,7 +98,7 @@ header {
     &__navbar {
       padding-top: 1px;
       margin-left: 0;
-      height: 75px;
+      height: 95px;
       bottom: 0;
       z-index: 666;
       width: 100%;
@@ -152,7 +158,7 @@ header {
 @media screen and (max-width: 620px) {
   .pg-header {
      &__navbar {
-      height: 60px;
+      height: 75px;
       }
     }
 }
@@ -160,7 +166,7 @@ header {
 @media screen and (max-width: 540px) {
   .pg-header {
      &__navbar {
-      height: 55px;
+      height: 70px;
       }
     }
 }
@@ -201,7 +207,7 @@ header {
     &__navbar {
       padding-top: 1px;
       margin-left: 0;
-      height: 55px;
+      height: 65px;
       bottom: 0;
       z-index: 666;
       width: 100%;

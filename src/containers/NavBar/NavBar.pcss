@@ -18,6 +18,22 @@
       background-image: url("icon_trading.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
+      @media screen and (max-width: 768px)  {
+         width: 30%;
+         padding-top: 30%;
+      }
+      @media screen and (max-width: 620px)  {
+         width: 35%;
+         padding-top: 35%;
+      }
+      @media screen and (max-width: 540px)  {
+         width: 40%;
+         padding-top: 40%;
+      }
+       @media screen and (max-width: 430px)  {
+         width: 45%;
+         padding-top: 45%;
+      }
   }
   .iconNavWallet {
       position: relative;
@@ -27,6 +43,22 @@
       background-image: url("icon_wallet.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
+       @media screen and (max-width: 768px)  {
+         width: 30%;
+         padding-top: 30%;
+      }
+      @media screen and (max-width: 620px)  {
+         width: 35%;
+         padding-top: 35%;
+      }
+      @media screen and (max-width: 540px)  {
+         width: 40%;
+         padding-top: 40%;
+      }
+       @media screen and (max-width: 430px)  {
+         width: 45%;
+         padding-top: 45%;
+      }
   }
   .iconNavHome {
       position: relative;
@@ -36,6 +68,22 @@
       background-image: url("icon_home.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
+       @media screen and (max-width: 768px)  {
+         width: 30%;
+         padding-top: 30%;
+      }
+      @media screen and (max-width: 620px)  {
+         width: 35%;
+         padding-top: 35%;
+      }
+      @media screen and (max-width: 540px)  {
+         width: 40%;
+         padding-top: 40%;
+      }
+       @media screen and (max-width: 430px)  {
+         width: 45%;
+         padding-top: 45%;
+      }
   }
   .iconNavOrder {
       position: relative;
@@ -45,6 +93,22 @@
       background-image: url("icon_history.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
+       @media screen and (max-width: 768px)  {
+         width: 30%;
+         padding-top: 30%;
+      }
+      @media screen and (max-width: 620px)  {
+         width: 35%;
+         padding-top: 35%;
+      }
+      @media screen and (max-width: 540px)  {
+         width: 40%;
+         padding-top: 40%;
+      }
+       @media screen and (max-width: 430px)  {
+         width: 45%;
+         padding-top: 45%;
+      }
   }
   .iconNavHistory {
       position: relative;
@@ -54,6 +118,22 @@
       background-image: url("icon_history.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
+       @media screen and (max-width: 768px)  {
+         width: 30%;
+         padding-top: 30%;
+      }
+      @media screen and (max-width: 620px)  {
+         width: 35%;
+         padding-top: 35%;
+      }
+      @media screen and (max-width: 540px)  {
+         width: 40%;
+         padding-top: 40%;
+      }
+       @media screen and (max-width: 430px)  {
+         width: 45%;
+         padding-top: 45%;
+      }
   }
   .iconNavAccount {
       position: relative;
@@ -63,6 +143,22 @@
       background-image: url("icon_account.png");
       background-repeat: no-repeat;
       background-size: 100% 100%;
+       @media screen and (max-width: 768px)  {
+         width: 30%;
+         padding-top: 30%;
+      }
+      @media screen and (max-width: 620px)  {
+         width: 35%;
+         padding-top: 35%;
+      }
+      @media screen and (max-width: 540px)  {
+         width: 40%;
+         padding-top: 40%;
+      }
+       @media screen and (max-width: 430px)  {
+         width: 45%;
+         padding-top: 45%;
+      }
   }
   .topNavbarMobile {
     display: none;
@@ -85,6 +181,22 @@
   .topNavimg {
     padding: 5px;
     height: 45px;
+     @media screen and (max-width: 768px)  {
+         padding: 5px;
+         height: 45px;
+      }
+      @media screen and (max-width: 620px)  {
+         padding: 5px;
+         height: 40px;
+      }
+      @media screen and (max-width: 540px)  {
+         padding: 5px;
+         height: 38px;
+      }
+       @media screen and (max-width: 430px)  {
+         padding: 5px;
+         height: 37px;
+      }
   }
   a { 
     &:hover, &:focus {
@@ -371,6 +483,9 @@
 
 
 @media screen and (max-width: 768px) {
+  .navbar-usser-menu{
+    display: none;
+  }
   .pg-navbar {
     flex-direction: column;
     min-height: calc(var(--gap) * 16.66);
@@ -719,7 +834,7 @@
     }
     .topNavimg {
       padding: 5px;
-      height: 40px;
+      height: 35px;
     }
     .navbarIcon {
       margin: auto;
@@ -769,12 +884,7 @@
     }
     &__header {
        &-settings  {
-              position: fixed;
-              padding: 0px 10px;
-              top: 0px;
-              left: 0;
-              right: 0;
-              background: var(--background-dark);
+             
 
           .dropdown-menu-language-field {
           }

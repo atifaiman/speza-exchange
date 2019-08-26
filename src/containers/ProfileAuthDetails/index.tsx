@@ -17,6 +17,7 @@ import {
     PASSWORD_REGEX,
 } from '../../helpers';
 import {
+  logoutFetch,
   RootState,
   selectUserInfo,
   User,
@@ -43,6 +44,7 @@ interface OnChangeEvent {
 }
 
 interface DispatchProps {
+    logout: typeof logoutFetch;
     changePassword: typeof changePasswordFetch;
     clearPasswordChangeError: () => void;
 }
@@ -217,6 +219,14 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         navigateTo2fa={this.handleNavigateTo2fa}
                     />
                 </div>
+                <div className="pg-profile-page__row">
+                    <Button
+                        className="pg-profile-page__btn-secondary-change"
+                        onClick={this.handleLogOut}
+                        label={this.props.intl.formatMessage({ id: 'page.header.navbar.logout'})}
+                    />
+                    {modal}
+                </div>
                 <Modal
                     show={this.state.showModal}
                     header={this.renderModalHeader()}
@@ -226,6 +236,9 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             </div>
         );
     }
+    private handleLogOut = () => {
+         this.props.logout();
+    };
 
     private renderModalHeader = () => {
         return (
@@ -375,6 +388,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 const mapDispatchToProps = dispatch => ({
     changePassword: ({ old_password, new_password, confirm_password }) =>
         dispatch(changePasswordFetch({ old_password, new_password, confirm_password })),
+    logout: () => dispatch(logoutFetch()),
 });
 
 const ProfileAuthDetailsConnected = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProfileAuthDetailsComponent));
