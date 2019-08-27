@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { ProfileAccountActivity } from '../../containers/ProfileAccountActivity';
@@ -24,34 +24,57 @@ class ProfileComponent extends React.Component<RouterProps> {
             <div className="container pg-profile-page">
                 <div className="pg-profile-page__details">
                     <div className="row pg-profile-page-header pg-profile-page-header-first">
-                        <h3 className="col-12">
-                            <FormattedMessage id="page.body.profile.header.account"/>
-                        </h3>
-                    </div>
-                    <div className="row">
-                        <div className="col-12 col-md-6 mx-0">
-                            <div className="row col-12 mx-0">
-                                <ProfileAuthDetails/>
+                        <div className="row" style={{display:'block' , width:'100%'}}>
+                            <h3 className="col-12" >
+                                <ul className="nav nav-tabs">
+                                    <li className="active">
+                                        <a  data-toggle="tab" href="#ProfileInfo">Profile</a>
+                                    </li>
+                                    <li >
+                                        <a data-toggle="tab" href="#IdentiyVer">Identiy Verification</a>
+                                    </li>
+                                </ul>
+                            </h3>
+                            <div className="tab-content" >
+                                <div  id="ProfileInfo"  className="tab-pane fade in active" >
+                                                <ProfileAuthDetails/>
+                                </div>
+                                <div id="IdentiyVer" className="tab-pane fade">
+                                                <ProfileVerification/>
+                                </div>
                             </div>
                         </div>
-                        <div className="col-12 col-md-6">
-                            <ProfileVerification/>
-                        </div>
+
                     </div>
-                    <div className="row px-4">
+                    <div className="row px-4" style={{paddingTop: '20px'}}>
                         <div className="col-12 mx-0">
                             <ReferralProgram/>
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col-12">
-                        <ProfileApiKeys/>
-                    </div>
-                    <div className="col-12">
-                        <ProfileAccountActivity/>
+                <div className="pg-profile-page__details">
+                    <div className="row pg-profile-page-header pg-profile-page-header-first">
+                <div className="row" style={{display:'block' , width:'100%'}}>
+                    <h3 className="col-12" >
+                        <ul className="nav nav-tabs">
+                            <li className="active">
+                                <a data-toggle="tab" href="#AccountActivity">Account Activity</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#APIkeys">API keys</a>
+                            </li>
+                        </ul>
+                    </h3>
+                    <div className="tab-content" >
+                        <div id="AccountActivity" className="tab-pane fade">
+                                <ProfileAccountActivity/>
+                        </div>
+                        <div  id="APIkeys"  className="tab-pane fade in active" >
+                                <ProfileApiKeys/>
+                        </div>
                     </div>
                 </div>
+                </div></div>
             </div>
         );
     }
@@ -63,3 +86,29 @@ const ProfileScreen = withRouter(ProfileComponent as any);
 export {
     ProfileScreen,
 };
+/*
+    <div className="row">
+        <div className="col-12 col-md-6 mx-0">
+            <div className="row col-12 mx-0">
+                <ProfileAuthDetails/>
+            </div>
+        </div>
+        <div className="col-12 col-md-6">
+            <ProfileVerification/>
+        </div>
+    </div>
+
+    <h3 className="col-12" >
+        <FormattedMessage id="page.body.profile.header.account"/>
+    </h3>
+
+    <div className="row">
+    <div className="col-12">
+        <ProfileApiKeys/>
+    </div>
+    <div className="col-12">
+        <ProfileAccountActivity/>
+    </div>
+    </div>
+*/
+

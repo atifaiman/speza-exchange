@@ -51,7 +51,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
             <div className="pg-profile-page__row pg-profile-page__level-verification">
                 <div className={titleClassName}>
                     {this.renderVerificationLevel('page.body.profile.header.account.profile.email', userLevel, targetLevel)}
-                    <p><FormattedMessage id="page.body.profile.header.account.profile.email.message" /></p>
+                    <p className="headThree"><FormattedMessage id="page.body.profile.header.account.profile.email.message"/></p>
                 </div>
             </div>
         );
@@ -66,7 +66,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
             <div className="pg-profile-page__row pg-profile-page__level-verification">
                 <div className={titleClassName}>
                     {this.renderVerificationLevel('page.body.profile.header.account.profile.phone', userLevel, targetLevel)}
-                    <p><FormattedMessage id="page.body.profile.header.account.profile.phone.message" /></p>
+                    <p className="headThree"><FormattedMessage id="page.body.profile.header.account.profile.phone.message" /></p>
                 </div>
             </div>
         );

@@ -48,46 +48,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
     <script>
-     var milliseconds = (new Date).getTime();
-     var earlier = milliseconds - 10 * 24 * 60 * 60 * 1000;
-     var messa22ge = 'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/xrpbtc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds;
-     var request2 = new XMLHttpRequest()
-     
-     var proxyURL = 'https://cors-anywhere.herokuapp.com';
-     
-     request2.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/xrpbtc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
-     
-     request2.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-     
-     request2.setRequestHeader('Access-Control-Allow-Origin', '*');
-     
-     request2.setRequestHeader('Access-Control-Allow-Method', 'GET');
-     
-     request2.setRequestHeader('Content-Type', 'application/json');
-     
-     request2.onload = function() {
-     
-       if (request2.status >= 200 && request.status < 400) {
-         // array splits the resonse into each market 
-         
-         //var data = JSON.stringify(this.response);
-         var data = JSON.parse(this.response);
-        document.getElementById("de1mo").innerHTML = data[1][2] + '</br>' + data[2][2] + '</br>' + data[3][2] + '</br>' + data[4][2] + '</br>' + data[5][2] + '</br>' + data[6][2] + '</br>'+  + data[7][2] + '</br>' + data[8][2] + '</br>' + data[9][2] + '</br>' + + data[10][2] + '</br>' + messa22ge;
-        //document.getElementById("de1mo").innerHTML = milliseconds ;
-
-       } else {
-     
-         const errorMessage = document.getElementById("de1mo")
-     
-         errorMessage.innerHTML = `Gah, it's not working!`
-     
-         app.appendChild(errorMessage)
-     
-       }
-      }      
-      request2.send()
     </script>
     <script>
+      
       function myFunction() {
          // Declare variables 
          var input, filter, table, tr, td, i, txtValue;
@@ -109,7 +72,154 @@
            } 
          }
        }
-                                           
+     var milliseconds = (new Date).getTime();
+     var earlier = milliseconds - 10 * 24 * 60 * 60 * 1000;
+     //xrpbtc graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     var xrpbtcdata = new Array(10);
+     var requestXrpbtc = new XMLHttpRequest()
+     var proxyURL = 'https://cors-anywhere.herokuapp.com';
+     requestXrpbtc.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/xrpbtc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
+     requestXrpbtc.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+     requestXrpbtc.setRequestHeader('Access-Control-Allow-Origin', '*');
+     requestXrpbtc.setRequestHeader('Access-Control-Allow-Method', 'GET');
+     requestXrpbtc.setRequestHeader('Content-Type', 'application/json');
+     requestXrpbtc.onload = function() {
+       if (requestXrpbtc.status >= 200 && requestXrpbtc.status < 400) {
+         // array splits the resonse into each market 
+         //var data = JSON.stringify(this.response);
+         var data = JSON.parse(this.response);
+         xrpbtcdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
+        //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
+       } else {
+         const errorMessage = document.getElementById("de1mo")
+         errorMessage.innerHTML = `Gah, it's not working!`
+         app.appendChild(errorMessage)
+       }
+      }      
+      requestXrpbtc.send()
+      
+    //mgteth graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     
+     var mgtethdata = new Array(10);
+     var requestMgteth = new XMLHttpRequest()
+     var proxyURL = 'https://cors-anywhere.herokuapp.com';
+     requestMgteth.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgteth/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
+     requestMgteth.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+     requestMgteth.setRequestHeader('Access-Control-Allow-Origin', '*');
+     requestMgteth.setRequestHeader('Access-Control-Allow-Method', 'GET');
+     requestMgteth.setRequestHeader('Content-Type', 'application/json');
+     requestMgteth.onload = function() {
+       if (requestMgteth.status >= 200 && requestMgteth.status < 400) {
+         // array splits the resonse into each market 
+         //var data = JSON.stringify(this.response);
+         var data = JSON.parse(this.response);
+         mgtethdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
+        //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
+       } else {
+         const errorMessage = document.getElementById("de1mo")
+         errorMessage.innerHTML = `Gah, it's not working!`
+         app.appendChild(errorMessage)
+       }
+      }      
+      requestMgteth.send()
+    
+    //mgtbtc graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     
+     var mgtbtcdata = new Array(10);
+     var requestMgtbtc = new XMLHttpRequest()
+     var proxyURL = 'https://cors-anywhere.herokuapp.com';
+     requestMgtbtc.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtbtc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
+     requestMgtbtc.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+     requestMgtbtc.setRequestHeader('Access-Control-Allow-Origin', '*');
+     requestMgtbtc.setRequestHeader('Access-Control-Allow-Method', 'GET');
+     requestMgtbtc.setRequestHeader('Content-Type', 'application/json');
+     requestMgtbtc.onload = function() {
+       if (requestMgtbtc.status >= 200 && requestMgtbtc.status < 400) {
+         // array splits the resonse into each market 
+         //var data = JSON.stringify(this.response);
+         var data = JSON.parse(this.response);
+         mgtbtcdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
+        //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
+       } else {
+         const errorMessage = document.getElementById("de1mo")
+         errorMessage.innerHTML = `Gah, it's not working!`
+         app.appendChild(errorMessage)
+       }
+      }      
+      requestMgtbtc.send()
+
+     //mgtthb graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    /* 
+     var mgtthbdata = new Array(10);
+     var requestMgtthb = new XMLHttpRequest()
+     var proxyURL = 'https://cors-anywhere.herokuapp.com';
+     requestMgtthb.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtthb/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
+     requestMgtthb.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+     requestMgtthb.setRequestHeader('Access-Control-Allow-Origin', '*');
+     requestMgtthb.setRequestHeader('Access-Control-Allow-Method', 'GET');
+     requestMgtthb.setRequestHeader('Content-Type', 'application/json');
+     requestMgtthb.onload = function() {
+       if (requestMgtthb.status >= 200 && requestMgtthb.status < 400) {
+         // array splits the resonse into each market 
+         //var data = JSON.stringify(this.response);
+         var data = JSON.parse(this.response);
+         mgtthbdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
+        //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
+       } else {
+         const errorMessage = document.getElementById("de1mo")
+         errorMessage.innerHTML = `Gah, it's not working!`
+         app.appendChild(errorMessage)
+       }
+      }      
+      requestMgtthb.send()
+     //mgtmyr graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     var mgtmyrdata = new Array(10);
+     var requestMgtmyr = new XMLHttpRequest()
+     var proxyURL = 'https://cors-anywhere.herokuapp.com';
+     requestMgtmyr.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtmyr/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
+     requestMgtmyr.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+     requestMgtmyr.setRequestHeader('Access-Control-Allow-Origin', '*');
+     requestMgtmyr.setRequestHeader('Access-Control-Allow-Method', 'GET');
+     requestMgtmyr.setRequestHeader('Content-Type', 'application/json');
+     requestMgtmyr.onload = function() {
+       if (requestMgtmyr.status >= 200 && requestMgtmyr.status < 400) {
+         // array splits the resonse into each market 
+         //var data = JSON.stringify(this.response);
+         var data = JSON.parse(this.response);
+         mgtmyrdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
+        //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
+       } else {
+         const errorMessage = document.getElementById("de1mo")
+         errorMessage.innerHTML = `Gah, it's not working!`
+         app.appendChild(errorMessage)
+       }
+      }      
+      requestMgtmyr.send()
+*/
+      //mgtltc graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     var mgtltcdata = new Array(10);
+     var requestMgtltc = new XMLHttpRequest()
+     var proxyURL = 'https://cors-anywhere.herokuapp.com';
+     requestMgtltc.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtltc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
+     requestMgtltc.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+     requestMgtltc.setRequestHeader('Access-Control-Allow-Origin', '*');
+     requestMgtltc.setRequestHeader('Access-Control-Allow-Method', 'GET');
+     requestMgtltc.setRequestHeader('Content-Type', 'application/json');
+     requestMgtltc.onload = function() {
+       if (requestMgtltc.status >= 200 && requestMgtltc.status < 400) {
+         // array splits the resonse into each market 
+         //var data = JSON.stringify(this.response);
+         var data = JSON.parse(this.response);
+         mgtltcdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
+         //document.getElementById("de1mo").innerHTML = xrpbtcdata ;
+       } else {
+         const errorMessage = document.getElementById("de1mo")
+         errorMessage.innerHTML = `Gah, it's not working!`
+         app.appendChild(errorMessage)
+       }
+      }      
+      requestMgtltc.send()
+     //market Pairs Table---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------            
      var request = new XMLHttpRequest()
      
      var proxyURL = 'https://cors-anywhere.herokuapp.com';
@@ -302,6 +412,7 @@
          tableData += " <tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
 
          document.getElementById("demo").innerHTML = tableData ;
+        // document.getElementById("de1mo").innerHTML = xrpbtcdata + "<br/>" + mgtthbdata + "<br/>" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtthb/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds ;
 
        } else {
      
@@ -312,12 +423,14 @@
          app.appendChild(errorMessage)
      
        }
-       new Chart(document.getElementById("xrpbtc"), {
+// Charts---------------------------------------------------------------
+/*
+        new Chart(document.getElementById("mgtthb"), {
         type: 'line',
         data: {
-          labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+          labels: [1,2,3,4,5,6,7,8,9,10],
           datasets: [{ 
-              data: [112,121,110,109,108,113,120,118,109,104,110,108],
+              data: mgtthbdata,
               label: "Africa",
               borderColor: "#3e95cd",
               fill: true
@@ -344,13 +457,141 @@
         }   
         }
       });
-
-        new Chart(document.getElementById("mgtthb"), {
+      new Chart(document.getElementById("mgtmyr"), {
         type: 'line',
         data: {
-          labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+          labels: [1,2,3,4,5,6,7,8,9,10],
           datasets: [{ 
-              data: [112,121,110,109,108,113,120,118,109,104,110,108],
+              data: mgtmyrdata,
+              label: "Africa",
+              borderColor: "#3e95cd",
+              fill: true
+            },
+          ]
+        },
+        options: {
+          title: {
+            display: false,
+          },
+          legend: {
+            display: false
+         },
+         tooltips: {
+            enabled: false
+         },
+         scales: {
+            xAxes: [{
+              display: false
+            }],
+            yAxes: [{
+              display: false
+            }]
+        }   
+        }
+      });
+    */
+    new Chart(document.getElementById("mgtltc"), {
+        type: 'line',
+        data: {
+          labels: [1,2,3,4,5,6,7,8,9,10],
+          datasets: [{ 
+              data: mgtltcdata,
+              label: "Africa",
+              borderColor: "#3e95cd",
+              fill: true
+            },
+          ]
+        },
+        options: {
+          title: {
+            display: false,
+          },
+          legend: {
+            display: false
+         },
+         tooltips: {
+            enabled: false
+         },
+         scales: {
+            xAxes: [{
+              display: false
+            }],
+            yAxes: [{
+              display: false
+            }]
+        }   
+        }
+      });
+      new Chart(document.getElementById("mgteth"), {
+        type: 'line',
+        data: {
+          labels: [1,2,3,4,5,6,7,8,9,10],
+          datasets: [{ 
+              data: mgtethdata,
+              label: "Africa",
+              borderColor: "#3e95cd",
+              fill: true
+            },
+          ]
+        },
+        options: {
+          title: {
+            display: false,
+          },
+          legend: {
+            display: false
+         },
+         tooltips: {
+            enabled: false
+         },
+         scales: {
+            xAxes: [{
+              display: false
+            }],
+            yAxes: [{
+              display: false
+            }]
+        }   
+        }
+      });
+      new Chart(document.getElementById("mgtbtc"), {
+        type: 'line',
+        data: {
+          labels: [1,2,3,4,5,6,7,8,9,10],
+          datasets: [{ 
+              data: mgtbtcdata,
+              label: "Africa",
+              borderColor: "#3e95cd",
+              fill: true
+            },
+          ]
+        },
+        options: {
+          title: {
+            display: false,
+          },
+          legend: {
+            display: false
+         },
+         tooltips: {
+            enabled: false
+         },
+         scales: {
+            xAxes: [{
+              display: false
+            }],
+            yAxes: [{
+              display: false
+            }]
+        }   
+        }
+      });
+      new Chart(document.getElementById("xrpbtc"), {
+        type: 'line',
+        data: {
+          labels: [1,2,3,4,5,6,7,8,9,10],
+          datasets: [{ 
+              data: xrpbtcdata,
               label: "Africa",
               borderColor: "#3e95cd",
               fill: true

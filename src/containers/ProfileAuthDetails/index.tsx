@@ -193,7 +193,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                             <p>{user.email}</p>
                         </div>
                         <div className="pg-profile-page__row">
-                            <h2>UID: {user.uid}</h2>
+                            <p>UID: {user.uid}</p>
                         </div>
                     </div>
                 </div>
