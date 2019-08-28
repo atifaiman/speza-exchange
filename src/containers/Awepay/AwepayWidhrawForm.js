@@ -66,12 +66,34 @@ const KRW = [
     { value: "023" , label: "Sc"},
     { value: "045" , label: "Saemaul"},
 ];
+const CNY = [
+  { value: "ICBC" , label: "Industrial and Commercial Bank of China"},
+  { value: "ABC" , label: "Agricultural Bank of China"},
+  { value: "CCB" , label: "China Construction Bank"},
+  { value: "SPDB" , label: "Shanghai Pudong Development Bank"},
+  { value: "CIB" , label: "China Industrial Bank"},
+  { value: "CMBC" , label: "China Minsheng Bank"},
+  { value: "BCM" , label: "Bank of Communication"},
+  { value: "CNCB" , label: "China CITIC Bank"},
+  { value: "CEB" , label: "China Everbright Bank"},
+  { value: "CMB" , label: "China Merchants Bank"},
+  { value: "GDB" , label: "China Guangfa Bank"},
+  { value: "BOC" , label: "Bank of China"},
+  { value: "HXB" , label: "Hua Xia Bank"},
+  { value: "PAB" , label: "Ping An Bank"},
+  { value: "PSBC" , label: "Postal Savings Bank of China"},
+  { value: "SDB" , label: "Shenzhen Development Bank"},
+  { value: "RCC" , label: "Riral Credit Cooperatives"},
+  { value: "BCCB" , label: "Bank of Bejing"},
+  { value: "SHB" , label: "Bank of Shanghai"},
+];
 const currencyOptions = [
     { value: "VND" , label: "VND"},
     { value: "THB" , label: "THB"},
     { value: "IDR" , label: "IDR"},
     { value: "MYR" , label: "MYR"},
     { value: "KRW" , label: "KRW"},
+    { value: "CNY" , label: "CNY"},
 ];
 const customStyles = {
     control: (base, state) => ({
@@ -274,7 +296,7 @@ class AwepayWidhrawForm extends Component {
     switch (name) {
       case "amount":
         formErrors.amount =
-        value < ((this.state.currency === "vnd") ? 30750 :  (this.state.currency === "thb") ? 512.5 : (this.state.currency === "idr") ? 205000 : (this.state.currency === "myr") ? 51.25 : (this.state.currency === "krw") ? 10300 : null ) ? "minimum withdraw not reached" : value > (this.state.balance - 50) ? "Minimum balance required is : 50$ " : "";
+        value < ((this.state.currency === "vnd") ? 30750 :  (this.state.currency === "thb") ? 512.5 : (this.state.currency === "idr") ? 205000 : (this.state.currency === "myr") ? 51.25 : (this.state.currency === "krw") ? 10300 : (this.state.currency === "cny") ? 2 : null ) ? "minimum withdraw not reached" : value > (this.state.balance - 50) ? "Minimum balance required is : 50$ " : "";
         break;
       // case "email":
       //   formErrors.email = emailRegex.test(value)
@@ -295,7 +317,7 @@ class AwepayWidhrawForm extends Component {
   render() {
     const { formErrors , selectedOption , selectedOption2 } = this.state;
 
-    if ((this.state.currency === "vnd")||(this.state.currency === "thb")||(this.state.currency === "idr")|| (this.state.currency === "myr") ||(this.state.currency === "krw")) {
+    if ((this.state.currency === "vnd")||(this.state.currency === "thb")||(this.state.currency === "idr")|| (this.state.currency === "myr") ||(this.state.currency === "krw") || (this.state.currency === "cny")) {
     // if (true) {
 
       
@@ -365,7 +387,7 @@ class AwepayWidhrawForm extends Component {
               <Select
                   value={selectedOption2}
                   onChange={this.handleSelectItemChange2}
-                  options={(this.state.currency === "vnd") ? VND :(this.state.currency === "thb") ? THB : (this.state.currency === "idr") ? IDR : (this.state.currency === "myr") ? MYR : (this.state.currency === "krw") ? KRW : null}
+                  options={(this.state.currency === "vnd") ? VND :(this.state.currency === "thb") ? THB : (this.state.currency === "idr") ? IDR : (this.state.currency === "myr") ? MYR : (this.state.currency === "krw") ? KRW : (this.state.currency === "cny") ? CNY : null}
                   styles={customStyles}
               />
               </div>
@@ -464,7 +486,7 @@ class AwepayWidhrawForm extends Component {
               <label 
               className="awepay_label"
               style={{fontSize: '15px', color:'#7045af'}}
-              > <span  style={{fontWeight: 'bold'}} >Fee({(this.state.currency === "krw") ? '3%' : '2.5%' }) : </span><span><Decimal fixed={2}>{ this.state.amount * ((this.state.currency === "krw") ? 0.03 : 0.025)}</Decimal></span></label>
+              > <span  style={{fontWeight: 'bold'}} >Fee({(this.state.currency === "krw") ? '3%' : (this.state.currency === "cny") ? '3.5%' : '2.5%' }) : </span><span><Decimal fixed={2}>{ this.state.amount * ((this.state.currency === "krw") ? 0.03 : (this.state.currency === "cny") ? 0.035 : 0.025)}</Decimal></span></label>
               <p style={{fontSize: '12px', color:'#7045af'}} >*Dear valued customer this fee is charged solely by the service provider.</p>
               </div>
             <div style={{ width: '100%' , display: 'flex' , flexDirection: 'column' , alignItems: 'center'}}>
@@ -504,7 +526,7 @@ class AwepayWidhrawForm extends Component {
          }}>
            <img  style={{  width: '220px' ,display:'flex' , margin: '50px auto'}} src={money} alt="Logo"/>
           <p style={{ textAlign: 'center' , width:'100%' , color: '#242253' , fontWeight:'300' , fontSize:'20px' , lineHeight:'0px' }}> Supported currencies are</p>
-          <p style={{ textAlign: 'center' , width:'100%' , color: '#242253' , fontWeight:'bold' , fontSize:'24px' , lineHeight:'0px' }}> VND, IDR , KRW , THB  and MYR. </p>
+          <p style={{ textAlign: 'center' , width:'100%' , color: '#242253' , fontWeight:'bold' , fontSize:'24px' , lineHeight:'0px' }}> VND, IDR , KRW , THB , MYR and CNY. </p>
         </div>
       );
 

@@ -12,7 +12,7 @@ const content = [
 		title:  <FormattedMessage id="page.landing.smallbanner1.title" />,
 		description:<FormattedMessage id='page.landing.smallbanner1.description' />,
 		button: <FormattedMessage id='page.landing.smallbanner1.button' />,
-        image: 'https://i.imgur.com/IyTp6mX.jpg',
+        image: 'https://i.imgur.com/Gw6AhNq.png',
 	},
 ];
 
@@ -30,7 +30,7 @@ class SmallBanner1 extends Component {
 		
 
         return (
-            <div className="wrapper">
+            <div className="wrapper" onClick={handleClick}>
                     
                     <Slider className="smallbanner-slider-wrapper" autoplay={4000} infinite={true}>
                         {content.map((item, index) => (
@@ -39,10 +39,11 @@ class SmallBanner1 extends Component {
                                 className="smallbanner-slider-content"
                                 style={{ background: `url('${item.image}') no-repeat center center` }}
                             >
-                                <div className="smallbanner-inner">
+                                <div className="smallbanner-inner" id="Leftbanner">
 									{/* {(item.image === "http://i.imgur.com/HUhlwqm.jpg" ) ? (<img style={{ height: '114px' , margin: 'auto' , }} src={spezalogo} alt="clock-Logo"/>) : null} */}
-                                    <h3>{item.title}</h3>
-                                    <p>{item.description}</p>
+                                    <p>Spread</p>
+                                    <p>Your Love for</p>
+                                    <h3>SVT</h3>
                                     <button onClick={handleClick}>{item.button}</button>
                                 </div>
                             </div>

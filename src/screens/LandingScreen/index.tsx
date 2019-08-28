@@ -84,13 +84,14 @@ class LandingComponent extends React.Component<RouterProps> {
                 </div>
             </div>
             <div className="row">
-                <div className="col-12" style={{height:'100%' , background:'#fff', marginLeft: 'auto' , marginRight: 'auto' , width: '100%'}}>
+                <div className="col-12" style={{height:'100%', marginLeft: 'auto' , marginRight: 'auto' , width: '100%'}}>
                     <div id="demo"/>
                 </div>
                 <div className="col-12" style={{height:'100%' , background:'#fff', marginLeft: 'auto' , marginRight: 'auto' , width: '100%'}}>
                     <div id="de1mo" style={{color: '#000'}}/>
                 </div>
             </div>
+            <div className="landpage-Banners">
             <div className="row">
                 <div className="col-12" style={{ background:'#141622'}}>
                 <div style={{margin: 'auto'}}>
@@ -249,6 +250,7 @@ class LandingComponent extends React.Component<RouterProps> {
                     <li style={{fontSize:'18px' , color:'#1E252F'}}>Apply to SPEZA</li>
                     </ul>
                     </div>
+            </div>
             </div>
             </div>
             </div>

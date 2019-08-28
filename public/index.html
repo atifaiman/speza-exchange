@@ -224,7 +224,7 @@
      
      var proxyURL = 'https://cors-anywhere.herokuapp.com';
      
-     request.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/tickers/', true)
+     request.open('GET', proxyURL + "/" +  'https://www.speza.exchange/api/v2/peatio/public/markets/tickers/', true)
      
      request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
      
@@ -315,69 +315,69 @@
          var pair = "";
          var show = "";
          var tableData = "";
-         tableData +="<div style=\" padding: 20px 0px; margin-left:-2px; \"><input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for Market..\"><table  id=\"myTable\" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:15px;\">Market</th><th>Buy</th><th>Sell</th><th>Low</th><th>High</th><th>Open</th><th>Last</th><th>Volume</th><th>Price Change</th><th>overview</th></tr></thead><tbody>";
+         tableData +="<div style=\" padding: 20px 0px; margin-left:-2px; \"><input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for Market..\"><table  id=\"myTable\" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:15px;\">Market</th><th>Buy</th><th>Sell</th><th class=\"chartMobile\" >Low</th><th class=\"chartMobile\" >High</th><th class=\"chartMobile\" >Open</th><th class=\"chartMobile\" >Last</th><th>Volume</th><th class=\"chartMobile\" >Price Change</th></tr></thead><tbody>";//<th>Graph</th>
          for (t=0 ; t < endResult.length; t++){
              
-             if (t === 0 ){
-                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px;\">MGT market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-             }
-             if (t === 143 ){
-                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px;\">BCH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-             }
-             if (t === 252 ){
-                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">BTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-             }
-             if (t === 340 ){
-                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">ETH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-             }
-             if (t === 439 ){
-                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px; \">LTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-             }
-             if (t === 549 ){
-                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">TUSD market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-             }
-             if (t === 572 ){
-                 tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">XRP market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-             }
+            //  if (t === 0 ){
+            //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px;\">MGT market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+            //  }
+            //  if (t === 143 ){
+            //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px;\">BCH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+            //  }
+            //  if (t === 252 ){
+            //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">BTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+            //  }
+            //  if (t === 340 ){
+            //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">ETH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+            //  }
+            //  if (t === 439 ){
+            //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px; \">LTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+            //  }
+            //  if (t === 549 ){
+            //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">TUSD market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+            //  }
+            //  if (t === 572 ){
+            //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">XRP market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
+            //  }
              if (t%11 === 0 ){
-                 tableData += "<tr onclick=\"window.open(\'https://www.speza.exchange/trading/" +endResult[t] + " \');\">";
-                 tableData += "<td style=\" color: #AAB4C1;  text-transform: uppercase; padding-left:15px; \" >";
+                 tableData += "<tr class=\"marketrow\"  onclick=\"window.open(\'https://www.speza.exchange/trading/" +endResult[t] + " \');\">";
+                 tableData += "<td class=\"marketpais\" >";
                  tableData += endResult[t] + "</td>"
                  pair = endResult[t];
              } 
              else if (t%11 === 1 ){
               tableData += "<td  style=\" color: #4DD77C;\">";
-              tableData += Number(endResult[t]) + "</td>"
+              tableData += endResult[t] + "</td>"
              } 
              else if (t%11 === 2 ){
               
               tableData += "<td style=\" color: #FF1479;\">";
-              tableData += Number(endResult[t]) + "</td>"
+              tableData += endResult[t] + "</td>"
              }  
              else if (t%11 === 3 ){
               
-              tableData += "<td>";
-              tableData += Number(endResult[t]) + "</td>"
+              tableData += "<td class=\"chartMobile\" >";
+              tableData += endResult[t] + "</td>"
              } 
              else if (t%11 === 4 ){
               
-              tableData += "<td>";
-               tableData += Number(endResult[t]) + "</td>"
+              tableData += "<td class=\"chartMobile\" >";
+               tableData +=  endResult[t] + "</td>"
              }  
              else if (t%11 === 5 ){
               
-              tableData += "<td>";
-               tableData += Number(endResult[t]) + "</td>"
+              tableData += "<td class=\"chartMobile\" >";
+               tableData += endResult[t] + "</td>"
              }  
              else if (t%11 === 6 ){
               
-              tableData += "<td>";
-              tableData += Number(endResult[t]) + "</td>"
+              tableData += "<td class=\"chartMobile\" >";
+              tableData += endResult[t] + "</td>"
              }
              else if (t%11 === 7 ){
               
               tableData += "<td>";
-               tableData += Number(endResult[t]) + "</td>"
+               tableData += endResult[t] + "</td>"
              }  
              if (t%11 === 8 ){
               
@@ -390,12 +390,14 @@
               var sign =  data[0];
 
               if( sign[0] === "+" ){
-                 tableData += "<td style=\" color:#4DD77C;\">";
+                 tableData += "<td class=\"chartMobile\" style=\" color:#4DD77C;\">";
               } else{
-                 tableData += "<td style=\" color: #FF1479;\">";
+                 tableData += "<td class=\"chartMobile\" style=\" color: #FF1479;\">";
               }
               
-              tableData += endResult[t] +"</td><td><canvas id="+ "\"" + pair + "\"" + "width=\"150\" height=\"80\"></canvas></td>"
+              tableData += endResult[t] +"</td>"
+              //<td><canvas id="+ "\"" + pair + "\"" + "width=\"150\" height=\"80\"></canvas></td>
+              //add above to table data text to have the chart column list
               
               tableData += "</tr>";
               
@@ -415,11 +417,9 @@
         // document.getElementById("de1mo").innerHTML = xrpbtcdata + "<br/>" + mgtthbdata + "<br/>" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtthb/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds ;
 
        } else {
-     
+         location.reload(true);
          const errorMessage = document.getElementById("demo")
-     
          errorMessage.innerHTML = `Gah, it's not working!`
-     
          app.appendChild(errorMessage)
      
        }
@@ -593,8 +593,9 @@
           datasets: [{ 
               data: xrpbtcdata,
               label: "Africa",
-              borderColor: "#3e95cd",
-              fill: true
+              borderColor: "#7045AF",
+              fill: true,
+              fillColor : "rgba(220,220,220,0.5)",
             },
           ]
         },

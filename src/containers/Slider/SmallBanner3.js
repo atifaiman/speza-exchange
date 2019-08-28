@@ -39,10 +39,10 @@ class SmallBanner3 extends Component {
                                 className="smallbanner-slider-content"
                                 style={{ background: `url('${item.image}') no-repeat center center` }}
                             >
-                                <div className="smallbanner-inner">
-									{/* {(item.image === "http://i.imgur.com/HUhlwqm.jpg" ) ? (<img style={{ height: '114px' , margin: 'auto' , }} src={spezalogo} alt="clock-Logo"/>) : null} */}
-                                    <h3>{item.title}</h3>
-                                    <p>{item.description}</p>
+                                <div className="smallbanner-inner" id="Rightbanner" >
+                                    {/* {(item.image === "http://i.imgur.com/HUhlwqm.jpg" ) ? (<img style={{ height: '114px' , margin: 'auto' , }} src={spezalogo} alt="clock-Logo"/>) : null} */}
+                                    <p>Launch Your Own</p>
+                                    <h3>Digital Asset Token Offering</h3>
                                     <button onClick={handleClick}>{item.button}</button>
                                 </div>
                             </div>

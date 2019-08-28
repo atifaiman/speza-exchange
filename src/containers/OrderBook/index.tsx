@@ -140,10 +140,10 @@ class OrderBookContainer extends React.Component<Props, State> {
     private renderOrderBook = (array: string[][], side: string, message: string, currentMarket?: Market) => {
         let total = accumulateVolume(array);
         const isLarge = this.state.width > breakpoint;
-        // const priceFixed = currentMarket ? currentMarket.bid_precision : 0;
-        // const amountFixed = currentMarket ? currentMarket.ask_precision : 0;
-        const priceFixed = 5;
-        const amountFixed = 5;
+        const priceFixed = currentMarket ? currentMarket.bid_precision : 0;
+        const amountFixed = currentMarket ? currentMarket.ask_precision : 0;
+        // const priceFixed = 5;
+        // const amountFixed = 5;
         return (array.length > 0) ? array.map((item, i) => {
             const [price, volume] = item;
             switch (side) {

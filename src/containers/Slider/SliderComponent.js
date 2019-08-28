@@ -12,25 +12,37 @@ const content = [
 		title: <FormattedMessage id="page.landing.slider.title" />,
 		description: <FormattedMessage id='page.landing.slider.description' />,
 		button: <FormattedMessage id="page.header.navbar.signIn" />,
-		image: 'https://i.imgur.com/Qds1jAs.jpg',
+		image: 'https://i.imgur.com/4sJuogv.jpg',
 	},
 	{
 		title:  <FormattedMessage id="page.landing.slider.title" />,
 		description: <FormattedMessage id='page.landing.slider.description' />,
 		button: <FormattedMessage id='page.header.navbar.signIn' />,
-		image: 'https://i.imgur.com/yY52aOD.jpg',
+		image: 'https://i.imgur.com/2GLC9X9.jpg',
 	},
 	{
 		title: <FormattedMessage id="page.landing.slider.title" />,
 		description:<FormattedMessage id="page.landing.slider.description" />,
 		button:<FormattedMessage id="page.header.navbar.signIn" />,
-		image: 'http://i.imgur.com/LI0PPFe.jpg',
+		image: 'https://i.imgur.com/odooe9c.jpg',
+	},
+	{
+		title: <FormattedMessage id="page.landing.slider.title" />,
+		description: <FormattedMessage id='page.landing.slider.description' />,
+		button: <FormattedMessage id="page.header.navbar.signIn" />,
+		image: 'https://i.imgur.com/4sJuogv.jpg',
 	},
 	{
 		title:  <FormattedMessage id="page.landing.slider.title" />,
-		description:<FormattedMessage id='page.landing.slider.description' />,
+		description: <FormattedMessage id='page.landing.slider.description' />,
 		button: <FormattedMessage id='page.header.navbar.signIn' />,
-		image: 'https://i.imgur.com/Qds1jAs.jpg',
+		image: 'https://i.imgur.com/2GLC9X9.jpg',
+	},
+	{
+		title: <FormattedMessage id="page.landing.slider.title" />,
+		description:<FormattedMessage id="page.landing.slider.description" />,
+		button:<FormattedMessage id="page.header.navbar.signIn" />,
+		image: 'https://i.imgur.com/odooe9c.jpg',
 	},
 ];
 
@@ -58,10 +70,37 @@ class SliderComponent extends Component {
                                 style={{ background: `url('${item.image}') no-repeat center center` }}
                             >
                                 <div className="inner">
-									{(item.image === "https://i.imgur.com/Qds1jAs.jpg" ) ? (<img style={{ margin: 'auto' , }} className="bannerimg" src={spezalogo} alt="clock-Logo"/>) : null}
-                                    <h3>{item.title}</h3>
-                                    <p>{item.description}</p>
-                                    {/* {(item.image === "http://i.imgur.com/HUhlwqm.jpg" ) ? (<button onClick={handleClick}><img style={{float: 'left', height: '13px' , margin: 'auto' , paddingLeft: '15px',paddingTop: '2px' }} src={arrow} alt="clock-Logo"/><span style={{fontSize: '17px' , marginLeft: '-15px'}}>{item.button}</span></button>) : null} */}
+									 <div className={(item.image === "https://i.imgur.com/4sJuogv.jpg") ? 'SliderInvite' : (item.image === "https://i.imgur.com/2GLC9X9.jpg") ? 'SliderSino' : (item.image === "https://i.imgur.com/odooe9c.jpg") ? 'SliderSummit' : 'kk'} >
+										{/* {(item.image === "https://i.imgur.com/Qds1jAs.jpg" ) ? (<img style={{ margin: 'auto' , }} className="bannerimg" src={spezalogo} alt="clock-Logo"/>) : null}
+                                    		<h3>{item.title}</h3>
+											<p>{item.description}</p> */}
+											<div id="SliderSinoContent">
+												<h3>SINO-PHIL ECONOMIC ZONE</h3>
+												<p>DAX MANAGEMENT</p>	
+											</div>
+											<div id="SliderInviteContentLeft">
+													<h3>Invite your friends</h3>
+													<p>to register an account with</p>
+													<p>Speza Exchange </p>	
+											</div>
+											<div id="SliderInviteContentRight">
+												<p>and both of you</p>
+												<p>will receive up to</p>
+												<h3>15 MGT for free</h3>
+											</div>
+											<div id="SliderSummitContentLeft">
+												<p>Offshore Exchange</p>
+												<p>License Issuer SPEZA</p>
+												<p>leading the panel on</p>
+											</div>
+											<div id="SliderSummitContentRight">
+												<h3>World Blockchain</h3>
+												<h3>Summit in Malaysia</h3>
+											</div>
+											
+											
+
+                                    </div>
                                 </div>
                             </div>
                         ))}

@@ -63,7 +63,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
             <p className="cr-deposit-fiat__title">{title}</p>
             <p className="cr-deposit-fiat__description">{description}</p>
             {/* <div className="cr-deposit-fiat-credentials">{bankData.map(renderDetails)}</div> */}
-            {((currency === 'myr') || (currency === 'krw') || (currency === 'vnd') || (currency === 'idr') || (currency === 'thb')) ? <Awepay currency={currency} email={email} userid={userid}/> : null}
+            {((currency === 'myr') || (currency === 'krw') || (currency === 'vnd') || (currency === 'idr') || (currency === 'thb') || (currency === 'cny')) ? <Awepay currency={currency} email={email} userid={userid}/> : null}
             {(currency === 'usd') ? <Epay userid={userid} currency={currency}/> : null}
             <br/>
             {(currency === 'usd') ? <BankDepositeinfo currency={currency}/> : null}

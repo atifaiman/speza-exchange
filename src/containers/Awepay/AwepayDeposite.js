@@ -142,7 +142,7 @@ class AwepayDeposite extends Component {
       //   break;
       case "amount":
         formErrors.amount =
-        value < ((this.state.currency === "vnd") ? 103500 :  (this.state.currency === "thb") ? 517.5 : (this.state.currency === "idr") ? 207000 : (this.state.currency === "myr") ? 51.75 : (this.state.currency === "krw") ? 10400 : null ) ? "Minimum amount not reached" : value >  ((this.state.currency === "vnd") ? 300000000 :  (this.state.currency === "thb") ? 500000 : (this.state.currency === "idr") ? 200000000 : (this.state.currency === "myr") ? 50000 : (this.state.currency === "krw") ? 30000000 : null )? "Maximum amount exceeded " : "";
+        value < ((this.state.currency === "vnd") ? 103500 :  (this.state.currency === "thb") ? 517.5 : (this.state.currency === "idr") ? 207000 : (this.state.currency === "myr") ? 51.75 : (this.state.currency === "krw") ? 10400 : (this.state.currency === "cny") ? 2 : null ) ? "Minimum amount not reached" : value >  ((this.state.currency === "vnd") ? 300000000 :  (this.state.currency === "thb") ? 500000 : (this.state.currency === "idr") ? 200000000 : (this.state.currency === "myr") ? 50000 : (this.state.currency === "krw") ? 30000000 : (this.state.currency === "cny") ? 50000 : null )? "Maximum amount exceeded " : "";
         break;
       default:
         break;
@@ -154,7 +154,7 @@ class AwepayDeposite extends Component {
 
   render() {
 
-    if (this.state.currency ===  "vnd" || this.state.currency === "idr" || this.state.currency === "krw" || this.state.currency ==="thb" || this.state.currency ==="myr" ) {
+    if (this.state.currency ===  "vnd" || this.state.currency === "idr" || this.state.currency === "krw" || this.state.currency ==="thb" || this.state.currency ==="myr" || this.state.currency ==="cny" ) {
       // if (true) {
 
       const { formErrors } = this.state;
@@ -208,7 +208,7 @@ class AwepayDeposite extends Component {
               <label 
               className="awepay_label"
               style={{fontSize: '15px', color:'#7045af'}}
-              > <span  style={{fontWeight: 'bold'}} >Fee ({(this.state.currency === "krw") ? '4%' : '3.5%' }) : </span><span><Decimal fixed={2}>{ this.state.amount * ((this.state.currency === "krw") ? 0.04 : 0.035)}</Decimal></span></label>
+              > <span  style={{fontWeight: 'bold'}} >Fee ({(this.state.currency === "krw") ? '4%' : (this.state.currency === "cny") ? '4.5%' : '3.5%' }) : </span><span><Decimal fixed={2}>{ this.state.amount * ((this.state.currency === "krw") ? 0.04 : (this.state.currency === "cny") ? 0.045 : 0.035)}</Decimal></span></label>
               <p style={{fontSize: '12px', color:'#7045af'}} >*Dear valued customer this fee is charged solely by the service provider. our company does not charge you for performing this transaction</p>
               </div>
             <div style={{ width: '100%' , display: 'flex' , flexDirection: 'column' , alignItems: 'center'}}>
@@ -248,7 +248,7 @@ class AwepayDeposite extends Component {
         <div className="awepay_depsit_confirmation ">
            <img  style={{  width: '220px' ,display:'flex' , margin: '50px auto'}} src={money} alt="Logo"/>
           <p style={{ textAlign: 'center' , width:'100%' , color: '#242253' , fontWeight:'300' , fontSize:'20px' , lineHeight:'0px' }}> Supported currencies are</p>
-          <p style={{ textAlign: 'center' , width:'100%' , color: '#242253' , fontWeight:'bold' , fontSize:'24px' , lineHeight:'0px' }}> VND, IDR, KRW, THB and MYR.</p>
+          <p style={{ textAlign: 'center' , width:'100%' , color: '#242253' , fontWeight:'bold' , fontSize:'24px' , lineHeight:'0px' }}> VND, IDR, KRW, THB , MYR and CNY.</p>
         </div>
 
       );

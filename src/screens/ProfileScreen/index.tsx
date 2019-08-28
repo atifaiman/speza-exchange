@@ -25,16 +25,17 @@ class ProfileComponent extends React.Component<RouterProps> {
                 <div className="pg-profile-page__details">
                     <div className="row pg-profile-page-header pg-profile-page-header-first">
                         <div className="row" style={{display:'block' , width:'100%'}}>
-                            <h3 className="col-12" >
+                            <div className="cr-tab-panel">
+                            <div className="cr-tab-panel__navigation-container draggable-container" style={{ justifyContent:'center'}}>
                                 <ul className="nav nav-tabs">
                                     <li className="active">
                                         <a  data-toggle="tab" href="#ProfileInfo">Profile</a>
                                     </li>
                                     <li >
-                                        <a data-toggle="tab" href="#IdentiyVer">Identiy Verification</a>
+                                        <a data-toggle="tab" href="#IdentiyVer">Identity Verification</a>
                                     </li>
                                 </ul>
-                            </h3>
+                            </div>
                             <div className="tab-content" >
                                 <div  id="ProfileInfo"  className="tab-pane fade in active" >
                                                 <ProfileAuthDetails/>
@@ -42,6 +43,7 @@ class ProfileComponent extends React.Component<RouterProps> {
                                 <div id="IdentiyVer" className="tab-pane fade">
                                                 <ProfileVerification/>
                                 </div>
+                            </div>
                             </div>
                         </div>
 
@@ -55,16 +57,17 @@ class ProfileComponent extends React.Component<RouterProps> {
                 <div className="pg-profile-page__details">
                     <div className="row pg-profile-page-header pg-profile-page-header-first">
                 <div className="row" style={{display:'block' , width:'100%'}}>
-                    <h3 className="col-12" >
-                        <ul className="nav nav-tabs">
-                            <li className="active">
-                                <a data-toggle="tab" href="#AccountActivity">Account Activity</a>
-                            </li>
-                            <li>
-                                <a data-toggle="tab" href="#APIkeys">API keys</a>
-                            </li>
-                        </ul>
-                    </h3>
+                <div className="cr-tab-panel">
+                            <div className="cr-tab-panel__navigation-container draggable-container" style={{ justifyContent:'center'}}>
+                            <ul className="nav nav-tabs">
+                                <li className="active">
+                                    <a data-toggle="tab" href="#AccountActivity">Account Activity</a>
+                                </li>
+                                <li>
+                                    <a data-toggle="tab" href="#APIkeys">API keys</a>
+                                </li>
+                            </ul>
+                    </div></div>
                     <div className="tab-content" >
                         <div id="AccountActivity" className="tab-pane fade">
                                 <ProfileAccountActivity/>
