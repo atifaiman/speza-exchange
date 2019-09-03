@@ -98,9 +98,9 @@ class LandingComponent extends React.Component<RouterProps> {
                 <div className="row" style={{ color: '#fff'}}>
                     <div className="col-xl-4 col-md-12 col-l-4 col-sm-12"  style={{height:'300px',margin: 'auto' }}>
                     <div className="row">
-                        <div  style={{ margin: 'auto', padding:'40px', display:'flex' , flexFlow:'column' , paddingTop:'40px', paddingBottom:'40px'}}>
-                        <h3 style={{fontSize:'48px',textAlign: 'center'}}><FormattedMessage id="page.landing.paneldark.col1.title"/></h3>
-                        <p style={{fontSize:'14px', maxWidth:'400px',textAlign: 'center'}}><FormattedMessage id="page.landing.paneldark.col1.description"/></p>
+                        <div  style={{ padding:'40px', display:'flex' , flexFlow:'column' , paddingBottom:'40px'}} className="stayConnected">
+                        <h3 style={{fontSize:'48px', paddingTop: '15%' , margin: '0' , textAlign: 'left'}}><FormattedMessage id="page.landing.paneldark.col1.title"/></h3>
+                        <p  style={{fontSize:'14px', maxWidth:'400px'}}><FormattedMessage id="page.landing.paneldark.col1.description"/></p>
                         </div>
                     </div>
                     </div>

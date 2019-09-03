@@ -335,7 +335,7 @@ export const en = {
 
     'page.footer.legalDocuments': 'Legal documents',
     'page.footer.faq': 'FAQ',
-
+    'page.footer.terms': '<a  style="text-decoration: none;" href="https://speza.zendesk.com/hc/en-us/articles/360032045111-Privacy-Policy">Terms & Privacy</a>',
     'page.header.signIn': 'Sign In',
     'page.header.signIn.email': 'Email',
     'page.header.signIn.password': 'Password',

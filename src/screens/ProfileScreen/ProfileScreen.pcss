@@ -27,8 +27,11 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
     &__name {
-      font-size: calc(var(--gap) * 1.75);
+      font-size: 16px;
       margin: 0;
+      @media( max-width: 768px) {
+        font-size: calc(var(--gap) * 1.75);
+      }
     }
 
     &__url {
@@ -62,10 +65,13 @@
     &-user {
       p {
         word-break: break-all;
-        font-size: calc(var(--gap) * 1.75);
+        font-size: 16px;
         font-weight: var(--font-weight);
         line-height: calc(var(--big-gap) * 0.66);
         margin: 0;
+        @media( max-width: 768px) {
+          font-size: calc(var(--gap) * 1.75);
+        }
       }
     }
 
@@ -84,6 +90,12 @@
     border-radius: calc(var(--gap) * 0.66) calc(var(--gap) * 0.66) 0 0;
     margin-right: 0;
     margin-left: 0;
+    h3 {
+      font-size: 14px;
+      @media( max-width: 768px) {
+        font-size: cal( var(--gap) * 1.5 );
+      }
+    }
   }
 
   &__switch {
@@ -173,7 +185,7 @@
 
   &__label {
     padding-top: calc(var(--gap) * 2);
-    font-size: calc(var(--gap) * 1.5);
+    font-size: 14px;
     color: var(--profile-grey);
     padding-bottom: var(--gap);
 
@@ -193,6 +205,9 @@
         font-size: var(--font-size);
         color: var(--color-red);
       }
+    }
+    @media (max-width: 768px) {
+      font-size: calc(var(--gap) * 1.5);
     }
   }
 
@@ -434,7 +449,11 @@
       width: 100%;
 
       h3 {
+        font-size: 14px;
         float: left;
+        @media (max-width: 768px) {
+          font-size: cal(var(--gap) * 1.5)
+        }
       }
 
       span {
@@ -622,6 +641,10 @@
 
   &__pull-right {
     float: right;
+    font-size: 14px;
+    @media (max-width: 768px) {
+      font-size: cal( var(--gap) * 1.5 );
+    }
   }
 
   &__text-center {

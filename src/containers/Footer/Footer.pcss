@@ -1,12 +1,15 @@
 .pg-footer {
+  textAlign: center;
+  fontSize: 12px;
   display: flex;
   background: var(--main-bg);
   height: 32px;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 0 7px;
 
   span {
+    text-align: center;
     font-style: normal;
     font-weight: bold;
     font-size: 10px;
@@ -26,6 +29,9 @@
     text-decoration-line: underline;
     color: var(--color-white);
     margin-bottom: 3px;
+    @media screen and (max-width: 768px) {
+      font-size: 11px;
+    }
   }
 
   b {
@@ -35,6 +41,14 @@
 
 @media screen and (max-width: 768px) {
   .pg-footer {
-    display: none;
+    font-size: 10px;
+    display: flex;
+    margin-bottom: 100px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .pg-footer {
+    margin-bottom: 70px;
   }
 }

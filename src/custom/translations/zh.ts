@@ -238,8 +238,8 @@ export const zh: LangType = {
     'page.body.profile.header.referralProgram': '推荐链接',
     'page.body.profile.content.copyLink': '复制链接',
 
-    'page.body.profile.apiKeys.header': 'My API Keys',
-    'page.body.profile.apiKeys.header.create': 'Create new',
+    'page.body.profile.apiKeys.header': 'API 密钥',
+    'page.body.profile.apiKeys.header.create': '创建新的',
 
     'page.body.profile.apiKeys.noOtp': 'Please enable Two-factor authentication',
     'page.body.profile.apiKeys.show': 'Show',
@@ -437,6 +437,7 @@ export const zh: LangType = {
     'identity.session.invalid_params': '无效的电子邮址或密码',
     'identity.session.missing_otp': '该帐户已启用双因素认证(2FA)但缺少OTP代码',
     'identity.session.invalid_otp': 'OTP代码无效',
+    'page.footer.terms': '<a href="https://speza.zendesk.com/hc/en-us/articles/360032045111-Privacy-Policy">Terms & Privacy</a>',
 
     'first_name.invalid': '名字无效',
     'last_name.invalid': '姓氏无效',

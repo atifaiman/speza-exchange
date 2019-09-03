@@ -2,22 +2,22 @@ import { LayoutGrid } from '../components/Grid';
 import { customLayouts } from '../custom/helpers/layout';
 
 export const layouts = {
-    // lg: [
-    //     { x: 16, y: 18, w: 8, h: 23, i: '1', minH: 23, maxH: 23, minW: 4 },
-    //     { x: 0, y: 0, w: 16, h: 39, i: '2', minH: 12, minW: 5 },
-    //     { x: 16, y: 0, w: 4, h: 28, i: '3', minH: 20, minW: 4 },
-    //     { x: 16, y: 38, w: 4, h: 13, i: '4', minH: 12, minW: 5 },
-    //     { x: 0, y: 40, w: 16, h: 23, i: '5', minH: 8, minW: 5 },
-    //     { x: 26, y: 11, w: 4, h: 28, i: '6', minH: 8, minW: 4 },
-    // ],
   lg: [
-      { x: 16, y: 18, w: 8, h: 23, i: '1', minH: 23, maxH: 23, minW: 4 },
-      { x: 0, y: 0, w: 16, h: 39, i: '2', minH: 12, minW: 5 },
-      { x: 16, y: 0, w: 8, h: 14, i: '3', minH: 20, minW: 4 },
-      { x: 16, y: 38, w: 4, h: 13, i: '4', minH: 12, minW: 5 },
-      { x: 0, y: 40, w: 16, h: 23, i: '5', minH: 8, minW: 5 },
-      { x: 16, y: 11, w: 8, h: 14, i: '6', minH: 8, minW: 4 },
+        { x: 16, y: 18, w: 8, h: 23, i: '1', minH: 23, maxH: 23, minW: 4 },
+        { x: 0, y: 0, w: 16, h: 39, i: '2', minH: 12, minW: 5 },
+        { x: 16, y: 0, w: 4, h: 23, i: '3', minH: 14, minW: 4 },
+        { x: 16, y: 38, w: 4, h: 13, i: '4', minH: 12, minW: 4 },
+        { x: 0, y: 40, w: 16, h: 23, i: '5', minH: 8, minW: 5 },
+        { x: 26, y: 11, w: 4, h: 28, i: '6', minH: 8, minW: 4 },
   ],
+//   lg: [
+//         { x: 14, y: 18, w: 6, h: 25, i: '1', minH: 23, maxH: 23, minW: 4 },
+//         { x: 0, y: 0, w: 14, h: 39, i: '2', minH: 12, minW: 5 },
+//         { x: 16, y: 0, w: 10, h: 17, i: '3', minH: 12, minW: 5 },
+//         { x: 26, y: 38, w: 4, h: 20, i: '4', minH: 12, minW: 5 },
+//         { x: 0, y: 40, w: 14, h: 23, i: '5', minH: 8, minW: 5 },
+//         { x: 22, y: 11, w: 10, h: 13, i: '6', minH: 8, minW: 4 },
+//   ],
   md: [
       { x: 14, y: 30, w: 10, h: 23, i: '1', minH: 23, maxH: 23, minW: 4 },
       { x: 0, y: 0, w: 18, h: 30, i: '2', minH: 12, minW: 5 },
@@ -66,3 +66,23 @@ export const resetLayout = (key: string): void => {
         );
     }
 };
+/*
+
+
+    lg: [
+        { x: 16, y: 18, w: 8, h: 23, i: '1', minH: 23, maxH: 23, minW: 4 },
+        { x: 0, y: 0, w: 16, h: 39, i: '2', minH: 12, minW: 5 },
+        { x: 16, y: 0, w: 4, h: 23, i: '3', minH: 14, minW: 4 },
+        { x: 16, y: 38, w: 4, h: 13, i: '4', minH: 12, minW: 5 },
+        { x: 0, y: 40, w: 16, h: 23, i: '5', minH: 8, minW: 5 },
+        { x: 26, y: 11, w: 4, h: 28, i: '6', minH: 8, minW: 4 },
+  ],
+  lg: [
+        { x: 14, y: 18, w: 6, h: 25, i: '1', minH: 23, maxH: 23, minW: 4 },
+        { x: 0, y: 0, w: 14, h: 39, i: '2', minH: 12, minW: 5 },
+        { x: 16, y: 0, w: 10, h: 17, i: '3', minH: 12, minW: 5 },
+        { x: 26, y: 38, w: 4, h: 20, i: '4', minH: 12, minW: 5 },
+        { x: 0, y: 40, w: 14, h: 23, i: '5', minH: 8, minW: 5 },
+        { x: 22, y: 11, w: 10, h: 13, i: '6', minH: 8, minW: 4 },
+  ],
+*/

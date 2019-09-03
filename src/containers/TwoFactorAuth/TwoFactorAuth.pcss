@@ -803,15 +803,23 @@ legend {
 }
 
 .headOne {
-  font-size: var(--font-size-bigger);
+   font-size: 16px;
+   
+     @media screen and (max-width: 540px)  {
+     font-size: var(--font-size-bigger);
    p {
+    
     font-size: cal( var(--gap) * 1.75 );
     span {
       font-size: cal( var(--gap) * 1.75 );
     }
+  
+     }
   }
 }
 .headTwo {
+    font-size: 14px;
+    @media screen and (max-width: 540px)  {
   p {
     font-size: cal( var(--gap) * 1.75 );
     span {
@@ -820,7 +828,10 @@ legend {
   }
   font-size: cal( var(--gap) * 1.75 );
 }
+}
 .headThree{
+   font-size: 12px;
+   @media screen and (max-width: 540px)  {
   font-size: cal( var(--gap) * 1.5 );
    p {
     font-size: cal( var(--gap) * 1.75 );
@@ -829,6 +840,8 @@ legend {
     }
   }
 }
+}
+
 
 .nav-tabs {
     border-bottom: none;
@@ -1739,5 +1752,17 @@ a:hover {
 .marketrow {
   &:hover {
     background: var(--button-hover);
+  }
+}
+.nav-tabs {
+  @media(max-width: 720px) {
+     font-size: 14px;
+  }
+}
+
+.stayConnected {
+   margin: auto  0;
+  @media(max-width: 1200px) {
+    margin: auto;
   }
 }

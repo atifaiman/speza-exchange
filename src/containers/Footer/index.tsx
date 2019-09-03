@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormattedHTMLMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 
 class FooterComponent extends React.Component {
@@ -15,6 +16,7 @@ class FooterComponent extends React.Component {
             <React.Fragment>
                 <footer className="pg-footer">
                     {startDate && <span>EXPIRE IN <b>{Math.ceil((startDate - today) / (3600 * 1000 * 24))} days</b></span>}
+                    <span> 2019 SINOPHIL ECONOMIC ZONE DAX MANAGEMENT SDN BHD. All Rights Reserved.  <FormattedHTMLMessage id="page.footer.terms" /> </span>
                 </footer>
             </React.Fragment>
         );

@@ -339,6 +339,7 @@ export const ru: LangType = {
 
     'page.footer.legalDocuments': 'Документы',
     'page.footer.faq': 'Помощь',
+    'page.footer.terms': '<a href="https://speza.zendesk.com/hc/en-us/articles/360032045111-Privacy-Policy">Terms & Privacy</a>',
 
     'page.header.signIn': 'Войти',
     'page.header.signIn.email': 'Почта',

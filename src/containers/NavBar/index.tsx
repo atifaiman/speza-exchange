@@ -77,6 +77,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             if (onLinkChange) {
                 onLinkChange();
             }
+            if (name === 'page.header.navbar.Landing') {
+                window.location.reload();
+            }
         };
         const path = url.includes('/trading') && currentMarket ? `/trading/${currentMarket.id}` : url;
         return (
@@ -121,18 +124,24 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         {isOpenLanguage ? this.getLanguageMenu() : null}
                     </div>
                     <div className="topNavbarMobile">
+                            <a href="https://speza.zendesk.com/hc/en-us" target="_blank">
                             <div className="topNavbarMobileContact">
                                 <div><img className="topNavimg" src={require('./top_navbar_contact.png')}/></div>
                                 <div><p style={{fontSize:'10px'}}><FormattedMessage id={'page.header.navbar.Contact'} /></p></div>
                             </div>
+                            </a>
+                            <a href="https://speza.zendesk.com/hc/en-us" target="_blank">
                             <div className="topNavbarMobileNewsLetter">
                                 <div><img className="topNavimg" src={require('./top_navbar_newsletter.png')}/></div>
                                 <div><p style={{fontSize:'10px'}}><FormattedMessage id={'page.header.navbar.newsletter'} /></p></div>
                             </div>
+                            </a>
+                            <a href="https://speza.zendesk.com/hc/en-us/articles/360032604332-Referral-Bonus-Program" target="_blank">
                             <div className="topNavbarMobileReferralRewads">
                                 <div><img className="topNavimg" src={require('./top_navbar_referral rewards.png')}/></div>
                                 <div><p style={{fontSize:'10px'}}><FormattedMessage id={'page.header.navbar.ReferralRewads'} /></p></div>
                             </div>
+                            </a>
                     </div>
                 </div>
                 <div className="pg-navbar__header-language" onClick={this.toggleLanguageMenu}>
