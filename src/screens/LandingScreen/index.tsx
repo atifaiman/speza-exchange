@@ -1,7 +1,9 @@
 import * as React from 'react';
+import Iframe from 'react-iframe';
 import { FormattedHTMLMessage ,FormattedMessage  } from 'react-intl';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+// import QuickBuy from '../../containers/QuickBuy/QuickBuy';
 import SliderComponent from '../../containers/Slider/SliderComponent';
 import SmallBanner1 from '../../containers/Slider/SmallBanner1';
 import SmallBanner2 from '../../containers/Slider/SmallBanner2';
@@ -106,17 +108,9 @@ class LandingComponent extends React.Component<RouterProps> {
                     </div>
                     <div className="col-xl-5 col-md-12 col-l-5 col-sm-12"  style={{margin:'auto'}}>
                     <div className="row">
-                        <form style={{display:'flex', margin:'auto'}} className="stayconnected">
-                            <label style={{fontSize:'14px', padding:'10px'}} >
-                                <FormattedMessage id="page.landing.paneldark.col2.name"/><br/>
-                                <input type="text" name="name" style={{padding:'15px', height:'40px' , marginTop:'5px'}} className="stayconnectedInput"/>
-                            </label>
-                            <label style={{fontSize:'14px', padding:'10px'}}>
-                                <FormattedMessage id="page.landing.paneldark.col2.email"/><br/>
-                                <input type="email" name="email" style={{padding:'15px', height:'40px' , marginTop:'5px'}} className="stayconnectedInput"/>
-                            </label>
-        <input type="submit" value="submit" style={{background: 'linear-gradient(270deg, #513A92 0%, #892D78 100%)' , height:'44px' , fontSize:'14px' , color:'#fff', padding:'10px' , marginTop:'30px' , marginLeft:'10px' , border: 'none'}} className="stayconnectedInput" />
-                        </form>
+                    <div className="grpelem shared_content" id="u192093" data-content-guid="u192093_content"  style={{margin: 'auto'}}>
+                        <Iframe id="JotFormIFrame-91061490714453"  url="https://form.jotform.me/91061490714453"  scrolling="no" className="StayConnectedForm"/>
+                    </div>
                     </div>
                     </div>
                     <div className="col-xl-3 col-md-12 col-l-3 col-sm-12" style={{margin:'auto'}}>
@@ -266,3 +260,22 @@ const LandingScreen = withRouter(LandingComponent as any);
 export {
     LandingScreen,
 };
+/*
+line 87 , Quickbuy Component
+<div className="row">
+    <div className="col-12" style={{height:'580px', marginLeft: 'auto' , marginRight: 'auto' , width: '100%' }}>
+        <QuickBuy/>
+    </div>
+</div>
+<form style={{display:'flex', margin:'auto'}} className="stayconnected">
+    <label style={{fontSize:'14px', padding:'10px'}} >
+        <FormattedMessage id="page.landing.paneldark.col2.name"/><br/>
+        <input type="text" name="name" style={{padding:'15px', height:'40px' , marginTop:'5px'}} className="stayconnectedInput"/>
+    </label>
+    <label style={{fontSize:'14px', padding:'10px'}}>
+        <FormattedMessage id="page.landing.paneldark.col2.email"/><br/>
+        <input type="email" name="email" style={{padding:'15px', height:'40px' , marginTop:'5px'}} className="stayconnectedInput"/>
+    </label>
+    <input type="submit" value="submit" style={{background: 'linear-gradient(270deg, #513A92 0%, #892D78 100%)' , height:'44px' , fontSize:'14px' , color:'#fff', padding:'10px' , marginTop:'30px' , marginLeft:'10px' , border: 'none'}} className="stayconnectedInput" />
+</form>
+*/
