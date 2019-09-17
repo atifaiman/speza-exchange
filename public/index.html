@@ -6,6 +6,9 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="theme-color" content="#000000">
     <meta name="ui-version" content="%REACT_APP_GIT_SHA%"/>
+    <meta http-equiv=“Pragma” content=”no-cache”>
+    <meta http-equiv=“Expires” content=”-1″>
+    <meta http-equiv=“CACHE-CONTROL” content=”NO-CACHE”>
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -50,7 +53,7 @@
        var ifr = document.getElementById("JotFormIFrame-91061490714453"); if(window.location.href && window.location.href.indexOf("?") > -1) { var get = window.location.href.substr(window.location.href.indexOf("?") + 1); if(ifr && get.length > 0) { var src = ifr.src; src = src.indexOf("?") > -1 ? src + "&" + get : src + "?" + get; ifr.src = src; } } window.handleIFrameMessage = function(e) { if (typeof e.data === 'object') { return; } var args = e.data.split(":"); if (args.length > 2) { iframe = document.getElementById("JotFormIFrame-" + args[(args.length - 1)]); } else { iframe = document.getElementById("JotFormIFrame"); } if (!iframe) { return; } switch (args[0]) { case "scrollIntoView": iframe.scrollIntoView(); break; case "setHeight": iframe.style.height = args[1] + "px"; break; case "collapseErrorPage": if (iframe.clientHeight > window.innerHeight) { iframe.style.height = window.innerHeight + "px"; } break; case "reloadPage": window.location.reload(); break; case "loadScript": var src = args[1]; if (args.length > 3) { src = args[1] + ':' + args[2]; } var script = document.createElement('script'); script.src = src; script.type = 'text/javascript'; document.body.appendChild(script); break; case "exitFullscreen": if (window.document.exitFullscreen) window.document.exitFullscreen(); else if (window.document.mozCancelFullScreen) window.document.mozCancelFullScreen(); else if (window.document.mozCancelFullscreen) window.document.mozCancelFullScreen(); else if (window.document.webkitExitFullscreen) window.document.webkitExitFullscreen(); else if (window.document.msExitFullscreen) window.document.msExitFullscreen(); break; } var isJotForm = (e.origin.indexOf("jotform") > -1) ? true : false; if(isJotForm && "contentWindow" in iframe && "postMessage" in iframe.contentWindow) { var urls = {"docurl":encodeURIComponent(document.URL),"referrer":encodeURIComponent(document.referrer)}; iframe.contentWindow.postMessage(JSON.stringify({"type":"urls","value":urls}), "*"); } }; if (window.addEventListener) { window.addEventListener("message", handleIFrameMessage, false); } else if (window.attachEvent) { window.attachEvent("onmessage", handleIFrameMessage); }
     </script>
     <script>
-      
+// Filter search bar
       function myFunction() {
          // Declare variables 
          var input, filter, table, tr, td, i, txtValue;
@@ -72,567 +75,220 @@
            } 
          }
        }
-     var milliseconds = (new Date).getTime();
-     var earlier = milliseconds - 10 * 24 * 60 * 60 * 1000;
-     //xrpbtc graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //  var xrpbtcdata = new Array(10);
-    //  var requestXrpbtc = new XMLHttpRequest()
-    //  var proxyURL = 'https://cors-anywhere.herokuapp.com';
-    //  requestXrpbtc.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/xrpbtc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
-    //  requestXrpbtc.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-    //  requestXrpbtc.setRequestHeader('Access-Control-Allow-Origin', '*');
-    //  requestXrpbtc.setRequestHeader('Access-Control-Allow-Method', 'GET');
-    //  requestXrpbtc.setRequestHeader('Content-Type', 'application/json');
-    //  requestXrpbtc.onload = function() {
-    //    if (requestXrpbtc.status >= 200 && requestXrpbtc.status < 400) {
-    //      // array splits the resonse into each market 
-    //      //var data = JSON.stringify(this.response);
-    //      var data = JSON.parse(this.response);
-    //      xrpbtcdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
-    //     //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
-    //    } else {
-    //      const errorMessage = document.getElementById("de1mo")
-    //      errorMessage.innerHTML = `Gah, it's not working!`
-    //      app.appendChild(errorMessage)
-    //    }
-    //   }      
-    //   requestXrpbtc.send()
-      
-    // //mgteth graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     
-    //  var mgtethdata = new Array(10);
-    //  var requestMgteth = new XMLHttpRequest()
-    //  var proxyURL = 'https://cors-anywhere.herokuapp.com';
-    //  requestMgteth.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgteth/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
-    //  requestMgteth.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-    //  requestMgteth.setRequestHeader('Access-Control-Allow-Origin', '*');
-    //  requestMgteth.setRequestHeader('Access-Control-Allow-Method', 'GET');
-    //  requestMgteth.setRequestHeader('Content-Type', 'application/json');
-    //  requestMgteth.onload = function() {
-    //    if (requestMgteth.status >= 200 && requestMgteth.status < 400) {
-    //      // array splits the resonse into each market 
-    //      //var data = JSON.stringify(this.response);
-    //      var data = JSON.parse(this.response);
-    //      mgtethdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
-    //     //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
-    //    } else {
-    //      const errorMessage = document.getElementById("de1mo")
-    //      errorMessage.innerHTML = `Gah, it's not working!`
-    //      app.appendChild(errorMessage)
-    //    }
-    //   }      
-    //   requestMgteth.send()
-    
-    // //mgtbtc graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     
-    //  var mgtbtcdata = new Array(10);
-    //  var requestMgtbtc = new XMLHttpRequest()
-    //  var proxyURL = 'https://cors-anywhere.herokuapp.com';
-    //  requestMgtbtc.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtbtc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
-    //  requestMgtbtc.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-    //  requestMgtbtc.setRequestHeader('Access-Control-Allow-Origin', '*');
-    //  requestMgtbtc.setRequestHeader('Access-Control-Allow-Method', 'GET');
-    //  requestMgtbtc.setRequestHeader('Content-Type', 'application/json');
-    //  requestMgtbtc.onload = function() {
-    //    if (requestMgtbtc.status >= 200 && requestMgtbtc.status < 400) {
-    //      // array splits the resonse into each market 
-    //      //var data = JSON.stringify(this.response);
-    //      var data = JSON.parse(this.response);
-    //      mgtbtcdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
-    //     //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
-    //    } else {
-    //      const errorMessage = document.getElementById("de1mo")
-    //      errorMessage.innerHTML = `Gah, it's not working!`
-    //      app.appendChild(errorMessage)
-    //    }
-    //   }      
-    //   requestMgtbtc.send()
-
-     //mgtthb graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    /* 
-     var mgtthbdata = new Array(10);
-     var requestMgtthb = new XMLHttpRequest()
-     var proxyURL = 'https://cors-anywhere.herokuapp.com';
-     requestMgtthb.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtthb/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
-     requestMgtthb.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-     requestMgtthb.setRequestHeader('Access-Control-Allow-Origin', '*');
-     requestMgtthb.setRequestHeader('Access-Control-Allow-Method', 'GET');
-     requestMgtthb.setRequestHeader('Content-Type', 'application/json');
-     requestMgtthb.onload = function() {
-       if (requestMgtthb.status >= 200 && requestMgtthb.status < 400) {
-         // array splits the resonse into each market 
-         //var data = JSON.stringify(this.response);
-         var data = JSON.parse(this.response);
-         mgtthbdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
-        //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
-       } else {
-         const errorMessage = document.getElementById("de1mo")
-         errorMessage.innerHTML = `Gah, it's not working!`
-         app.appendChild(errorMessage)
-       }
-      }      
-      requestMgtthb.send()
-     //mgtmyr graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     var mgtmyrdata = new Array(10);
-     var requestMgtmyr = new XMLHttpRequest()
-     var proxyURL = 'https://cors-anywhere.herokuapp.com';
-     requestMgtmyr.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtmyr/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
-     requestMgtmyr.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-     requestMgtmyr.setRequestHeader('Access-Control-Allow-Origin', '*');
-     requestMgtmyr.setRequestHeader('Access-Control-Allow-Method', 'GET');
-     requestMgtmyr.setRequestHeader('Content-Type', 'application/json');
-     requestMgtmyr.onload = function() {
-       if (requestMgtmyr.status >= 200 && requestMgtmyr.status < 400) {
-         // array splits the resonse into each market 
-         //var data = JSON.stringify(this.response);
-         var data = JSON.parse(this.response);
-         mgtmyrdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
-        //  document.getElementById("de1mo").innerHTML = xrpbtcdata ;
-       } else {
-         const errorMessage = document.getElementById("de1mo")
-         errorMessage.innerHTML = `Gah, it's not working!`
-         app.appendChild(errorMessage)
-       }
-      }      
-      requestMgtmyr.send()
-*/
-      //mgtltc graph---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //  var mgtltcdata = new Array(10);
-    //  var requestMgtltc = new XMLHttpRequest()
-    //  var proxyURL = 'https://cors-anywhere.herokuapp.com';
-    //  requestMgtltc.open('GET', proxyURL + "/" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtltc/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true)
-    //  requestMgtltc.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-    //  requestMgtltc.setRequestHeader('Access-Control-Allow-Origin', '*');
-    //  requestMgtltc.setRequestHeader('Access-Control-Allow-Method', 'GET');
-    //  requestMgtltc.setRequestHeader('Content-Type', 'application/json');
-    //  requestMgtltc.onload = function() {
-    //    if (requestMgtltc.status >= 200 && requestMgtltc.status < 400) {
-    //      // array splits the resonse into each market 
-    //      //var data = JSON.stringify(this.response);
-    //      var data = JSON.parse(this.response);
-    //      mgtltcdata = [parseFloat(data[1][2]), parseFloat(data[2][2]),parseFloat(data[3][2]),parseFloat(data[4][2]),parseFloat(data[5][2]),parseFloat(data[6][2]),parseFloat(data[7][2]),parseFloat(data[8][2]),parseFloat(data[9][2]),parseFloat(data[10][2])];
-    //      //document.getElementById("de1mo").innerHTML = xrpbtcdata ;
-    //    } else {
-    //      const errorMessage = document.getElementById("de1mo")
-    //      errorMessage.innerHTML = `Gah, it's not working!`
-    //      app.appendChild(errorMessage)
-    //    }
-    //   }      
-    //   requestMgtltc.send()
-     //market Pairs Table---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------            
-    
-
-     try {
-
-      var request = new XMLHttpRequest()
-      
-      var proxyURL = 'https://cors-anywhere.herokuapp.com';
-      
-      request.open('GET', proxyURL + "/" +  'https://www.speza.exchange/api/v2/peatio/public/markets/tickers/', true)
-      //request.open('GET', 'https://www.speza.exchange/api/v2/peatio/public/markets/tickers/', true)
-      request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-      
-      request.setRequestHeader('Access-Control-Allow-Origin', '*');
-      
-      request.setRequestHeader('Access-Control-Allow-Method', 'GET');
-      
-      request.setRequestHeader('Content-Type', 'application/json');
-
-      request.send();
-      
-    }
-    catch(err) {
-      location.reload(true);
-    }
-    try {
-    request.onload = function() {
-
-if (request.status = "200" ) {
-
-  // array splits the resonse into each market 
+///////////////////////////////////////////
+                  
+  const tradepath = window.env.api.tradeUrl;
   
- // var data = JSON.stringify(this.response);
-  var data = this.response;
-  data = data.split(/[}}]/);
-  var cleandata ="|";
-
-  for ( h=0 ; h < data.length ; h++) {
-      if ( h%2 === 0 ){
-          cleandata += data[h] + "|";
-      }
-  }
-  cleandata = cleandata.split("|");
-  cleandata.pop();
-  cleandata.pop();
-  cleandata.shift();
-
-  //cleandata is the array each index contains one market  with empty elements if first element and last two elements
-
-  var result = [];
-  var endResult = [];
-  //result.length = 10;
-  //var marketData = "";
-  //var rawdata = "";
-  //var KIR = "";
-    for ( o=0 ; o < cleandata.length ; o++) {
-      cleandata[o] =   cleandata[o] ; 
-      var Market = cleandata[o].split(",");
-      if( o > 0 ){
-          // the first market contains empty value in first index instead of itemvalues
-          Market.shift();
-      }
-      for ( j=0 ; j < Market.length ; j++){
-  
-          if ( j >= 2){
-                  // all other values
-              var newitem = Market[j].replace(/\"/g, '');
-              newitem = newitem.replace(/{/g, '');
-          
-              var MarketName = newitem.split(":");
-              for ( k=0 ; k < MarketName.length ; k++){
-             
-                  if (k%2 === 1){
-                      result.push( MarketName[k]);
-                  }
-              }
-          
-          } else {
-                  if (j === 0 ){
-                      //market Name
-                      var newitem = Market[j].replace(/\"/g, '');
-                      newitem = newitem.replace(/{/g, '');
-                    
-                      var MarketName = newitem.split(":");
-                    
-                      result.push(MarketName[0]);
-              } else if ( j=== 1 ) {
-                      // Buy Value
-                      var newitem = Market[j].replace(/\"/g, '');
-                      newitem = newitem.replace(/{/g, '');
-                    
-                      var MarketName = newitem.split(":");
-                      result.push(MarketName[2]);
-              }
-        }
-        endResult.push(result);
-        result = new Array();
-      }
-
-  }
- for( l=0 ; l < endResult.length ; l++){
-     if( l%10 === 2){
-      //endResult.splice(l,1);
-     }  
- }
-  var pair = "";
-  var show = "";
-  var tableData = "";
-  tableData +="<div style=\" padding: 20px 0px; margin-left:-2px; \"><input type=\"text\" id=\"myInput\" onkeyup=\"myFunction()\" placeholder=\"Search for Market..\"><table  id=\"myTable\" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:15px;\">Market</th><th>Buy</th><th>Sell</th><th class=\"chartMobile\" >Low</th><th class=\"chartMobile\" >High</th><th class=\"chartMobile\" >Open</th><th class=\"chartMobile\" >Last</th><th>Volume</th><th class=\"chartMobile\" >Price Change</th></tr></thead><tbody>";//<th>Graph</th>
-  for (t=0 ; t < endResult.length; t++){
-      
-     //  if (t === 0 ){
-     //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px;\">MGT market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-     //  }
-     //  if (t === 143 ){
-     //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px;\">BCH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-     //  }
-     //  if (t === 252 ){
-     //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">BTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-     //  }
-     //  if (t === 340 ){
-     //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">ETH market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-     //  }
-     //  if (t === 439 ){
-     //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px; color: #242253; \"><th style=\"font-size: 12px; padding-left:15px; \">LTC market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-     //  }
-     //  if (t === 549 ){
-     //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">TUSD market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-     //  }
-     //  if (t === 572 ){
-     //      tableData += "<tr style=\"background-color:  #FEFCFF; height: 60px;  color: #242253;\"><th style=\"font-size: 12px; padding-left:15px; \">XRP market</th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>";
-     //  }
-      if (t%11 === 0 ){
-          tableData += "<tr class=\"marketrow\"  onclick=\"window.open(\'https://www.speza.exchange/trading/" +endResult[t] + " \');\">";
-          tableData += "<td class=\"marketpais\" >";
-          tableData += endResult[t] + "</td>"
-          pair = endResult[t];
-      } 
-      else if (t%11 === 1 ){
-       tableData += "<td  style=\" color: #4DD77C;\">";
-       tableData += endResult[t] + "</td>"
-      } 
-      else if (t%11 === 2 ){
-       
-       tableData += "<td style=\" color: #FF1479;\">";
-       tableData += endResult[t] + "</td>"
-      }  
-      else if (t%11 === 3 ){
-       
-       tableData += "<td class=\"chartMobile\" >";
-       tableData += endResult[t] + "</td>"
-      } 
-      else if (t%11 === 4 ){
-       
-       tableData += "<td class=\"chartMobile\" >";
-        tableData +=  endResult[t] + "</td>"
-      }  
-      else if (t%11 === 5 ){
-       
-       tableData += "<td class=\"chartMobile\" >";
-        tableData += endResult[t] + "</td>"
-      }  
-      else if (t%11 === 6 ){
-       
-       tableData += "<td class=\"chartMobile\" >";
-       tableData += endResult[t] + "</td>"
-      }
-      else if (t%11 === 7 ){
-       
-       tableData += "<td>";
-        tableData += endResult[t] + "</td>"
-      }  
-      if (t%11 === 8 ){
-       
-      // tableData += "<td>";
-      // tableData += Number(endResult[t]) + "</td>"
-       
-      } 
-      else if (t%11 === 9 ){
-       var data = endResult[t];
-       var sign =  data[0];
-
-       if( sign[0] === "+" ){
-          tableData += "<td class=\"chartMobile\" style=\" color:#4DD77C;\">";
-       } else{
-          tableData += "<td class=\"chartMobile\" style=\" color: #FF1479;\">";
-       }
-       
-       tableData += endResult[t] +"</td>"
-       //<td><canvas id="+ "\"" + pair + "\"" + "width=\"150\" height=\"80\"></canvas></td>
-       //add above to table data text to have the chart column list
-       
-       tableData += "</tr>";
-       
-      } 
-      
-      else if (t%11 === 10 ){
-       
-      // tableData += "<td  style=\" display: none;\">";
-      // tableData += endResult[t] + "</td>"
-      // tableData += "</tr>";
-      } 
-  }
-
-  tableData += " <tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
-
-  document.getElementById("demo").innerHTML = tableData ;
- // document.getElementById("de1mo").innerHTML = xrpbtcdata + "<br/>" + mgtthbdata + "<br/>" +  'https://blockchain.mundoexchange.io/api/v2/peatio/public/markets/mgtthb/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds ;
-
-} else if (request.status != 200) {
-   location.reload(true);
-}
-     
-// Charts---------------------------------------------------------------
+///////////////////////////////////////////
+// marketpair array
+    var height = 100;
+    var width = 80;
+    var milliseconds = (new Date).getTime();
+    var earlier = milliseconds - 1 * 24 * 60 * 60 * 1000; // last 24 hoursc
 /*
-        new Chart(document.getElementById("mgtthb"), {
-        type: 'line',
-        data: {
-          labels: [1,2,3,4,5,6,7,8,9,10],
-          datasets: [{ 
-              data: mgtthbdata,
-              label: "Africa",
-              borderColor: "#3e95cd",
-              fill: true
-            },
-          ]
-        },
-        options: {
-          title: {
-            display: false,
-          },
-          legend: {
-            display: false
-         },
-         tooltips: {
-            enabled: false
-         },
-         scales: {
-            xAxes: [{
-              display: false
-            }],
-            yAxes: [{
-              display: false
-            }]
-        }   
-        }
-      });
-      new Chart(document.getElementById("mgtmyr"), {
-        type: 'line',
-        data: {
-          labels: [1,2,3,4,5,6,7,8,9,10],
-          datasets: [{ 
-              data: mgtmyrdata,
-              label: "Africa",
-              borderColor: "#3e95cd",
-              fill: true
-            },
-          ]
-        },
-        options: {
-          title: {
-            display: false,
-          },
-          legend: {
-            display: false
-         },
-         tooltips: {
-            enabled: false
-         },
-         scales: {
-            xAxes: [{
-              display: false
-            }],
-            yAxes: [{
-              display: false
-            }]
-        }   
-        }
-      });
-    */
-    // new Chart(document.getElementById("mgtltc"), {
-    //     type: 'line',
-    //     data: {
-    //       labels: [1,2,3,4,5,6,7,8,9,10],
-    //       datasets: [{ 
-    //           data: mgtltcdata,
-    //           label: "Africa",
-    //           borderColor: "#3e95cd",
-    //           fill: true
-    //         },
-    //       ]
-    //     },
-    //     options: {
-    //       title: {
-    //         display: false,
-    //       },
-    //       legend: {
-    //         display: false
-    //      },
-    //      tooltips: {
-    //         enabled: false
-    //      },
-    //      scales: {
-    //         xAxes: [{
-    //           display: false
-    //         }],
-    //         yAxes: [{
-    //           display: false
-    //         }]
-    //     }   
-    //     }
-    //   });
-    //   new Chart(document.getElementById("mgteth"), {
-    //     type: 'line',
-    //     data: {
-    //       labels: [1,2,3,4,5,6,7,8,9,10],
-    //       datasets: [{ 
-    //           data: mgtethdata,
-    //           label: "Africa",
-    //           borderColor: "#3e95cd",
-    //           fill: true
-    //         },
-    //       ]
-    //     },
-    //     options: {
-    //       title: {
-    //         display: false,
-    //       },
-    //       legend: {
-    //         display: false
-    //      },
-    //      tooltips: {
-    //         enabled: false
-    //      },
-    //      scales: {
-    //         xAxes: [{
-    //           display: false
-    //         }],
-    //         yAxes: [{
-    //           display: false
-    //         }]
-    //     }   
-    //     }
-    //   });
-    //   new Chart(document.getElementById("mgtbtc"), {
-    //     type: 'line',
-    //     data: {
-    //       labels: [1,2,3,4,5,6,7,8,9,10],
-    //       datasets: [{ 
-    //           data: mgtbtcdata,
-    //           label: "Africa",
-    //           borderColor: "#3e95cd",
-    //           fill: true
-    //         },
-    //       ]
-    //     },
-    //     options: {
-    //       title: {
-    //         display: false,
-    //       },
-    //       legend: {
-    //         display: false
-    //      },
-    //      tooltips: {
-    //         enabled: false
-    //      },
-    //      scales: {
-    //         xAxes: [{
-    //           display: false
-    //         }],
-    //         yAxes: [{
-    //           display: false
-    //         }]
-    //     }   
-    //     }
-    //   });
-    //   new Chart(document.getElementById("xrpbtc"), {
-    //     type: 'line',
-    //     data: {
-    //       labels: [1,2,3,4,5,6,7,8,9,10],
-    //       datasets: [{ 
-    //           data: xrpbtcdata,
-    //           label: "Africa",
-    //           borderColor: "#7045AF",
-    //           fill: true,
-    //           fillColor : "rgba(220,220,220,0.5)",
-    //         },
-    //       ]
-    //     },
-    //     options: {
-    //       title: {
-    //         display: false,
-    //       },
-    //       legend: {
-    //         display: false
-    //      },
-    //      tooltips: {
-    //         enabled: false
-    //      },
-    //      scales: {
-    //         xAxes: [{
-    //           display: false
-    //         }],
-    //         yAxes: [{
-    //           display: false
-    //         }]
-    //     }   
-    //     }
-    //   });
-    }
-  }   catch(err) {
+[0]  id: "maticbtc"
+[1]  name: "MATIC/BTC"
+[2]  avg_price: "0.00001568067477768"
+[3]  buy: "0.00001467"
+[4]  high: "0.00001605"
+[5]  last: "0.00001598"
+[6]  low: "0.00001551"
+[7]  open: 0.00001564
+[8]  price_change_percent: "+2.17%"
+[9]  sell: "0.00001725"
+[10] vol: "0.020309"
+[11] volume: "0.020309"
+*/
+    try {
+      var request = new XMLHttpRequest();
+      request.open('GET', tradepath +  '/public/markets/', true);
+      request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+      request.setRequestHeader('Access-Control-Allow-Origin', '*');
+      request.setRequestHeader('Access-Control-Allow-Method', 'GET');      
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send();
+      request.onload = function() {
+      var data = JSON.parse(this.response);
+      var marketNames = new Array(data.length);
+      for (var i = 0; i < marketNames.length; i++) {
+        marketNames[i] = new Array(13);
+      }
+      for (h=0; h < data.length; h++ ){
+        marketNames[h][0] = data[h].id;
+        marketNames[h][1] = data[h].name;
+      }
+      try {
+
+          var request = new XMLHttpRequest();
+          request.open('GET', tradepath + '/public/markets/tickers/', true);
+          //request.open('GET', 'https://www.speza.exchange/api/v2/peatio/public/markets/tickers/', true)
+          request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+          request.setRequestHeader('Access-Control-Allow-Origin', '*');
+          request.setRequestHeader('Access-Control-Allow-Method', 'GET');
+          request.setRequestHeader('Content-Type', 'application/json');
+          request.send();
+          request.onload = function() {
+            var data = JSON.parse(this.response);
+            for (var i=0 ; i < marketNames.length ; i++ ){
+              marketNames[i][2]= data[marketNames[i][0]].ticker.avg_price;
+              marketNames[i][3]= data[marketNames[i][0]].ticker.buy;
+              marketNames[i][4]= data[marketNames[i][0]].ticker.high;
+              marketNames[i][5]= data[marketNames[i][0]].ticker.last;
+              marketNames[i][6]= data[marketNames[i][0]].ticker.low;
+              marketNames[i][7]= data[marketNames[i][0]].ticker.open;
+              marketNames[i][8]= data[marketNames[i][0]].ticker.price_change_percent;
+              marketNames[i][9]= data[marketNames[i][0]].ticker.sell;
+              marketNames[i][10]= data[marketNames[i][0]].ticker.vol;
+              marketNames[i][11]= data[marketNames[i][0]].ticker.volume;
+            } 
+            try {
+            var requestGraph = new XMLHttpRequest();
+            requestGraph.open('GET', tradepath + '/public/markets/k-line?period=1440&time_from='+ earlier.toString().substring(0, 10) + '&time_to='+ milliseconds, true);
+            requestGraph.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+            requestGraph.setRequestHeader('Access-Control-Allow-Origin', '*');
+            requestGraph.setRequestHeader('Access-Control-Allow-Method', 'GET');
+            requestGraph.setRequestHeader('Content-Type', 'application/json');
+            requestGraph.send();
+            requestGraph.onload = function() {
+              if (requestGraph.status >= 200 && requestGraph.status < 400) {
+                var data = JSON.parse(this.response);
+                for (var i = 0; i < marketNames.length; i++) {
+                  marketNames[i][12] = data[marketNames[i][0]];
+                }
+                var marketStack = [];
+                marketStack.push(marketNames[0][1].split("/")[1]);
+                for (var i=0 ; i < marketNames.length ; i++ ){
+                    if (marketStack[marketStack.length -1] != marketNames[i][1].split("/")[1] ) {
+                      marketStack.push(marketNames[i][1].split("/")[1]);
+                    }
+                }
+                var marketList = new Array(marketStack.length);
+                for (var i=0 ; i < marketStack.length ; i++ ){
+                  marketList[i] = [];
+                }
+                var currentMarket = 0;
+                for (var i=0 ; i < marketNames.length ; i++ ){
+                    if (marketStack[currentMarket] === marketNames[i][1].split("/")[1] ) {
+                      marketList[currentMarket].push(marketNames[i]);
+                    } else {
+                      currentMarket++;
+                      marketList[currentMarket].push(marketNames[i]);
+                    }
+                }
+        
+              // window.onload = function() {
+                var MarketTabs = '<ul  style=\" margin: auto; width:80%; \" class=\"nav nav-tabs\"><li><a data-toggle=\"tab\" href=\"#'+ marketStack[0].toLowerCase() +'\">' + marketStack[0] + '</a></li>';
+                for (var i=1 ; i < marketStack.length ; i++ ){
+                    MarketTabs += '<li><a data-toggle=\"tab\" href=\"#' + marketStack[i].toLowerCase() + '\">'+ marketStack[i] +'</a></li>';
+                }
+                    MarketTabs += '</ul><div class=\"tab-content\"><div  id=\"'+marketStack[0].toLowerCase()+'\"  class=\"tab-pane fade in active\"><div  id=\"'+ marketStack[0] +'\"></div></div>';
+                for (var i=1 ; i < marketStack.length ; i++ ){
+                    MarketTabs +='<div  id=\"'+ marketStack[i].toLowerCase() +'\"  class=\"tab-pane fade in active\"><div  id=\"'+ marketStack[i]+ '\"></div></div>';
+                }
+                MarketTabs +='</div>';
+                document.getElementById("Markets").innerHTML = MarketTabs;
+                // $("Markets").ready( function() {
+                  // document.getElementById("Markets").innerHTML = MarketTabs;
+                // });
+                for (var k=0 ; k < marketStack.length; k++){
+                  var marketDATA = "";
+                  marketDATA += "<div style=\" padding: 20px 0px; margin-left:-2px; \"><table style=\" margin: auto; width:80%; \" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:15px;\">Market</th><th>Buy</th><th>Sell</th><th class=\"chartMobile\" >Low</th><th class=\"chartMobile\" >High</th><th class=\"chartMobile\" >Open</th><th class=\"chartMobile\" >Last</th><th  class=\"chartMobile\" >Volume</th><th>Price Change</th><th>Graph</th></tr></thead><tbody>";
+                  for (var t=0 ; t < marketList[k].length; t++){
+                    marketDATA += "<tr class=\"marketrow\"  onclick=\"window.open(\'https://www.speza.exchange/trading/" + marketList[0][t][0] + " \');\">";
+                    marketDATA += "<td class=\"marketpais\" >";
+                    marketDATA += marketList[k][t][1] + "</td>";
+                    marketDATA += "<td  style=\" color: #4DD77C;\">";
+                    marketDATA += marketList[k][t][3]+ "</td>";
+                    marketDATA += "<td style=\" color: #FF1479;\">";
+                    marketDATA += marketList[k][t][9] + "</td>";
+                    marketDATA += "<td class=\"chartMobile\" >";
+                    marketDATA += marketList[k][t][6] + "</td>";
+                    marketDATA += "<td class=\"chartMobile\" >";
+                    marketDATA += marketList[k][t][4]  + "</td>";
+                    marketDATA += "<td class=\"chartMobile\" >";
+                    marketDATA += marketList[k][t][7] + "</td>";
+                    marketDATA += "<td class=\"chartMobile\" >";
+                    marketDATA += marketList[k][t][5] + "</td>";
+                    marketDATA += "<td  class=\"chartMobile\" >";
+                    marketDATA += marketList[k][t][11] + "</td>";
+                      if( marketList[k][t][8][0] === "+" ){
+                        marketDATA += "<td style=\" color:#4DD77C;\">";
+                      } else{
+                        marketDATA += "<td style=\" color: #FF1479;\">";
+                      }
+                      // marketDATA += marketList[k][t][8] +'</td><td class=\"marketGraph\" ><canvas id=\"' + marketList[k][t][0] + '\" width=\"'+ width +'\" height=\"'+ height +'\" /></td>';
+                      marketDATA += marketList[k][t][8] +'</td><td><div class=\"chart-container\"><canvas id=\"' + marketList[k][t][0] + '\"/></div></td>';
+                      marketDATA += "</tr>";
+                    }  
+                  marketDATA += " <tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
+                  document.getElementById(marketStack[k]).innerHTML = marketDATA;
+                  // $(marketStack[k]).ready( function() {
+                  //       document.getElementById(marketStack[k]).innerHTML = marketDATA;
+                  // });
+                    for (var t=0 ; t < marketList[k].length; t++){
+                      var bar_ctx = document.getElementById(marketList[k][t][0]).getContext('2d');
+                      var gradient = bar_ctx.createLinearGradient(0, 0, 0, 65);
+                      gradient.addColorStop(0, 'rgba(250,174,50,1)');   
+                      gradient.addColorStop(1, 'rgba(250,174,50,0)');
+
+                        new Chart(document.getElementById(marketList[k][t][0]), {
+                          type: 'line',
+                          data: {
+                            labels: [1,2,3,4,5,6,7,8],
+                            datasets: [{ 
+                                data: [marketList[k][t][12][0][1], marketList[k][t][12][0][2] ,marketList[k][t][12][0][3] ,marketList[k][t][12][0][4] ,marketList[k][t][12][1][1] ,marketList[k][t][12][1][2] ,marketList[k][t][12][1][3] ,marketList[k][t][12][0][4]],
+                                //data: [3,5,9,7,8,6,3,5],
+                                backgroundColor: gradient,
+                                label: "Africa",
+                                borderColor: "#3e95cd",
+                                fill: true,
+                              },
+                            ]
+                          },
+                          options: {
+                            title: {
+                              display: false,
+                            },
+                            legend: {
+                              display: false
+                            },
+                            tooltips: {
+                              enabled: false
+                            },
+                            scales: {
+                              xAxes: [{
+                                display: false
+                              }],
+                              yAxes: [{
+                                display: false,
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                              }]
+                          }   
+                          }
+                        });
+                    }
+              }
+              
+                // console.log(marketNames);//all Pairs
+                // console.log(marketStack);// all the markets
+                // console.log(marketList);// all Pairs in each of the markets
+              } else {
+              }
+              }      
+            }
+            catch(err) {
+              location.reload(true);
+            } 
+          } 
+          } catch(err) {
+          location.reload(true);
+          }
+     }
+    } catch(err) {
       location.reload(true);
     }
-    
     </script>
 
   </body>
