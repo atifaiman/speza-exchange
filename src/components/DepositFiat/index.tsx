@@ -2,7 +2,8 @@ import * as React from 'react';
 /*import { FormattedMessage } from 'react-intl';*/
 import Awepay from '../../containers/Awepay/Awepay';
 import BankDepositeinfo from '../../containers/BankDeposit/DepositFiatPop';
-import Epay from '../../containers/Epay/Epay';
+// import Epay from '../../containers/Epay/Epay';
+import MasterCardDeposit from '../../containers/MasterCardDeposit/MasterCardDeposit';
 
 interface DepositFiatProps {
     /**
@@ -63,8 +64,9 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
             <p className="cr-deposit-fiat__title">{title}</p>
             <p className="cr-deposit-fiat__description">{description}</p>
             {/* <div className="cr-deposit-fiat-credentials">{bankData.map(renderDetails)}</div> */}
+            {<MasterCardDeposit userid={userid} currency={currency}/>}
             {((currency === 'myr') || (currency === 'krw') || (currency === 'vnd') || (currency === 'idr') || (currency === 'thb') || (currency === 'cny')) ? <Awepay currency={currency} email={email} userid={userid}/> : null}
-            {(currency === 'usd') ? <Epay userid={userid} currency={currency}/> : null}
+            {/* {(currency === 'usd') ? <Epay userid={userid} currency={currency}/> : null} */}
             <br/>
             {(currency === 'usd') ? <BankDepositeinfo currency={currency}/> : null}
 

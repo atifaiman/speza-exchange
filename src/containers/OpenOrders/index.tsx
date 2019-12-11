@@ -60,7 +60,7 @@ export class OpenOrdersContainer extends React.Component<Props> {
         });
         return (
             <div className={classNames}>
-                <div className="cr-table-header__content">
+                <div className="cr-table-header__content" style={{zIndex: 'auto'}}>
                     <div className="cr-title-component">
                         <FormattedMessage id="page.body.trade.header.openOrders" />
                     </div>

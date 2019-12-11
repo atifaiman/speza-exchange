@@ -131,7 +131,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
       if (isLabelExist.length > 0) {
         switch (userLevel) {
           case targetLevel - 1: {
-            if (documentLabel) {
+            if (documentLabel.value === 'pending') {
               return (
                 <p className="pg-profile-page__level-verification__name">
                   <FormattedMessage id={`${text}.unverified.title`}/>

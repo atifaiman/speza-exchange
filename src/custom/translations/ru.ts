@@ -610,5 +610,73 @@ export const ru: LangType = {
 
     'server.internal_error': 'Внутренняя ошибка сервера',
 
+    // --- TOKEN LISTING CHECKLIST FORM --- //
+    // section 1: Project
+    'page.body.form.checklist.secProjectQuestion1': 'Project Name',
+    'page.body.form.checklist.secProjectQuestion2': 'Token/Coin Full Name',
+    'page.body.form.checklist.secProjectQuestion3': 'Token/Coin Symbol',
+    'page.body.form.checklist.secProjectQuestion4': 'Official website',
+    'page.body.form.checklist.secProjectQuestion5': 'Permanent link to your whitepaper',
+    'page.body.form.checklist.secProjectQuestion6': 'What is the nature of the project',
+    'page.body.form.checklist.secProjectQuestion7': 'What are the problems/pain-points the project is trying to solve? Why did you start this project?',
+    'page.body.form.checklist.secProjectQuestion8': 'What is the target industry of the Project? (e.g. finance, healthcare, supply chain, social media and energy, etc.)',
+    'page.body.form.checklist.secProjectQuestion9': 'Who are the target users? (e.g. consumers, service providers, retail investors, professional investors, etc.)',
+    'page.body.form.checklist.secProjectQuestion10': 'Please provide a comprehensive description of the token/coin, including core use cases and an overview of the token economy.',
+    'page.body.form.checklist.secProjectQuestion11': 'Why do you think a native digital asset is necessary for your Project?',
+    'page.body.form.checklist.secProjectQuestion12': 'Is there an existing platform or application where users are able to use your token?',
+    'page.body.form.checklist.secProjectQuestion13': 'Who are the Project’s key competitors (crypto and non-crypto)? How do you plan to differentiate the Project?',
+    // section 2: User
+    'page.body.form.checklist.secUserQuestion1': 'Please share with us any key stats of your Project, such as total number of users, DAU, MAU, etc. Please only include users of the Project’s product. Do not include or reference the number of social media followers the Project has.',
+    'page.body.form.checklist.secUserQuestion2': 'How many people are there in the Project’s social media community? Please provide a headcount and link for the Project on Telegram, Reddit, Slack, Twitter, Facebook, lnstagram, Line, Viber, KakaoTalk, Imo, Zalo, BBM, Chaton, WhatsApp or any other applicable social media platform. Please be as detailed as possible.',
+    'page.body.form.checklist.secUserQuestion3': 'Are there ways in which users contribute to the development of the Project’s platform? Please describe.',
+    // section 3: Product
+    'page.body.form.checklist.secProductQuestion1': 'What is the current development status of the project and how is the performance?(e.g. MVP/Alpha/Beta/Testnet/Mainnet)?',
+    'page.body.form.checklist.secProductQuestion2': 'Please share with us a link to the demo or the product for us to try it.',
+    'page.body.form.checklist.secProductQuestion3': 'Please describe each applicable feature of the token/coin.',
+    'page.body.form.checklist.secProductQuestion4': 'Is the Project open-source? If so, please provide any copyright or other open source license applicable to the open-source portion of the Project.',
+    'page.body.form.checklist.secProductQuestion5': 'Please provide a link to the Project GitHub repo. If you have any repos that arenot public, Please provide your private code repo for us to review your development to date.',
+    // section 4: Team
+    'page.body.form.checklist.secTeamQuestion1': 'What is the current team size and where is the team based in?',
+    'page.body.form.checklist.secTeamQuestion2': 'Please list each core member of the Project team and outline their role and responsibilities for the Project.',
+    'page.body.form.checklist.secTeamQuestion3': 'Please provide the LinkedIn and/or Github links of all core members. Please ensure that their LinkedIn profiles are completed in as much detail as possible.',
+    //section 5: Token Economics
+    'page.body.form.checklist.secTokenQuestion1': 'What is the current market capitalization of the token/coin (based on the current date of submission)?',
+    'page.body.form.checklist.secTokenQuestion2': 'What is the total token/coin supply? How much is currently circulating?',
+    'page.body.form.checklist.secTokenQuestion3': 'Which exchange(s) is the token/coin currently trading on?',
+    'page.body.form.checklist.secTokenQuestion4': 'Was the token/coin listed on any exchange prior to the public launch? If so, please specify.',
+    // section 6: ICO and Other Offerings of the Token/Coin
+    'page.body.form.checklist.secICOQuestion1': 'Was the token/coin offered through an ICO?',
+    'page.body.form.checklist.secICOQuestion2': 'What was the ICO price per token/coin?',
+    'page.body.form.checklist.secICOQuestion3': 'How much was raised during the ICO? For what percentage of supply?',
+    'page.body.form.checklist.secICOQuestion4': 'When was the ICO launch date and what was the duration of the ICO (number of days)?',
+    'page.body.form.checklist.secICOQuestion5': 'On which platform did you conduct the ICO?',
+    'page.body.form.checklist.secICOQuestion6': 'Did the ICO have a hard cap? If so, what percentage of the hard cap was reached?',
+    'page.body.form.checklist.secICOQuestion7': 'How were the funds raised during the ICO used? What is the planned use for such funds going forward?',
+    'page.body.form.checklist.secICOQuestion8': 'Please provide your current projected runway with funds raised, and an 18 month FTE (full-time employee) plan, if applicable?How many people participated in the ICO?',
+    'page.body.form.checklist.secICOQuestion9': 'Which jurisdictions were allowed to participate in the sale?',
+    'page.body.form.checklist.secICOQuestion10': 'In which jurisdiction was the issuer of the token/coin established, and from which jurisdiction was the ICO conducted?',
+    'page.body.form.checklist.secICOQuestion11': 'Was there a limit on tokens that can be purchased by one individual the Project’s ICO? If so, please provide the individual cap.',
+    'page.body.form.checklist.secICOQuestion12a': 'Were the purchasers of the tokens/coins required to execute an agreement documenting their purchase and/or consent to terms and conditions?',
+    'page.body.form.checklist.secICOQuestion12b': `If you answered 'Yes' to previous questions, please provide the form(s) of such agreements and/or terms and conditions.`,
+    'page.body.form.checklist.secICOQuestion12c': 'Did the agreements described in the previous question require or did the Project otherwise require any acknowledgments or representations as a conditionto receiving tokens/coins? If yes, please describe.',
+    'page.body.form.checklist.secICOQuestion13': 'Were tokens/coins issued outside of the ICO? If so, were such issuances pursuant to a private placement or offering? Please describe the circumstances.',
+    'page.body.form.checklist.secICOQuestion14': 'Were KYC/AML/sanctions compliance procedures applied to purchasers of tokens/coins in each of the offerings/sales? If so, please describe.',
+    // section 7: Wallet
+    'page.body.form.checklist.secWalletQuestion1': 'Is the token/coin ERC 20 compliant?',
+    'page.body.form.checklist.secWalletQuestion2': 'Please provide a link to the relevant blockchain explorer.',
+    'page.body.form.checklist.secWalletQuestion3': 'Which protocol is the token/coin based on? Eg. Ethereum, EOS, NEO, etc.',
+    'page.body.form.checklist.secWalletQuestion4': 'What is the Encryption Algorithm?',
+    'page.body.form.checklist.secWalletQuestion5': 'Does the project team actively maintain a full node for your token? Please explain in detail below.',
+    'page.body.form.checklist.secWalletQuestion6': 'Does the project have a light wallet (non-full node) available on Mac? Please explain in detail below.',
+    'page.body.form.checklist.secWalletQuestion7': 'Is your token integrated with hardware wallet providers (Ledger/Trezor)?',
+    // section 8: Market
+    'page.body.form.checklist.secMarketQuestion1': 'What specific market pairs do you plan to list in SPEZA Exchange?',
+    'page.body.form.checklist.secMarketQuestion2': 'Do you require liquidity or market maker solution?',
+    // section 9: Fees
+    'page.body.form.checklist.secFeesQuestion1': 'How much is the project team willing to reserve for post-listing marketing activities on SPEZA Exchange?',
+    'page.body.form.checklist.secFeesQuestion2': 'Do you plan to offer token/coin giveaways, and/or other marketing initiative(s),including allocations or distributions to organizations (including non-profits) for the purpose of developing or expanding the token/coin ecosystem? If so, please provide exact details of proposed plans.',
+    // section 10: Miscellaneous
+    'page.body.form.checklist.secMiscellaneousQuestion1': 'Do you accept that, even after payment, SPEZA may delist your token/coin and you may not be eligible for any refunds?',
+
     ...nationalitiesNames,
 };

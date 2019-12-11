@@ -48,7 +48,7 @@ class MarketDepthContainer extends React.Component<Props> {
         };
         return (
             <div>
-                <div className="cr-table-header__content">
+                <div className="cr-table-header__content"  style={{zIndex: 'auto'}}>
                     <div className={'pg-market-depth__title'}>
                         <FormattedMessage id="page.body.trade.header.marketDepths" />
                     </div>

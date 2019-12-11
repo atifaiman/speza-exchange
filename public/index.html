@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+          content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=0" />
     <meta name="theme-color" content="#000000">
     <meta name="ui-version" content="%REACT_APP_GIT_SHA%"/>
     <meta http-equiv=“Pragma” content=”no-cache”>
@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="../node_modules/@openware/cryptofont/font/crypto-font.css">
     <link rel="stylesheet" href="./css/theme.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -27,7 +30,8 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Speza</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>SPEZA</title>
   </head>
   <body>
     <script src="%PUBLIC_URL%/config/env.js"></script>
@@ -46,7 +50,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
     <script type="text/javascript">
@@ -54,37 +57,59 @@
     </script>
     <script>
 // Filter search bar
+      var alltables = [];
       function myFunction() {
          // Declare variables 
          var input, filter, table, tr, td, i, txtValue;
          input = document.getElementById("myInput");
          filter = input.value.toUpperCase();
-         table = document.getElementById("myTable");
+
+         table = document.getElementById("allMarketpairs");
          tr = table.getElementsByTagName("tr");
        
          // Loop through all table rows, and hide those who don't match the search query
-         for (i = 0; i < tr.length; i++) {
-           td = tr[i].getElementsByTagName("td")[0];
-           if (td) {
-             txtValue = td.textContent || td.innerText;
-             if (txtValue.toUpperCase().indexOf(filter) > -1) {
-               tr[i].style.display = "";
-             } else {
-               tr[i].style.display = "none";
-             }
-           } 
-         }
-       }
+         //console.log(alltables);
+
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          } 
+        }
+        try {
+            for ( var p=0 ; alltables.length; p++ ){
+              newtable = document.getElementById("table"+alltables[p]);
+              newtr = newtable.getElementsByTagName("tr");
+              for (i = 0; i < newtr.length; i++) {
+                newtd = newtr[i].getElementsByTagName("td")[0];
+                if (newtd) {
+                  txtValue = newtd.textContent || newtd.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    newtr[i].style.display = "";
+                  } else {
+                    newtr[i].style.display = "none";
+                  }
+                } 
+              }
+            } 
+          } catch(err) {
+        } 
+      }
 ///////////////////////////////////////////
                   
   const tradepath = window.env.api.tradeUrl;
   
 ///////////////////////////////////////////
-// marketpair array
-    var height = 100;
-    var width = 80;
+    // marketpair array
+    // var height = 70;
+    // var width = 100;
     var milliseconds = (new Date).getTime();
-    var earlier = milliseconds - 1 * 24 * 60 * 60 * 1000; // last 24 hoursc
+    var earlier = milliseconds - 4 * 24 * 60 * 60 * 1000; // last 24 hoursc
 /*
 [0]  id: "maticbtc"
 [1]  name: "MATIC/BTC"
@@ -99,6 +124,24 @@
 [10] vol: "0.020309"
 [11] volume: "0.020309"
 */
+try {
+      var request = new XMLHttpRequest();
+      request.open('GET', tradepath +  '/public/currencies/', true);
+      request.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+      request.setRequestHeader('Access-Control-Allow-Origin', '*');
+      request.setRequestHeader('Access-Control-Allow-Method', 'GET');      
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send();
+      request.onload = function() {
+      var data = JSON.parse(this.response);
+      var CurrencyImage = new Array(data.length);
+      for (var i = 0; i < CurrencyImage.length; i++) {
+        CurrencyImage[i] = new Array(2);
+        CurrencyImage[i][0] = data[i].id;
+        CurrencyImage[i][1] = data[i].icon_url;
+      }
+      //console.log(data);
+      
     try {
       var request = new XMLHttpRequest();
       request.open('GET', tradepath +  '/public/markets/', true);
@@ -111,7 +154,7 @@
       var data = JSON.parse(this.response);
       var marketNames = new Array(data.length);
       for (var i = 0; i < marketNames.length; i++) {
-        marketNames[i] = new Array(13);
+        marketNames[i] = new Array(16);
       }
       for (h=0; h < data.length; h++ ){
         marketNames[h][0] = data[h].id;
@@ -154,7 +197,40 @@
                 var data = JSON.parse(this.response);
                 for (var i = 0; i < marketNames.length; i++) {
                   marketNames[i][12] = data[marketNames[i][0]];
+                  marketNames[i][13] = marketNames[i][1].split("/")[1];
+                  marketNames[i][14] = marketNames[i][1].split("/")[0].toLowerCase();
+                //  }
+                if(CurrencyImage){
+                    //console.log(CurrencyImage.length)
+                    for (var j = 0; j < CurrencyImage.length; j++) {
+                        if(CurrencyImage[j][1] && CurrencyImage[j][0] ==  marketNames[i][14]) {
+                         marketNames[i][15] = CurrencyImage[j][1];
+                         } else {
+                         }
+                      }
                 }
+                  // for (var j = 0; i < CurrencyImage.length; j++) {
+                  //   if( CurrencyImage[j][0] ===  marketNames[i][14] ){
+                  //     marketNames[i][15] = CurrencyImage[j][1].split("/")[0].toLowerCase();
+                  //   }
+                  // }
+                }
+                //var sortedStuff = marketNames;
+                //sortedStuff.sort(compareMarketColumn);
+                //console.log(sortedStuff);
+                // console.log(marketNames);
+                //console.log(CurrencyImage);
+
+                marketNames.sort(compareMarketColumn);
+                function compareMarketColumn(a, b) {
+                    if (a[13] === b[13]) {
+                        return 0;
+                    }
+                    else {
+                        return (a[13] < b[13]) ? -1 : 1;
+                    }
+                }
+
                 var marketStack = [];
                 marketStack.push(marketNames[0][1].split("/")[1]);
                 for (var i=0 ; i < marketNames.length ; i++ ){
@@ -175,50 +251,95 @@
                       marketList[currentMarket].push(marketNames[i]);
                     }
                 }
-        
+
               // window.onload = function() {
-                var MarketTabs = '<ul  style=\" margin: auto; width:80%; \" class=\"nav nav-tabs\"><li><a data-toggle=\"tab\" href=\"#'+ marketStack[0].toLowerCase() +'\">' + marketStack[0] + '</a></li>';
+                var MarketTabs = '<ul class=\"nav nav-tabs hs\"><li id="elallmarketLi" class=\"selected active\"><a  class=\"allmarketTab marketTabSpace\" style=\"white-space:nowrap; text-align: center;\" data-toggle=\"tab\" href=\"#AllMarkets\" onclick="alltabs()"> All Markets </a></li><li><a class=\"allmarketTab\"  style=\"text-align: center;\" data-toggle=\"tab\" onclick="normtab()" href=\"#'+ marketStack[0].toLowerCase() +'\">' + marketStack[0] + '</a></li>';
                 for (var i=1 ; i < marketStack.length ; i++ ){
-                    MarketTabs += '<li><a data-toggle=\"tab\" href=\"#' + marketStack[i].toLowerCase() + '\">'+ marketStack[i] +'</a></li>';
+                    MarketTabs += '<li><a class=\"allmarketTab\" style=\"text-align: center;\" onclick="normtab()" data-toggle=\"tab\" href=\"#' + marketStack[i].toLowerCase() + '\">'+ marketStack[i] +'</a></li>';
                 }
-                    MarketTabs += '</ul><div class=\"tab-content\"><div  id=\"'+marketStack[0].toLowerCase()+'\"  class=\"tab-pane fade in active\"><div  id=\"'+ marketStack[0] +'\"></div></div>';
+                    MarketTabs += '</ul><input id=\"myInput\"  class=\"inputLand\" onkeyup=\"myFunction()\" placeholder=\"&ensp; Search\"><div class=\"tab-content\"><div  id=\"AllMarkets\" class=\"tab-pane fade in active\"><div  id=\"allmarkets\"></div></div><div  id=\"'+marketStack[0].toLowerCase()+'\"  class=\"tab-pane fade in active\"><div  class=\"Markety\" style=\"display:none;\"  id=\"'+ marketStack[0] +'\"></div></div>';
                 for (var i=1 ; i < marketStack.length ; i++ ){
-                    MarketTabs +='<div  id=\"'+ marketStack[i].toLowerCase() +'\"  class=\"tab-pane fade in active\"><div  id=\"'+ marketStack[i]+ '\"></div></div>';
+                    MarketTabs +='<div  id=\"'+ marketStack[i].toLowerCase() +'\"  class=\"tab-pane fade in active\"><div style=\"display:none;\" class=\"Markety\" id=\"'+ marketStack[i]+ '\"></div></div>';
                 }
                 MarketTabs +='</div>';
+
+                console.log(marketList);
+                //$('#Markets').innerHTML = MarketTabs;
+                // while(!document.getElementById("Markets")){
+                //   setTimeout(function(){}, 1000);
+                // }
+                // window.addEventListener('DOMContentLoaded', function(){
+                //     document.getElementById("Markets").innerHTML = MarketTabs;
+                //     //document.querySelector('#my-awesome-el').innerHTML = new Date
+                // });
                 document.getElementById("Markets").innerHTML = MarketTabs;
+                var tableAllMarket = "";
+              tableAllMarket += "<div class=\"LandingTableContainer\" style=\" padding: 20px 0px; margin-left:-2px; \"><table id=\"allMarketpairs\" style=\" width: 99%;  margin: auto; margin-bottom: 5px;  margin-right: 25px; min-height:110%;\" class=\"Newfixed_header table-hover\"><thead><tr><th></th></tr><tr class=\"rowtable\"><th class=\"marketTabSpace\" >Market</th><th  class=\"chartMobile\" >Buy</th><th  class=\"chartMobile\" >Sell</th><th class=\"chartMobile\" style=\"display:none;\">Low</th><th class=\"chartMobile\" style=\"display:none;\" >High</th><th class=\"chartMobile\"style=\"display:none;\" >Open</th><th>Last Price</th><th  style=\"white-space: nowrap;\" class=\"chartMobile\" >24h Volume</th><th style=\"white-space: nowrap;\">24h Change</th><th style=\"text-align: left;\">Market</th></tr></thead><tbody>";
+              for(var l=0 ; l < marketStack.length; l++){
+                for(var m=0 ; m < marketList[l].length; m++){
+                    tableAllMarket += "<tr class=\"marketrow\"  onclick=\"window.open(\'" + tradepath.substring(0, tradepath.length-13) + "trading/" +  marketList[l][m][0] + " \');\">";
+                    tableAllMarket += "<td class=\"marketpais\" >";
+                    tableAllMarket += "<img class=\"currencyImage\" src=\"" + marketList[l][m][15] + "\"  height=\"32\" width=\"32\" >" + marketList[l][m][1] + "</td>";
+                    tableAllMarket += "<td  class=\"chartMobile\"  style=\" color: #4DD77C;\">";
+                    tableAllMarket += marketList[l][m][3]+ "</td>";
+                    tableAllMarket += "<td  class=\"chartMobile\"  style=\" color: #FF1479;\">";
+                    tableAllMarket += marketList[l][m][9] + "</td>";
+                    // tableAllMarket += "<td class=\"chartMobile\" >";
+                    // tableAllMarket += marketList[l][m][6] + "</td>";
+                    // tableAllMarket += "<td class=\"chartMobile\" >";
+                    // tableAllMarket += marketList[l][m][4]  + "</td>";
+                    // tableAllMarket += "<td class=\"chartMobile\" >";
+                    // tableAllMarket += marketList[l][m][7] + "</td>";
+                    tableAllMarket += "<td>";
+                    tableAllMarket += marketList[l][m][5] + "</td>";
+                    tableAllMarket += "<td class=\"chartMobile\" >";
+                    tableAllMarket += marketList[l][m][11] + "</td>";
+                    if( marketList[l][m][8][0] === "+" ){
+                        tableAllMarket += "<td style=\" color:#4DD77C;\">";
+                      } else{
+                        tableAllMarket += "<td style=\" color: #FF1479;\">";
+                      }
+                    tableAllMarket += marketList[l][m][8] +'</td>';
+                    tableAllMarket += '<td><div class=\"chart-container\"><canvas id=\"allM' + marketList[l][m][0] + '\"/></div></td>';
+                    tableAllMarket += "</tr>";
+                }
+              }
+
+            tableAllMarket += "<tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
+            document.getElementById("allmarkets").innerHTML = tableAllMarket;
+                
                 // $("Markets").ready( function() {
                   // document.getElementById("Markets").innerHTML = MarketTabs;
                 // });
                 for (var k=0 ; k < marketStack.length; k++){
                   var marketDATA = "";
-                  marketDATA += "<div style=\" padding: 20px 0px; margin-left:-2px; \"><table style=\" margin: auto; width:80%; \" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr style=\" font-size: 16px; \"><th style=\"padding-left:15px;\">Market</th><th>Buy</th><th>Sell</th><th class=\"chartMobile\" >Low</th><th class=\"chartMobile\" >High</th><th class=\"chartMobile\" >Open</th><th class=\"chartMobile\" >Last</th><th  class=\"chartMobile\" >Volume</th><th>Price Change</th><th>Graph</th></tr></thead><tbody>";
+                  marketDATA += "<div class=\"LandingTableContainer\" style=\" padding: 20px 0px; margin-left:-2px; \"><table id=\"table"+marketStack[k]+"\" style=\" width: 99%; margin: auto; margin-bottom: 5px; margin-right: 25px; min-height:110%;\" class=\"fixed_header table-hover\"><thead><tr><th></th></tr><tr class=\"rowtable\"><th class=\"marketTabSpace\" >Pair</th><th  class=\"chartMobile\" >Buy</th><th class=\"chartMobile\" >Sell</th><th class=\"chartMobile\" style=\"display:none;\">Low</th><th class=\"chartMobile\" style=\"display:none;\" >High</th><th class=\"chartMobile\" style=\"display:none;\" >Open</th><th>Last Price</th><th style=\"white-space: nowrap;\" class=\"chartMobile\">24h Volume</th><th style=\"white-space: nowrap;\">24h Change</th><th>Market</th></tr></thead><tbody>";
                   for (var t=0 ; t < marketList[k].length; t++){
-                    marketDATA += "<tr class=\"marketrow\"  onclick=\"window.open(\'https://www.speza.exchange/trading/" + marketList[0][t][0] + " \');\">";
+                    marketDATA += "<tr class=\"marketrow\"  onclick=\"window.open(\'"+ tradepath.substring(0, tradepath.length-13) + "trading/" + marketList[k][t][0] + "\');\">";
                     marketDATA += "<td class=\"marketpais\" >";
-                    marketDATA += marketList[k][t][1] + "</td>";
-                    marketDATA += "<td  style=\" color: #4DD77C;\">";
+                    marketDATA += "<img class=\"currencyImage\" src=\"" + marketList[k][t][15] + "\"  height=\"32px\" width=\"32px\" >" + marketList[k][t][1] + "</td>";
+                    marketDATA += "<td  class=\"chartMobile\"  style=\" color: #4DD77C;\">";
                     marketDATA += marketList[k][t][3]+ "</td>";
-                    marketDATA += "<td style=\" color: #FF1479;\">";
+                    marketDATA += "<td  class=\"chartMobile\" style=\" color: #FF1479;\">";
                     marketDATA += marketList[k][t][9] + "</td>";
-                    marketDATA += "<td class=\"chartMobile\" >";
-                    marketDATA += marketList[k][t][6] + "</td>";
-                    marketDATA += "<td class=\"chartMobile\" >";
-                    marketDATA += marketList[k][t][4]  + "</td>";
-                    marketDATA += "<td class=\"chartMobile\" >";
-                    marketDATA += marketList[k][t][7] + "</td>";
-                    marketDATA += "<td class=\"chartMobile\" >";
+                    // marketDATA += "<td class=\"chartMobile\" >";
+                    // marketDATA += marketList[k][t][6] + "</td>";
+                    // marketDATA += "<td class=\"chartMobile\" >";
+                    // marketDATA += marketList[k][t][4]  + "</td>";
+                    // marketDATA += "<td class=\"chartMobile\" >";
+                    // marketDATA += marketList[k][t][7] + "</td>";
+                    marketDATA += "<td >";
                     marketDATA += marketList[k][t][5] + "</td>";
-                    marketDATA += "<td  class=\"chartMobile\" >";
+                    // marketDATA += marketList[k][t][8] +'</td><td class=\"marketGraph\" ><canvas id=\"' + marketList[k][t][0] + '\" width=\"'+ width +'\" height=\"'+ height +'\" /></td>';
+                    marketDATA += "<td class=\"chartMobile\">";
                     marketDATA += marketList[k][t][11] + "</td>";
-                      if( marketList[k][t][8][0] === "+" ){
-                        marketDATA += "<td style=\" color:#4DD77C;\">";
-                      } else{
-                        marketDATA += "<td style=\" color: #FF1479;\">";
-                      }
-                      // marketDATA += marketList[k][t][8] +'</td><td class=\"marketGraph\" ><canvas id=\"' + marketList[k][t][0] + '\" width=\"'+ width +'\" height=\"'+ height +'\" /></td>';
-                      marketDATA += marketList[k][t][8] +'</td><td><div class=\"chart-container\"><canvas id=\"' + marketList[k][t][0] + '\"/></div></td>';
-                      marketDATA += "</tr>";
+                    if( marketList[k][t][8][0] === "+" ){
+                      marketDATA += "<td style=\" color:#4DD77C;\">"+ marketList[k][t][8] +"</td>";
+                    } else{
+                      marketDATA += "<td style=\" color: #FF1479;\">"+ marketList[k][t][8] +"</td>";
+                    }
+                    marketDATA += '<td><div class=\"chart-container\"><canvas id=\"' + marketList[k][t][0] + '\"/></div></td>';
+                    marketDATA += "</tr>";
                     }  
                   marketDATA += " <tr style=\"padding-top:100px;\"><td>&nbsp;</td></tr></tbody></table></div>";
                   document.getElementById(marketStack[k]).innerHTML = marketDATA;
@@ -226,26 +347,40 @@
                   //       document.getElementById(marketStack[k]).innerHTML = marketDATA;
                   // });
                     for (var t=0 ; t < marketList[k].length; t++){
+                      var fillData = [];
+                      if (marketList[k][t][12][0] === undefined || marketList[k][t][12][0].length == 0) { fillData = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] } else {
+                        //Comment line below and Uncomment line belowit
+                        //fillData = [1,2,10,20,10,8,5,4]
+                        fillData =  [(marketList[k][t][12][0][1]) ? marketList[k][t][12][0][1] : 0  , (marketList[k][t][12][0][2]) ? marketList[k][t][12][0][2] : 0  , (marketList[k][t][12][0][3]) ? marketList[k][t][12][0][3] : 0 , (marketList[k][t][12][0][4]) ? marketList[k][t][12][0][4] : 0 , (marketList[k][t][12][1][1]) ? marketList[k][t][12][1][1] : 0 , (marketList[k][t][12][1][2]) ? marketList[k][t][12][1][2] : 0  ,(marketList[k][t][12][1][3]) ? marketList[k][t][12][1][3] : 0 , (marketList[k][t][12][1][4]) ? marketList[k][t][12][1][4] : 0 , (marketList[k][t][12][2][1]) ? marketList[k][t][12][2][1] : 0  ,(marketList[k][t][12][2][2]) ? marketList[k][t][12][2][2] : 0 ,(marketList[k][t][12][2][3]) ? marketList[k][t][12][2][3] : 0 , (marketList[k][t][12][2][4]) ? marketList[k][t][12][2][4] : 0 ,(marketList[k][t][12][3][1]) ? marketList[k][t][12][3][1] : 0 ,(marketList[k][t][12][3][2]) ? marketList[k][t][12][3][2] : 0 ,(marketList[k][t][12][3][3]) ? marketList[k][t][12][3][3] : 0 , (marketList[k][t][12][3][4]) ? marketList[k][t][12][3][4] : 0 , (marketList[k][t][12][4][1]) ? marketList[k][t][12][4][1] : 0  , (marketList[k][t][12][4][2]) ? marketList[k][t][12][4][2] : 0 , (marketList[k][t][12][4][3]) ? marketList[k][t][12][4][3] : 0 ,(marketList[k][t][12][4][4]) ? marketList[k][t][12][4][4] : 0 ];
+                      }
+                      var maxval = Math.max(...fillData);
+                      var minval = Math.min(...fillData);
                       var bar_ctx = document.getElementById(marketList[k][t][0]).getContext('2d');
-                      var gradient = bar_ctx.createLinearGradient(0, 0, 0, 65);
-                      gradient.addColorStop(0, 'rgba(250,174,50,1)');   
-                      gradient.addColorStop(1, 'rgba(250,174,50,0)');
+                      var gradient = bar_ctx.createLinearGradient(0, 0, 0, 40);
+                      gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+                      gradient.addColorStop(1, 'rgba(191,53,127,0)');
 
                         new Chart(document.getElementById(marketList[k][t][0]), {
                           type: 'line',
                           data: {
-                            labels: [1,2,3,4,5,6,7,8],
+                            labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
                             datasets: [{ 
-                                data: [marketList[k][t][12][0][1], marketList[k][t][12][0][2] ,marketList[k][t][12][0][3] ,marketList[k][t][12][0][4] ,marketList[k][t][12][1][1] ,marketList[k][t][12][1][2] ,marketList[k][t][12][1][3] ,marketList[k][t][12][0][4]],
-                                //data: [3,5,9,7,8,6,3,5],
+                                //data: (marketList[k][t][12][0]) ? [marketList[k][t][12][0][1], marketList[k][t][12][0][2] ,marketList[k][t][12][0][3] ,marketList[k][t][12][0][4] ,marketList[k][t][12][1][1] ,marketList[k][t][12][1][2] ,marketList[k][t][12][1][3] ,marketList[k][t][12][0][4]] : [1,1,1,1,1,1,1,1],
+                                data: fillData,
                                 backgroundColor: gradient,
                                 label: "Africa",
-                                borderColor: "#3e95cd",
+                                borderColor: "#BF357F",
+                                borderWidth: 1.5,
                                 fill: true,
                               },
                             ]
                           },
                           options: {
+                            elements: {
+                                point:{
+                                    radius: 0
+                                }
+                            },
                             title: {
                               display: false,
                             },
@@ -262,34 +397,999 @@
                               yAxes: [{
                                 display: false,
                                 ticks: {
-                                    beginAtZero: true
+                                  suggestedMin: minval - .01 * minval ,
+                                  suggestedMax: maxval + .01 * minval
                                 }
                               }]
                           }   
                           }
                         });
+                        new Chart(document.getElementById('allM'+marketList[k][t][0]), {
+                          type: 'line',
+                          data: {
+                            labels: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+                            datasets: [{ 
+                                //data: (marketList[k][t][12][0]) ? [marketList[k][t][12][0][1], marketList[k][t][12][0][2] ,marketList[k][t][12][0][3] ,marketList[k][t][12][0][4] ,marketList[k][t][12][1][1] ,marketList[k][t][12][1][2] ,marketList[k][t][12][1][3] ,marketList[k][t][12][0][4]] : [1,1,1,1,1,1,1,1],
+                                data: fillData,
+                                backgroundColor: gradient,
+                                label: "Africa",
+                                borderColor: "#BF357F",
+                                borderWidth: 1.5,
+                                fill: true,
+                              },
+                            ]
+                          },
+                          options: {
+                            elements: {
+                                point:{
+                                    radius: 0
+                                }
+                            },
+                            title: {
+                              display: false,
+                            },
+                            legend: {
+                              display: false
+                            },
+                            tooltips: {
+                              enabled: false
+                            },
+                            scales: {
+                              xAxes: [{
+                                display: false
+                              }],
+                              yAxes: [{
+                                display: false,
+                                ticks: {
+                                  suggestedMin: minval - .01 * minval ,
+                                  suggestedMax: maxval + .01 * minval
+                                }
+                              }]
+                          }   
+                          }
+                        });
+                        //var newName = 'allM' + (marketList[k][t][0]) ;
+                        // console.log(newName);
+                        //console.log(marketList[k][t][0]);
+                        // new Chart(document.getElementById(newName.toString()), {
+                        //   type: 'line',
+                        //   data: {
+                        //     labels: [1,2,3,4,5,6,7,8],
+                        //     datasets: [{ 
+                        //         //data: (marketList[k][t][12][0]) ? [marketList[k][t][12][0][1], marketList[k][t][12][0][2] ,marketList[k][t][12][0][3] ,marketList[k][t][12][0][4] ,marketList[k][t][12][1][1] ,marketList[k][t][12][1][2] ,marketList[k][t][12][1][3] ,marketList[k][t][12][0][4]] : [1,1,1,1,1,1,1,1],
+                        //         data: fillData,
+                        //         backgroundColor: gradient,
+                        //         label: "Africa",
+                        //         borderColor: "#BF357F",
+                        //         borderWidth: 1.5,
+                        //         fill: true,
+                        //       },
+                        //     ]
+                        //   },
+                        //   options: {
+                        //     elements: {
+                        //         point:{
+                        //             radius: 0
+                        //         }
+                        //     },
+                        //     title: {
+                        //       display: false,
+                        //     },
+                        //     legend: {
+                        //       display: false
+                        //     },
+                        //     tooltips: {
+                        //       enabled: false
+                        //     },
+                        //     scales: {
+                        //       xAxes: [{
+                        //         display: false
+                        //       }],
+                        //       yAxes: [{
+                        //         display: false,
+                        //         ticks: {
+                        //             beginAtZero: true
+                        //         }
+                        //       }]
+                        //   }   
+                        //   }
+                        // });
                     }
               }
+              alltables = marketStack;
+  
+            // console.log(marketNames);//all Pairs
+            // console.log(marketStack);// all the markets
+            // console.log(marketList);// all Pairs in each of the markets
+             
+             
+              /******************************************************************/ /******************************************************************/ /******************************************************************/
+              /******************************************************************/
+               try {
+              var requestTopPairs = new XMLHttpRequest();
+              requestTopPairs.open('GET', tradepath + '/public/markets/top?limit=8', true);
+              requestTopPairs.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
+              requestTopPairs.setRequestHeader('Access-Control-Allow-Origin', '*');
+              requestTopPairs.setRequestHeader('Access-Control-Allow-Method', 'GET');
+              requestTopPairs.setRequestHeader('Content-Type', 'application/json');
+              requestTopPairs.send();
+              requestTopPairs.onload = function() {
+                if (requestTopPairs.status >= 200 && requestTopPairs.status < 400) {
+                  var data = JSON.parse(this.response); 
+                  // console.log(data);
+                  // console.log(marketNames);
+                  // console.log(marketList);
+                  var htmldataM = "<div><ul className=\"GslidesN\" style=\" display: flex; margin-left: -45px;\">";
+                  var htmldata = "<div><ul className=\"GslidesN\" style=\" display: flex; margin-left: -45px;\">";
+                  var bestPDataNames = [];
+                  var bestMPDataNames = [];
+                  var bestPDataColor = [];
+                  var best2PDataNames = [];
+                  var bestPDataChart = [];
+                  for(var i=0 ; i<marketNames.length; i++) {
+                   if(data[marketNames[i][0]]){
+                      var lastPrice = parseFloat(data[marketNames[i][0]].ticker.last).toFixed(2);
+                      bestPDataNames.push("bestP"+marketNames[i][0]);
+                      bestMPDataNames.push("MbestP"+marketNames[i][0]);
+                      bestPDataChart.push(marketNames[i][12]);
+                      console.log(marketNames[i][0].toString());
+                      console.log(bestPDataChart);
+                      // console.log(marketNames[i][12][0]);
+                      // console.log(marketNames[i][12]);
+                      // console.log(marketNames[i]);
+                      // console.log(bestPDataChart);
+                      // console.log('AvrgPrice: '+data[marketNames[i][0]].ticker.price_change_percent[0]);
+                      // console.log(tradepath.substring(0, tradepath.length-13) + "trading/" + marketNames[i][0]);
+                      var colorCode = (data[marketNames[i][0]].ticker.price_change_percent[0] === "+") ? "#12C096" : "#BF357F" ;
+                      bestPDataColor.push(colorCode);
+                      htmldata += "<li style=\"cursor: pointer; display:flex;\" class=\"GslideN slide2 \" onclick=\"window.open(\'"+ tradepath.substring(0, tradepath.length-13) + "trading/" +   marketNames[i][0] + "\');\" ><div class=\"bestPerforming_Graph_container\"><table class=\"frontchartinfo\" style=\"color:#000000; text-allign:left;\"><tr><td class=\"TopPbold\" style=\"padding-top: 10px; text-align: left;\">" + marketNames[i][1] + "</td><td rowspan=\"2\"><canvas class=\"backChart\" id=\"bestP" + marketNames[i][0] + "\"/></td></tr><tr><td class=\"TopPbold closetogether\" style=\"text-align: left; color:" + colorCode + ";\">"+ lastPrice +"</td></tr><tr><td class=\"TopPnorm closetogether\" style=\"text-align: left;\"><span style=\"color: " + colorCode +  ";\"> " + data[marketNames[i][0]].ticker.price_change_percent + " </span>Volume:" + data[marketNames[i][0]].ticker.volume +"</td><td style=\"font-weight: normal; color:#fff; font-size: 14px; width: 150px;\">s</td></tr></table></div><div class=\"seprationline\" style=\"border: 0.5px solid rgba(108,108,108,0.05); margin: 0 3px; width=0.1px; height=30px;\"></div></li>";
+                      htmldataM += "<li style=\"cursor: pointer; display:flex;\" class=\"GslideN slide2 \" onclick=\"window.open(\'"+ tradepath.substring(0, tradepath.length-13) + "trading/" +   marketNames[i][0] + "\');\" ><div class=\"bestPerforming_Graph_container\"><table class=\"frontchartinfo\" style=\"color:#000000; text-allign: center;\"><tr><td><canvas class=\"MbackChart\" id=\"MbestP" + marketNames[i][0] + "\"/></td></tr><tr><td class=\"TopPbold\" style=\"padding-top: 70px; text-align: center; font-size:16px;\">" + marketNames[i][1] + "</td></tr><tr><td class=\"TopPbold closetogether\" style=\"text-align: center;\"><span style=\"color:" + colorCode + "; font-size:16px; \">"+ lastPrice +"</span></br><span class=\"TopPnorm closetogether\" style=\"text-align: center;\"><span style=\"color: " + colorCode + "; font-size:12px;\">" + data[marketNames[i][0]].ticker.price_change_percent + "</span></span></td></tr></table></div><div class=\"seprationline\" style=\"border: 0.5px solid rgba(108,108,108,0.05); margin: 0 3px; width=0.1px; height=30px;\"></div></li>";
+                      /* 
+                      avg_price:buy:high:last:low:open:price_change_percent:sell:vol:volume:
+                      */
+                   }
+                  }
+                  // for(var i=0 ; i<marketNames.length; i++) {
+                  //  if(data[marketNames[i][0]]){
+                  //     var lastPrice = parseFloat(data[marketNames[i][0]].ticker.last).toFixed(2);
+                  //     best2PDataNames.push("best2P"+marketNames[i][0]);
+                  //     bestPDataChart.push(marketNames[i][12][0]);
+                  //     // console.log(marketNames[i][12][0]);
+                  //     // console.log(marketNames[i][12]);
+                  //     // console.log(marketNames[i]);
+                  //     // console.log(bestPDataChart);
+                  //     // console.log('AvrgPrice: '+data[marketNames[i][0]].ticker.price_change_percent[0]);
+                  //     // console.log(tradepath.substring(0, tradepath.length-13) + "trading/" + marketNames[i][0]);
+                  //     var colorCode = (data[marketNames[i][0]].ticker.price_change_percent[0] === "+") ? "#4DD77C" : "#FF1479" ;
+                  //     htmldata += "<li style=\"cursor: pointer;\" class=\"GslideN slide2 \" onclick=\"window.open(\'"+ tradepath.substring(0, tradepath.length-13) + "trading/" +   marketNames[i][0] + "\');\" ><div class=\"bestPerforming_Graph_container\"><table class=\"frontchartinfo\" style=\"color:#000000; width:290px; height:105px;\"><tr><td style=\"font-weight: 500; font-size: 14px; padding-top: 10px;\">" + marketNames[i][1] + "</td><td rowspan=\"2\"><canvas class=\"backChart\" id=\"best2P" + marketNames[i][0] + "\" style=\"padding: 20px 35px; box-shadow: 7px 3px 5px rgba(0,0,0,.05);\"/></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color:" + colorCode + ";\">"+ lastPrice +"</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color:" + colorCode + ";\">" + data[marketNames[i][0]].ticker.price_change_percent + "</td><td style=\"font-weight: normal; font-size: 14px;\">Volume:" + data[marketNames[i][0]].ticker.volume + "</td></tr></table></div></li>";
+                  //     /* 
+                  //     avg_price:buy:high:last:low:open:price_change_percent:sell:vol:volume:
+                  //     */
+                  //  }
+                  // }
+                  // console.log(bestPDataNames);
+                  // console.log(bestPDataChart);
+                  // if (bestPDataChart[0] === undefined || bestPDataChart[0].length == 0) {
+                  //   console.log("hello");
+                  // } else{
+                  //   console.log("goodbye");
+                  // }
+                  htmldata +=  "</ul></div>"; 
+                  htmldataM +=  "</ul></div>"; 
+                  // var sss = [3,5,9,7,8,6,3,5];
+                  document.getElementById("Samplebar").innerHTML = htmldata;
+                  document.getElementById("SamplebarMobile").innerHTML = htmldataM;
+  
+                  for(var i=0 ; i<bestPDataNames.length; i++){
+                      var fillData = [];
+                      if (bestPDataChart[i] === undefined || bestPDataChart[i].length == 0) { fillData = [0,0,0,0,0,0,0,0,0,0,0,0]} else {
+                        fillData =  [(bestPDataChart[i][2][1]) ? bestPDataChart[i][2][1] : 0 , (bestPDataChart[i][2][2]) ? bestPDataChart[i][2][2] : 0  ,(bestPDataChart[i][2][3]) ? bestPDataChart[i][2][3] : 0 ,(bestPDataChart[i][2][4]) ? bestPDataChart[i][2][4] : 0 ,(bestPDataChart[i][3][1]) ? bestPDataChart[i][3][1] : 0 ,(bestPDataChart[i][3][2]) ? bestPDataChart[i][3][2] :0 ,(bestPDataChart[i][3][3]) ? bestPDataChart[i][3][3] : 0 ,(bestPDataChart[i][3][4]) ? bestPDataChart[i][3][4] : 0 ,(bestPDataChart[i][4][1]) ? bestPDataChart[i][4][1] : 0  ,(bestPDataChart[i][4][2]) ? bestPDataChart[i][4][2] : 0 ,(bestPDataChart[i][4][3]) ? bestPDataChart[i][4][3] : 0 ,(bestPDataChart[i][4][4]) ?  bestPDataChart[i][4][4] : 0];
+                      }
+                      var maxval = Math.max(...fillData);
+                      var minval = Math.min(...fillData);
+                      var bar_ctx = document.getElementById(bestPDataNames[i].toString()).getContext('2d');
+                      var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+                      gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+                      gradient.addColorStop(1, 'rgba(191,53,127,0)');
+                        new Chart(document.getElementById(bestPDataNames[i].toString()), {
+                          type: 'line',
+                          data: {
+                            labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+                            datasets: [{ 
+                                data: fillData,
+                                backgroundColor: "#fff",
+                                label: "Africa",
+                                borderColor: bestPDataColor[i],
+                                borderWidth: 4.5,
+                                fill: true,
+                              },
+                            ]
+                          },
+                          options: {
+                            elements: {
+                                point:{
+                                    radius: 0
+                                }
+                            },
+                            title: {
+                              display: false,
+                            },
+                            legend: {
+                              display: false
+                            },
+                            tooltips: {
+                              enabled: false
+                            },
+                            scales: {
+                              xAxes: [{
+                                display: false
+                              }],
+                              yAxes: [{
+                                display: false,
+                                ticks: {
+                                    suggestedMin: minval ,
+                                    suggestedMax: maxval
+                                }
+                              }]
+                          }   
+                          }
+                        });
+                        new Chart(document.getElementById(bestMPDataNames[i].toString()), {
+                          type: 'line',
+                          data: {
+                            labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+                            datasets: [{ 
+                                data: fillData,
+                                backgroundColor: "#fff",
+                                label: "Africa",
+                                borderColor: bestPDataColor[i],
+                                borderWidth: 4.5,
+                                fill: true,
+                              },
+                            ]
+                          },
+                          options: {
+                            elements: {
+                                point:{
+                                    radius: 0
+                                }
+                            },
+                            title: {
+                              display: false,
+                            },
+                            legend: {
+                              display: false
+                            },
+                            tooltips: {
+                              enabled: false
+                            },
+                            scales: {
+                              xAxes: [{
+                                display: false
+                              }],
+                              yAxes: [{
+                                display: false,
+                                ticks: {
+                                    suggestedMin: minval ,
+                                    suggestedMax: maxval
+                                }
+                              }]
+                          }   
+                          }
+                        });
+                  }
+                  // for(var i=0 ; i<best2PDataNames.length; i++){
+                  //     var fillData = [];
+                  //     if (bestPDataChart[i] === undefined || bestPDataChart[i].length == 0) { fillData = [0,0,0,0,0,0,0,0] } else {
+                  //       fillData = bestPDataChart[i];
+                  //     }
+                  //     var bar_ctx = document.getElementById(best2PDataNames[i].toString()).getContext('2d');
+                  //     var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+                  //     gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+                  //     gradient.addColorStop(1, 'rgba(191,53,127,0)');
+                  //       new Chart(document.getElementById(best2PDataNames[i].toString()), {
+                  //         type: 'line',
+                  //         data: {
+                  //           labels: [1,2,3,4,5,6,7,8],
+                  //           datasets: [{ 
+                  //               data: fillData,
+                  //               backgroundColor: gradient,
+                  //               label: "Africa",
+                  //               borderColor: "#BF357F",
+                  //               borderWidth: 1.5,
+                  //               fill: true,
+                  //             },
+                  //           ]
+                  //         },
+                  //         options: {
+                  //           elements: {
+                  //               point:{
+                  //                   radius: 0
+                  //               }
+                  //           },
+                  //           title: {
+                  //             display: false,
+                  //           },
+                  //           legend: {
+                  //             display: false
+                  //           },
+                  //           tooltips: {
+                  //             enabled: false
+                  //           },
+                  //           scales: {
+                  //             xAxes: [{
+                  //               display: false
+                  //             }],
+                  //             yAxes: [{
+                  //               display: false,
+                  //               ticks: {
+                  //                   beginAtZero: true
+                  //               }
+                  //             }]
+                  //         }   
+                  //         }
+                  //       });
+                        
+                  // }
+                } else {
+                }
+                }
+                      
+              }
               
-                // console.log(marketNames);//all Pairs
-                // console.log(marketStack);// all the markets
-                // console.log(marketList);// all Pairs in each of the markets
+              catch(err) {
+                location.reload(true);
+              } 
+               /******************************************************************/
+            //   var htmldata = "<div><ul className=\"GslidesN\" style=\" display: flex; margin-left: -45px;\">"
+            //   htmldata += "<li class=\"GslideN slide2 \"><table style=\"color:#fff;\"><tr><td style=\"font-weight: 500; font-size: 14px;\">1BNB /USDT</td><td rowspan=\"2\"><div class=\"bestPerforming_Graph_container\"><canvas id=\"sample1\" style=\"padding: 20px 35px;\"/></div></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color: #4DD77C;\">34.0482</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color: #4DD77C;\">+3.65%</td><td style=\"font-weight: normal; font-size: 14px;\">Volume: 51,273,447</td></tr></table></li>";
+            //   htmldata += "<li class=\"GslideN slide2 \"><table style=\"color:#fff;\"><tr><td style=\"font-weight: 500; font-size: 14px;\">2BNB /USDT</td><td rowspan=\"2\"><div class=\"bestPerforming_Graph_container\"><canvas id=\"sample2\" style=\"padding: 20px 35px;\"/></div></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color: #4DD77C;\">34.0482</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color: #4DD77C;\">+3.65%</td><td style=\"font-weight: normal; font-size: 14px;\">Volume: 51,273,447</td></tr></table></li>";
+            //   htmldata += "<li class=\"GslideN slide2 \"><table style=\"color:#fff;\"><tr><td style=\"font-weight: 500; font-size: 14px;\">3BNB /USDT</td><td rowspan=\"2\"><div class=\"bestPerforming_Graph_container\"><canvas id=\"sample3\" style=\"padding: 20px 35px;\"/></div></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color: #4DD77C;\">34.0482</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color: #4DD77C;\">+3.65%</td><td style=\"font-weight: normal; font-size: 14px;\">Volume: 51,273,447</td></tr></table></li>";
+            //   htmldata += "<li class=\"GslideN slide2 \"><table style=\"color:#fff;\"><tr><td style=\"font-weight: 500; font-size: 14px;\">4BNB /USDT</td><td rowspan=\"2\"><div class=\"bestPerforming_Graph_container\"><canvas id=\"sample4\" style=\"padding: 20px 35px;\"/></div></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color: #4DD77C;\">34.0482</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color: #4DD77C;\">+3.65%</td><td style=\"font-weight: normal; font-size: 14px;\">Volume: 51,273,447</td></tr></table></li>";
+            //   htmldata += "<li class=\"GslideN slide2 \"><table style=\"color:#fff;\"><tr><td style=\"font-weight: 500; font-size: 14px;\">5BNB /USDT</td><td rowspan=\"2\"><div class=\"bestPerforming_Graph_container\"><canvas id=\"sample5\" style=\"padding: 20px 35px;\"/></div></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color: #4DD77C;\">34.0482</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color: #4DD77C;\">+3.65%</td><td style=\"font-weight: normal; font-size: 14px;\">Volume: 51,273,447</td></tr></table></li>";
+            //   htmldata += "<li class=\"GslideN slide2 \"><table style=\"color:#fff;\"><tr><td style=\"font-weight: 500; font-size: 14px;\">6BNB /USDT</td><td rowspan=\"2\"><div class=\"bestPerforming_Graph_container\"><canvas id=\"sample6\" style=\"padding: 20px 35px;\"/></div></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color: #4DD77C;\">34.0482</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color: #4DD77C;\">+3.65%</td><td style=\"font-weight: normal; font-size: 14px;\">Volume: 51,273,447</td></tr></table></li>";
+            //   htmldata += "<li class=\"GslideN slide2 \"><table style=\"color:#fff;\"><tr><td style=\"font-weight: 500; font-size: 14px;\">7BNB /USDT</td><td rowspan=\"2\"><div class=\"bestPerforming_Graph_container\"><canvas id=\"sample7\" style=\"padding: 20px 35px;\"/></div></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color: #4DD77C;\">34.0482</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color: #4DD77C;\">+3.65%</td><td style=\"font-weight: normal; font-size: 14px;\">Volume: 51,273,447</td></tr></table></li>";
+            //   htmldata += "<li class=\"GslideN slide2 \"><table style=\"color:#fff;\"><tr><td style=\"font-weight: 500; font-size: 14px;\">8BNB /USDT</td><td rowspan=\"2\"><div class=\"bestPerforming_Graph_container\"><canvas id=\"sample8\" style=\"padding: 20px 35px;\"/></div></td></tr><tr><td style=\"font-weight: bold; font-size: 24px; color: #4DD77C;\">34.0482</td></tr><tr><td style=\"font-weight: 500; font-size: 14px; color: #4DD77C;\">+3.65%</td><td style=\"font-weight: normal; font-size: 14px;\">Volume: 51,273,447</td></tr></table></li>";
+            //   htmldata +=  "</ul></div>"; 
+            //  // window.onload = function() {
+            //     document.getElementById("Samplebar").innerHTML = htmldata;
+            //  // }
+            // var LLwidth = 100;
+            // var LLanimation_speed = 1000;
+            // var LLtime_val = 6000;
+            // var LLcurrent_slide = 1;
+
+            // var LLinterval;
+            //  var $Gslider = $('#Samplebar');
+            //  var $Gslide_container = $('.GslidesN');
+            //  var $Gslides = $('.GslideN');
+
+
+            // $Gslides.each(function(index){
+            //       $(this).css('left',(index*100)+'%');
+            //   });
+            // function GstartSlider() {
+            //   LLinterval = setInterval(function() {
+            //     $Gslide_container.animate({'left': '-='+(LLwidth+'%'), 'opacity': '0.1'  , 'text-shadow': 'none'}, LLanimation_speed, function() {
+            //       if (++LLcurrent_slide === $Gslides.length+1) {
+            //         LLcurrent_slide = 1;
+            //         $Gslide_container.css('left', 0);
+            //       }
+            //       $Gslide_container.css('opacity', 1);
+            //       $Gslide_container.css('text-shadow', '0px 0px 5px #A372EA');
+            //     });
+            //   }, LLtime_val);      
+            // }
+            // GstartSlider();
+         
+            // var bar_ctx = document.getElementById("sample1").getContext('2d');
+            // var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+            // gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+            // gradient.addColorStop(1, 'rgba(191,53,127,0)');
+
+            //   new Chart(document.getElementById("sample1"), {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1,2,3,4,5,6,7,8],
+            //       datasets: [{ 
+            //           data: [3,5,9,7,8,6,3,5],
+            //           backgroundColor: gradient,
+            //           label: "Africa",
+            //           borderColor: "#BF357F",
+            //           borderWidth: 1.5,
+            //           fill: true,
+            //         },
+            //       ]
+            //     },
+            //     options: {
+            //       elements: {
+            //           point:{
+            //               radius: 0
+            //           }
+            //       },
+            //       title: {
+            //         display: false,
+            //       },
+            //       legend: {
+            //         display: false
+            //       },
+            //       tooltips: {
+            //         enabled: false
+            //       },
+            //       scales: {
+            //         xAxes: [{
+            //           display: false
+            //         }],
+            //         yAxes: [{
+            //           display: false,
+            //           ticks: {
+            //               beginAtZero: true
+            //           }
+            //         }]
+            //     }   
+            //     }
+            //   });
+            //   var bar_ctx = document.getElementById("sample2").getContext('2d');
+            // var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+            // gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+            // gradient.addColorStop(1, 'rgba(191,53,127,0)');
+
+            //   new Chart(document.getElementById("sample2"), {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1,2,3,4,5,6,7,8],
+            //       datasets: [{ 
+            //           data: [3,5,9,7,8,6,3,5],
+            //           backgroundColor: gradient,
+            //           label: "Africa",
+            //           borderColor: "#BF357F",
+            //           borderWidth: 1.5,
+            //           fill: true,
+            //         },
+            //       ]
+            //     },
+            //     options: {
+            //       elements: {
+            //           point:{
+            //               radius: 0
+            //           }
+            //       },
+            //       title: {
+            //         display: false,
+            //       },
+            //       legend: {
+            //         display: false
+            //       },
+            //       tooltips: {
+            //         enabled: false
+            //       },
+            //       scales: {
+            //         xAxes: [{
+            //           display: false
+            //         }],
+            //         yAxes: [{
+            //           display: false,
+            //           ticks: {
+            //               beginAtZero: true
+            //           }
+            //         }]
+            //     }   
+            //     }
+            //   });
+            //   var bar_ctx = document.getElementById("sample3").getContext('2d');
+            // var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+            // gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+            // gradient.addColorStop(1, 'rgba(191,53,127,0)');
+
+            //   new Chart(document.getElementById("sample3"), {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1,2,3,4,5,6,7,8],
+            //       datasets: [{ 
+            //           data: [3,5,9,7,8,6,3,5],
+            //           backgroundColor: gradient,
+            //           label: "Africa",
+            //           borderColor: "#BF357F",
+            //           borderWidth: 1.5,
+            //           fill: true,
+            //         },
+            //       ]
+            //     },
+            //     options: {
+            //       elements: {
+            //           point:{
+            //               radius: 0
+            //           }
+            //       },
+            //       title: {
+            //         display: false,
+            //       },
+            //       legend: {
+            //         display: false
+            //       },
+            //       tooltips: {
+            //         enabled: false
+            //       },
+            //       scales: {
+            //         xAxes: [{
+            //           display: false
+            //         }],
+            //         yAxes: [{
+            //           display: false,
+            //           ticks: {
+            //               beginAtZero: true
+            //           }
+            //         }]
+            //     }   
+            //     }
+            //   });
+            //   var bar_ctx = document.getElementById("sample4").getContext('2d');
+            // var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+            // gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+            // gradient.addColorStop(1, 'rgba(191,53,127,0)');
+
+            //   new Chart(document.getElementById("sample4"), {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1,2,3,4,5,6,7,8],
+            //       datasets: [{ 
+            //           data: [3,5,9,7,8,6,3,5],
+            //           backgroundColor: gradient,
+            //           label: "Africa",
+            //           borderColor: "#BF357F",
+            //           borderWidth: 1.5,
+            //           fill: true,
+            //         },
+            //       ]
+            //     },
+            //     options: {
+            //       elements: {
+            //           point:{
+            //               radius: 0
+            //           }
+            //       },
+            //       title: {
+            //         display: false,
+            //       },
+            //       legend: {
+            //         display: false
+            //       },
+            //       tooltips: {
+            //         enabled: false
+            //       },
+            //       scales: {
+            //         xAxes: [{
+            //           display: false
+            //         }],
+            //         yAxes: [{
+            //           display: false,
+            //           ticks: {
+            //               beginAtZero: true
+            //           }
+            //         }]
+            //     }   
+            //     }
+            //   });
+            //   var bar_ctx = document.getElementById("sample5").getContext('2d');
+            // var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+            // gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+            // gradient.addColorStop(1, 'rgba(191,53,127,0)');
+
+            //   new Chart(document.getElementById("sample5"), {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1,2,3,4,5,6,7,8],
+            //       datasets: [{ 
+            //           data: [3,5,9,7,8,6,3,5],
+            //           backgroundColor: gradient,
+            //           label: "Africa",
+            //           borderColor: "#BF357F",
+            //           borderWidth: 1.5,
+            //           fill: true,
+            //         },
+            //       ]
+            //     },
+            //     options: {
+            //       elements: {
+            //           point:{
+            //               radius: 0
+            //           }
+            //       },
+            //       title: {
+            //         display: false,
+            //       },
+            //       legend: {
+            //         display: false
+            //       },
+            //       tooltips: {
+            //         enabled: false
+            //       },
+            //       scales: {
+            //         xAxes: [{
+            //           display: false
+            //         }],
+            //         yAxes: [{
+            //           display: false,
+            //           ticks: {
+            //               beginAtZero: true
+            //           }
+            //         }]
+            //     }   
+            //     }
+            //   });
+            //   var bar_ctx = document.getElementById("sample6").getContext('2d');
+            // var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+            // gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+            // gradient.addColorStop(1, 'rgba(191,53,127,0)');
+
+            //   new Chart(document.getElementById("sample6"), {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1,2,3,4,5,6,7,8],
+            //       datasets: [{ 
+            //           data: [3,5,9,7,8,6,3,5],
+            //           backgroundColor: gradient,
+            //           label: "Africa",
+            //           borderColor: "#BF357F",
+            //           borderWidth: 1.5,
+            //           fill: true,
+            //         },
+            //       ]
+            //     },
+            //     options: {
+            //       elements: {
+            //           point:{
+            //               radius: 0
+            //           }
+            //       },
+            //       title: {
+            //         display: false,
+            //       },
+            //       legend: {
+            //         display: false
+            //       },
+            //       tooltips: {
+            //         enabled: false
+            //       },
+            //       scales: {
+            //         xAxes: [{
+            //           display: false
+            //         }],
+            //         yAxes: [{
+            //           display: false,
+            //           ticks: {
+            //               beginAtZero: true
+            //           }
+            //         }]
+            //     }   
+            //     }
+            //   });
+            // var bar_ctx = document.getElementById("sample7").getContext('2d');
+            // var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+            // gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+            // gradient.addColorStop(1, 'rgba(191,53,127,0)');
+
+            //   new Chart(document.getElementById("sample7"), {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1,2,3,4,5,6,7,8],
+            //       datasets: [{ 
+            //           data: [3,5,9,7,8,6,3,5],
+            //           backgroundColor: gradient,
+            //           label: "Africa",
+            //           borderColor: "#BF357F",
+            //           borderWidth: 1.5,
+            //           fill: true,
+            //         },
+            //       ]
+            //     },
+            //     options: {
+            //       elements: {
+            //           point:{
+            //               radius: 0
+            //           }
+            //       },
+            //       title: {
+            //         display: false,
+            //       },
+            //       legend: {
+            //         display: false
+            //       },
+            //       tooltips: {
+            //         enabled: false
+            //       },
+            //       scales: {
+            //         xAxes: [{
+            //           display: false
+            //         }],
+            //         yAxes: [{
+            //           display: false,
+            //           ticks: {
+            //               beginAtZero: true
+            //           }
+            //         }]
+            //     }   
+            //     }
+            //   });
+            //   var bar_ctx = document.getElementById("sample8").getContext('2d');
+            // var gradient = bar_ctx.createLinearGradient(0, 0, 0, 125);
+            // gradient.addColorStop(0, 'rgba(191,53,127,1)');   
+            // gradient.addColorStop(1, 'rgba(191,53,127,0)');
+
+            //   new Chart(document.getElementById("sample8"), {
+            //     type: 'line',
+            //     data: {
+            //       labels: [1,2,3,4,5,6,7,8],
+            //       datasets: [{ 
+            //           data: [3,5,9,7,8,6,3,5],
+            //           backgroundColor: gradient,
+            //           label: "Africa",
+            //           borderColor: "#BF357F",
+            //           borderWidth: 1.5,
+            //           fill: true,
+            //         },
+            //       ]
+            //     },
+            //     options: {
+            //       elements: {
+            //           point:{
+            //               radius: 0
+            //           }
+            //       },
+            //       title: {
+            //         display: false,
+            //       },
+            //       legend: {
+            //         display: false
+            //       },
+            //       tooltips: {
+            //         enabled: false
+            //       },
+            //       scales: {
+            //         xAxes: [{
+            //           display: false
+            //         }],
+            //         yAxes: [{
+            //           display: false,
+            //           ticks: {
+            //               beginAtZero: true
+            //           }
+            //         }]
+            //     }   
+            //     }
+            //   });
+               /******************************************************************/ /******************************************************************/ /******************************************************************/ /******************************************************************/
+              // var slideDataInfo=  "<ul className=\"GslidesN\"><li className=\"GslideN slide1\">slide1</li><li className=\"GslideN slide2\">slide2</li><li className=\"GslideN slide3\">slide3</li></ul>";
+              // document.getElementById("SlideGraph").innerHTML = slideDataInfo;
+              // // var slideDataInfo = "<div className=\"topGraphSlide\"><ul className=\"slidesN\">";
+
+              // // for (var k=0 ; k < marketStack.length; k++) {
+              // //   for (var t=0 ; t < marketList[k].length; t++) {
+              // //     slideDataInfo+='<li className=\"slideN\"><div style=\"width: 400px; height:300px\"><canvas id=\"slider' + marketList[k][t][0] + '\"/></div></li>';
+              // //   }
+              // // }  
+
+              // // slideDataInfo +="</ul></div>";
+              // // document.getElementById("SlideGraph").innerHTML = slideDataInfo;
+              // // for (var k=0 ; k < marketStack.length; k++) {
+              // //   for (var t=0 ; t < marketList[k].length; t++) {
+              // //   new Chart(document.getElementById("slider"+marketList[k][t][0]), {
+              // //               type: 'line',
+              // //               data: {
+              // //                 labels: [1,2,3,4,5,6,7,8],
+              // //                 datasets: [{ 
+              // //                     //data: [marketList[k][t][12][0][1], marketList[k][t][12][0][2] ,marketList[k][t][12][0][3] ,marketList[k][t][12][0][4] ,marketList[k][t][12][1][1] ,marketList[k][t][12][1][2] ,marketList[k][t][12][1][3] ,marketList[k][t][12][0][4]],
+              // //                     data: [3,5,9,7,8,6,3,5],
+              // //                     backgroundColor: gradient,
+              // //                     label: "Africa",
+              // //                     borderColor: "#BF357F",
+              // //                     borderWidth: 1.5,
+              // //                     fill: true,
+              // //                   },
+              // //                 ]
+              // //               },
+              // //               options: {
+              // //                 elements: {
+              // //                     point:{
+              // //                         radius: 0
+              // //                     }
+              // //                 },
+              // //                 title: {
+              // //                   display: false,
+              // //                 },
+              // //                 legend: {
+              // //                   display: false
+              // //                 },
+              // //                 tooltips: {
+              // //                   enabled: false
+              // //                 },
+              // //                 scales: {
+              // //                   xAxes: [{
+              // //                     display: false
+              // //                   }],
+              // //                   yAxes: [{
+              // //                     display: false,
+              // //                     ticks: {
+              // //                         beginAtZero: true
+              // //                     }
+              // //                   }]
+              // //               }   
+              // //               }
+              // //             });
+              // //       }
+              // //     }
               } else {
               }
               }      
             }
             catch(err) {
               location.reload(true);
-            } 
+            }
+             
           } 
           } catch(err) {
           location.reload(true);
           }
      }
+     
     } catch(err) {
       location.reload(true);
     }
-    </script>
+      } }catch(err) {
+      location.reload(true);
+    }
 
+
+  </script>
   </body>
+  <script>
+   //  var newslist="";
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+try{
+        const url = window.env.api.tradeUrl + '/public/notices' ;
+        fetch( url , {
+        method: 'Get',
+        headers: {
+          'Content-type':'application/json',
+          'Access-Control': 'Allow-Origin'
+        },
+        })  .then(res => res.json())
+            .then(data => {
+             //for( var i=0 ; i<data.length ; i++){
+                // this.setState({
+                //   headingsArray[] = data[i].notice_title;
+                // });
+                // this.setState({
+                //   headingsArray : this.state.headingsArray.push(data[i].notice_title),
+                // });
+                // this.setState({
+                //   headingsArray: [...this.state.headingsArray, data[i].notice_title],
+                //   //headingsArray:  data,
+                // });
+                date = new Date(data[data.length-1].created_at);
+                $("#news").append('<li class=\"slideN slide2 animate-flicker\"><div style=\"margin: auto; width:87%;\"><img src=\"https://i.imgur.com/ZVw77Ha.png\" height=\"22px\"/>&emsp;&emsp;' + data[data.length-1].notice_title + '&emsp;' +  data[data.length-1].description  +` &emsp;&emsp;|&emsp;&emsp;` + ' ' + monthNames[(date.getMonth())] + ' ' + date.getDate()  + ' &emsp;' + '<a href=\"https://speza.zendesk.com/hc/en-us/categories/360001478312-Announcements\"  target=\"_blank\"style=\" color:#823179; font-size:12px; text-decoration: none;\" >More ></a>' + ' </div></li>');
+                //newslist += "<li className=\"slideN slide2\">"+ data[i].notice_title +"</li>";
+                // this.state.headingsArray.push(data[i].notice_title);
+                // this.state.headingsArray.push("sss");
+                // console.log(data[i].notice_title);
+            //}
+              var width = 100;
+              var animation_speed = 1;
+              var time_val = 18000;
+              var current_slide = 1;
+
+              var $slider = $('#sliderN');
+              var $slide_container = $('.slidesN');
+              var $slides = $('.slideN');
+
+              var interval;
+              var $slides = $('.slideN');
+              $slides.each(function(index){
+                   $(this).css('left',(index*100)+'%');
+                });
+              function startSlider() {
+                  interval = setInterval(function() {
+                  $slide_container.animate({'left': '-='+(width+'%'), 'opacity': '0.1'  , 'text-shadow': 'none'}, animation_speed, function() {
+                    if (++current_slide === $slides.length+1) {
+                      current_slide = 1;
+                      $slide_container.css('left', 0);
+                    }
+                    $slide_container.css('opacity', 1);
+                   // $slide_container.css('text-shadow', '4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15)');
+                  });
+                }, time_val);      
+              }
+              startSlider();
+            //console.log(this.state.headingsArray);
+            // this.setState({
+            //       headingsArray : data.notice_title
+            // });
+            // const element = (
+            //   // <ul className="slidesN">
+            //   // <List items={fruites} />
+            //   // <img onClick={handleClick} src={logo} style={{ position:'absolute', width: '20px' , height: '20px' , margin:'10px' , right:'10px', cursor: 'pointer'}} alt="Logo" />
+            //   // </ul>
+            // );
+            //document.getElementById("news").innerHTML = newslist;
+            // ReactDOM.render( <List items={this.state.fruites}/> , document.getElementById('sliderN'));
+          })
+
+              
+        }  catch(err) {
+        location.reload(true);
+      }
+      // var width = 100;
+      // var animation_speed = 6000;
+      // var time_val = 17000;
+      // var current_slide = 1;
+
+      // var $slider = $('#sliderN');
+      // var $slide_container = $('.slidesN');
+      // var $slides = $('.slideN');
+
+      // var interval;
+
+     
+  
+      // function startSlider() {
+      //   interval = setInterval(function() {
+      //     $slide_container.animate({'left': '-='+(width+'%'), 'opacity': '0.6'  , 'text-shadow': 'none'}, animation_speed, function() {
+      //       if (++current_slide === $slides.length) {
+      //         current_slide = 1;
+      //         $slide_container.css('left', 0);
+      //       }
+      //       $slide_container.css('opacity', 1);
+      //       $slide_container.css('text-shadow', '0px 0px 5px #A372EA');
+      //     });
+      //   }, time_val);      
+      // }
+      // startSlider();
+
+
+
+      function alltabs() {
+        document.getElementById("AllMarkets").style.display =  "block";
+        var arrayOfElements=document.getElementsByClassName('Markety');
+        var lengthOfArray=arrayOfElements.length;
+        for (var i=0; i<lengthOfArray;i++){
+            arrayOfElements[i].style.display='none';
+        };
+      }
+      function normtab() {
+        document.getElementById("AllMarkets").style.display =  "none"
+        var arrayOfElements=document.getElementsByClassName('Markety');
+        var lengthOfArray=arrayOfElements.length;
+        for (var i=0; i<lengthOfArray;i++){
+            arrayOfElements[i].style.display='block';
+        };
+      }
+
+      alltabs();
+
+      document.getElementById("elallmarketLi").addClass("selected");
+      $("elallmarketLi").addClass("selected");
+      //("#Markets").tabs("select", "#AllMarkets");
+      //$("#Markets").tabs({active: 1});
+      //document.getElementById("AllMarkets").style.display =  "block";
+      // $("#AllMarkets").addClass("active");
+    </script>
+   <!-- <script>
+     function callback(response){
+        console.log(response);
+     }
+     $.ajax({
+       url:"https://geoip-db.com/jsonp/",
+       dataType:"jsonp"
+     }) -->
+  <script>
+    // window.onload = function() {
+                   
+    //               }
+  </script>
+  </script>
+  <!-- <script>
+   document.getElementById("No1").onclick = window.open('https://www.w3schools.com/jsref/met_document_getelementsbyclassname.asp');
+  </script> -->
 </html>

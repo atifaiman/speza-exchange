@@ -318,7 +318,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         if (type === 'fiat') {
             return (
                 <div>
+                <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
                 {user.otp ? <FiatWithdraw userid={user.uid} currency={currency} balance={balance}  email={user.email}/> : this.isOtpDisabled()}
+                {/* <FiatWithdraw userid={user.uid} currency={currency} balance={balance}  email={user.email}/> */}
                 </div>
             );
         }

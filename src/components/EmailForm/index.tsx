@@ -52,7 +52,7 @@ class EmailForm extends React.Component<EmailFormProps> {
                         <div className="cr-email-form__option">
                             <div className="cr-email-form__option-inner">
                                 {title ? title : 'Forgot password'}
-                                <div className="cr-email-form__cros-icon" onClick={this.handleCancel}>
+                                <div className="cr-email-form__cros-icon" onClick={this.handleCancel} style={{ display: 'none' }}>
                                     <img src={require('./close.svg')}/>
                                 </div>
                             </div>

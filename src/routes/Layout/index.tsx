@@ -20,16 +20,23 @@ import {
 } from '../../modules';
 import {
     ChangeForgottenPasswordScreen,
+    CoinListingApplicationScreen,
     ConfirmScreen,
     EmailVerificationScreen,
     ForgotPasswordScreen,
     HistoryScreen,
+    ICODiscoveryScreen,
     LandingScreen,
     OrdersTabScreen,
     ProfileScreen,
     ProfileTwoFactorAuthScreen,
+    ReferralScreen,
+    RegistrationDoneScreen,
+    RequestSentScreen,
     SignInScreen,
     SignUpScreen,
+    TokenListingChecklistScreen,
+    TokenListingIntegrationScreen,
     TradingScreen,
     VerificationScreen,
     WalletsScreen,
@@ -150,8 +157,15 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/forgot_password" component={ForgotPasswordScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/password_reset" component={ChangeForgottenPasswordScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/email-verification" component={EmailVerificationScreen} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/ico-discovery" component={ICODiscoveryScreen} />
                     <Route exact={true} path="/trading/:market?" component={TradingScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/form/token-listing-integration" component={TokenListingIntegrationScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/form/token-listing-checklist" component={TokenListingChecklistScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/form/coin-listing-application" component={CoinListingApplicationScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/form/request-sent" component={RequestSentScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/registration-complete" component={RegistrationDoneScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/orders" component={OrdersTabScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={true} path="/referral" component={ReferralScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/history" component={HistoryScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/confirm" component={ConfirmScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile" component={ProfileScreen} />

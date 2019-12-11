@@ -55,7 +55,7 @@
         }
 
         .cr-wallet-item {
-            border-color: #fff;
+            border-color: #a0a0a0;
             border-radius: 0;
             color: var(--wallets-item-font);
 
@@ -391,7 +391,7 @@
         border-bottom: 1px solid var(--wallets-item-border);
         border-radius: calc(var(--gap) * 0.5);
         box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12);
-        font-size: calc(var(--gap) * 2.66);
+        font-size: calc(var(--gap) * 2.35);
 
         & > * {
             background: var(--transparent);
@@ -471,12 +471,15 @@
     }
 
     &__enable-2fa-message {
+        margin: 10px 0;
         font-size: calc(var(--gap) * 3);
         text-align: center;
     }
 
     &__button-2fa {
         &.cr-button {
+            display: flex;
+            margin: auto;
             background: var(--button-primary);
             color: var(--color-white) ;
             font-size: calc(var(--gap) * 2);
@@ -494,7 +497,7 @@
 
     .pg-history-elem__label {
         color: var(--wallets-balance);
-        font-size: calc(var(--gap) * 5);
+        font-size: calc(var(--gap) * 4);
         font-weight: 300;
     }
 

@@ -313,8 +313,12 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         const today = new Date();
         const typeOfDocuments = this.getDocumentsType(documentsType);
         // const docExpire = isDateInFuture(expiration) ? expiration : '';
-        const dateOfExp = (date && (date > today)) ? date.toLocaleDateString() : '' ;
-
+        const mm = date.getMonth() + 1;
+        const dd = date.getDate();
+        const yy = date.getFullYear();
+        const myDateString =  `${yy}-${mm}-${dd}`;
+        //const dateOfExp = (date && (date > today)) ? date.toLocaleDateString() : '' ;
+        const dateOfExp = (date && (date > today)) ? myDateString : '' ;
         if (!scans.length) {
             return;
         }

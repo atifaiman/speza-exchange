@@ -197,7 +197,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         </div>
                     </div>
                 </div>
-                <div className="pg-profile-page__row">
+                <div className="">
                     <div>
                         <div className="pg-profile-page__label">
                             {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password'})}
@@ -238,6 +238,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     }
     private handleLogOut = () => {
          this.props.logout();
+         localStorage.removeItem('notificationClose');
     };
 
     private renderModalHeader = () => {

@@ -53,6 +53,7 @@ interface IdentityState {
     cityFocused: boolean;
     dateOfBirthFocused: boolean;
     firstNameFocused: boolean;
+    citizenFocused: boolean;
     lastNameFocused: boolean;
     postcodeFocused: boolean;
     residentialAddressFocused: boolean;
@@ -79,6 +80,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
         dateOfBirthFocused: false,
         firstNameFocused: false,
         lastNameFocused: false,
+        citizenFocused: false,
         postcodeFocused: false,
         residentialAddressFocused: false,
         date: new Date(),
@@ -118,6 +120,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
             firstNameFocused,
             lastNameFocused,
             postcodeFocused,
+            citizenFocused,
             residentialAddressFocused,
             countryOfBirth,
             // metadata,
@@ -144,6 +147,9 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
 
         const postcodeGroupClass = cr('pg-confirm__content-identity-col-row-content', {
             'pg-confirm__content-identity-col-row-content--focused': postcodeFocused,
+        });
+        const citizenGroupClass = cr('pg-confirm__content-identity-col-row-content', {
+            'pg-confirm__content-identity-col-row-content--focused': citizenFocused,
         });
 
         const residentialAddressGroupClass = cr('pg-confirm__content-identity-col-row-content', {
@@ -509,7 +515,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                             <div className="pg-confirm__content-identity-col-row-content-label">
                                 {countryOfBirth && this.translate('page.body.kyc.identity.CoR')}
                             </div>
-                            <fieldset className={postcodeGroupClass}>
+                            <fieldset className={citizenGroupClass}>
                                 <Select
                                     value={selectedOption}
                                     onChange={this.handleSelectItemChange}
@@ -602,6 +608,12 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
                     });
                     this.scrollToElement(7);
                     break;
+                case 'citizenFocused':
+                this.setState({
+                    citizenFocused: !this.state.citizenFocused,
+                });
+                this.scrollToElement(7);
+                break;
                 case 'residentialAddress':
                     this.setState({
                         residentialAddressFocused: !this.state.residentialAddressFocused,
@@ -665,7 +677,12 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
 
     private sendData = () => {
         const today = new Date();
-        const dob = (this.state.date && (this.state.date < today)) ? this.state.date.toLocaleDateString() : '' ;
+        const mm = this.state.date.getMonth() + 1;
+        const dd = this.state.date.getDate();
+        const yy = this.state.date.getFullYear();
+        const myDateString = `${yy}-${mm}-${dd}`;//(US)
+        //const dob = (this.state.date && (this.state.date < today)) ? this.state.date.toLocaleDateString() : '' ;
+        const dob = (this.state.date && (this.state.date < today)) ? myDateString : '' ;
         // const dob = !isDateInFuture(this.state.dateOfBirth) ? this.state.dateOfBirth : '';
         const profileInfo = {
             first_name: this.state.firstName,

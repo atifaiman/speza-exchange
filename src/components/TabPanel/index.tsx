@@ -82,7 +82,7 @@ class TabPanel extends React.Component<TabPanelProps> {
         return (
             <div className={className}>
                 <div className="cr-tab-panel__navigation-container draggable-container">
-                    <div className={navCx} role="tablist">
+                    <div className={navCx} role="tablist" style={{width:'100%' , display:'flex' , flexDirection:'row' , justifyContent:'space-around'}}>
                         {panels.map(this.renderTabPanel)}
                     </div>
                     {optionalHead && <div className="cr-tab-panel__optinal-head">{optionalHead}</div>}

@@ -70,14 +70,13 @@ class AwepayDeposite extends Component {
     .then(data => {
       const element = (
         <div style={{width:'500px' , height:'500px' , textAlign: 'left'}}>
-           <h1 className="awepay_depsit_head">Deposit</h1>
-          <img  style={{  width: '150px' ,display:'flex' ,  padding:'30px' , margin: 'auto'}} src={AwepayLogo} alt="Awepay-Logo"/>
+           <h1  style={{ color:'#000'}}className="awepay_depsit_head">Online banking</h1>
           <h3
           style={{ textAlign: 'center' ,
           color: '#242253',
           fontWeight: '300',
           fontSize: '20px',
-          lineHeight:'12px',
+          lineHeight:'25px',
           padding:'5px'
           }}>Confirm your Deposit information</h3>
           <p
@@ -85,7 +84,7 @@ class AwepayDeposite extends Component {
            color: '#242253',
            fontWeight: 'bold',
            fontSize: '30px',
-           lineHeight:'12px',
+           lineHeight:'25px',
            padding:'5px',
            }}>{this.state.email}</p>
           <p
@@ -93,7 +92,7 @@ class AwepayDeposite extends Component {
            color: '#242253',
            fontWeight: 'bold',
            fontSize: '30px',
-           lineHeight:'12px',
+           lineHeight:'25px',
            padding:'5px',
            textTransform: 'uppercase',
            }}>{this.state.currency}</p>
@@ -102,18 +101,20 @@ class AwepayDeposite extends Component {
            color: '#242253',
            fontWeight: 'bold',
            fontSize: '30px',
-           lineHeight:'12px',
+           lineHeight:'25px',
            padding:'5px'
            }}>  <Decimal fixed={2}>{this.state.amount}</Decimal> </p>
         <div dangerouslySetInnerHTML={{__html: data.data}}/>
         <p
          style={{ textAlign: 'center' ,
+         width: '60%',
+         margin:'auto',
          color: '#242253',
          fontWeight: '300',
          fontSize: '18px',
-         lineHeight:'12px',
+         lineHeight:'25px',
          padding:'5px'
-         }}>You will be redirected to AWEPAY for Authorization</p>
+         }}>You will be redirected to your Online Banking for Authorization</p>
         </div>
       );
       console.log(data);
@@ -163,8 +164,8 @@ class AwepayDeposite extends Component {
       
       <div style={{ backgroundColor: '#ffffff',  borderRadius: '10px' , width: '500px' , display: 'flex' , flexDirection: 'column' }}>
         
-          <h1 className="awepay_depsit_head">Deposit</h1>
-          <img  style={{  width: '120px' , height: '27x',  padding:'30px' , margin: 'auto'}} src={AwepayLogo} alt="Awepay-Logo"/>
+          <h1 className=" ">Deposit</h1>
+          <p  style={{ color: '#000' , fontsize: '20px', margin: 'auto' , fontWeight: '400' , fontSize:'20px'}} alt="Awepay-Logo">Online banking</p>
           <form onSubmit={this.handleSubmit} noValidate>
             <div style={{ display: 'flex' ,flexDirection: 'column' , marginBottom: '15px' , width: '100%'  }}>
               <div style={{ display: 'none'}}>
@@ -228,7 +229,7 @@ class AwepayDeposite extends Component {
                 border: 'none',
                 padding: 'var(--gap)',
                 margin: 'var(--gap)',
-              }} >Go to Awepay </button>
+              }} >Next</button>
             </div>
           </form>
           <div>

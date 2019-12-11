@@ -3,7 +3,7 @@ import Select from 'react-select';
 import ReactDOM from 'react-dom'
 import { render } from "react-dom";
 import { Decimal } from '@openware/components';
-import AwepayLogo from './awepay.png';
+import AwepayLogo from './Onlinebanking.svg';
 import money from './money.png';
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
@@ -156,13 +156,13 @@ class AwepayWidhrawForm extends Component {
     const element = (
         <div style={{width:'600px' , height:'600px' , textAlign: 'left'}}>
                <h1 className="awepay_depsit_head">Withdraw</h1>
-          <img  style={{  width: '150px' ,display:'flex' ,  padding:'30px' , margin: 'auto'}} src={AwepayLogo} alt="Awepay-Logo"/>
+               <p  style={{ color: '#000' , fontsize: '20px', margin: 'auto' , fontWeight: '400'}} alt="Awepay-Logo">Online banking</p>
             <h3
              style={{ textAlign: 'center' ,
              color: '#242253',
              fontWeight: '300',
              fontSize: '24px',
-             lineHeight:'12px',
+             lineHeight:'42px',
              padding:'5px'
              }}>Request submitted</h3>
 
@@ -171,7 +171,7 @@ class AwepayWidhrawForm extends Component {
               <tr>
                 <td><p
             style={{ textAlign: 'left' ,
-            color: 'var(--base)',
+            color: '#000',
             fontWeight: 'bold',
             fontSize: '18px',
             lineHeight:'12px',
@@ -189,7 +189,7 @@ class AwepayWidhrawForm extends Component {
               <tr>
                 <td><p
             style={{ textAlign: 'left' ,
-            color: 'var(--base)',
+            color: '#000',
             fontWeight: 'bold',
             fontSize: '18px',
             lineHeight:'12px',
@@ -207,7 +207,7 @@ class AwepayWidhrawForm extends Component {
               <tr>
                 <td><p
             style={{ textAlign: 'left' ,
-            color: 'var(--base)',
+            color: '#000',
             fontWeight: 'bold',
             fontSize: '18px',
             lineHeight:'12px',
@@ -225,7 +225,7 @@ class AwepayWidhrawForm extends Component {
               <tr>
                 <td><p
             style={{ textAlign: 'left' ,
-            color: 'var(--base)',
+            color: '#000',
             fontWeight: 'bold',
             fontSize: '18px',
             lineHeight:'12px',
@@ -243,7 +243,7 @@ class AwepayWidhrawForm extends Component {
               <tr>
                 <td><p
             style={{ textAlign: 'left' ,
-            color: 'var(--base)',
+            color: '#000',
             fontWeight: 'bold',
             fontSize: '18px',
             lineHeight:'12px',
@@ -261,7 +261,7 @@ class AwepayWidhrawForm extends Component {
               <tr>
                 <td><p
             style={{ textAlign: 'left' ,
-            color: 'var(--base)',
+            color: '#000',
             fontWeight: 'bold',
             fontSize: '18px',
             lineHeight:'12px',
@@ -325,7 +325,7 @@ class AwepayWidhrawForm extends Component {
       
         <div style={{ backgroundColor: '#ffffff',  borderRadius: '10px' , width: '400px' , display: 'flex' , flexDirection: 'column'  }}>
              <h1 className="awepay_depsit_head">Withdraw</h1>
-          <img  style={{  width: '120px' ,display:'flex' ,  padding:'30px' , margin: 'auto'}} src={AwepayLogo} alt="Awepay-Logo"/>
+             <p  style={{ color: '#000' , fontsize: '20px', margin: 'auto' , fontWeight: '400'}} alt="Awepay-Logo">Online banking</p>
          
           <form onSubmit={this.handleSubmit} noValidate>
             <div style={{ display: 'flex' ,flexDirection: 'column' , marginBottom: '15px' , width: '100%'  }}>
@@ -374,7 +374,7 @@ class AwepayWidhrawForm extends Component {
               >Bank Name </label>
                
               <div
-              style={{color: 'var(--text)',
+              style={{color: '#000',
                fontSize: 'calc(var(--gap) * 2.53)',
                border: '1px solid var(--input-block-border-color)',
                borderRadius: 'calc(var(--gap) * 0.66)',

@@ -94,7 +94,7 @@ export class TradingChartComponent extends React.PureComponent<Props> {
     public render() {
         return (
             <React.Fragment>
-                <div className="cr-table-header__content">
+                <div className="cr-table-header__content" style={{zIndex: 'auto'}}>
                     {this.props.currentMarket ? this.props.currentMarket.name : ''}
                 </div>
                 <div id={widgetParams.containerId} className="pg-trading-chart" />

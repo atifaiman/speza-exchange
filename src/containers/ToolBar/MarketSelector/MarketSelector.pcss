@@ -14,10 +14,20 @@
   cursor: pointer;
 
   &-search-wrapper {
+    /*
     width: calc(var(--big-gap) * 5.45);
     position: fixed;
     bottom: 0;
     left: 0;
+    z-index: 20;
+    animation-name: pg-trading-header-selector-search;
+    animation-duration: var(--market-selector-animation-duration);
+    background: var(--trading-header-background);
+    */
+    width: calc(var(--big-gap) * 7.0);
+    position: absolute;
+    top: 70px;
+    left: 5px;
     z-index: 20;
     animation-name: pg-trading-header-selector-search;
     animation-duration: var(--market-selector-animation-duration);
@@ -107,8 +117,12 @@
   }
 
   &-list-container-open {
-    left: calc(var(--big-gap) * -0.23);
+    /*
     top: calc(var(--big-gap) * -0.082);
+    left: calc(var(--big-gap) * -0.23);
+    */
+    top: calc(var(--big-gap) * .782);
+    left: calc(var(--big-gap) * -.1);
     width: calc(var(--big-gap) * 7);
     height: 100vh;
     padding-left: calc(var(--gap));
@@ -196,7 +210,7 @@
   to {
     width: calc(var(--big-gap) * 7);
     height: calc(100vh - var(--big-gap) * 1.1);
-    top: calc(var(--big-gap) * -0.082);
+    top: calc(var(--big-gap) * .782);
   }
 }
 
@@ -204,7 +218,7 @@
   from {
     width: calc(var(--big-gap) * 7);
     height: calc(100vh - var(--big-gap) * 1.1);
-    top: calc(var(--big-gap) * -0.082);
+    top: calc(var(--big-gap) * .782);
   }
   to {
     width: 0;

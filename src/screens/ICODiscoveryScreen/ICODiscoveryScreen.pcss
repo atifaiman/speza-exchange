@@ -1,0 +1,105 @@
+.page-body {
+    p, h1, h2, h3, h4 {
+        padding: 0;
+        margin: 0;
+    }
+    &-content {
+        width: inherit;
+        max-width: 1200px;
+        padding: 50px 0;
+    }
+    &-banner {
+        width: inherit;
+        height: 400px;
+        background: linear-gradient(69.59deg, #2A0B46 33.52%, #6C187D 100.04%);
+    }
+    @media only screen and (max-width: 1440px) {
+        &-content {
+            width: 100%;
+            max-width: 1440px;
+            padding: 50px 8.33%;
+        }
+    }
+}
+
+.discovery {
+    &-list {
+        width: 100%;
+        display: -webkit-flex;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.new-card {
+    &-container {
+        height: 420px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 10px rgba( 0, 0, 0, .2);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    &-cover-image {
+        width: 100%;
+        height: 160px;
+        background: linear-gradient(69.59deg, #2A0B46 33.52%, #6C187D 100.04%);
+        border-radius: 4px 4px 0 0;
+        display: -webkit-flex;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &-logo {
+        width: 250px;
+        height: 100px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    &-content {
+        padding: 20px;
+    }
+    &-status {
+        text-transform: uppercase;
+        color: #00BE85;
+        font-size: 10px;
+        font-weight: 700;
+        margin-bottom: 10px !important;
+    }
+    &-time {
+        color: #F02B67;
+    }
+    &-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 10px !important;
+        color: black;
+    }
+    &-description {
+        font-size: 12px;
+        color: rgb(10, 10, 10);
+    }
+    @media only screen and (min-width: 900px) {
+        &-container {
+            width: 31.5%;
+            margin-right: 2.75%;
+        }
+        &-container:nth-child(3n+0) {
+            margin-right: 0;
+        }
+    }
+    @media only screen and (min-width: 600px) and (max-width: 899px) {
+        &-container {
+            width: 48%;
+            margin-right: 4%;
+        }
+        &-container:nth-child(2n+0) {
+            margin-right: 0;
+        }
+    }
+    @media only screen and (max-width: 599px) {
+        &-container {
+            width: 100%;
+        }
+    }
+}

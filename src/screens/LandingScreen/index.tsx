@@ -4,80 +4,342 @@ import { FormattedHTMLMessage ,FormattedMessage  } from 'react-intl';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 // import QuickBuy from '../../containers/QuickBuy/QuickBuy';
-import SliderComponent from '../../containers/Slider/SliderComponent';
+// import { MasterCard } from '../../containers';
+
+import { Carousel } from '../../containers/Carousel';
+import News from '../../containers/Header/newsHeadline';
+// // import MasterCardComponent from '../../containers/Mastercard/MasterCard';
+// import MobileSliderComponent from '../../containers/Slider/MobileSliderComponent';
+// import SliderComponent from '../../containers/Slider/SliderComponent';
+
+
+/*
 import SmallBanner1 from '../../containers/Slider/SmallBanner1';
 import SmallBanner2 from '../../containers/Slider/SmallBanner2';
 import SmallBanner3 from '../../containers/Slider/SmallBanner3';
+*/
 import { setDocumentTitle } from '../../helpers';
+
+const ThreeBanners: React.FC = () => {
+    return (
+    <div className="container_banners" style={{minWidth:'1200px'}}>
+        <div className="three-banner-container" >
+            <div className="three-banner-item" id="banner-1">
+                <div className="three-banner-background" />
+                <div className="three-banner-overlay-container">
+                    <div className="three-banner-overlay-image" />
+                </div>
+                <div className="three-banner-content">
+                    <div className="content-col-1">
+                        <div className="content-logo" />
+                    </div>
+                    <div className="content-col-2">
+                        <div className="content-row-1">
+                            <p>List your Tokens on<br /><span>SPEZA Digital Asset Exchange</span></p>
+                        </div>
+                        <div className="content-row-2">
+                            <div className="content-button">Get Started</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="three-banner-item" id="banner-2">
+                <div className="three-banner-background" />
+                <div className="three-banner-overlay-container">
+                    <div className="three-banner-overlay-image" />
+                </div>
+                <div className="three-banner-content">
+                    <div className="content-col-1">
+                        <div className="content-logo" />
+                    </div>
+                    <div className="content-col-2">
+                        <div className="content-row-1">
+                            <p><span>SPEZA</span><br />Partner Recruitment Program</p>
+                        </div>
+                        <div className="content-row-2">
+                            <div className="content-button">Get Started</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="three-banner-item" id="banner-3">
+                <div className="three-banner-background" />
+                <div className="three-banner-overlay-container">
+                    <div className="three-banner-overlay-image" />
+                </div>
+                <div className="three-banner-content">
+                    <div className="content-col-1" />
+                    <div className="content-col-2">
+                    <div className="content-row-1">
+                        <div id="logo-speza-wallet" />
+                        <p>Revolutionizing Payments</p>
+                    </div>
+                        <div className="content-row-2">
+                            <div className="content-button">Get Started</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>);
+};
+
 
 class LandingComponent extends React.Component<RouterProps> {
 
+
     public componentDidMount() {
+        // if (window.localStorage)
+        // {
+        //   if (!localStorage.getItem('firstLoad'))
+        //   {
+        //     localStorage['firstLoad'] = true;
+        //     window.location.reload();
+        //   }
+        //   else
+        //     localStorage.removeItem('firstLoad');
+        // }
         setDocumentTitle('Home');
     }
 
+    public Fb = () => {
+        window.open('https://www.facebook.com/spezaworld', '_blank');
+    };
+    public Li = () => {
+        window.open('https://www.linkedin.com/company/speza', '_blank');
+    };
+    public Ms = () => {
+        window.open('https://www.messenger.com/login.php?next=https%3A%2F%2Fwww.messenger.com%2Ft%2F356791751702540%2F%3Fmessaging_source%3Dsource%253Apages%253Amessage_shortlink', '_blank');
+    };
+    public Tl = () => {
+        window.open('https://t.me/SPEZAWorld', '_blank');
+    };
+    public In = () => {
+        window.open('https://www.instagram.com/spezaworld/', '_blank');
+    };
     public goBack = () => {
         this.props.history.goBack();
     };
+    public goReff = () => {
+        const url = `${window.env.api.tradeUrl.substring(0,window.env.api.tradeUrl.length - 13)}referral/`;
+        window.open(url, '_self');
+    };
+    public handleClick1 = () => {
+         window.open('https://speza.zendesk.com/hc/en-us/articles/360032950831-Spread-Your-Love-for-SVT', '_blank');
+    };
 
+    public handleClick2 = () => {
+         window.open('https://play.google.com/store/apps/details?id=com.exchange.speza&hl=en', '_blank');
+    };
+
+    public handleClick3 = () => {
+         window.open('https://speza.zendesk.com/hc/en-us/articles/360032597872-Launch-Your-Own-Digital-Asset-Token-Offering', '_blank');
+    };
+    public handleClick4 = () => {
+        // window.open('http://google.com', '_blank');
+    };
+    public handleClick5 = () => {
+        const url = `${window.env.api.tradeUrl.substring(0,window.env.api.tradeUrl.length - 13)}trading/`;
+        window.open(url, '_blank');
+    };
     public render() {
         return (
             <div className="pg_landing">
-            <div className="row">
-                <div className="col-12">
-                    <div className="bigSlider">
-                    <SliderComponent/>
-                    </div>
-                </div>
+            <div className="row" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Carousel/>
             </div>
+            <div className="row container_banners" style={{height:'200px'}} >
+                <div id="Samplebar"/>
+                <div id="SamplebarMobile"/>
+            </div>
+            <div className="row" style={{background:'#FEFEFE'}}>
             <div className="bannerThreeSlider">
-                <div className="row" style={{justifyContent: 'space-between'}}>
-                    <div className="col-3" style={{padding:'0'}}>
-                        <div className="smallbannerMobile">
-                        <SmallBanner1/>
+                <div className="row bannerThreeSpace">
+                    <div className="container_banners" style={{display: 'none'}}>
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4 bannerOne ThreeBannerLeft smallbannerMobile" style={{ paddingBottom:'7%' ,cursor:'pointer', borderRadius:'10px' }}>
+                                <div id="Leftbanner">
+                                    <p>Spread</p>
+                                    <p>Your Love for</p>
+                                    <h3>SVT</h3>
+                                    <button id="LeftB" onClick={this.handleClick1}>sads</button>
+                                </div>
                         </div>
-                    </div>
-                    <div className="col-3" style={{padding:'0'}}>
-                        <div className="smallbannerMobile">
-                        <SmallBanner2/>
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4  bannerTwo ThreeBannerCenter smallbannerMobile" style={{ paddingBottom:'7%' ,cursor:'pointer', borderRadius:'10px'}} >
+                            <div id="Centerbanner">
+                                    <p>SPEZA</p>
+                                    <p>Digital Asset</p>
+                                    <p>Exchange</p>
+                                    <h3>Mobile App</h3>
+                                    <button onClick={this.handleClick1}>asdasd</button>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-3" style={{padding:'0'}}>
-                        <div className="smallbannerMobile">
-                        <SmallBanner3/>
+                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4  ThreeBannerRight smallbannerMobile" style={{paddingBottom:'7%',cursor:'pointer', borderRadius:'10px'}}>
+                            <div id="Rightbanner" >
+                                    <p>Launch Your Own</p>
+                                    <h3>Digital Asset Token Offering</h3>
+                                    <button onClick={this.handleClick1}>aasd</button>
+                                </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="row">
-                <div id="Markets" style={{ width:'100%'}} />
             </div>
-            <div className="landpage-Banners">
+            <div className="row" style={{background:'#FEFEFE', display: 'none'}} >
+                <div className="container_banners" style={{minWidth:'1200px'}}>
+                    <div className="col-xl-4 col-md-4 col-l-4 col-sm-12"  style={{ paddingLeft: '0'}}>
+                        <div className="col-12 ThreeBannerLeft ThreebannersMobile" style={{ borderRadius:'10px' }}>
+                            <div className="ThreeBanner_TextContainer" id="Leftbanner">
+                                <div className="TopSegment">
+                                    <p style={{ lineHeight: 1.3, fontWeight: 300 }}>Spread <br/>Your Love for</p>
+                                    <p style={{ fontWeight: 700, fontSize: 40, fontStyle: 'italic' }}>SVT</p>
+                                </div>
+                                <div className="BottomSegment">
+                                    <input type="button" value="Get Started" className="Button" onClick={this.handleClick1}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xl-4 col-md-4 col-l-4 col-sm-12" style={{ paddingRight: '1px', paddingLeft: '1px'}}>
+                        <div className="col-12 ThreeBannerCenter ThreebannersMobile" style={{borderRadius:'10px'}} >
+                            <div className="ThreeBanner_TextContainer" id="Centerbanner">
+                                <div className="TopSegment">
+                                    <p style={{ lineHeight: 1.3, fontWeight: 300 }}>SPEZA<br/> Digital Asset<br/> Exchange</p>
+                                    <p style={{ fontWeight: 900, fontStyle: 'italic' }}>Mobile App</p>
+                                </div>
+                                <div className="BottomSegment">
+                                    <input type="button" value="Get Started" className="Button" onClick={this.handleClick2} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-xl-4 col-md-4 col-l-4 col-sm-12"  style={{ paddingRight: '0'}}>
+                        <div className="col-12  ThreeBannerRight ThreebannersMobile" style={{ borderRadius:'10px'}}>
+                            <div className="ThreeBanner_TextContainer" id="Rightbanner" >
+                                <div className="TopSegment">
+                                    <p style={{ lineHeight: 1, fontWeight: 300, marginBottom: 0 }}>Launch Your Own</p>
+                                    <p style={{ fontWeight: 900, fontStyle: 'regular', lineHeight: 1.3 }}>Digital Asset Token<br/> Offering</p>
+                                </div>
+                                <div className="BottomSegment">
+                                    <input type="button" value="Learn More" className="Button" onClick={this.handleClick3} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="row" style={{background:'#FEFEFE'}} >
+                <ThreeBanners />
+            </div>
+            <div>
+                <div className="row container_banners" >
+                    <News/>
+                </div>
+            </div>
             <div className="row">
-                <div className="col-12" style={{ background:'#141622'}}>
-                <div style={{margin: 'auto'}}>
+                <div id="SlideGraph"/>
+            </div>
+            <div className="row" style={{background:'#FAFAFA'}}>
+                <div id="Markets" className="MarketComponent container_banners" style={{borderRadius:'5px'}}/>
+            </div>
+            <div className="row" style={{background:'#FEFEFE'}} >
+            <div className="container_banners">
+                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12">
+                    <div className="col-12 ThreeBannerLeft ThreebannersMobileButtomPage" style={{ borderRadius:'10px' }}>
+                        <div className="ThreeBanner_TextContainer" id="Leftbanner">
+                            <div className="TopSegment">
+                                <p style={{ lineHeight: 'normal', fontWeight: 300 }}>Spread <br/>Your Love for</p>
+                                <p style={{ fontWeight: 700, fontSize: 40, fontStyle: 'italic', lineHeight: 'normal'}}>SVT</p>
+                            </div>
+                            <div className="BottomSegment">
+                                <input type="button" value="Get Started" className="Button" onClick={this.handleClick1}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12">
+                    <div className="col-12 ThreeBannerCenter ThreebannersMobileButtomPage" style={{borderRadius:'10px'}} >
+                        <div className="ThreeBanner_TextContainer" id="Centerbanner">
+                            <div className="TopSegment">
+                                <p style={{ lineHeight: 'normal', fontWeight: 300 }}>SPEZA <br/>Digital Asset<br/> Exchange</p>
+                                <p style={{ fontWeight: 900,fontStyle: 'italic' ,lineHeight: 'normal' }}>Mobile App</p>
+                            </div>
+                            <div className="BottomSegment">
+                                <input type="button" value="Get Started" className="Button" onClick={this.handleClick2}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12"  >
+                    <div className="col-12  ThreeBannerRight ThreebannersMobileButtomPage" style={{ borderRadius:'10px'}}>
+                        <div className="ThreeBanner_TextContainer" id="Rightbanner" >
+                            <div className="TopSegment">
+                                <p style={{ lineHeight: 'normal', fontWeight: 300, marginBottom: 0 }}>Launch Your Own</p>
+                                <p style={{ fontWeight: 900, lineHeight: 'normal', fontStyle: 'regular'}}>Digital Asset Token<br/> Offering</p>
+                            </div>
+                            <div className="BottomSegment">
+                                <input type="button" value="Learn More" className="Button" onClick={this.handleClick3}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div style={{background:'#FEFEFE'}}>
+            <div className="row container_banners">
+            <div className="row buttomGraph_Banner">
+    <div className="" onClick={this.handleClick4} style={{cursor:'pointer' , width: '49%' , marginLeft: '-1%'}}>
+        <div className="row quikBuySize"  style={{height:'100%'}}>
+            <div className="col-xl-11 col-md-11 col-l-11 col-sm-12  quickBuyBanner">
+                <div className="ComingSoonTag"><img className="ComingSoonTagimg" src={require('./coming soon tag.png')}/></div>
+                <img src={require('./banner_trading_icon.png')}  className="buttomGraph_BannerImage"/>
+                <div className="buttomGraph_BannerData">
+                    <h1>Quick Buy</h1>
+                    <p>Your simple access to crypto</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div className="" onClick={this.handleClick5} style={{cursor:'pointer' ,width: '48%' , marginRight: '-2%'}}>
+        <div className="row tradeBannerSize" style={{height:'100%'}}>
+            <div className="col-xl-11 col-md-11 col-l-11 col-sm-12 tradeBanner">
+                <div><img src={require('./banner_quick buy_icon.png')} className="buttomGraph_BannerImage"/></div>
+                    <div className="buttomGraph_BannerData">
+                        <h1>Trading</h1>
+                        <p>Unlock the power of Digital Assets</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+            <div className="row landpage-Banners" style={{ background:'#141622' , display:'none'}}>
+                <div className="col-12 container_banners">
+                <div style={{}}>
                 <div className="row" style={{ color: '#fff'}}>
-                    <div className="col-xl-4 col-md-12 col-l-4 col-sm-12"  style={{height:'300px',margin: 'auto' }}>
+                    <div className="col-xl-4 col-md-12 col-l-4 col-sm-12"  style={{margin: 'auto' }}>
                     <div className="row">
-                        <div  style={{ padding:'40px', display:'flex' , flexFlow:'column' , paddingBottom:'40px'}} className="stayConnected">
+                        <div  style={{ display:'flex' , flexFlow:'column' , paddingBottom:'40px'}} className="stayConnected">
                         <h3 style={{fontSize:'48px', paddingTop: '15%' , margin: '0' , textAlign: 'left'}}><FormattedMessage id="page.landing.paneldark.col1.title"/></h3>
                         <p  style={{fontSize:'14px', maxWidth:'400px'}}><FormattedMessage id="page.landing.paneldark.col1.description"/></p>
                         </div>
                     </div>
                     </div>
-                    <div className="col-xl-5 col-md-12 col-l-5 col-sm-12"  style={{margin:'auto'}}>
-                    <div className="row">
-                    <div className="grpelem shared_content" id="u192093" data-content-guid="u192093_content"  style={{margin: 'auto'}}>
-                        <Iframe id="JotFormIFrame-91061490714453"  url="https://form.jotform.me/91061490714453"  scrolling="no" className="StayConnectedForm"/>
+                    <div className="col-xl-5 col-md-12 col-l-5 col-sm-12"  style={{margin:'auto' , padding:'25px'}}>
+                    <div className="row" style={{height: '360px'}}>
+                    <div className="grpelem shared_content" id="u192093" data-content-guid="u192093_content"  style={{margin: 'auto' , height: '360px'}}>
+                        <Iframe id="JotFormIFrame-91061490714453"  url="https://form.jotform.me/92692324063457"  scrolling="no" className="StayConnectedForm"/>
                     </div>
                     </div>
                     </div>
                     <div className="col-xl-3 col-md-12 col-l-3 col-sm-12" style={{margin:'auto'}}>
                     <div className="row" style={{  height:'100px' }} >
-                        <div style={{  margin:'auto' }}>
-                             <img src={require('./fb.svg')} style={{ height:'37px' , padding:'0 15px'}}/>
-                             <img src={require('./linkedin.svg')} style={{ height:'37px', padding:'0 15px'}} />
-                             <img src={require('./tele.svg')} style={{ height:'37px', padding:'0 15px'}}/>
+                        <div style={{  margin:'auto' , display:'flex' }}>
+                             <div id="Fb" onClick={this.Fb} style={{ height:'30px' ,width:'15px' , margin:'0 10px', padding:'0 10px'}}/>
+                             <div id="Li" onClick={this.Li} style={{ height:'30px' ,width:'30px' , margin:'0 10px', padding:'0 15px'}}/>
+                             <div id="Ms" onClick={this.Ms} style={{ height:'30px' ,width:'30px' , margin:'0 10px', padding:'0 15px'}}/>
+                             <div id="Tl" onClick={this.Tl} style={{ height:'24px' ,width:'30px' , margin:'0 10px', padding:'0 15px'}}/>
+                             <div id="In" onClick={this.In} style={{ height:'27px' ,width:'27px' , margin:'0 10px', padding:'0 15px'}}/>
                         </div>
                     </div>
                   </div>
@@ -85,128 +347,118 @@ class LandingComponent extends React.Component<RouterProps> {
                 </div>
                 </div>
             </div>
-            <div className="spezaButtomBanner">
+            <div className="landpage-Banners">
+            <div className="spezaButtomBanner" style={{ background:'#212328'}}>
                 <div className="row">
-                        <div className="col-4" style={{height:'500px' , background:'#fff', display:'flex'}}>
-                            <div style={{margin:'auto', marginTop:'110px', display:'flex' , flexDirection:'column' , marginLeft: '40px' , textAlign:'left' , lineHeight:'12px'}} >
-                                <img src={require('./spezalogo.svg')} style={{ height:'37px', padding:'0 15px'}}/>
-                                <h3 style={{fontSize:'24px' , color:'#0053A3' , marginTop:'30px'}}>HAVE QUESTIONS?</h3>
+                    <div className="row container_banners" style={{maxHeight:'400px'}}>
+                        <div className="col-5" style={{height:'400px' , background:'#212328', display:'flex'}}>
+                            <div style={{margin:'110px -10px', display:'flex' , flexDirection:'column' , textAlign:'left' , lineHeight:'12px'}} >
+                                <img src={require('./Speza_logo_full_beta.gif')} style={{ height:'55px', marginBottom:'-10px'}}/>
+                                <h3 style={{fontSize:'14px' , color:'#fff' , marginTop:'30px', fontWeight:'bold'}}>HAVE QUESTIONS?</h3>
                                 <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link1"/></p>
                                 <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link2"/></p>
                                 <p><FormattedHTMLMessage id="page.header.panelbottom.col1.link3"/></p>
-                                <p style={{fontSize:'14px' ,color:'#1E252F'}}>+603 7490 7707</p>
+                                <p><span style={{color: '#fff'}}>+603 7490 7707</span></p>
                         </div>
                         </div>
-                        <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
-                            <div style={{marginTop:'100px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}} >
-                                <h3 style={{fontSize:'24px' , color:'#141622'}}>COMPANY</h3>
-                                <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '20px'}}>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>About Us</li>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Terms</li>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Fees</li>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Referral</li>
+                        <div className="col-1.2" style={{height:'400px' , background:'#212328', display:'flex' }}>
+                            <div style={{marginTop:'163px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}} >
+                                <h3 style={{fontSize:'14px' , color:'#fff', fontWeight:'bold'}}>COMPANY</h3>
+                                <ul style={{ listStyleType: 'none' , padding: '0' , lineHeight: '20px'}}>
+                                <li style={{fontSize:'12px' , color:'#fff' , display:'none'}}>About Us</li>
+                                <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://speza.zendesk.com/hc/en-us/articles/360033576071-Term-of-Service">Terms</a></li>
+                                <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank"  href="https://speza.zendesk.com/hc/en-us/articles/360032045111-Privacy-Policy">Privacy</a></li>
+                                <li style={{fontSize:'12px' , color:'#fff' , display:'none'}}>Fees</li>
+                                <li style={{fontSize:'12px' , color:'#fff' , cursor: 'pointer'}}><a className="buttomFotter" onClick={this.goReff}>Referral</a></li>
                                 </ul>
                         </div>
                         </div>
-                        <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
-                            <div style={{marginTop:'100px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px', flexDirection:'column'}}>
-                                <h3 style={{fontSize:'24px' , color:'#141622'}}>PRODUCTS</h3>
-                                <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '20px'}}>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Regulated Exchange Platform</li>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Regulated Asset Backed Tokenization</li>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Offshore Virtual Currency</li>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Exchange License</li>
+                        <div className="col-2-1" style={{height:'400px' , background:'#212328', display:'flex' }}>
+                            <div style={{marginTop:'163px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px', flexDirection:'column'}}>
+                                <h3 style={{fontSize:'14px' , color:'#fff', fontWeight:'bold'}}>PRODUCTS</h3>
+                                <ul style={{ listStyleType: 'none',  padding: '0' , lineHeight: '20px'}}>
+                                <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://www.speza.org/regulated-digital-asset-exchange.html">Regulated Exchange Platform</a></li>
+                                <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://www.speza.org/regulated-digital-asset-token-offering.html">Regulated Asset Backed Tokenization</a></li>
+                                {/* <li style={{fontSize:'12px' , color:'#1E252F'}}>Offshore Virtual Currency</li> */}
+                                <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://www.speza.org/ovce.html">Exchange License</a></li>
                                 </ul>
                         </div>
                         </div>
-                        <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
-                            <div style={{marginTop:'100px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px', flexDirection:'column'}}>
-                                <h3 style={{fontSize:'24px' , color:'#141622'}}>RESOURCES</h3>
-                                <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '20px'}}>
-                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>Blog</li>
-                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>Announcements</li>
-                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>API Docs</li>
-                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>FAQ</li>
-                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>Support Center</li>
-                                    <li style={{fontSize:'12px' , color:'#1E252F'}}>Contact Us</li>
+                        <div className="col-1.5" style={{height:'400px' , background:'#212328', display:'flex' }}>
+                            <div style={{marginTop:'163px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px', flexDirection:'column'}}>
+                                <h3 style={{fontSize:'14px' , color:'#fff', fontWeight:'bold'}}>RESOURCES</h3>
+                                <ul style={{ listStyleType: 'none' , padding: '0' , lineHeight: '20px'}}>
+                                    <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://www.speza.org/blog.html">Blog</a></li>
+                                    <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://speza.zendesk.com/hc/en-us/sections/360003652372-Announcements">Announcements</a></li>
+                                    <li style={{fontSize:'12px' , color:'#fff' , display:'none'}}><a className="buttomFotter" target="_blank" href="https://app.swaggerhub.com/apis-docs/SpezaOrg/SpezaExchange/2.0.39">API Docs</a></li>
+                                    <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://speza.zendesk.com/hc/en-us/categories/360001478292-FAQ">FAQ</a></li>
+                                    <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://speza.zendesk.com/hc/en-us">Support Center</a></li>
+                                    <li style={{fontSize:'12px' , color:'#fff' , display:'none'}}>Contact Us</li>
                                 </ul>
                         </div>
                         </div>
-                        <div className="col-2" style={{height:'500px' , background:'#fff', display:'flex' }}>
-                            <div style={{marginTop:'100px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px',flexDirection:'column'}}>
-                                <h3 style={{fontSize:'24px' , color:'#141622'}}>CAREERS</h3>
-                                <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '20px'}}>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Careers</li>
-                                <li style={{fontSize:'12px' , color:'#1E252F'}}>Apply to SPEZA</li>
+                        <div className="col-1.3" style={{height:'400px' , background:'#212328', display:'flex' }}>
+                            <div style={{marginTop:'163px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px',flexDirection:'column'}}>
+                                <h3 style={{fontSize:'14px' , color:'#fff' , fontWeight:'bold'}}>CAREERS</h3>
+                                <ul style={{ listStyleType: 'none',  padding: '0' , lineHeight: '20px'}}>
+                                <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://www.speza.org/careers.html">Careers</a></li>
+                                <li style={{fontSize:'12px' , color:'#fff'}}><a className="buttomFotter" target="_blank" href="https://www.speza.org/apply-to-speza.html">Apply to SPEZA</a></li>
                                 </ul>
+                        </div>
                         </div>
                         </div>
                     </div>
             </div>
-            <div className="spezaButtomBannerMobile">
-                    <div className="row" style={{background:'#fff'}}>
-                        <div style={{height:'200px' , paddingTop:'50px',margin:'auto', textAlign:'center'  }}>
-                            <img src={require('./spezalogo.svg')} style={{ height:'37px', padding:'0 15px'}}/>
-                            <h3 style={{fontSize:'24px' , color:'#0053A3' , marginTop:'30px'}}>HAVE QUESTIONS?</h3>
-                            <p style={{fontSize:'14px' ,color:'#1E252F'}}>+603 7490 7707</p>
-                        </div>
-                    </div>
-                    <div className="row" style={{background:'#fff'}}>
-                        <div style={{height:'100px', display:'flex', fontSize: '16px', margin: 'auto',padding: '10px 20px'}} className="buttombanner_emails">
-                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4"><FormattedHTMLMessage id="page.header.panelbottom.col1.link1"/></div>
-                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4"><FormattedHTMLMessage id="page.header.panelbottom.col1.link2"/></div>
-                        <div className="col-xl-4 col-md-4 col-l-4 col-sm-4"><FormattedHTMLMessage id="page.header.panelbottom.col1.link3"/></div>
-                        </div>
-                    </div>
-                    <div className="row" style={{background:'#fff'}}>
-                        <div style={{paddingBottom: '80px', paddingTop:'20px', margin:'auto' , display: 'flex' , flexFlow: 'column' , width: '100%'}}>
+            </div>
+            <div className="MobileLandingPage" style={{display: 'none'}}>
+                <div className="row" style={{background:'#fff'}}>
+                    <div style={{paddingBottom: '80px', paddingTop:'20px', margin:'auto' , display: 'flex' , flexFlow: 'column' , width: '100%'}}>
                         <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de1mo"  style={{ margin: '5px' , background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>COMPANY&#x2192;</h3></button>
-                         <div id="de1mo"  className="collapse">
-                <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
-                    <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '35px'}}>
-                    <li style={{fontSize:'18px' , color:'#1E252F'}}>About Us</li>
-                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Terms</li>
-                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Fees</li>
-                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Referral</li>
-                    </ul>
-                </div>
-            </div>
-            <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de2mo"style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>PRODUCTS&#x2192;</h3></button>
-            <div id="de2mo"  className="collapse">
-                <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
-                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '35px'}}>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Regulated Exchange Platform</li>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Regulated Asset Backed Tokenization</li>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Offshore Virtual Currency</li>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Exchange License</li>
-                    </ul>
-                </div>
-            </div>
-            <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de3mo" style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>RESOURCES&#x2192;</h3></button>
-            <div id="de3mo" className="collapse">
-                     <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
-                        <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '35px'}}>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Blog</li>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Announcements</li>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>API Docs</li>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>FAQ</li>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Support Center</li>
-                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Contact Us</li>
-                        </ul>
+                            <div id="de1mo"  className="collapse">
+                                <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
+                                    <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '35px'}}>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>About Us</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Terms</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Fees</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Referral</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de2mo"style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>PRODUCTS&#x2192;</h3></button>
+                            <div id="de2mo"  className="collapse">
+                                <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
+                                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '35px'}}>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Regulated Exchange Platform</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Regulated Asset Backed Tokenization</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Offshore Virtual Currency</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Exchange License</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de3mo" style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>RESOURCES&#x2192;</h3></button>
+                            <div id="de3mo" className="collapse">
+                                <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
+                                    <ul style={{ listStyleType: 'none' , marginLeft: '-35px' , lineHeight: '35px'}}>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Blog</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Announcements</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>API Docs</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>FAQ</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Support Center</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Contact Us</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de4mo" style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>CAREERS&#x2192;</h3></button>
+                            <div id="de4mo" className="collapse">
+                                <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
+                                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '35px'}}>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Careers</li>
+                                        <li style={{fontSize:'18px' , color:'#1E252F'}}>Apply to SPEZA</li>
+                                    </ul>
+                                </div>
+                            </div>
                     </div>
-            </div>
-            <button type="button" className="btn btn-info" data-toggle="collapse" data-target="#de4mo" style={{ margin: '5px', background: 'transparent', border:'none'}}><h3 style={{fontSize:'24px' , color:'#141622'}}>CAREERS&#x2192;</h3></button>
-            <div id="de4mo" className="collapse">
-                    <div style={{marginTop:'20px', display:'flex' , marginLeft: '40px' , textAlign:'left' , lineHeight:'14px' ,flexDirection:'column'}}>
-                    <ul style={{ listStyleType: 'none', marginLeft: '-35px' , lineHeight: '35px'}}>
-                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Careers</li>
-                    <li style={{fontSize:'18px' , color:'#1E252F'}}>Apply to SPEZA</li>
-                    </ul>
-                    </div>
-            </div>
-            </div>
-            </div>
-            </div>
+                </div>
             </div>
         </div>
         );
@@ -281,4 +533,8 @@ line 87 , Quickbuy Component
         <div id="de1mo" style={{color: '#000'}}/>
     </div>
 </div>
+<img src={require('./icon_facebook.png')} style={{ height:'37px' , padding:'0 15px'}}/>
+<img src={require('./icon_linkedin.png')} style={{ height:'37px', padding:'0 15px'}}/>
+<img src={require('./icon_messenger.png')} style={{ height:'37px', padding:'0 15px'}}/>
+<img src={require('./icon_telegram.png')} style={{ height:'37px', padding:'0 15px'}}/>
 */

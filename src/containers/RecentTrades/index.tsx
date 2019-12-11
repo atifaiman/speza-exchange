@@ -79,7 +79,7 @@ class RecentTradesComponent extends React.Component<RecentTradesProps, State> {
         ) :
         (
             <div>
-                <div className="cr-table-header__content">
+                <div className="cr-table-header__content" style={{zIndex: 'auto'}}>
                     <div className="cr-title-component">{this.props.intl.formatMessage({id: 'page.body.trade.header.recentTrades'})}</div>
                 </div>
                 <MarketTab />

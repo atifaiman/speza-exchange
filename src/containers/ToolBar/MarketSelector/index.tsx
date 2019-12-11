@@ -28,11 +28,15 @@ interface State {
 }
 
 class MarketSelectorComponent extends React.Component<ReduxProps, State> {
+
+
     public readonly state = {
         isOpen: false,
         searchFieldValue: '',
         marketsTabsSelectedValue: '',
     };
+
+    // private node; <div className="pg-trading-header-selector" onClick={this.handleOpenSelector}ref={this.node}>
 
     public render() {
         const {
@@ -94,12 +98,25 @@ class MarketSelectorComponent extends React.Component<ReduxProps, State> {
             </div>
         );
     }
-
+    // public componentWillMount(){
+    //     document.addEventListener('mousedown', this.handleClick,false);
+    // }
+    // public componentWillUnmount(){
+    //     document.addEventListener('mousedown', this.handleClick,false);
+    // }
     private handleOpenSelector = () => {
         this.setState({
             isOpen: !this.state.isOpen,
         });
     }
+    // private handleClick = e => {
+    //     if (this.node.contains(e.target)) {
+    //         return;
+    //     }
+    //     this.setState({
+    //         isOpen: false,
+    //     });
+    // }
 
     private searchFieldChangeHandler = e => {
         this.setState({

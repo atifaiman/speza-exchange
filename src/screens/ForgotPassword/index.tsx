@@ -108,7 +108,6 @@ class ForgotPasswordComponent extends React.Component<Props, ForgotPasswordState
 
     private validateForm = () => {
         const { email } = this.state;
-
         const isEmailValid = email ? email.match(EMAIL_REGEX) : true;
 
         if (!isEmailValid) {

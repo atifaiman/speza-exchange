@@ -11,6 +11,7 @@ import {
     ToolBar,
     TradingChart,
 } from '../../containers';
+//import { HistoryElement } from '../../containers/HistoryElement';
 import { getUrlPart, setDocumentTitle } from '../../helpers';
 import {
     RootState,
@@ -148,12 +149,15 @@ class Trading extends React.Component<Props, StateProps> {
     public render() {
         const rowHeight = 14;
         const allGridItems = [...this.gridItems];
+        // const gridGroupOne = [this.gridItems[1] , this.gridItems[3]];
         const {rgl} = this.props;
 
         return (
             <div className={'pg-trading-screen'}>
                 <div className={'pg-trading-wrap'}>
+                    <div className="toolbarComponentMobile">
                     <ToolBar/>
+                    </div>
                     <Grid
                         breakpoints={breakpoints}
                         className="layout"
@@ -220,7 +224,125 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
 
 // tslint:disable-next-line no-any
 const TradingScreen = withRouter(connect(mapStateToProps, mapDispatchToProps)(Trading) as any);
-
 export {
     TradingScreen,
 };
+
+/*
+<div className="row" style={{display:'block' , width:'100%'}}>
+    <div className="cr-tab-panel">
+        <div className="cr-tab-panel__navigation-container draggable-container" style={{ justifyContent:'center'}}>
+                <ul className="nav nav-tabs">
+                    <li className="active">
+                        <a data-toggle="tab" href="#Tab1">Tab One</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#Tab2">Tab Two</a>
+                    </li>
+                </ul>
+        </div>
+    </div>
+    <div className="tab-content" >
+        <div id="Tab1" className="tab-pane fade">
+                <p> Hello1 </p>
+        </div>
+        <div  id="Tab2"  className="tab-pane fade in active" >
+                <p> hello2 </p>
+        </div>
+    </div>
+</div>
+*/
+/*
+                    <div className="row" style={{display:'block' , width:'96%' , margin:'auto'}}>
+                        <div className="cr-tab-panel">
+                            <div className="cr-tab-panel__navigation-container draggable-container" style={{ justifyContent:'center'}}>
+                                    <ul className="nav nav-tabs">
+                                        <li className="active">
+                                            <a data-toggle="tab" href="#Tab1">Tab One</a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#Tab2">Tab Two</a>
+                                        </li>
+                                        <li>
+                                            <a data-toggle="tab" href="#Tab3">Tab Three</a>
+                                        </li>
+                                    </ul>
+                            </div>
+                        </div>
+                        <div className="tab-content " >
+                            <div id="Tab1" className="tab-pane fade in active">
+                                <p>Hello1</p>
+                                    <div className="cr-tab-panel">
+                                        <div className="cr-tab-panel__navigation-container draggable-container" style={{ justifyContent:'center'}}>
+                                                <ul className="nav nav-tabs">
+                                                    <li className="active">
+                                                        <a data-toggle="tab" href="#TabChart">Chart</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#TabMarketDepth">Market Depth</a>
+                                                    </li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                    <div className="tab-content" >
+                                        <div id="TabChart" className="tab-pane fade in active mobileTrade">
+                                            <TradingChart />
+                                        </div>
+                                        <div id="TabMarketDepth" className="tab-pane fade mobileTrade">
+                                            <MarketDepthsComponent />
+                                        </div>
+                                    </div>
+                            </div>
+                            <div  id="Tab2"  className="tab-pane fade" >
+                                <p>hello 2</p>
+                                    <div className="cr-tab-panel">
+                                        <div className="cr-tab-panel__navigation-container draggable-container" style={{ justifyContent:'center'}}>
+                                                <ul className="nav nav-tabs">
+                                                    <li className="active">
+                                                        <a data-toggle="tab" href="#TabOrderBook">OrderBook</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#TabRecentTrades">Recent Trades</a>
+                                                    </li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                    <div className="tab-content" >
+                                        <div id="TabOrderBook" className="tab-pane fade in active mobileTrade" style={{ width:'400px'}}>
+                                            <OrderBook size={this.state.orderBookComponentResized} />,
+                                        </div>
+                                        <div id="TabRecentTrades" className="tab-pane fade mobileTrade">
+                                            <RecentTrades/>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div  id="Tab3"  className="tab-pane fade" >
+                                    <p> hello3 </p>
+                                    <div className="cr-tab-panel">
+                                        <div className="cr-tab-panel__navigation-container draggable-container" style={{ justifyContent:'center'}}>
+                                                <ul className="nav nav-tabs">
+                                                    <li className="active">
+                                                        <a data-toggle="tab" href="#TabOpenOrders">Opern Order</a>
+                                                    </li>
+                                                    <li>
+                                                        <a data-toggle="tab" href="#TabHistory">History</a>
+                                                    </li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                    <div className="tab-content" >
+                                        <div id="TabOpenOrders" className="tab-pane fade in active mobileTrade">
+                                                <OpenOrdersComponent/>
+                                        </div>
+                                        <div id="TabHistory" className="tab-pane fade mobileTrade mobileTrade">
+                                                <HistoryElement type="trades" />
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                    <input type="button" value="Get Started" className="Button" />
+                    </div>
+*/
+

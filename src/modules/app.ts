@@ -11,6 +11,7 @@ import { recentTradesReducer  } from './public/recentTrades';
 import { apiKeysReducer } from './user/apiKeys';
 import { authReducer  } from './user/auth';
 import { sendEmailVerificationReducer } from './user/emailVerification';
+import { formSubmissionReducer } from './user/formSubmission';
 import { historyReducer  } from './user/history';
 import {
     documentsReducer,
@@ -59,4 +60,5 @@ export const userReducer = combineReducers({
     openOrders: openOrdersReducer,
     sendEmailVerification: sendEmailVerificationReducer,
     withdrawLimit: withdrawLimitReducer,
+    formSubmission: formSubmissionReducer,
 });

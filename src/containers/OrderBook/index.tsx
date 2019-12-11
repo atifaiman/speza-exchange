@@ -83,7 +83,7 @@ class OrderBookContainer extends React.Component<Props, State> {
         const asksData = isLarge ? asks : asks.slice(0).reverse();
         return (
             <React.Fragment>
-                <div className={'cr-table-header__content'}>
+                <div className={'cr-table-header__content'}  style={{zIndex: 'auto'}}>
                     {this.props.intl.formatMessage({id: 'page.body.trade.orderbook'})}
                 </div>
                 <CombinedOrderBook

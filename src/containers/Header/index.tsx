@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
-import logo = require('../../assets/images/logo.svg');
+import { withRouter } from 'react-router-dom';
+// import logo = require('../../assets/images/logo.svg');
 import {
   RootState,
   selectMobileWalletUi,
   setMobileWalletUi,
 } from '../../modules';
 import { NavBar } from '../NavBar';
+// import News from './newsHeadline';
 
 interface HeaderState {
     isActive: boolean;
@@ -39,11 +40,15 @@ class Head extends React.Component<any, HeaderState> {
           {!['/confirm'].some(r => location.pathname.includes(r)) &&
             <header className={'pg-header pg-header--active'}>
                 <div className="pg-container pg-header__content">
-                    <Link to={'/wallets'} className="pg-header__logo">
-                        <div className="pg-logo">
-                            <img src={logo} className="pg-logo__img" alt="Logo" />
+                <a href={window.env.api.applogicUrl.substring(0, window.env.api.applogicUrl.length - 15)}>
+                         <div className="pg-logo">
+                            {/* <div id="MainLogo"  style={{ height:'50px' ,width:'50px' , margin:'0 10px', padding:'0 10px'}}/> */}
+                            {/* <img src={require('./Speza_exchange_logo1.gif')} alt="speza" /> */}
+                            {/* <img src={logo} className="pg-logo__img" alt="Logo" /> */}
+                            <img src={require('./Speza_exchange_logo_beta.png')} className="pg-logo__img static" alt="Logo" /><img  className="pg-logo__img active" src={require('./Speza_exchange_logo_b.gif')} alt="speza" />
+                            {/* <img  className="BetaTag" src={require('./betatag.svg')} alt="speza" /> */}
                         </div>
-                    </Link>
+                    </a>
                     <div className="pg-header__location">
                         {mobileWallet ? <span>{mobileWallet}</span> : <span>{location.pathname.split('/')[1]}</span>}
                     </div>

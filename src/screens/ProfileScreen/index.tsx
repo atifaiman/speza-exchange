@@ -49,7 +49,7 @@ class ProfileComponent extends React.Component<RouterProps> {
 
                     </div>
                     <div className="row px-4" style={{paddingTop: '20px'}}>
-                        <div className="col-12 mx-0">
+                        <div className="col-7 mx-0">
                             <ReferralProgram/>
                         </div>
                     </div>
@@ -69,10 +69,10 @@ class ProfileComponent extends React.Component<RouterProps> {
                             </ul>
                     </div></div>
                     <div className="tab-content" >
-                        <div id="AccountActivity" className="tab-pane fade">
+                        <div id="AccountActivity" className="tab-pane fade in active">
                                 <ProfileAccountActivity/>
                         </div>
-                        <div  id="APIkeys"  className="tab-pane fade in active" >
+                        <div  id="APIkeys"  className="tab-pane fade" >
                                 <ProfileApiKeys/>
                         </div>
                     </div>
