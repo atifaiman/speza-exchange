@@ -12,7 +12,7 @@
 .new-form {
     &-container {
         width: 90%;
-        max-width: 1280px;
+        max-width: 900px;
         padding: 60px 3.125%;
         /* padding: 60px 0; */
 
@@ -38,10 +38,21 @@
             align-self: flex-start;
     }
     &-content {
-        padding-top: 10px;
+        padding-top: 80px;
         width: 100%;
+        &-invisible {
+            display: none;
+        }
         &-title {
             font-size: 26px;
+            margin-bottom: 10px !important;
+            &-bar {
+                display: -webkit-flex;
+                display: flex;
+                flex-flow: column wrap;
+                position: relative;
+                z-index: 10;
+            }
         }
         &-page {
             background: none;
@@ -62,15 +73,33 @@
                 &-question {
                     font-size: 16px;
                 }
+                &-helper-text {
+                    font-size: 12px;
+                    color: #8C8C8C;
+                }
                 &-input {
                     width: 100%;
                     margin-top: 10px;
                     font-size: 16px;
                     padding: 15px 15px;
-                    border: 1px solid #C6C6C6;
+                    border: 1px solid #E6E6E6;
                     border-radius: 2px;
                     &-error {
                         border-color: #F02B67 !important;
+                    }
+                    &-date {
+                        width: 100%;
+                        .react-date-picker__wrapper {
+                            width: 100%;
+                            margin-top: 10px;
+                            font-size: 16px;
+                            padding: 15px 15px;
+                            border-radius: 2px;
+                            border-color: #E6E6E6;
+                        }
+                        .react-date-picker__wrapper:focus {
+                                border-color: #000;
+                        }
                     }
                 }
                 &-input:focus {
@@ -89,12 +118,13 @@
             }
         }
         &-alert {
-            background: #823179;
+            background: #FAFAFA;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
             width: 100%;
             padding: 15px 25px;
-            color: white;
+            color: black;
             margin: 10px 0;
-            border-radius: 10px;
             display: -webkit-flex;
             display: flex;
             align-items: center;
@@ -144,7 +174,7 @@
             background: linear-gradient(90.05deg, #BE55AD 0%, #543D8F 100.04%);
         }
         &-disabled {
-            cursor: not-allowed;
+            cursor: not-allowed !important;
             background: linear-gradient(180deg, #C4C4C4 0%, #6C6C6C 100%) !important;
         }
     }
@@ -155,6 +185,36 @@
         display: flex;
         align-items: center;
         flex-flow: column wrap;
+        text-align: center;
+    }
+    &-project-name {
+        margin-top: 20px;
+        /* padding: 10px; */
+        /* background: #BF357F; */
+        /* color: white; */
+        display: -webkit-flex;
+        display: flex;
+        justify-content: flex-start;
+        p {
+            padding: 10px !important;
+            background: #BF357F;
+            color: white;
+            border-radius: 6px;
+            font-weight: 700 !important;
+        }
+    }
+    &-modal {
+        color: black;
+        background: white !important;
+        padding: 50px;
+        width: 350px;
+        height: 380px;
+        display: -webkit-flex;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
         text-align: center;
     }
 }
@@ -168,13 +228,14 @@
     &-list {
         position: relative;
         top: -11px;
-        width: 80%;
+        width: 100%;
         display: -webkit-flex;
         display: flex;
         justify-content: space-between;
     }
     &-item {
         width: 300px;
+        height: 150px;
         text-align: center;
         &-number {
             background: black;
@@ -194,18 +255,28 @@
             font-size: 18px;
             font-weight: 700;
             margin: 10px 0 !important;
+            height: 70px;
         }
         &-link {
-            font-size: 12px;
+            font-size: 14px;
+            font-weight: 700;
             color: #BF357F;
+            padding: 15px 10px;
+            width: 70%;
+            height: 80px;
+            background: transparent;
+            margin: auto;
             &-disabled {
                 color: #6C6C6C;
                 pointer-events: none;
             }
+            &-disabled:hover {
+                cursor: not-allowed;
+            }
         }
         &-link:hover {
             text-decoration: none;
-            color: #BF357F;
+            cursor: pointer;
         }
     }
     &-disabled {
@@ -242,7 +313,7 @@
 }
 
 #icon {
-    &-form { background-image: url('./screens/CoinListingApplicationScreen/icon-form.png') }
+    &-info { background-image: url('./screens/CoinListingApplicationScreen/icon-info.png') }
     &-verified {
         width: 140px;
         height: 140px;
@@ -335,4 +406,45 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.dropdown {
+    &-main-button {
+        border: 1px solid #E6E6E6;
+        border-radius: 3px;
+        padding: 15px;
+        width: 200px;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+    &-main-button:after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 6px 5px 0 5px;
+        border-color: #6c6c6c transparent transparent transparent;
+        display: inline-block;
+        margin-left: 30px;
+    }
+    &-lists {
+        width: 200px;
+        border-radius: 0 0 3px 3px;
+        border: 1px solid #E6E6E6;
+        overflow: hidden;
+        background: white;
+        max-height: 500px;
+        overflow: scroll;
+        &-invisible {
+            display: none;
+        }
+    }
+    &-item {
+        border-bottom: 1px solid #F1F1F1;
+        padding: 10px 13px;
+    }
+}
+.row-helper-text {
+    font-size: 16px;
+    color: #8C8C8C;
 }

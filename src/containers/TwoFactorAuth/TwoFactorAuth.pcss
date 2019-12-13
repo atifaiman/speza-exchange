@@ -3366,7 +3366,23 @@ table.referralAccount {
 /* New banner adjustment - for individual item only */
 
 .three-banner {
+  &-non-mobile {
+    @media only screen and (max-width: 768px) {
+      display: none !important;
+    }
+  }
+  &-mobile {
+    position: relative;
+    left: 15px;
+    @media only screen and (min-width: 769px) {
+      display: none !important;
+    }
+  }
   &-container {
+    @media only screen and (max-width: 768px) {
+      width: 100vw;
+      justify-content: center;
+    }
     width: 100%;
     display: -webkit-flex;
     display: flex;
@@ -3420,6 +3436,18 @@ table.referralAccount {
     flex-flow: row wrap;
     margin-right: 2%;
     overflow: hidden;
+    @media only screen and (max-width: 768px) {
+      width: 85%;
+      height: 300px;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+    @media only screen and (max-width: 570px) {
+      height: 250px;
+    }
+    @media only screen and (max-width: 400px) {
+      height: 205px;
+    }
   }
   &-item:nth-child(3n+0) {
     margin-right: 0;
@@ -3467,14 +3495,15 @@ table.referralAccount {
         background-position: 0 50% !important;
       }
       &-button {
-        width: 85px;
-        height: 25px;
+        padding: 7px;
+        width: 140px;
         background: #823179;
         color: white;
         display: -webkit-flex;
         display: flex;
         align-items: center;
         justify-content: center;
+        border-radius: 2px;
       }
       &-col-1 {
         width: 30%;
@@ -3497,14 +3526,62 @@ table.referralAccount {
         width: 100%;
         display: -webkit-flex;
         display: flex;
-        align-items: flex-end;
+        justify-content: flex-end;
+        flex-flow: column wrap;
         color: #823179;
         padding-bottom: 10px;
-        font-size: 16px;
-        font-weight: 300;
-        span {
-          font-size: 24px;
-          font-weight: 700;
+        p {
+          .text-light {
+            font-size: 16px;
+            font-weight: 300;
+          }
+          .text-bold {
+            font-size: 24px ;
+            font-weight: 700;
+          }
+        }
+        #logo-speza-pay {
+          width: 230px;
+          height: 70px;
+          margin-left: -45px;
+          margin-bottom: -25px;
+          background: url('./screens/LandingScreen/three-banner-3-logo.png');
+          background-size: contain;
+          background-repeat: no-repeat;
+        }
+        @media only screen and (min-width: 571px) and (max-width: 660px) {
+          #logo-speza-pay {
+            width: 380px !important;
+            height: 110px;
+            margin-left: -80px;
+            margin-bottom: -25px;
+          }
+        }
+        @media only screen and (min-width: 571px) and (max-width: 768px) {
+          p {
+            .text-light {
+              font-size: 28px;
+            }
+            .text-bold {
+              font-size: 36px ;
+            }
+          }
+          #logo-speza-pay {
+            width: 410px;
+            height: 110px;
+            margin-left: -80px;
+            margin-bottom: -25px;
+          }
+        }
+        @media only screen and (max-width: 570px) and (min-width: 400px) {
+          p {
+            .text-light {
+              font-size: 18px;
+            }
+            .text-bold {
+              font-size: 22px ;
+            }
+          }
         }
       }
       &-row-2 {

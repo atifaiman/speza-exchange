@@ -24,7 +24,7 @@
     width: inherit;
     height: inherit;
     overflow: hidden;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat !important;
     background-size: cover !important;
     background-position: center !important;
 }
@@ -34,10 +34,9 @@
     position: relative;
     top: -400px;
     overflow: hidden;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat !important;
     background-size: cover !important;
     background-position: center !important;
-    opacity: .8;
 }
 .carousel-banner-background-new {
     width: inherit;
@@ -133,6 +132,71 @@
     justify-content: space-between;
     box-sizing: border-box;
     padding-bottom: 35px;
+    line-height: 2;
+    .text-regular-zh {
+        span {
+            font-weight: 400 !important;
+        }
+    }
+    .text-light {
+        span {
+            font-size: 24px;
+            font-weight: 300;
+            font-style: italic;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    }
+    .text-bold {
+        font-size: 44px;
+        font-weight: 700;
+        font-style: italic;
+        text-shadow: 0px 0px 5px #A372EA;
+        margin-top: 100px !important;
+    }
+
+    @media only screen and (max-width: 1280px) {
+        .text-light {
+            span {
+                font-size: 22px;
+            }
+        }
+        .text-bold {
+            font-size: 42px;
+        }
+    }
+    @media only screen and (max-width: 960px) {
+        .text-light {
+            span {
+                font-size: 20px;
+            }
+        }
+        .text-bold {
+            font-size: 38px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        line-height: 1.5;
+        .text-light {
+            span {
+                font-size: 16px;
+            }
+        }
+        .text-bold {
+            font-size: 25px;
+        }
+    }
+    @media only screen and (max-width: 500px) {
+        line-height: 1.3;
+        .text-light {
+            span {
+                font-size: 12px;
+            }
+        }
+        .text-bold {
+            font-size: 18px;
+        }
+    }
 }
 .carousel-content-col-1, .carousel-content-col-2 {
     display: flex;
@@ -157,20 +221,28 @@
 }
 
 .carousel-button {
-    width: 250px;
-    height: 50px;
+    width: 180px;
+    height: 45px;
     display: flex;
     display: -webkit-flex;
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-weight: 700 !important;
     font-style: normal !important;
     text-decoration: none;
     cursor: pointer;
     margin-top: 40px;
     background: linear-gradient(90.1deg, #BE55AD 0%, #543D8F 100.04%);
+    @media only screen and (max-width: 768px) {
+        width: 130px;
+        height: 40px;
+        margin-top: 20px;
+    }
+    @media only screen and (max-width: 430px) {
+        font-size: 14px !important;
+    }
 }
 
 .carousel-logo {
@@ -193,7 +265,6 @@
     width: 100%;
     height: 12px;
     position: absolute;
-    /* top: -28px; */
     opacity: .85;
     background-color: #A335BF;
     border-radius: 10px;
@@ -272,58 +343,6 @@
     }
 }
 
-/* ---- BLOCKCHAIN SUMMIT ---- */
-
-#blockchain-summit .carousel-content-row-2 {
-    font-size: 24px;
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.1;
-}
-
-#blockchain-summit span {
-    font-size: 44px;
-    font-weight: 700;
-}
-
-/* ---- INVITE FRIENDS ---- */
-
-#invite-friends .carousel-content-row-2 {
-    font-size: 38px;
-    font-weight: 300;
-    line-height: 1.1;
-    font-style: italic;
-}
-
-#invite-friends .carousel-content-col-2 {
-    padding-right: 20px;
-}
-
-#invite-friends span {
-    font-size: 44px;
-    font-weight: 700;
-}
-
-#invite-friends .carousel-content-col-2 span {
-    font-size: 88px;
-}
-
-/* ---- ACCEPTING DCEP ---- */
-
-#accepting-dcep .carousel-content-row-2 {
-    font-size: 20px;
-}
-
-#accepting-dcep .carousel-content-col-2 p {
-    text-align: left;
-    align-self: flex-start;
-}
-
-#accepting-dcep span {
-    font-size: 36px;
-    font-weight: 700;
-}
-
 /* ---- DAX PUBLIC BETA ---- */
 #dax-public-beta {
     .carousel-banner-background {
@@ -331,51 +350,20 @@
     }
     .carousel-banner-overlay {
         background: url('./containers/Carousel/banner-4-overlay.png');
-        background-size: cover !important;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    .carousel-content-row-2 {
-        font-size: 24px;
-        font-weight: 300;
-        font-style: italic;
-        line-height: 1.2;
-    }
-    span {
-        font-size: 44px;
-        font-weight: 700;
     }
     #logo-beta {
         background: url('./containers/Carousel/slider_04_logo_beta.png');
-        width: 354px;
+        width: 320px;
         height: 105px;
         margin-bottom: 65px;
     }
-    @media only screen and (max-width: 1280px) {
-        .carousel-content-row-2 {
-            font-size: 23px;
-        }
-        span {
-            font-size: 42px;
-        }
-    }
     @media only screen and (max-width: 960px) {
-        .carousel-content-row-2 {
-            font-size: 20px;
-            padding-bottom: 30px;
-        }
-
-        span {
-            font-size: 38px;
-        }
-
         .carousel-button {
             margin-top: 30px;
         }
     }
     @media only screen and (max-width: 768px) {
         .carousel-content-row-2 {
-            font-size: 16px;
             .carousel-content-col-1 {
                 flex-basis: 60%;
             }
@@ -383,49 +371,22 @@
                 flex-basis: 38%;
             }
         }
-
-        span {
-            font-size: 25px;
-        }
-
         .carousel-button {
             margin-top: 10px;
         }
-
         #logo-beta {
-            width: 200px;
-            margin-bottom: 15px;
+            width: 220px;
+            margin-bottom: 2px;
         }
     }
     @media only screen and (max-width: 430px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            line-height: 1.3;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
         #logo-beta {
             width: 150px;
-            margin-bottom: -10px;
         }
     }
     @media only screen and (max-width: 380px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
         #logo-beta {
             width: 120px;
-            margin-bottom: -15px;
         }
     }
 }
@@ -433,55 +394,24 @@
 /* ---- NEM LISTING ---- */
 #nem-listing {
     .carousel-banner-background {
-        background: linear-gradient(69.59deg, #E66000 33.52%, #FFE600 100.04%);
+        background: linear-gradient(69.59deg, #E63700 33.52%, #FF6B00 100.04%);
     }
     .carousel-banner-overlay {
         background: url('./containers/Carousel/banner-5-overlay.png');
-        background-size: cover !important;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    .carousel-content-row-2 {
-        font-size: 24px;
-        font-weight: 300;
-        font-style: italic;
-        line-height: 1.2;
-    }
-    span {
-        font-size: 44px;
-        font-weight: 700;
     }
     #logo-nem {
         background: url('./containers/Carousel/slider_05_logo_nem.png');
-        width: 354px;
+        width: 300px;
         height: 105px;
         margin-bottom: 65px;
     }
-    @media only screen and (max-width: 1280px) {
-        .carousel-content-row-2 {
-            font-size: 23px;
-        }
-        span {
-            font-size: 42px;
-        }
-    }
     @media only screen and (max-width: 960px) {
-        .carousel-content-row-2 {
-            font-size: 20px;
-            padding-bottom: 30px;
-        }
-
-        span {
-            font-size: 38px;
-        }
-
         .carousel-button {
             margin-top: 30px;
         }
     }
     @media only screen and (max-width: 768px) {
         .carousel-content-row-2 {
-            font-size: 16px;
             .carousel-content-col-1 {
                 flex-basis: 60%;
             }
@@ -489,46 +419,21 @@
                 flex-basis: 38%;
             }
         }
-
-        span {
-            font-size: 25px;
-        }
-
         .carousel-button {
             margin-top: 10px;
         }
-
         #logo-nem {
             width: 200px;
             margin-bottom: 15px;
         }
     }
     @media only screen and (max-width: 430px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            line-height: 1.3;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
         #logo-nem {
             width: 150px;
             margin-bottom: -10px;
         }
     }
     @media only screen and (max-width: 380px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
         #logo-nem {
             width: 120px;
             margin-bottom: -15px;
@@ -543,22 +448,9 @@
     }
     .carousel-banner-overlay {
         background: url('./containers/Carousel/slider-svt-overlay.png');
-        background-size: cover !important;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    .carousel-content-row-2 {
-        font-size: 24px;
-        font-weight: 300;
-        font-style: italic;
-        line-height: 1.2;
     }
     .carousel-content-col-1 {
         justify-content: center;
-    }
-    span {
-        font-size: 44px;
-        font-weight: 700;
     }
     #logo-svt {
         background: url('./containers/Carousel/slider-svt-logo-svt.png');
@@ -566,31 +458,13 @@
         height: 105px;
         margin-bottom: 65px;
     }
-    @media only screen and (max-width: 1280px) {
-        .carousel-content-row-2 {
-            font-size: 23px;
-        }
-        span {
-            font-size: 42px;
-        }
-    }
     @media only screen and (max-width: 960px) {
-        .carousel-content-row-2 {
-            font-size: 20px;
-            padding-bottom: 30px;
-        }
-
-        span {
-            font-size: 38px;
-        }
-
         .carousel-button {
             margin-top: 30px;
         }
     }
     @media only screen and (max-width: 768px) {
         .carousel-content-row-2 {
-            font-size: 16px;
             .carousel-content-col-1 {
                 flex-basis: 60%;
             }
@@ -598,46 +472,21 @@
                 flex-basis: 38%;
             }
         }
-
-        span {
-            font-size: 25px;
-        }
-
         .carousel-button {
             margin-top: 10px;
         }
-
         #logo-svt {
             width: 200px;
             margin-bottom: 15px;
         }
     }
     @media only screen and (max-width: 430px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            line-height: 1.3;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
         #logo-svt {
             width: 150px;
             margin-bottom: -10px;
         }
     }
     @media only screen and (max-width: 380px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
         #logo-svt {
             width: 120px;
             margin-bottom: -15px;
@@ -652,19 +501,6 @@
     }
     .carousel-banner-overlay {
         background: url('./containers/Carousel/slider-love-overlay.png');
-        background-size: cover !important;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    .carousel-content-row-2 {
-        font-size: 24px;
-        font-weight: 300;
-        font-style: italic;
-        line-height: 1.2;
-    }
-    span {
-        font-size: 44px;
-        font-weight: 700;
     }
     #logo-love {
         background: url('./containers/Carousel/slider-love-logo-love.png');
@@ -672,31 +508,13 @@
         height: 205px;
         margin-bottom: 35px;
     }
-    @media only screen and (max-width: 1280px) {
-        .carousel-content-row-2 {
-            font-size: 23px;
-        }
-        span {
-            font-size: 42px;
-        }
-    }
     @media only screen and (max-width: 960px) {
-        .carousel-content-row-2 {
-            font-size: 20px;
-            padding-bottom: 30px;
-        }
-
-        span {
-            font-size: 38px;
-        }
-
         .carousel-button {
             margin-top: 30px;
         }
     }
     @media only screen and (max-width: 768px) {
         .carousel-content-row-2 {
-            font-size: 16px;
             .carousel-content-col-1 {
                 flex-basis: 60%;
             }
@@ -704,49 +522,19 @@
                 flex-basis: 38%;
             }
         }
-
-        span {
-            font-size: 25px;
-        }
-
         .carousel-button {
             margin-top: 10px;
         }
-
         #logo-love {
             width: 200px;
+            height: 130px;
             margin-bottom: 15px;
         }
     }
     @media only screen and (max-width: 430px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            line-height: 1.3;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
         #logo-love {
             width: 150px;
-            margin-bottom: -10px;
-        }
-    }
-    @media only screen and (max-width: 380px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
-        #logo-love {
-            width: 120px;
-            margin-bottom: -15px;
+            margin-bottom: 0px;
         }
     }
 }
@@ -754,23 +542,10 @@
 /* ---- LOCALISED PAYMENT ---- */
 #localised-payment {
     .carousel-banner-background {
-        background: linear-gradient(69.59deg, #0E022E 33.52%, #000D85 100.04%);
+        background: linear-gradient(69.59deg, #001252 33.52%, #0010A0 100.04%);
     }
     .carousel-banner-overlay {
         background: url('./containers/Carousel/banner-6-overlay.png');
-        background-size: cover !important;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    .carousel-content-row-2 {
-        font-size: 24px;
-        font-weight: 300;
-        font-style: italic;
-        line-height: 1.2;
-    }
-    span {
-        font-size: 44px;
-        font-weight: 700;
     }
     #logo-transfer {
         background: url('./containers/Carousel/slider_06_logo_transfer.png');
@@ -779,30 +554,17 @@
         margin-bottom: 65px;
     }
     @media only screen and (max-width: 1280px) {
-        .carousel-content-row-2 {
-            font-size: 23px;
-        }
-        span {
-            font-size: 42px;
+        #logo-transfer {
+            background-position: center !important;
         }
     }
     @media only screen and (max-width: 960px) {
-        .carousel-content-row-2 {
-            font-size: 20px;
-            padding-bottom: 30px;
-        }
-
-        span {
-            font-size: 38px;
-        }
-
         .carousel-button {
             margin-top: 30px;
         }
     }
     @media only screen and (max-width: 768px) {
         .carousel-content-row-2 {
-            font-size: 16px;
             .carousel-content-col-1 {
                 flex-basis: 60%;
             }
@@ -810,132 +572,77 @@
                 flex-basis: 38%;
             }
         }
-
-        span {
-            font-size: 25px;
-        }
-
         .carousel-button {
             margin-top: 10px;
         }
-
         #logo-transfer {
+            width: 180px;
+            height: 100px;
+            margin-bottom: 25px;
+        }
+    }
+    @media only screen and (max-width: 430px) {
+        #logo-transfer {
+            width: 150px;
+        }
+    }
+    @media only screen and (max-width: 380px) {
+        #logo-transfer {
+            width: 120px;
+        }
+    }
+}
+
+/* ---- ZERO TRADING FEE ---- */
+#zero-trading-fee {
+    .carousel-banner-background {
+        background: linear-gradient(71.34deg, #030001 0%, #5B26CC 100%);
+    }
+    .carousel-banner-overlay {
+        background: url('./containers/Carousel/zero-trading-fee-overlay.png');
+    }
+    #logo-zero {
+        background: url('./containers/Carousel/zero-trading-fee-logo.png');
+        width: 300px;
+        height: 130px;
+        margin-bottom: 65px;
+    }
+    @media only screen and (max-width: 1280px) {
+    }
+    @media only screen and (max-width: 960px) {
+        .carousel-button {
+            margin-top: 30px;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        .carousel-content-row-2 {
+            .carousel-content-col-1 {
+                flex-basis: 60%;
+            }
+            .carousel-content-col-2 {
+                flex-basis: 38%;
+            }
+        }
+        .carousel-button {
+            margin-top: 10px;
+        }
+        #logo-zero {
             width: 180px;
             height: 100px;
             margin-bottom: 15px;
         }
     }
     @media only screen and (max-width: 430px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            line-height: 1.3;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
-        #logo-transfer {
+        #logo-zero {
             width: 150px;
             margin-bottom: -10px;
         }
     }
     @media only screen and (max-width: 380px) {
-        .carousel-content-row-2 {
-            font-size: 12px;
-            padding-bottom: 60px;
-        }
-
-        span {
-            font-size: 18px;
-        }
-
-        #logo-transfer {
+        #logo-zero {
             width: 120px;
             margin-bottom: -15px;
         }
-    }
-}
-
-/* ---- ALL IMAGE IMPORT ---- */
-#blockchain-summit .carousel-banner-background { background: url('./containers/Carousel/blockchain-summit-bg.png'); background-position-y: 0% !important;}
-#invite-friends .carousel-banner-background { background: linear-gradient(69.59deg, #2A0B46 33.52%, #6C187D 100.04%); }
-#accepting-dcep .carousel-banner-background { background: url('./containers/Carousel/accepting-dcep.png'); }
-
-#blockchain-summit .carousel-banner-overlay { background: url('./containers/Carousel/banner-2-overlay.png'); }
-#invite-friends .carousel-banner-overlay { background: url('./containers/Carousel/banner-1-overlay.png'); }
-
-#logo1-wbs {
-    width: 280px;
-    height: 78px;
-    background: url('./containers/Carousel/logo-wbs.png');
-    margin-bottom: 60px; /* Elevate the logo */
-}
-#logo1-friends {
-    width: 80px;
-    height: 80px;
-    background: url('./containers/Carousel/icon-friend.png');
-    margin-right: 20px;
-}
-#logo1-speza-globe {
-    width: 170px;
-    height: 170px;
-    background: url('./containers/Carousel/logo-speza-globe.png');
-    margin: 0;
-    padding: 0;
-}
-#logo1-dcep {
-    width: 354px;
-    height: 105px;
-    background: url('./containers/Carousel/logo-dcep.png');
-    margin-bottom: 20px;
-}
-
-/* ---- SPECIAL ADJUSTMENT : SPEZA GLOBE ---- */
-
-#container-logo1-speza-globe {
-    width: 250px;
-    height: 170px;
-    display: flex;
-    display: -webkit-flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* ---- SPECIAL ADJUSTMENT : FRIENDS LOGO AND CONTENT ---- */
-
-#friends-logo-content {
-    display: flex;
-    display: -webkit-flex;
-    width: 100%;
-    height: 150px;
-    flex-flow: row wrap;
-    align-items: center;
-}
-#friends-logo-content p {
-    width: 75%;
-}
-
-@media only screen and (min-width: 1440px) {
-    #logo1-friends {
-        width: 0;
-        height: 0;
-        margin: 0;
-    }
-    #blockchain-summit .carousel-banner-background {
-        background-position-y: 0% !important;
-    }
-
-    .carousel-banner-background {
-        filter: blur(4px);
-        transform: scale(1.1);
-    }
-}
-
-@media only screen and (min-width: 1200px) {
-    #invite-friends .carousel-banner-overlay {
-        transform: scale(1.3) translate(-10%, -8%);
     }
 }
 
@@ -943,71 +650,12 @@
     .carousel-content-body {
         padding: 0 7%;
     }
-    /* ---- BLOCKCHAIN SUMMIT ---- */
-    #blockchain-summit .carousel-banner-background {
-        background-position-y: 0% !important;
-    }
-
-    #blockchain-summit .carousel-content-row-2 {
-        font-size: 23px;
-    }
-
-    #blockchain-summit span {
-        font-size: 42px;
-    }
-
-    /* ---- INVITE FRIENDS ---- */
-
-    #invite-friends .carousel-content-row-2 {
-        font-size: 31px;
-        font-weight: 300;
-        line-height: 1.1;
-        font-style: italic;
-    }
-
-    #invite-friends span {
-        font-size: 40px;
-        font-weight: 700;
-    }
-
-    #invite-friends .carousel-content-col-2 span {
-        font-size: 80px;
-    }
-
-    #invite-friends .carousel-content-col-2 p {
-        margin-bottom: -15px;
-    }
-
-    #logo1-friends {
-        width: 70px;
-        height: 70px;
-        background: url('./containers/Carousel/icon-friend.png');
-        margin-right: 15px;
-    }
-
-    /* ---- ACCEPTING DCEP ---- */
-
-    #accepting-dcep .carousel-content-row-2 {
-        font-size: 20px;
-    }
-
-    #accepting-dcep .carousel-content-col-2 p {
-        text-align: left;
-        align-self: flex-start;
-    }
-
-    #accepting-dcep span {
-        font-size: 36px;
-        font-weight: 700;
-    }
 }
 
 @media only screen and (min-width: 1601px) {
-    
     .slick-dots > li {
         width: 120px !important;
     }
-    
     .carousel-thumb-hover {
         height: 16px;
         top: -20px;
@@ -1015,11 +663,9 @@
 }
 
 @media only screen and (max-width: 1600px) {
-    
     .slick-dots > li {
         width: 100px !important;
     }
-    
     .carousel-thumb-hover {
         height: 14px;
         top: -19px;
@@ -1027,7 +673,6 @@
 }
 
 @media only screen and (max-width: 1200px) {
-    
     .slick-dots > li {
         width: 80px !important;
     }
@@ -1041,50 +686,6 @@
 @media only screen and (max-width: 960px) {
     .slick-dots {
         visibility: hidden;
-    }
-
-    /* ---- BLOCKCHAIN SUMMIT ---- */
-
-    #blockchain-summit .carousel-content-row-2 {
-        font-size: 20px;
-        padding-bottom: 30px;
-    }
-
-    #blockchain-summit span {
-        font-size: 38px;
-    }
-
-    #blockchain-summit .carousel-button {
-        margin-top: 30px;
-    }
-
-    /* ---- INVITE FRIENDS ---- */
-
-    #invite-friends .carousel-content-row-2 {
-        font-size: 22px;
-    }
-
-    #invite-friends span {
-        font-size: 30px;
-        font-weight: 700;
-    }
-
-    #invite-friends .carousel-content-col-2 span {
-        font-size: 66px;
-    }
-
-    #invite-friends .carousel-content-col-2 p {
-        padding-right: 5px;
-    }
-
-    /* ---- ACCEPTING DCEP ---- */
-
-    #logo1-dcep {
-        width: 280px;
-        height: 105px;
-        background: url('./containers/Carousel/logo-dcep.png');
-        margin-bottom: 20px;
-        margin-right: -15px;
     }
 }
 
@@ -1108,276 +709,9 @@
         box-sizing: border-box;
         padding-bottom: 35px;
     }
-
-    .carousel-button {
-        width: 210px;
-        height: 40px;
-        margin-top: 20px;
-    }
-
     .carousel-content-row-1, .carousel-content-row-3 {
         font-size: 10px;
         letter-spacing: 0.1px;
         font-weight: 500;
-    }
-
-    /* ---- BLOCKCHAIN SUMMIT ---- */
-    #blockchain-summit .carousel-content-row-2 {
-        font-size: 19px;
-    }
-
-    #blockchain-summit span {
-        font-size: 28px;
-    }
-
-    #logo1-wbs {
-        width: 250px;
-    }
-
-    /* ---- INVITE FRIENDS ---- */
-
-    #invite-friends .carousel-content-row-2 {
-        font-size: 18px;
-    }
-
-    #invite-friends span {
-        font-size: 22px;
-    }
-
-    #invite-friends .carousel-content-col-2 span {
-        font-size: 60px;
-    }
-
-    #invite-friends .carousel-content-col-2 p {
-        margin-bottom: -15px;
-        padding-right: 5px;
-    }
-
-    #logo1-friends {
-        width: 50px;
-        height: 50px;
-        background: url('./containers/Carousel/icon-friend.png');
-        margin-right: 15px;
-    }
-    /* ---- SPECIAL ADJUSTMENT : FRIENDS LOGO AND CONTENT ---- */
-
-    #friends-logo-content {
-        height: 120px;
-    }
-
-    /* ---- ACCEPTING DCEP ---- */
-
-    #accepting-dcep .carousel-content-row-2 {
-        font-size: 14px;
-    }
-
-    #accepting-dcep .carousel-content-col-2 p {
-        text-align: left;
-        align-self: flex-start;
-    }
-
-    #accepting-dcep span {
-        font-size: 24px;
-        font-weight: 700;
-    }
-
-    #accepting-dcep .carousel-button {
-        margin-top: 0;
-    }
-
-    #logo1-speza-globe {
-        width: 130px;
-        height: 130px;
-    }
-
-    #container-logo1-speza-globe {
-        height: 130px;
-        width: 210px;
-    }
-
-    #logo1-dcep {
-        width: 200px;
-        height: 80px;
-        margin-bottom: 0px;
-    }
-}
-
-@media only screen and (max-width: 430px) {
-    .carousel-button {
-        width: 150px;
-        height: 40px;
-        font-size: 14px !important;
-    }
-    /* ---- BLOCKCHAIN SUMMIT ---- */
-    #blockchain-summit .carousel-content-row-2 {
-        font-size: 12px;
-        padding-bottom: 60px;
-    }
-
-    #blockchain-summit span {
-        font-size: 18px;
-    }
-
-    #logo1-wbs {
-        width: 140px;
-        margin-bottom: 20px;
-    }
-
-    /* ---- INVITE FRIENDS ---- */
-
-    #invite-friends .carousel-content-row-2 {
-        font-size: 12px;
-    }
-
-    #invite-friends span {
-        font-size: 22px;
-    }
-
-    #invite-friends .carousel-content-col-2 span {
-        font-size: 40px;
-    }
-
-    #invite-friends .carousel-content-col-2 p {
-        margin-bottom: -5px;
-        padding-right: 5px;
-    }
-
-    #logo1-friends {
-        width: 50px;
-        height: 50px;
-        background: url('./containers/Carousel/icon-friend.png');
-        margin-right: 15px;
-    }
-
-    #friends-logo-content {
-        height: 120px;
-    }
-
-    /* ---- ACCEPTING DCEP ---- */
-    #accepting-dcep .carousel-banner-background {
-        background-position-x: 40% !important;
-    }
-
-    #accepting-dcep .carousel-content-row-2 {
-        font-size: 14px;
-    }
-
-    #accepting-dcep .carousel-content-col-2 p {
-        text-align: left;
-        align-self: flex-start;
-    }
-
-    #accepting-dcep span {
-        font-size: 16px;
-        font-weight: 700;
-    }
-
-    #accepting-dcep .carousel-button {
-        margin-top: 0;
-    }
-
-    #logo1-speza-globe {
-        width: 110px;
-        height: 110px;
-    }
-
-    #container-logo1-speza-globe {
-        height: 130px;
-        width: 150px;
-    }
-
-    #logo1-dcep {
-        width: 150px;
-        height: 80px;
-        margin-bottom: 0px;
-    }
-}
-
-@media only screen and (max-width: 380px) {
-    .carousel-button {
-        width: 130px;
-    }
-    /* ---- BLOCKCHAIN SUMMIT ---- */
-    #blockchain-summit .carousel-content-row-2 {
-        font-size: 12px;
-        padding-bottom: 60px;
-    }
-
-    #blockchain-summit span {
-        font-size: 18px;
-    }
-
-    #logo1-wbs {
-        width: 140px;
-        margin-bottom: 20px;
-    }
-
-    /* ---- INVITE FRIENDS ---- */
-
-    #invite-friends .carousel-content-row-2 {
-        font-size: 12px;
-    }
-
-    #invite-friends span {
-        font-size: 18px;
-    }
-
-    #invite-friends .carousel-content-col-2 span {
-        font-size: 30px;
-    }
-
-    #invite-friends .carousel-content-col-2 p {
-        margin-bottom: -5px;
-        padding-right: 5px;
-    }
-
-    #logo1-friends {
-        width: 50px;
-        height: 50px;
-        background: url('./containers/Carousel/icon-friend.png');
-        margin-right: 15px;
-    }
-
-    #friends-logo-content {
-        height: 120px;
-    }
-
-    /* ---- ACCEPTING DCEP ---- */
-    #accepting-dcep .carousel-banner-background {
-        background-position-x: 40% !important;
-    }
-
-    #accepting-dcep .carousel-content-row-2 {
-        font-size: 14px;
-    }
-
-    #accepting-dcep .carousel-content-col-2 p {
-        text-align: left;
-        align-self: flex-start;
-    }
-
-    #accepting-dcep span {
-        font-size: 16px;
-        font-weight: 700;
-    }
-
-    #accepting-dcep .carousel-button {
-        margin-top: 0;
-    }
-
-    #logo1-speza-globe {
-        width: 110px;
-        height: 110px;
-    }
-
-    #container-logo1-speza-globe {
-        height: 130px;
-        width: 150px;
-    }
-
-    #logo1-dcep {
-        width: 150px;
-        height: 80px;
-        margin-bottom: 0px;
     }
 }

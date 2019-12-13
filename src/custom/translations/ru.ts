@@ -610,6 +610,78 @@ export const ru: LangType = {
 
     'server.internal_error': 'Внутренняя ошибка сервера',
 
+    // --- FORMS: BASIC WORDS --- //
+    'page.body.form.next': 'Next',
+    'page.body.form.back': 'Back',
+    'page.body.form.apply': 'Apply',
+    'page.body.form.submit': 'Submit',
+    'page.body.form.ok': 'OK',
+
+    // --- FORMS: PHRASES --- //
+    'page.body.form.existing-project': 'Existing Project',
+    'page.body.form.complete-detailed-information': 'Complete Detailed Information',
+    'page.body.form.token-listing-integration': 'Token Listing Integration',
+    'page.body.form.speza-exchange-token-listing-checklist': 'SPEZA Exchange Token Listing Checklist',
+    'page.body.form.alert.info1': 'You have successfully uploaded the basic information required for your listing application. Please make sure to click the below links and upload the additional information required through the Speza Token Listing Info and Speza Token Listing Info Webpage.',
+    'page.body.form.error.input-required': 'This input is required.',
+    'page.body.form.modal.success.line1': 'Token Listing Integration Form has been Submitted.',
+    'page.body.form.modal.success.line2': 'Click OK to continue.',
+    'page.body.form.helper-text.image': 'You may visit https://imgbb.com/ to upload your image to provide us with a link.',
+    'page.body.form.helper-text.document': 'You may visit https://www.docdroid.net/ to upload your image to provide us with a link.',
+    'page.body.form.helper-text.existing-project1': 'Please find your project to continue the token listing application process.',
+    'page.body.form.helper-text.existing-project2': 'If no project has been created, please select create new project.',
+
+    // --- FORMS: TITLES AND SECTIONS --- //
+    'page.body.form.application.title': 'Listing a Coin on Speza Exchange',
+    'page.body.form.application.secProject': 'Fill Out Basic Information',
+
+    'page.body.form.integration.title': 'Speza Exchange - Token & Project Info',
+    'page.body.form.integration.secProject': 'Project Summary ',
+    'page.body.form.integration.secPrice': 'Price & Supply',
+    'page.body.form.integration.secDocumentation': 'Documentation',
+
+    'page.body.form.checklist.title': 'Speza Exchange Token Listing',
+    'page.body.form.checklist.secProject': 'Project Summary ',
+    'page.body.form.checklist.secUser': 'Users and Community',
+    'page.body.form.checklist.secProduct': 'Product',
+    'page.body.form.checklist.secTeam': 'Team',
+    'page.body.form.checklist.secToken': 'Token Economics',
+    'page.body.form.checklist.secICO': 'ICO and Other Offerings of the Token/Coin',
+    'page.body.form.checklist.secWallet': 'Wallet',
+    'page.body.form.checklist.secMarket': 'Market',
+    'page.body.form.checklist.secFees': 'Fees',
+    'page.body.form.checklist.secMiscellaneous': 'Miscellaneous',
+
+    // --- TOKEN LISTING APPLICATION FORM --- //
+    // section 1: Project
+    'page.body.form.application.secProjectQuestion1': 'Project Name',
+    'page.body.form.application.secProjectQuestion2': 'Token/Coin Full Name',
+    'page.body.form.application.secProjectQuestion3': 'Token/Coin Symbol',
+    'page.body.form.application.secProjectQuestion4': 'Email',
+
+    // --- TOKEN LISTING INTEGRATION FORM --- //
+    // section 1: Project
+    'page.body.form.integration.secProjectQuestion1': 'Project Name',
+    'page.body.form.integration.secProjectQuestion2': 'Token/Coin Full Name',
+    'page.body.form.integration.secProjectQuestion3': 'Token/Coin Symbol or Abbreviation',
+    'page.body.form.integration.secProjectQuestion4': 'Icon Picture Upload',
+    // section 2: User
+    'page.body.form.integration.secPriceQuestion5': 'Issue Date',
+    'page.body.form.integration.secPriceQuestion6': 'Issue Price (eg. 1 BTC = 5000token)',
+    'page.body.form.integration.secPriceQuestion7': 'Total Supply',
+    'page.body.form.integration.secPriceQuestion8': 'Max Supply',
+    'page.body.form.integration.secPriceQuestion9': 'Circulating Supply',
+    // section 3: Product
+    'page.body.form.integration.secDocumentationQuestion10': 'Full API Documentation',
+    'page.body.form.integration.secDocumentationQuestion10a': 'RPC',
+    'page.body.form.integration.secDocumentationQuestion10b': 'Price (if any)',
+    'page.body.form.integration.secDocumentationQuestion10c': '3rd party node (if any)',
+    'page.body.form.integration.secDocumentationQuestion10d': 'If the above is unavailable, please provide full documentation to setup the blockchain server',
+    'page.body.form.integration.secDocumentationQuestion11': 'If the token is ERC-20, please provide the following',
+    'page.body.form.integration.secDocumentationQuestion11a': 'Token contract address',
+    'page.body.form.integration.secDocumentationQuestion11b': 'Coin decimals',
+    'page.body.form.integration.secDocumentationQuestion11c': 'Price API (if any)',
+
     // --- TOKEN LISTING CHECKLIST FORM --- //
     // section 1: Project
     'page.body.form.checklist.secProjectQuestion1': 'Project Name',
@@ -677,6 +749,51 @@ export const ru: LangType = {
     'page.body.form.checklist.secFeesQuestion2': 'Do you plan to offer token/coin giveaways, and/or other marketing initiative(s),including allocations or distributions to organizations (including non-profits) for the purpose of developing or expanding the token/coin ecosystem? If so, please provide exact details of proposed plans.',
     // section 10: Miscellaneous
     'page.body.form.checklist.secMiscellaneousQuestion1': 'Do you accept that, even after payment, SPEZA may delist your token/coin and you may not be eligible for any refunds?',
+
+    // ---- SLIDERS FOR CAROUSEL ---- //
+    'page.body.carousel.slider1.line1': `SPEZA Digital Asset Exchange is`,
+    'page.body.carousel.slider1.line2': `now open for trading`,
+    'page.body.carousel.slider1.line3': `SPEZA DAX`,
+    'page.body.carousel.slider1.line4': `Public Beta Is Now Live`,
+    'page.body.carousel.slider1.button': `Get Started`,
+
+    'page.body.carousel.slider2.line1': `Coming Soon`,
+    'page.body.carousel.slider2.line2': `Introducing the`,
+    'page.body.carousel.slider2.line3': `SPEZA Vision Token`,
+
+    'page.body.carousel.slider3.line1': `Invite your friends and`,
+    'page.body.carousel.slider3.line2': `earn up to 15 SVT`,
+    'page.body.carousel.slider3.line3': `Spread your love`,
+    'page.body.carousel.slider3.line4': `for SVT`,
+    'page.body.carousel.slider3.button': `Get Started`,
+
+    'page.body.carousel.slider4.line1': `Utilise your local bank to purchase Digital`,
+    'page.body.carousel.slider4.line2': `Assets using Bank-to-Bank Transfers`,
+    'page.body.carousel.slider4.line3': `Localized Payment`,
+    'page.body.carousel.slider4.line4': `Options`,
+    'page.body.carousel.slider4.button': `Get Started`,
+
+    'page.body.carousel.slider5.line1': `SPEZA Digital Asset Exchange`,
+    'page.body.carousel.slider5.line2': `have listed XEM Token and now`,
+    'page.body.carousel.slider5.line3': `it's available to trade`,
+    'page.body.carousel.slider5.line4': `SPEZA Lists NEM`,
+    'page.body.carousel.slider5.button': `Get Started`,
+
+    'page.body.carousel.slider6.line1': `Maximize your earnings when trading`,
+    'page.body.carousel.slider6.line2': `in SPEZA Digital Asset Exchange`,
+    'page.body.carousel.slider6.line3': `0% Trading Fee`,
+    'page.body.carousel.slider6.button': `Get Started`,
+
+    // ---- THREE BANNERS ---- //
+    'page.body.3banner.banner1.line1': `List your Tokens on`,
+    'page.body.3banner.banner1.line2': `SPEZA Digital Asset Exchange`,
+    'page.body.3banner.banner1.button': `Get Started`,
+
+    'page.body.3banner.banner2.line1': `SPEZA`,
+    'page.body.3banner.banner2.line2': `Partner Recruitment Program`,
+    'page.body.3banner.banner2.button': `Get Started`,
+
+    'page.body.3banner.banner3.line1': `Revolutionizing Payments`,
 
     ...nationalitiesNames,
 };

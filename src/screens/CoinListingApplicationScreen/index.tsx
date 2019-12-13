@@ -1,8 +1,9 @@
 import axios from 'axios';
 import * as React from 'react';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { RouterProps } from 'react-router';
+import Modal from 'react-responsive-modal';
+import { RouteChildrenProps, RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import {
     checkChecklistFormSubmission,
@@ -38,7 +39,7 @@ interface DispatchProps {
     checkRegistrationFormSubmission: typeof checkRegistrationFormSubmission;
 }
 
-type Props = ReduxProps & RouterProps & DispatchProps;
+type Props = ReduxProps & RouterProps & DispatchProps & RouteChildrenProps & InjectedIntlProps;
 
 
 // tslint:disable-next-line
@@ -49,6 +50,11 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
         tokenAbbreviation: undefined,
         email: undefined,
     });
+    const [integrationSubmission, setIntegrationSubmission] = React.useState(false);
+    const [checklistSubmission, setChecklistSubmission] = React.useState(false);
+    const [projectID, setProjectID] = React.useState(0);
+    // tslint:disable-next-line
+    const [selectedProject, setSelectedProject] = React.useState({} as any);
     const handleProjectChange = (e: React.FormEvent<HTMLInputElement>) => {
         setProject({ ...project, [e.currentTarget.name]: e.currentTarget.value });
     };
@@ -57,22 +63,38 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
         totalProgress: 2,
     });
     const [isDisabled, setDisabled] = React.useState(true);
+    // tslint:disable-next-line
+    const [projectList, setProjectList] = React.useState([]);
+    const [toggleDropdown, setToggleDropdown] = React.useState(false);
+    const [toggleModal, setToggleModal] = React.useState(false);
+    const [toggleForm, setToggleForm] = React.useState(false);
+
+    // fetch data and map
     React.useEffect(() => {
         const applogic = window.env.api.applogicUrl;
         // tslint:disable-next-line
         const url = applogic.substring(0, applogic.length - 11) + 'v1/listing/listings?uid=' + props.user.uid;
         axios.get(url)
         .then(res => {
-            console.log(res);
             // tslint:disable-next-line
-            const formArray: any = res;
-            formArray.data.find(resItem => resItem.form === 'Token Listing Integration') && props.checkIntegrationFormSubmission();
-            formArray.data.find(resItem => resItem.form === 'Token Listing Checklist') && props.checkChecklistFormSubmission();
-            formArray.data.find(resItem => resItem.form === 'Coin Listing Registration') && props.checkRegistrationFormSubmission();
+            let tempProjectList = res.data.filter(elem => elem.form === 'Coin Listing Registration') as any;
+            // tslint:disable-next-line
+            tempProjectList.forEach((project: any, index: number) => {
+                tempProjectList[index].json_data = JSON.parse(project.json_data.replace(/=>/g, ':'));
+            });
+            setProjectList(tempProjectList);
+            if (props.location.state) {
+                const tempSelectedProject = tempProjectList.find(proj => proj.id === props.location.state.projectID);
+                setProjectID(props.location.state.projectID);
+                setSelectedProject(tempSelectedProject);
+                setProgress({ ...progress, currentProgress: 2 });
+            }
         })
         .catch(error => console.log(error));
-        // tslint:disable-next-line
-        props.registrationFormSubmitted ? props.history.push('/registration-complete') : (props.integrationFormSubmitted && setProgress({ ...progress, currentProgress: 2 }));
+    }, []);
+
+    // empty checks
+    React.useEffect(() => {
         // tslint:disable-next-line
         let formSection: any[] = [];
         switch (progress.currentProgress) {
@@ -85,6 +107,32 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
         // tslint:disable-next-line
         !emptyErrorFlag ? setDisabled(true) : setDisabled(false);
     }, [project]);
+
+    React.useEffect(() => {
+        const applogic = window.env.api.applogicUrl;
+        // tslint:disable-next-line
+        const url = applogic.substring(0, applogic.length - 11) + 'v1/listing/listings?uid=' + props.user.uid;
+        axios.get(url)
+        .then(res => {
+            // tslint:disable-next-line
+            let tempForms = res.data.filter(elem => elem.form !== 'Coin Listing Registration') as any;
+            // tslint:disable-next-line
+            tempForms.forEach((form: any, index: number) => {
+                tempForms[index].json_data = JSON.parse(form.json_data.replace(/=>/g, ':'));
+            });
+            if (tempForms.find(formItem => (formItem.form === 'Token Listing Integration') && (formItem.json_data.registration_id === projectID))) {setIntegrationSubmission(true);} else {setIntegrationSubmission(false);}
+            if (tempForms.find(formItem => (formItem.form === 'Token Listing Checklist') && (formItem.json_data.registration_id === projectID))) {setChecklistSubmission(true);} else {setChecklistSubmission(false);}
+        })
+        .catch(error => console.log(error));
+    }, [selectedProject]);
+
+    React.useEffect(() => {
+        if (integrationSubmission && checklistSubmission) {
+            setDisabled(false);
+        }
+    }, [integrationSubmission, checklistSubmission]);
+
+
     const handleNextSection = () => {
         const applogic = window.env.api.applogicUrl;
         // tslint:disable-next-line
@@ -102,29 +150,50 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
             },
         })
         .then(res => {
+            setProjectID(res.data.id);
+            setSelectedProject(res.data);
             setProgress({ ...progress, currentProgress: progress.currentProgress + 1 });
         })
         .catch(error => {
-            console.log(error);
+            props.history.push('/signIn');
         });
         window.scrollTo(0, 0);
     };
+
+    const handleProjectAccess = projectInfo => {
+        setToggleDropdown(false);
+        setProjectID(projectInfo.id);
+        setSelectedProject(projectInfo);
+        setProgress({ ...progress, currentProgress: 2 });
+    };
+
+    const closeModal = () => {setToggleModal(false);};
+
     const handlePrevSection = () => {
         setProgress({ ...progress, currentProgress: progress.currentProgress - 1 });
         window.scrollTo(0, 0);
     };
     const handleIntegrationForm = () => {
-        props.history.push('/form/token-listing-integration');
+        props.history.push({
+            pathname: '/form/token-listing-integration',
+            state: { projectID: projectID },
+        });
     };
     const handleChecklistForm = () => {
-        props.history.push('/form/token-listing-checklist');
+        props.history.push({
+            pathname: '/form/token-listing-checklist',
+            state: { projectID: projectID },
+        });
     };
     const handleSubmitButton = () => {
-        props.submitRegistrationForm();
-        props.history.push('/form/registration-complete');
+        console.log('Modal here');
+        setToggleModal(true);
     };
     const handleReferralPage = () => {
         props.history.push('/referral');
+    };
+    const handleDropdownList = () => {
+        setToggleDropdown(!toggleDropdown);
     };
     // const handleReset = () => {
     //     props.resetSubmissionStatus();
@@ -135,26 +204,44 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
     // const handleFakeChecklistSubmit = () => {
     //     props.submitChecklistForm();
     // };
+    const handleToggleForm = () => {
+        setToggleForm(true);
+        setToggleDropdown(false);
+    };
     return (
         <div>
             <div className="page-body">
                 {/* <div className="new-form-container"> */}
                 <div className="new-form-container">
-                    <h1>Listing a Coin on SPEZA Exchange</h1>
-                    <div className="new-form-content">
+                    <h1><FormattedMessage id="page.body.form.application.title" /></h1>
+                    <p className="row-helper-text"><br /><FormattedMessage id="page.body.form.helper-text.existing-project1"/></p>
+                    <p className="row-helper-text"><FormattedMessage id="page.body.form.helper-text.existing-project2"/></p>
+                    {/* tslint:disable-next-line */}
+                    <div>
+                        <div className="dropdown-main-button" onClick={handleDropdownList}><FormattedMessage id="page.body.form.existing-project" /></div>
+                        <div className={toggleDropdown ? 'dropdown-lists' : 'dropdown-lists-invisible'}>
+                            {/* tslint:disable-next-line */}
+                            <div className="dropdown-item" style={{ fontWeight: 700 }} onClick={handleToggleForm}>Create new project</div>
+                            {/* tslint:disable-next-line */}
+                            {projectList.map((project: any, index: number) => <div key={index} className="dropdown-item" onClick={() => handleProjectAccess(project)}>{project.json_data.page_1.item_1}</div>)}
+                        </div>
+                    </div>
+                    <div className={toggleForm ? 'new-form-content' : 'new-form-content-invisible'}>
                         {/* tslint:disable-next-line */}
                         {
                             progress.currentProgress === 1 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Fill Out Basic Information</p>
+                                    <div className="new-form-content-title-bar">
+                                        <p className="new-form-content-title"><FormattedMessage id="page.body.form.application.secProject" /></p>
+                                    </div>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
                                         </div>
                                         <div className="row-item">
-                                            <p className="row-question">Project Name</p>
+                                            <p className="row-question"><FormattedMessage id="page.body.form.application.secProjectQuestion1" /></p>
                                             <input className={project.name === '' ? `row-input row-input-error` : `row-input`} type="text" name="name" value={project.name} onChange={handleProjectChange} />
-                                            {project.name === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.name === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -162,9 +249,9 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
                                             <p className="row-question">2.</p>
                                         </div>
                                         <div className="row-item">
-                                            <p className="row-question">Token/Coin Full Name</p>
+                                            <p className="row-question"><FormattedMessage id="page.body.form.application.secProjectQuestion2" /></p>
                                             <input className={project.tokenFullName === '' ? `row-input row-input-error` : `row-input`} type="text" name="tokenFullName" value={project.tokenFullName} onChange={handleProjectChange} />
-                                            {project.tokenFullName === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.tokenFullName === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -172,9 +259,9 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
                                             <p className="row-question">3.</p>
                                         </div>
                                         <div className="row-item">
-                                            <p className="row-question">Token/Coin Symbol</p>
+                                            <p className="row-question"><FormattedMessage id="page.body.form.application.secProjectQuestion3" /></p>
                                             <input className={project.tokenAbbreviation === '' ? `row-input row-input-error` : `row-input`} type="text" name="tokenAbbreviation" value={project.tokenAbbreviation} onChange={handleProjectChange} />
-                                            {project.tokenAbbreviation === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.tokenAbbreviation === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -182,9 +269,9 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
                                             <p className="row-question">4.</p>
                                         </div>
                                         <div className="row-item">
-                                            <p className="row-question">Email</p>
+                                            <p className="row-question"><FormattedMessage id="page.body.form.application.secProjectQuestion4" /></p>
                                             <input className={project.email === '' ? `row-input row-input-error` : `row-input`} type="text" name="email" value={project.email} onChange={handleProjectChange} />
-                                            {project.email === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.email === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -194,28 +281,29 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 2 && (
                                 <div className="new-form-content-page">
-                                    <p style={{ textAlign: 'center' }}>Complete Detailed Information</p>
+                                    <p style={{ textAlign: 'center' }}><FormattedMessage id="page.body.form.complete-detailed-information" /></p>
                                     <div className="new-form-content-alert">
-                                        <div className="alert-icon" id="icon-form" />
+                                        <div className="alert-icon" id="icon-info" />
                                         <div className="alert-text">
-                                            <p>You have successfully uploaded the basic information required for your listing application. Please make sure to click the below links and upload the additional information required through the SPEZA Token Listing Info and SPEZA Token Listing Info Webpage.</p>
+                                            <p><FormattedMessage id="page.body.form.alert.info1" /></p>
                                         </div>
                                     </div>
+                                    {/* <div className="new-form-project-name"><p>{selectedProject.json_data.page_1.item_1}</p></div> */}
                                     <div className="new-form-track-progress">
                                         <div className="progress-track-line"/>
                                         <div className="progress-list">
-                                            <div className={props.integrationFormSubmitted ? 'progress-item progress-done' : 'progress-item'}>
+                                            <div className={integrationSubmission ? 'progress-item progress-done' : 'progress-item'}>
                                                 <div className="progress-item-number"><p>1</p></div>
-                                                <div className="progress-item-title">Token Listing Integration</div>
-                                                {/* {props.integrationFormSubmitted ? (<Link to="/form/token-listing-integration" target="_blank"className="progress-item-link">Token Listing Integration Form</Link>) : (<Link to="#" target="_blank" className="progress-item-link-disabled">Token Listing Integration Form</Link>)} */}
+                                                <div className="progress-item-title"><FormattedMessage id="page.body.form.token-listing-integration" /></div>
+                                                {/* {integrationSubmission ? (<Link to="/form/token-listing-integration" target="_blank"className="progress-item-link">Token Listing Integration Form</Link>) : (<Link to="#" target="_blank" className="progress-item-link-disabled">Token Listing Integration Form</Link>)} */}
                                                 {/* <Link to="/form/token-listing-integration" target="_blank"className="progress-item-link">Token Listing Integration Form</Link> */}
                                                 <div className="progress-item-link" onClick={handleIntegrationForm}>Token Listing Integration Form</div>
                                             </div>
-                                            <div className={props.integrationFormSubmitted ? (props.checklistFormSubmitted ? 'progress-item progress-done' : 'progress-item') : 'progress-item progress-disabled'}>
+                                            <div className={integrationSubmission ? (checklistSubmission ? 'progress-item progress-done' : 'progress-item') : 'progress-item progress-disabled'}>
                                                 <div className="progress-item-number"><p>2</p></div>
-                                                <div className="progress-item-title">Token Listing Checklist</div>
+                                                <div className="progress-item-title"><FormattedMessage id="page.body.form.speza-exchange-token-listing-checklist" /></div>
                                                 {/* <Link to="/form/token-listing-checklist" target="_blank" className="progress-item-link">Token Listing Checklist Form</Link> */}
-                                                <div className="progress-item-link" onClick={handleChecklistForm}>Token Listing Integration Form</div>
+                                                <div className="progress-item-link" onClick={handleChecklistForm}>Token Listing Checklist Form</div>
                                             </div>
                                         </div>
                                     </div>
@@ -223,13 +311,21 @@ const CoinListingApplicationComponent: React.FC<Props> = (props: Props) => {
                             )
                         }
                         <div className="new-form-button-container">
-                            {progress.currentProgress !== 1 && <input type="submit" value="Back" className="new-form-button-box new-form-button-back" onClick={handlePrevSection}/>}
-                            {progress.currentProgress < progress.totalProgress && <input type="submit" value="Next" className={isDisabled ? `new-form-button-box new-form-button-next new-form-button-disabled` : `new-form-button-box new-form-button-next`} disabled={isDisabled} onClick={handleNextSection}/>}
-                            {progress.currentProgress === progress.totalProgress && <input type="submit" value="Apply" className={!props.checklistFormSubmitted ? `new-form-button-box new-form-button-next new-form-button-disabled` : `new-form-button-box new-form-button-next`} disabled={!props.checklistFormSubmitted} onClick={handleSubmitButton}/>}
+                            {progress.currentProgress !== 1 && <input type="submit" value={props.intl.formatMessage({id: 'page.body.form.back'})} className="new-form-button-box new-form-button-back" onClick={handlePrevSection}/>}
+                            {progress.currentProgress < progress.totalProgress && <input type="submit" value={props.intl.formatMessage({id: 'page.body.form.next'})} className={isDisabled ? `new-form-button-box new-form-button-next new-form-button-disabled` : `new-form-button-box new-form-button-next`} disabled={isDisabled} onClick={handleNextSection}/>}
+                            {progress.currentProgress === progress.totalProgress && <input type="submit" value={props.intl.formatMessage({id: 'page.body.form.submit'})} className={!checklistSubmission ? `new-form-button-box new-form-button-next new-form-button-disabled` : `new-form-button-box new-form-button-next`} disabled={!checklistSubmission} onClick={handleSubmitButton}/>}
                             {/* <input type="submit" value="Reset" className="new-form-button-box new-form-button-next" onClick={handleReset} /> */}
                             {/* <input type="submit" value="Submit Integration" className="new-form-button-box new-form-button-next" onClick={handleFakeIntegrationSubmit} /> */}
                             {/* <input type="submit" value="Submit Checklist" className="new-form-button-box new-form-button-next" onClick={handleFakeChecklistSubmit}  /> */}
                         </div>
+                        <Modal open={toggleModal} onClose={closeModal}>
+                            <div id="AwepayForm" className="new-form-modal">
+                                <div id="icon-verified" />
+                                <p><FormattedMessage id="page.body.form.modal.success.line1" /><br /><FormattedMessage id="page.body.form.modal.success.line2" /></p>
+                                {/* tslint:disable-next-line */}
+                                <input type="submit" value={props.intl.formatMessage({id: 'page.body.form.ok'})} className="new-form-button-box new-form-button-next" onClick={() => props.history.push('/landing')}/>
+                            </div>
+                        </Modal>
                     </div>
                 </div>
             </div>
@@ -323,7 +419,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
 });
 
 // tslint:disable-next-line:no-any
-const CoinListingApplicationScreen = withRouter(connect(mapStateToProps, mapDispatchToProps)(CoinListingApplicationComponent) as any);
+const CoinListingApplicationScreen = injectIntl(withRouter(connect(mapStateToProps, mapDispatchToProps)(CoinListingApplicationComponent) as any));
 
 export {
     CoinListingApplicationScreen,

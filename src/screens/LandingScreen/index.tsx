@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Iframe from 'react-iframe';
-import { FormattedHTMLMessage ,FormattedMessage  } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { connect, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 // import QuickBuy from '../../containers/QuickBuy/QuickBuy';
@@ -8,6 +9,10 @@ import { withRouter } from 'react-router-dom';
 
 import { Carousel } from '../../containers/Carousel';
 import News from '../../containers/Header/newsHeadline';
+import {
+    RootState,
+    selectCurrentLanguage,
+} from '../../modules';
 // // import MasterCardComponent from '../../containers/Mastercard/MasterCard';
 // import MobileSliderComponent from '../../containers/Slider/MobileSliderComponent';
 // import SliderComponent from '../../containers/Slider/SliderComponent';
@@ -20,10 +25,20 @@ import SmallBanner3 from '../../containers/Slider/SmallBanner3';
 */
 import { setDocumentTitle } from '../../helpers';
 
-const ThreeBanners: React.FC = () => {
+// tslint:disable-next-line
+const ThreeBanners: React.FC<any> = props => {
+    const handleBanner1 = () => {
+        props.history.push('/form/coin-listing-application');
+    };
+    const handleBanner2 = () => {
+        window.open('https://speza.zendesk.com/hc/en-us/articles/360037419852-SPEZA-Partner-Recruitment-Program');
+    };
+    // const handleBanner3 = () => {
+    //     window.open('#');
+    // };
     return (
     <div className="container_banners" style={{minWidth:'1200px'}}>
-        <div className="three-banner-container" >
+        <div className={props.mobile ? 'three-banner-container three-banner-mobile' : 'three-banner-container three-banner-non-mobile'} >
             <div className="three-banner-item" id="banner-1">
                 <div className="three-banner-background" />
                 <div className="three-banner-overlay-container">
@@ -35,10 +50,13 @@ const ThreeBanners: React.FC = () => {
                     </div>
                     <div className="content-col-2">
                         <div className="content-row-1">
-                            <p>List your Tokens on<br /><span>SPEZA Digital Asset Exchange</span></p>
+                            <p>
+                                <span className={props.i18n === 'zh' ? 'text-bold' : 'text-light'}><FormattedMessage id="page.body.3banner.banner1.line1" /><br /></span>
+                                <span className={props.i18n === 'zh' ? 'text-light' : 'text-bold'}><FormattedMessage id="page.body.3banner.banner1.line2" /></span>
+                            </p>
                         </div>
                         <div className="content-row-2">
-                            <div className="content-button">Get Started</div>
+                            <div className="content-button" onClick={handleBanner1}><FormattedMessage id="page.body.3banner.banner1.button" /></div>
                         </div>
                     </div>
                 </div>
@@ -54,10 +72,13 @@ const ThreeBanners: React.FC = () => {
                     </div>
                     <div className="content-col-2">
                         <div className="content-row-1">
-                            <p><span>SPEZA</span><br />Partner Recruitment Program</p>
+                            <p>
+                                <span className="text-bold"><FormattedMessage id="page.body.3banner.banner2.line1" /></span>
+                                <span className="text-light"><br /><FormattedMessage id="page.body.3banner.banner2.line2" /></span>
+                            </p>
                         </div>
                         <div className="content-row-2">
-                            <div className="content-button">Get Started</div>
+                            <div className="content-button" onClick={handleBanner2}><FormattedMessage id="page.body.3banner.banner2.button" /></div>
                         </div>
                     </div>
                 </div>
@@ -71,11 +92,13 @@ const ThreeBanners: React.FC = () => {
                     <div className="content-col-1" />
                     <div className="content-col-2">
                     <div className="content-row-1">
-                        <div id="logo-speza-wallet" />
-                        <p>Revolutionizing Payments</p>
+                        <div id="logo-speza-pay" />
+                        <p>
+                            <span className="text-light"><FormattedMessage id="page.body.3banner.banner3.line1" /></span>
+                        </p>
                     </div>
                         <div className="content-row-2">
-                            <div className="content-button">Get Started</div>
+                            {/* <div className="content-button" onClick={handleBanner3}>Get Started</div> */}
                         </div>
                     </div>
                 </div>
@@ -84,8 +107,9 @@ const ThreeBanners: React.FC = () => {
     </div>);
 };
 
+type Props = RouterProps & InjectedIntlProps;
 
-class LandingComponent extends React.Component<RouterProps> {
+class LandingComponent extends React.Component<Props> {
 
 
     public componentDidMount() {
@@ -228,7 +252,7 @@ class LandingComponent extends React.Component<RouterProps> {
                 </div>
             </div>
             <div className="row" style={{background:'#FEFEFE'}} >
-                <ThreeBanners />
+                <ThreeBanners mobile={false} i18n={this.props.i18n}/>
             </div>
             <div>
                 <div className="row container_banners" >
@@ -242,47 +266,7 @@ class LandingComponent extends React.Component<RouterProps> {
                 <div id="Markets" className="MarketComponent container_banners" style={{borderRadius:'5px'}}/>
             </div>
             <div className="row" style={{background:'#FEFEFE'}} >
-            <div className="container_banners">
-                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12">
-                    <div className="col-12 ThreeBannerLeft ThreebannersMobileButtomPage" style={{ borderRadius:'10px' }}>
-                        <div className="ThreeBanner_TextContainer" id="Leftbanner">
-                            <div className="TopSegment">
-                                <p style={{ lineHeight: 'normal', fontWeight: 300 }}>Spread <br/>Your Love for</p>
-                                <p style={{ fontWeight: 700, fontSize: 40, fontStyle: 'italic', lineHeight: 'normal'}}>SVT</p>
-                            </div>
-                            <div className="BottomSegment">
-                                <input type="button" value="Get Started" className="Button" onClick={this.handleClick1}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12">
-                    <div className="col-12 ThreeBannerCenter ThreebannersMobileButtomPage" style={{borderRadius:'10px'}} >
-                        <div className="ThreeBanner_TextContainer" id="Centerbanner">
-                            <div className="TopSegment">
-                                <p style={{ lineHeight: 'normal', fontWeight: 300 }}>SPEZA <br/>Digital Asset<br/> Exchange</p>
-                                <p style={{ fontWeight: 900,fontStyle: 'italic' ,lineHeight: 'normal' }}>Mobile App</p>
-                            </div>
-                            <div className="BottomSegment">
-                                <input type="button" value="Get Started" className="Button" onClick={this.handleClick2}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-xl-4 col-md-12 col-l-4 col-sm-12"  >
-                    <div className="col-12  ThreeBannerRight ThreebannersMobileButtomPage" style={{ borderRadius:'10px'}}>
-                        <div className="ThreeBanner_TextContainer" id="Rightbanner" >
-                            <div className="TopSegment">
-                                <p style={{ lineHeight: 'normal', fontWeight: 300, marginBottom: 0 }}>Launch Your Own</p>
-                                <p style={{ fontWeight: 900, lineHeight: 'normal', fontStyle: 'regular'}}>Digital Asset Token<br/> Offering</p>
-                            </div>
-                            <div className="BottomSegment">
-                                <input type="button" value="Learn More" className="Button" onClick={this.handleClick3}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <ThreeBanners mobile={true} i18n={this.props.i18n}/>
             </div>
             <div style={{background:'#FEFEFE'}}>
             <div className="row container_banners">
@@ -465,8 +449,12 @@ class LandingComponent extends React.Component<RouterProps> {
     }
 }
 
+const mapStateToProps: MapStateToProps<{}, {}, RootState> = state => ({
+    i18n: selectCurrentLanguage(state),
+});
+
 // tslint:disable-next-line:no-any
-const LandingScreen = withRouter(LandingComponent as any);
+const LandingScreen = withRouter(connect(mapStateToProps)(LandingComponent) as any);
 
 export {
     LandingScreen,

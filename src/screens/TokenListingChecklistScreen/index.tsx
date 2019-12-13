@@ -1,8 +1,9 @@
 import axios from 'axios';
 import * as React from 'react';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { RouterProps } from 'react-router';
+import Modal from 'react-responsive-modal';
+import { RouteChildrenProps, RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import {
     RootState,
@@ -22,7 +23,7 @@ interface DispatchProps {
     submitChecklistForm: typeof submitChecklistForm;
 }
 
-type Props = ReduxProps & DispatchProps & RouterProps;
+type Props = ReduxProps & DispatchProps & RouterProps & RouteChildrenProps & InjectedIntlProps;
 
 // tslint:disable-next-line
 const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
@@ -102,10 +103,10 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
         totalProgress: 10,
     });
     const [isDisabled, setDisabled] = React.useState(true);
+    const [toggleModal, setToggleModal] = React.useState(false);
     React.useEffect(() => {
         console.clear();
-        console.log(`Checklist form submission status: ${props.checklistFormSubmitted}`);
-        console.log(props);
+        console.log(props.location.state);
         // tslint:disable-next-line
         let formSection: any[] = [];
         switch (progress.currentProgress) {
@@ -117,10 +118,22 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                     break;
             case 4: formSection = [project.secTeamAnswer1, project.secTeamAnswer2, project.secTeamAnswer3];
                     break;
+            case 5: formSection = [project.secTokenAnswer1, project.secTokenAnswer2, project.secTokenAnswer3, project.secTokenAnswer4];
+                    break;
+            case 6: formSection = [project.secICOAnswer1, project.secICOAnswer2, project.secICOAnswer3, project.secICOAnswer4, project.secICOAnswer5, project.secICOAnswer6, project.secICOAnswer7, project.secICOAnswer8, project.secICOAnswer9, project.secICOAnswer10, project.secICOAnswer11, project.secICOAnswer12a, project.secICOAnswer13, project.secICOAnswer14];
+                    break;
+            case 7: formSection = [project.secWalletAnswer1, project.secWalletAnswer2, project.secWalletAnswer3, project.secWalletAnswer4, project.secWalletAnswer5, project.secWalletAnswer6, project.secWalletAnswer7];
+                    break;
+            case 8: formSection = [project.secMarketAnswer1, project.secMarketAnswer2];
+                    break;
+            case 9: formSection = [project.secFeesAnswer1, project.secFeesAnswer2];
+                    break;
+            case 10: formSection = [project.secMiscellaneousAnswer1];
+                     break;
             default: formSection = [project];
         }
         // tslint:disable-next-line
-        let emptyErrorFlag: Boolean = formSection.every(particular => particular !== undefined && particular !== '');
+        let emptyErrorFlag: Boolean = formSection.every(particular => particular !== undefined && particular !== '' && particular !== false);
         // tslint:disable-next-line
         !emptyErrorFlag ? setDisabled(true) : setDisabled(false);
     });
@@ -141,6 +154,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
             uid: props.user.uid,
             form: 'Token Listing Checklist',
             json_data: {
+                registration_id: props.location.state.projectID,
                 page_1: { // section: Project Summary
                     item_1: project.secProjectAnswer1,
                     item_2: project.secProjectAnswer2,
@@ -220,8 +234,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
             },
         })
         .then(res => {
-            props.submitChecklistForm();
-            props.history.push('/form/request-sent');
+            setToggleModal(true);
         })
         .catch(error => {
             console.log(error);
@@ -233,19 +246,28 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
     const handleReferralPage = () => {
         props.history.push('/referral');
     };
+    const closeModal = () => {setToggleModal(false);props.history.push({pathname: '/form/coin-listing-application', state: { projectID: props.location.state.projectID }});};
     return (
         <div>
+            <Modal open={toggleModal} onClose={closeModal}>
+                <div id="AwepayForm" className="new-form-modal">
+                    <div id="icon-verified" />
+                    <p><FormattedMessage id="page.body.form.modal.success.line1" /><br /><FormattedMessage id="page.body.form.modal.success.line2" /></p>
+                    {/* tslint:disable-next-line */}
+                    <input type="submit" value={props.intl.formatMessage({id: 'page.body.form.ok'})} className="new-form-button-box new-form-button-next" onClick={() => props.history.push('/form/coin-listing-application')}/>
+                </div>
+            </Modal>
             <div className="page-body">
                 {/* <div className="new-form-container"> */}
                 <div className="new-form-container">
-                    <h1>SPEZA Exchange Token Listing</h1>
-                    <p className="new-form-progress-indicator">{progress.currentProgress}/{progress.totalProgress}</p>
+                    <h1><FormattedMessage id="page.body.form.checklist.title" /></h1>
                     <div className="new-form-content">
+                    <p className="new-form-progress-indicator">{progress.currentProgress}/{progress.totalProgress}</p>
                         {/* tslint:disable-next-line */}
                         {
                             progress.currentProgress === 1 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Project Summary</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secProject" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -253,7 +275,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion1" /></p>
                                             <input className={project.secProjectAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer1" value={project.secProjectAnswer1} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -263,7 +285,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion2" /></p>
                                             <input className={project.secProjectAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer2" value={project.secProjectAnswer2} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -273,7 +295,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion3" /></p>
                                             <input className={project.secProjectAnswer3 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer3" value={project.secProjectAnswer3} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer3 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer3 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -283,7 +305,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion4" /></p>
                                             <input className={project.secProjectAnswer4 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer4" value={project.secProjectAnswer4} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer4 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer4 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -292,8 +314,9 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         </div>
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion5" /></p>
+                                            <p className="row-helper-text"><FormattedMessage id="page.body.form.helper-text.document"/></p>
                                             <input className={project.secProjectAnswer5 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer5" value={project.secProjectAnswer5} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer5 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer5 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -303,7 +326,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion6" /></p>
                                             <input className={project.secProjectAnswer6 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer6" value={project.secProjectAnswer6} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer6 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer6 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -313,7 +336,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion7" /></p>
                                             <input className={project.secProjectAnswer7 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer7" value={project.secProjectAnswer7} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer7 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer7 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -323,7 +346,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion8" /></p>
                                             <input className={project.secProjectAnswer8 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer8" value={project.secProjectAnswer8} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer8 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer8 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -333,7 +356,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion9" /></p>
                                             <input className={project.secProjectAnswer9 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer9" value={project.secProjectAnswer9} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer9 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer9 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -343,7 +366,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion10" /></p>
                                             <input className={project.secProjectAnswer10 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer10" value={project.secProjectAnswer10} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer10 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer10 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -353,7 +376,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion11" /></p>
                                             <input className={project.secProjectAnswer11 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer11" value={project.secProjectAnswer11} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer11 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer11 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -363,7 +386,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion12" /></p>
                                             <input className={project.secProjectAnswer12 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer12" value={project.secProjectAnswer12} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer12 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer12 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -373,7 +396,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProjectQuestion13" /></p>
                                             <input className={project.secProjectAnswer13 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProjectAnswer13" value={project.secProjectAnswer13} onChange={handleProjectChange} />
-                                            {project.secProjectAnswer13 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProjectAnswer13 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -383,7 +406,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 2 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Users and Community</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secUser" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -391,7 +414,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secUserQuestion1" /></p>
                                             <input className={project.secUserAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secUserAnswer1" value={project.secUserAnswer1} onChange={handleProjectChange} />
-                                            {project.secUserAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secUserAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -401,7 +424,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secUserQuestion2" /></p>
                                             <input className={project.secUserAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secUserAnswer2" value={project.secUserAnswer2} onChange={handleProjectChange} />
-                                            {project.secUserAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secUserAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -411,7 +434,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secUserQuestion3" /></p>
                                             <input className={project.secUserAnswer3 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secUserAnswer3" value={project.secUserAnswer3} onChange={handleProjectChange} />
-                                            {project.secUserAnswer3 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secUserAnswer3 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -421,7 +444,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 3 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Product</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secProduct" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -429,7 +452,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProductQuestion1" /></p>
                                             <input className={project.secProductAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProductAnswer1" value={project.secProductAnswer1} onChange={handleProjectChange} />
-                                            {project.secProductAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProductAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -439,7 +462,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProductQuestion2" /></p>
                                             <input className={project.secProductAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProductAnswer2" value={project.secProductAnswer2} onChange={handleProjectChange} />
-                                            {project.secProductAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProductAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -449,7 +472,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProductQuestion3" /></p>
                                             <input className={project.secProductAnswer3 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProductAnswer3" value={project.secProductAnswer3} onChange={handleProjectChange} />
-                                            {project.secProductAnswer3 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProductAnswer3 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -458,8 +481,9 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         </div>
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProductQuestion4" /></p>
+                                            <p className="row-helper-text"><FormattedMessage id="page.body.form.helper-text.document"/></p>
                                             <input className={project.secProductAnswer4 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProductAnswer4" value={project.secProductAnswer4} onChange={handleProjectChange} />
-                                            {project.secProductAnswer4 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProductAnswer4 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -469,7 +493,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secProductQuestion5" /></p>
                                             <input className={project.secProductAnswer5 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secProductAnswer5" value={project.secProductAnswer5} onChange={handleProjectChange} />
-                                            {project.secProductAnswer5 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secProductAnswer5 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -479,7 +503,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 4 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Team</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secTeam" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -487,7 +511,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secTeamQuestion1" /></p>
                                             <input className={project.secTeamAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secTeamAnswer1" value={project.secTeamAnswer1} onChange={handleProjectChange} />
-                                            {project.secTeamAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secTeamAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -497,7 +521,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secTeamQuestion2" /></p>
                                             <input className={project.secTeamAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secTeamAnswer2" value={project.secTeamAnswer2} onChange={handleProjectChange} />
-                                            {project.secTeamAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secTeamAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -507,7 +531,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secTeamQuestion3" /></p>
                                             <input className={project.secTeamAnswer3 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secTeamAnswer3" value={project.secTeamAnswer3} onChange={handleProjectChange} />
-                                            {project.secTeamAnswer3 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secTeamAnswer3 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -517,7 +541,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 5 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Token Economics</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secToken" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -525,7 +549,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secTokenQuestion1" /></p>
                                             <input className={project.secTokenAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secTokenAnswer1" value={project.secTokenAnswer1} onChange={handleProjectChange} />
-                                            {project.secTokenAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secTokenAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -535,7 +559,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secTokenQuestion2" /></p>
                                             <input className={project.secTokenAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secTokenAnswer2" value={project.secTokenAnswer2} onChange={handleProjectChange} />
-                                            {project.secTokenAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secTokenAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -545,7 +569,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secTokenQuestion3" /></p>
                                             <input className={project.secTokenAnswer3 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secTokenAnswer3" value={project.secTokenAnswer3} onChange={handleProjectChange} />
-                                            {project.secTokenAnswer3 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secTokenAnswer3 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -555,7 +579,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secTokenQuestion4" /></p>
                                             <input className={project.secTokenAnswer4 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secTokenAnswer4" value={project.secTokenAnswer4} onChange={handleProjectChange} />
-                                            {project.secTokenAnswer4 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secTokenAnswer4 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -565,7 +589,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 6 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">ICO and Other Offerings of the Token/Coin</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secICO" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -573,7 +597,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion1" /></p>
                                             <input className={project.secICOAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer1" value={project.secICOAnswer1} onChange={handleProjectChange} />
-                                            {project.secICOAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -583,7 +607,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion2" /></p>
                                             <input className={project.secICOAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer2" value={project.secICOAnswer2} onChange={handleProjectChange} />
-                                            {project.secICOAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -593,7 +617,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion3" /></p>
                                             <input className={project.secICOAnswer3 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer3" value={project.secICOAnswer3} onChange={handleProjectChange} />
-                                            {project.secICOAnswer3 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer3 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -603,7 +627,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion4" /></p>
                                             <input className={project.secICOAnswer4 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer4" value={project.secICOAnswer4} onChange={handleProjectChange} />
-                                            {project.secICOAnswer4 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer4 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -613,7 +637,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion5" /></p>
                                             <input className={project.secICOAnswer5 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer5" value={project.secICOAnswer5} onChange={handleProjectChange} />
-                                            {project.secICOAnswer5 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer5 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -623,7 +647,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion6" /></p>
                                             <input className={project.secICOAnswer6 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer6" value={project.secICOAnswer6} onChange={handleProjectChange} />
-                                            {project.secICOAnswer6 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer6 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -633,7 +657,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion7" /></p>
                                             <input className={project.secICOAnswer7 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer7" value={project.secICOAnswer7} onChange={handleProjectChange} />
-                                            {project.secICOAnswer7 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer7 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -643,7 +667,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion8" /></p>
                                             <input className={project.secICOAnswer8 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer8" value={project.secICOAnswer8} onChange={handleProjectChange} />
-                                            {project.secICOAnswer8 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer8 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -653,7 +677,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion9" /></p>
                                             <input className={project.secICOAnswer9 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer9" value={project.secICOAnswer9} onChange={handleProjectChange} />
-                                            {project.secICOAnswer9 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer9 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -663,7 +687,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion10" /></p>
                                             <input className={project.secICOAnswer10 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer10" value={project.secICOAnswer10} onChange={handleProjectChange} />
-                                            {project.secICOAnswer10 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer10 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -673,7 +697,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion11" /></p>
                                             <input className={project.secICOAnswer11 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer11" value={project.secICOAnswer11} onChange={handleProjectChange} />
-                                            {project.secICOAnswer11 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer11 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -683,15 +707,16 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion12a" /></p>
                                             <input className={project.secICOAnswer12a === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer12a" value={project.secICOAnswer12a} onChange={handleProjectChange} />
-                                            {project.secICOAnswer12a === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer12a === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                             <br />
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion12b" /></p>
+                                            <p className="row-helper-text"><FormattedMessage id="page.body.form.helper-text.document"/></p>
                                             <input className={project.secICOAnswer12b === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer12b" value={project.secICOAnswer12b} onChange={handleProjectChange} />
-                                            {project.secICOAnswer12b === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer12b === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                             <br />
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion12c" /></p>
                                             <input className={project.secICOAnswer12c === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer12c" value={project.secICOAnswer12c} onChange={handleProjectChange} />
-                                            {project.secICOAnswer12c === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer12c === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -701,7 +726,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion13" /></p>
                                             <input className={project.secICOAnswer13 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer13" value={project.secICOAnswer13} onChange={handleProjectChange} />
-                                            {project.secICOAnswer13 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer13 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -711,7 +736,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secICOQuestion14" /></p>
                                             <input className={project.secICOAnswer14 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secICOAnswer14" value={project.secICOAnswer14} onChange={handleProjectChange} />
-                                            {project.secICOAnswer14 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secICOAnswer14 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -721,7 +746,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 7 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Wallet</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secWallet" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -729,7 +754,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secWalletQuestion1" /></p>
                                             <input className={project.secWalletAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secWalletAnswer1" value={project.secWalletAnswer1} onChange={handleProjectChange} />
-                                            {project.secWalletAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secWalletAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -739,7 +764,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secWalletQuestion2" /></p>
                                             <input className={project.secWalletAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secWalletAnswer2" value={project.secWalletAnswer2} onChange={handleProjectChange} />
-                                            {project.secWalletAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secWalletAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -749,7 +774,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secWalletQuestion3" /></p>
                                             <input className={project.secWalletAnswer3 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secWalletAnswer3" value={project.secWalletAnswer3} onChange={handleProjectChange} />
-                                            {project.secWalletAnswer3 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secWalletAnswer3 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -759,7 +784,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secWalletQuestion4" /></p>
                                             <input className={project.secWalletAnswer4 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secWalletAnswer4" value={project.secWalletAnswer4} onChange={handleProjectChange} />
-                                            {project.secWalletAnswer4 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secWalletAnswer4 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -769,7 +794,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secWalletQuestion5" /></p>
                                             <input className={project.secWalletAnswer5 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secWalletAnswer5" value={project.secWalletAnswer5} onChange={handleProjectChange} />
-                                            {project.secWalletAnswer5 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secWalletAnswer5 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -779,7 +804,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secWalletQuestion6" /></p>
                                             <input className={project.secWalletAnswer6 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secWalletAnswer6" value={project.secWalletAnswer6} onChange={handleProjectChange} />
-                                            {project.secWalletAnswer6 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secWalletAnswer6 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -789,7 +814,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secWalletQuestion7" /></p>
                                             <input className={project.secWalletAnswer7 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secWalletAnswer7" value={project.secWalletAnswer7} onChange={handleProjectChange} />
-                                            {project.secWalletAnswer7 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secWalletAnswer7 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -799,7 +824,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 8 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Market</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secMarket" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -807,7 +832,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secMarketQuestion1" /></p>
                                             <input className={project.secMarketAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secMarketAnswer1" value={project.secMarketAnswer1} onChange={handleProjectChange} />
-                                            {project.secMarketAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secMarketAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -817,7 +842,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secMarketQuestion2" /></p>
                                             <input className={project.secMarketAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secMarketAnswer2" value={project.secMarketAnswer2} onChange={handleProjectChange} />
-                                            {project.secMarketAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secMarketAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -827,7 +852,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 9 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Fees</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secFees" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -835,7 +860,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secFeesQuestion1" /></p>
                                             <input className={project.secFeesAnswer1 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secFeesAnswer1" value={project.secFeesAnswer1} onChange={handleProjectChange} />
-                                            {project.secFeesAnswer1 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secFeesAnswer1 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                     <div className="new-form-content-row">
@@ -845,7 +870,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                                         <div className="row-item">
                                             <p className="row-question"><FormattedMessage id="page.body.form.checklist.secFeesQuestion2" /></p>
                                             <input className={project.secFeesAnswer2 === '' ? `row-input row-input-error` : `row-input`} type="text" name="secFeesAnswer2" value={project.secFeesAnswer2} onChange={handleProjectChange} />
-                                            {project.secFeesAnswer2 === '' ? <p className="row-error">This input is required.</p> : <p className="row-space">---</p>}
+                                            {project.secFeesAnswer2 === '' ? <p className="row-error"><FormattedMessage id="page.body.form.error.input-required" /></p> : <p className="row-space">---</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -856,7 +881,7 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                         {
                             progress.currentProgress === 10 && (
                                 <div className="new-form-content-page">
-                                    <p className="new-form-content-title">Miscellaneous</p>
+                                    <p className="new-form-content-title"><FormattedMessage id="page.body.form.checklist.secMiscellaneous" /></p>
                                     <div className="new-form-content-row">
                                         <div className="row-numbering">
                                             <p className="row-question">1.</p>
@@ -871,9 +896,9 @@ const TokenListingChecklistComponent: React.FC<Props> = (props: Props) => {
                             )
                         }
                         <div className="new-form-button-container">
-                            {progress.currentProgress !== 1 && <input type="submit" value="Back" className="new-form-button-box new-form-button-back" onClick={handlePrevSection}/>}
-                            {progress.currentProgress < progress.totalProgress && <input type="submit" value="Next" className={isDisabled ? `new-form-button-box new-form-button-next new-form-button-disabled` : `new-form-button-box new-form-button-next`} disabled={isDisabled} onClick={handleNextSection}/>}
-                            {progress.currentProgress === progress.totalProgress && <input type="submit" value="Submit" className={isDisabled ? `new-form-button-box new-form-button-next new-form-button-disabled` : `new-form-button-box new-form-button-next`} disabled={isDisabled} onClick={handleSubmitButton}/>}
+                            {progress.currentProgress !== 1 && <input type="submit" value={props.intl.formatMessage({id: 'page.body.form.back'})} className="new-form-button-box new-form-button-back" onClick={handlePrevSection}/>}
+                            {progress.currentProgress < progress.totalProgress && <input type="submit" value={props.intl.formatMessage({id: 'page.body.form.next'})} className={isDisabled ? `new-form-button-box new-form-button-next new-form-button-disabled` : `new-form-button-box new-form-button-next`} disabled={isDisabled} onClick={handleNextSection}/>}
+                            {progress.currentProgress === progress.totalProgress && <input type="submit" value={props.intl.formatMessage({id: 'page.body.form.submit'})} className={isDisabled ? `new-form-button-box new-form-button-next new-form-button-disabled` : `new-form-button-box new-form-button-next`} disabled={isDisabled} onClick={handleSubmitButton}/>}
                         </div>
                     </div>
                 </div>
@@ -960,7 +985,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
 });
 
 // tslint:disable-next-line:no-any
-const TokenListingChecklistScreen = withRouter(connect(mapStateToProps, mapDispatchToProps)(TokenListingChecklistComponent) as any);
+const TokenListingChecklistScreen = injectIntl(withRouter(connect(mapStateToProps, mapDispatchToProps)(TokenListingChecklistComponent) as any));
 
 export {
     TokenListingChecklistScreen,

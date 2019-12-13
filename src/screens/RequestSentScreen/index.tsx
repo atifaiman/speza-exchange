@@ -3,7 +3,7 @@ import {
     connect,
     MapStateToProps,
 } from 'react-redux';
-import { RouterProps } from 'react-router';
+import { RouteChildrenProps, RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 // import DatePicker from 'react-date-picker';
 import {
@@ -20,12 +20,16 @@ interface ReduxProps {
     checklistFormSubmitted: boolean;
 }
 
-type Props = ReduxProps & RouterProps;
+type Props = ReduxProps & RouterProps & RouteChildrenProps;
 
 const RequestSentComponent: React.FC<Props> = (props: Props) => {
     React.useEffect(() => {
+        console.log(props);
         setTimeout(() => {
-            props.history.push('/form/coin-listing-application');
+            props.history.push({
+                pathname: '/form/coin-listing-application',
+                state: {projectID: props.location.state.projectID},
+            });
         }, 5000);
     });
     return (

@@ -100,7 +100,7 @@ const markets = [
         title: 'Rakunisation 5.0',
         status: 'running',
         timeInterval: 'something to see',
-        priceInUSD: 0.05,
+        priceInUSD: 0.0001,
         description: 'A new ecosystem at the apex of Games and Blockchain Technology.',
         content: `The RAKUN entertainment platform gives players a more immersive experience, bridging them into a new type of (game) economy via Blockchain.
 
@@ -125,7 +125,12 @@ const ICODiscoveryComponent: React.FC<RouterProps> = () => {
     return (
         <div>
             <div className="page-body">
-                <div className="page-body-banner" />
+                <div className="page-body-banner">
+                    <div className="page-body-banner-overlay">
+                        <p className="banner-title">Be informed and invest responsibly</p>
+                        <p className="banner-subtitle">Trade and invest safely in some of the best Digital Asset and Token Offering project on our Digital Asset Discovery Platform</p>
+                    </div>
+                </div>
                 <div className="page-body-content">
                     <div className="discovery-menu" />
                     <div className="discovery-category" />

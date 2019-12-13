@@ -78,8 +78,8 @@ class MarketDepthContainer extends React.Component<Props> {
             <span className={'pg-market-depth__tooltip'}>
                 <span><FormattedMessage id="page.body.trade.header.marketDepths.content.price" /> : {price} {bidCurrency}</span>
                 <span><FormattedMessage id="page.body.trade.header.marketDepths.content.volume" /> : {volume} {askCurrency}</span>
-                <span><FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeVolume" /> : {preciseData(cumulativeVolume, 2)} {askCurrency}</span>
-                <span><FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeValue" /> : {preciseData(cumulativePrice, 2)} {bidCurrency}</span>
+                <span><FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeVolume" /> : {preciseData(cumulativeVolume, 10)} {askCurrency}</span>
+                <span><FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeValue" /> : {preciseData(cumulativePrice, 10)} {bidCurrency}</span>
             </span>
         );
 
@@ -94,8 +94,8 @@ class MarketDepthContainer extends React.Component<Props> {
             cumulativePriceData = cumulativePriceData + (numberPrice * numberVolume);
             return {
                 [type]: cumulativeVolumeData,
-                cumulativePrice: preciseData(cumulativePriceData, 2),
-                cumulativeVolume: preciseData(cumulativeVolumeData, 2),
+                cumulativePrice: preciseData(cumulativePriceData, 10),
+                cumulativeVolume: preciseData(cumulativeVolumeData, 10),
                 volume: Number(volume),
                 price: Number(price),
                 name: tipLayout({ volume, price, cumulativeVolume: cumulativeVolumeData, cumulativePrice: cumulativePriceData }),

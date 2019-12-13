@@ -12,6 +12,26 @@
         width: inherit;
         height: 400px;
         background: linear-gradient(69.59deg, #2A0B46 33.52%, #6C187D 100.04%);
+        &-overlay {
+            width: inherit;
+            height: inherit;
+            display: -webkit-flex;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            .banner {
+                &-title {
+                    font-size: 48px;
+                    font-weight: 700;
+                    margin-bottom: 20px !important;
+                }
+                &-subtitle {
+                    font-size: 20px;
+                }
+            }
+        }
     }
     @media only screen and (max-width: 1440px) {
         &-content {
