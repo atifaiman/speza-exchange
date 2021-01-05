@@ -5,7 +5,7 @@
   "dependencies": {
     "@openware/components": "2.0.41",
     "@openware/cryptofont": "^0.1.6",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bitcoincashjs": "0.1.10",
     "bootstrap": "^4.3.1",
     "history": "^4.7.2",
